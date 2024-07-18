@@ -43,7 +43,7 @@ export default function LoginForm() {
 
       fetch(login(data));
     }
-  }, [loginData, fetch]);
+  }, [loginData]);
 
   useEffect(() => {
     if (userData) {
@@ -56,7 +56,7 @@ export default function LoginForm() {
     if (error) {
       clearFieldValue('password');
     }
-  }, [error, clearFieldValue]);
+  }, [error]);
 
   return (
     <Form
