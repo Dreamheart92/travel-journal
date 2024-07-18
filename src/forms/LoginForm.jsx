@@ -6,9 +6,10 @@ import useOnFetch from '../hooks/useOnFetch';
 import { login } from '../services/authService';
 import { storeUserData } from '../utility/storage';
 import { PATHS } from '../constants/paths';
-import Form from '../components/Form';
+
 import VALIDATIONS from '../constants/validations';
 
+import Form from '../components/Form';
 import TextInput from '../components/Input/TextInput';
 import Button from '../components/Button';
 
@@ -18,6 +19,7 @@ export default function LoginForm() {
     handleSubmit,
     clearFieldValue,
     formData: loginData,
+    isSubmittedAndHasErrors,
   } = useForm();
 
   const {
@@ -29,6 +31,9 @@ export default function LoginForm() {
 
   const navigate = useNavigate();
 
+  const { handlers: emailHandlers, state: emailState } = register('email', '', { required: true, minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH });
+  const { handlers: passwordHandlers, state: passwordState } = register('password', '', { required: true, minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH });
+
   useEffect(() => {
     if (loginData) {
       const data = {
@@ -38,34 +43,48 @@ export default function LoginForm() {
 
       fetch(login(data));
     }
-  }, [loginData]);
+  }, [loginData, fetch]);
 
   useEffect(() => {
     if (userData) {
       storeUserData(userData.data);
       navigate(PATHS.HOME);
     }
-  }, [userData]);
+  }, [userData, navigate]);
 
   useEffect(() => {
     if (error) {
       clearFieldValue('password');
     }
-  }, [error]);
+  }, [error, clearFieldValue]);
 
   return (
-    <Form onSubmit={handleSubmit} error={error}>
-      <TextInput  {...register("email", "",
-        { required: true, minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH })}>
+    <Form
+      onSubmit={handleSubmit}
+      error={error}
+    >
+      <TextInput
+        isSubmittedAndHasErrors={isSubmittedAndHasErrors}
+        handlers={emailHandlers}
+        state={emailState}
+      >
         Email
       </TextInput>
 
-      <TextInput type="password" {...register("password", "", {
-        required: true,
-        minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH
-      })}>Password</TextInput>
+      <TextInput
+        type="password"
+        isSubmittedAndHasErrors={isSubmittedAndHasErrors}
+        handlers={passwordHandlers}
+        state={passwordState}
+      >
+        Password
+      </TextInput>
 
-      <Button isLoading={isLoading}>Login</Button>
+      <Button
+        isSubmitButton
+        caption="Login"
+        isLoading={isLoading}
+      />
     </Form>
-  )
+  );
 }
