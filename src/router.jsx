@@ -3,6 +3,7 @@ import { PATHS } from './constants/paths';
 
 import App from './App';
 import Home from './pages/Home';
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       {
         path: PATHS.HOME,
         element: <Home />,
+      },
+      {
+        path: PATHS.LOGIN,
+        element: <Login />
       },
     ],
   },
