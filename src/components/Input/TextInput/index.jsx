@@ -9,7 +9,7 @@ export default function TextInput(
   {
     label,
     type = 'text',
-    children,
+    placeholder,
     handlers,
     state,
     isSubmittedAndHasErrors,
@@ -25,7 +25,7 @@ export default function TextInput(
         className={style.field}
         onChange={handlers.onChange}
         onBlur={handlers.onBlur}
-        placeholder={children}
+        placeholder={placeholder}
         type={type}
         value={state.value}
       />
@@ -36,7 +36,7 @@ export default function TextInput(
 TextInput.propTypes = {
   label: PropTypes.string,
   type: PropTypes.string,
-  children: PropTypes.string,
+  placeholder: PropTypes.string,
   handlers: handlersPropType,
   state: statePropType,
   isSubmittedAndHasErrors: isSubmittedAndHasErrorsPropType,
