@@ -67,6 +67,7 @@ export default function LoginForm() {
         isSubmittedAndHasErrors={isSubmittedAndHasErrors}
         handlers={emailHandlers}
         state={emailState}
+        placeholder="Email"
       >
         Email
       </TextInput>
@@ -76,9 +77,8 @@ export default function LoginForm() {
         isSubmittedAndHasErrors={isSubmittedAndHasErrors}
         handlers={passwordHandlers}
         state={passwordState}
-      >
-        Password
-      </TextInput>
+        placeholder="Password"
+      />
 
       <Button
         isSubmitButton
