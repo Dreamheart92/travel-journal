@@ -91,8 +91,8 @@ const useForm = (initialValue = {}) => {
         value: formState[fieldName]?.value,
         isDirty: formState[fieldName]?.isDirty,
         error: fieldErrors !== null ? fieldErrors[fieldName] || null : null,
+        isSubmittedAndHasErrors,
       },
-      isSubmittedAndHasErrors,
     };
   };
 
@@ -126,7 +126,6 @@ const useForm = (initialValue = {}) => {
     handleSubmit,
     formData,
     clearFieldValue,
-    isSubmittedAndHasErrors,
   };
 };
 
