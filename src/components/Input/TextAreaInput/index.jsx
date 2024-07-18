@@ -7,7 +7,7 @@ import style from '../index.module.css';
 export default function TextAreaInput(
   {
     label,
-    children,
+    placeholder,
     handlers,
     state,
     isSubmittedAndHasErrors,
@@ -24,7 +24,7 @@ export default function TextAreaInput(
         onChange={handlers.onChange}
         onBlur={handlers.onBlur}
         value={state.value}
-        placeholder={children}
+        placeholder={placeholder}
         rows="10"
         cols="50"
       />
@@ -34,7 +34,7 @@ export default function TextAreaInput(
 
 TextAreaInput.propTypes = {
   label: PropTypes.string,
-  children: PropTypes.string,
+  placeholder: PropTypes.string,
   handlers: handlersPropType,
   state: statePropType,
   isSubmittedAndHasErrors: isSubmittedAndHasErrorsPropType,
