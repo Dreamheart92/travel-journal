@@ -1,0 +1,9 @@
+.image-wrapper {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.image-wrapper button {
+    width: 14em;
+}
