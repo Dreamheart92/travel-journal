@@ -12,6 +12,5 @@ export const statePropType = PropTypes.shape({
     PropTypes.object,
     PropTypes.oneOf([null]),
   ]),
+  isSubmittedAndHasErrors: PropTypes.bool,
 });
-
-export const isSubmittedAndHasErrorsPropType = PropTypes.bool;
