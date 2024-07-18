@@ -1,0 +1,74 @@
+.button {
+    border: none;
+    padding: .5em 1em;
+    border-radius: .5em;
+    width: 50%;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.primary {
+    background-color: #1E90FF;
+}
+
+.primary:hover {
+    background-color: #077cec;
+}
+
+.secondary {
+    background-color: green;
+}
+
+.secondary:hover {
+    background-color: #006300;
+}
+
+.warning {
+    background-color: red;
+}
+
+.warning:hover {
+    background-color: #cf0000;
+}
+
+.selected {
+    background-color: #1E90FF;
+}
+
+.loading {
+    padding-right: 2em;
+}
+
+.loader {
+    width: 20px;
+    aspect-ratio: 2;
+    --_g: no-repeat radial-gradient(circle closest-side, #EEE 90%, #0000);
+    background: var(--_g) 0% 50%,
+        var(--_g) 50% 50%,
+        var(--_g) 100% 50%;
+    background-size: calc(100% / 3) 50%;
+    animation: l3 1s infinite linear;
+}
+
+@keyframes l3 {
+    20% {
+        background-position: 0% 0%, 50% 50%, 100% 50%
+    }
+
+    40% {
+        background-position: 0% 100%, 50% 0%, 100% 50%
+    }
+
+    60% {
+        background-position: 0% 50%, 50% 100%, 100% 0%
+    }
+
+    80% {
+        background-position: 0% 50%, 50% 50%, 100% 100%
+    }
+}
