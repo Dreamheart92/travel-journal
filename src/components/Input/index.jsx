@@ -25,7 +25,6 @@ export default function Input({ label, children, ...props }) {
 }
 
 Input.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   children: PropTypes.node.isRequired,
-  props: PropTypes.object.isRequired,
 };
