@@ -1,4 +1,4 @@
-import { handlersPropType, statePropType, isSubmittedAndHasErrorsPropType } from '../../../propTypes/inputPropTypes';
+import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
 
 import Wrapper from '..';
 
@@ -6,7 +6,6 @@ export default function DateInput(
   {
     handlers,
     state,
-    isSubmittedAndHasErrors,
   },
 ) {
   const dateValue = state.value;
@@ -15,7 +14,6 @@ export default function DateInput(
   return (
     <Wrapper
       state={state}
-      isSubmittedAndHasErrors={isSubmittedAndHasErrors}
     >
       <input onChange={handlers.onChange} onBlur={handlers.onBlur} defaultValue={date} name="date" id="date" type="date" />
     </Wrapper>
@@ -25,5 +23,4 @@ export default function DateInput(
 DateInput.propTypes = {
   handlers: handlersPropType,
   state: statePropType,
-  isSubmittedAndHasErrors: isSubmittedAndHasErrorsPropType,
 };

@@ -1,22 +1,20 @@
 import PropTypes from 'prop-types';
-
 import ErrorMessage from '../ErrorMessage';
 
-import { statePropType, isSubmittedAndHasErrorsPropType } from '../../propTypes/inputPropTypes';
+import { statePropType } from '../../propTypes/inputPropTypes';
 import { normalizeName } from '../../utility/utility';
 
 import style from './index.module.css';
 
-export default function Input(
+export default function Wrapper(
   {
     label,
     children,
     state,
-    isSubmittedAndHasErrors,
   },
 ) {
   const displayError = state.error && (state.isDirty
-    || isSubmittedAndHasErrors);
+    || state.isSubmittedAndHasErrors);
 
   return (
     <>
@@ -32,9 +30,8 @@ export default function Input(
   );
 }
 
-Input.propTypes = {
+Wrapper.propTypes = {
   label: PropTypes.string,
   children: PropTypes.node.isRequired,
   state: statePropType,
-  isSubmittedAndHasErrors: isSubmittedAndHasErrorsPropType,
 };

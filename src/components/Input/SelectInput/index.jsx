@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { handlersPropType, statePropType, isSubmittedAndHasErrorsPropType } from '../../../propTypes/inputPropTypes';
+import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
 import { normalizeName } from '../../../utility/utility';
 
 import Wrapper from '..';
@@ -11,13 +11,11 @@ export default function SelectInput(
     options,
     handlers,
     state,
-    isSubmittedAndHasErrors,
   },
 ) {
   return (
     <Wrapper
       state={state}
-      isSubmittedAndHasErrors={isSubmittedAndHasErrors}
     >
       <select
         className={style.field}
@@ -47,5 +45,4 @@ SelectInput.propTypes = {
   }])),
   handlers: handlersPropType,
   state: statePropType,
-  isSubmittedAndHasErrors: isSubmittedAndHasErrorsPropType,
 };

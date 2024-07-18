@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Wrapper from '..';
 
 import style from '../index.module.css';
-import { handlersPropType, isSubmittedAndHasErrorsPropType, statePropType } from '../../../propTypes/inputPropTypes';
+import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
 
 export default function TextInput(
   {
@@ -12,14 +12,12 @@ export default function TextInput(
     placeholder,
     handlers,
     state,
-    isSubmittedAndHasErrors,
   },
 ) {
   return (
     <Wrapper
       state={state}
       label={label}
-      isSubmittedAndHasErrors={isSubmittedAndHasErrors}
     >
       <input
         className={style.field}
@@ -39,5 +37,4 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   handlers: handlersPropType,
   state: statePropType,
-  isSubmittedAndHasErrors: isSubmittedAndHasErrorsPropType,
 };
