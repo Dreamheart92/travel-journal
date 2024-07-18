@@ -2,13 +2,21 @@ import PropTypes from 'prop-types';
 
 import ErrorMessage from '../ErrorMessage';
 
+import { statePropType, isSubmittedAndHasErrorsPropType } from '../../propTypes/inputPropTypes';
 import { normalizeName } from '../../utility/utility';
 
 import style from './index.module.css';
 
-export default function Input({ label, children, ...props }) {
-  const displayError = props.state.error && (props.state.isDirty
-    || props.formState.isSubmittedAndHasErrors);
+export default function Input(
+  {
+    label,
+    children,
+    state,
+    isSubmittedAndHasErrors,
+  },
+) {
+  const displayError = state.error && (state.isDirty
+    || isSubmittedAndHasErrors);
 
   return (
     <>
@@ -18,7 +26,7 @@ export default function Input({ label, children, ...props }) {
       <div className={style.wrapper}>
         {children}
         {displayError
-          && <ErrorMessage message={Object.entries(props.state.error)[0][1]} />}
+          && <ErrorMessage message={Object.entries(state.error)[0][1]} />}
       </div>
     </>
   );
@@ -27,4 +35,6 @@ export default function Input({ label, children, ...props }) {
 Input.propTypes = {
   label: PropTypes.string,
   children: PropTypes.node.isRequired,
+  state: statePropType,
+  isSubmittedAndHasErrors: isSubmittedAndHasErrorsPropType,
 };
