@@ -92,9 +92,7 @@ const useForm = (initialValue = {}) => {
         isDirty: formState[fieldName]?.isDirty,
         error: fieldErrors !== null ? fieldErrors[fieldName] || null : null,
       },
-      formState: {
-        isSubmittedAndHasErrors,
-      },
+      isSubmittedAndHasErrors,
     };
   };
 
@@ -128,6 +126,7 @@ const useForm = (initialValue = {}) => {
     handleSubmit,
     formData,
     clearFieldValue,
+    isSubmittedAndHasErrors,
   };
 };
 
