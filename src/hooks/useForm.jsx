@@ -1,45 +1,45 @@
-import { useRef, useState } from "react";
-import { normalizeName } from "../utility/utility.js";
+import { useRef, useState } from 'react';
+import { normalizeName } from '../utility/utility';
 
 const validateField = (value, validations, fieldName) => {
   const errors = {};
 
-  for (const validationType in validations) {
-    const requirement = validations[validationType];
-
+  Object.entries(validations).forEach(([validationType, requirement]) => {
     switch (validationType) {
-      case "required": {
-        if (value.trim() === "" && requirement) {
-          errors[validationType] = `${normalizeName(fieldName)} is required`
+      case 'required': {
+        if (value.trim() === '' && requirement) {
+          errors[validationType] = `${normalizeName(fieldName)} is required`;
         }
         break;
       }
-      case "minLength": {
+      case 'minLength': {
         if (value.trim().length < requirement) {
-          errors[validationType] = `${normalizeName(fieldName)} must be at least ${requirement} characters long`
+          errors[validationType] = `${normalizeName(fieldName)} must be at least ${requirement} characters long`;
         }
         break;
       }
 
-      case "maxLength" : {
+      case 'maxLength': {
         if (value.trim().length > requirement) {
-          errors[validationType] = `${normalizeName(fieldName)} must not be more than ${requirement} characters`
+          errors[validationType] = `${normalizeName(fieldName)} must not be more than ${requirement} characters`;
         }
         break;
       }
-      case "email" : {
+      case 'email': {
         const pattern = /^[a-zA-Z0-9]+@[a-z]+.[a-z]{2,5}$/;
         if (value.match(pattern) === null) {
-          errors[validationType] = "Email address is invalid"
+          errors[validationType] = 'Email address is invalid';
         }
+        break;
       }
+      default:
     }
-  }
+  });
 
   return Object.keys(errors).length > 0 ? errors : null;
-}
+};
 
-export const useForm = (initialValue = {}) => {
+const useForm = (initialValue = {}) => {
   const [formState, setFormState] = useState(initialValue);
   const [formData, setFormData] = useState(null);
 
@@ -48,13 +48,22 @@ export const useForm = (initialValue = {}) => {
 
   const validators = useRef({});
 
-  const register = (fieldName, fieldValue = "", validation = {}) => {
+  const runValidators = (fieldName, fieldValue) => {
+    const fieldValidators = validators.current[fieldName];
+    const currentFieldErrors = validateField(fieldValue, fieldValidators, fieldName);
 
-    if (!formState.hasOwnProperty(fieldName)) {
-      setFormState(prevFormState => ({
+    setFieldErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: currentFieldErrors,
+    }));
+  };
+
+  const register = (fieldName, fieldValue = '', validation = {}) => {
+    if (typeof formState[fieldName] === 'undefined') {
+      setFormState((prevFormState) => ({
         ...prevFormState,
-        [fieldName]: { value: fieldValue, isDirty: false }
-      }))
+        [fieldName]: { value: fieldValue, isDirty: false },
+      }));
 
       validators.current[fieldName] = validation;
       runValidators(fieldName, fieldValue);
@@ -63,38 +72,38 @@ export const useForm = (initialValue = {}) => {
     return {
       handlers: {
         onChange: (event) => {
-          const value = fieldName === "image" ? event.target.files[0] : event.target.value;
+          const value = fieldName === 'image' ? event.target.files[0] : event.target.value;
 
-          setFormState(prevState => ({
+          setFormState((prevState) => ({
             ...prevState,
-            [fieldName]: { ...prevState[fieldName], value }
-          }))
+            [fieldName]: { ...prevState[fieldName], value },
+          }));
           runValidators(fieldName, event.target.value);
         },
         onBlur: () => {
-          setFormState(prevState => ({
+          setFormState((prevState) => ({
             ...prevState,
-            [fieldName]: { ...prevState[fieldName], isDirty: true }
-          }))
-        }
+            [fieldName]: { ...prevState[fieldName], isDirty: true },
+          }));
+        },
       },
       state: {
         value: formState[fieldName]?.value,
         isDirty: formState[fieldName]?.isDirty,
-        error: fieldErrors !== null ? fieldErrors[fieldName] || null : null
+        error: fieldErrors !== null ? fieldErrors[fieldName] || null : null,
       },
       formState: {
-        isSubmittedAndHasErrors
-      }
-    }
-  }
+        isSubmittedAndHasErrors,
+      },
+    };
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsSubmittedAndHasErrors(false);
 
     if (fieldErrors !== null) {
-      const isValidForm = Object.values(fieldErrors).every(requirement => requirement === null);
+      const isValidForm = Object.values(fieldErrors).every((requirement) => requirement === null);
 
       if (isValidForm) {
         setFormData(formState);
@@ -102,26 +111,16 @@ export const useForm = (initialValue = {}) => {
         setIsSubmittedAndHasErrors(true);
       }
     }
-  }
+  };
 
   const clearFieldValue = (fieldName) => {
-    setFormState(prevState => ({
+    setFormState((prevState) => ({
       ...prevState,
-      [fieldName]: { value: "", isDirty: false }
-    }))
+      [fieldName]: { value: '', isDirty: false },
+    }));
 
-    runValidators(fieldName, "");
-  }
-
-  const runValidators = (fieldName, fieldValue) => {
-    const fieldValidators = validators.current[fieldName];
-    const fieldErrors = validateField(fieldValue, fieldValidators, fieldName);
-
-    setFieldErrors(prevErrors => ({
-      ...prevErrors,
-      [fieldName]: fieldErrors
-    }))
-  }
+    runValidators(fieldName, '');
+  };
 
   return {
     formState,
@@ -129,5 +128,7 @@ export const useForm = (initialValue = {}) => {
     handleSubmit,
     formData,
     clearFieldValue,
-  }
-}
+  };
+};
+
+export default useForm;
