@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 
 import style from './index.module.css';
 
-export default function NavigationLink({ to, children }) {
+export default function NavigationLink({ to, children, ...props }) {
   return (
     <NavLink
       to={to}
       className={({ isActive }) => `${style.link} ${isActive && to !== '' ? style.active : ''}`}
+      {...props}
     >
       {children}
     </NavLink>
