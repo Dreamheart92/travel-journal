@@ -1,10 +1,32 @@
+import PropTypes from 'prop-types';
+
 import style from './index.module.css';
 
-export default function Button({ variant = 'primary', children, isLoading, ...props }) {
+export default function Button(
+  {
+    variant = 'primary',
+    caption,
+    isLoading,
+    onClick,
+    isSubmitButton = false,
+  },
+) {
   return (
-    <button {...props} className={`${style.button} ${style[variant]} ${isLoading ? style.loading : null}`}>
-      {children}
-      {isLoading && <div className={style.loader}></div>}
+    <button
+      onClick={onClick}
+      type={isSubmitButton ? 'submit' : 'button'}
+      className={`${style.button} ${style[variant]} ${isLoading ? style.loading : null}`}
+    >
+      {caption}
+      {isLoading && <div className={style.loader} />}
     </button>
-  )
+  );
 }
+
+Button.propTypes = {
+  variant: PropTypes.string,
+  caption: PropTypes.string,
+  isLoading: PropTypes.bool,
+  onClick: PropTypes.func,
+  isSubmitButton: PropTypes.bool,
+};
