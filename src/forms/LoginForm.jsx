@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useForm } from '../hooks/useForm';
+import useForm from '../hooks/useForm';
 import useOnFetch from '../hooks/useOnFetch';
 
 import { login } from '../services/authService';
