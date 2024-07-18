@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 
 import style from './index.module.css';
 
-export default function NavigationLink({ to, children, ...props }) {
+export default function NavigationLink({ to, children, onClick }) {
   return (
     <NavLink
       to={to}
       className={({ isActive }) => `${style.link} ${isActive && to !== '' ? style.active : ''}`}
-      {...props}
+      onClick={onClick}
     >
       {children}
     </NavLink>
@@ -18,5 +18,6 @@ export default function NavigationLink({ to, children, ...props }) {
 
 NavigationLink.propTypes = {
   to: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
 };

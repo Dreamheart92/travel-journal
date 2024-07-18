@@ -1,6 +1,6 @@
 import style from './index.module.css';
 
-import loading from "/loading.jpg"
+import loading from '/loading.jpg';
 
 export default function Loading() {
   return (
