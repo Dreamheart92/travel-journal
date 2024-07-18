@@ -1,4 +1,4 @@
-import LoginForm from '../../forms/LoginForm.jsx';
+import LoginForm from '../../forms/LoginForm';
 import AuthLayout from '../../layouts/AuthLayout';
 
 export default function Login() {
