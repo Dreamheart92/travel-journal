@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PATHS } from '../../constants/paths';
+import { PATHS } from '../../../constants/paths';
 
 import style from './index.module.css';
 
