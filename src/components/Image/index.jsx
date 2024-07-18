@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 
+import style from './index.module.css';
+
 export default function Image({ imageUrl }) {
   return (
-    <img src={imageUrl} alt="" />
+    <img
+      className={style.image}
+      src={imageUrl} alt="" />
   );
 }
 
