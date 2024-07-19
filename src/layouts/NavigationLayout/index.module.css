@@ -6,4 +6,13 @@
     justify-content: space-around;
     padding: 1em 0;
     z-index: 100;
+    color: black;
+    border-bottom: 1px solid #EEE;
+    background-color: white;
+}
+
+.home-page {
+    color: white;
+    border: none;
+    background-color: transparent;
 }
