@@ -1,0 +1,64 @@
+.destination-card {
+  width: 25em;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card-image {
+  transition: all 0.3s ease-in;
+}
+
+.card-image img {
+  border-radius: .5em;
+  filter: brightness(90%);
+}
+
+.info {
+  color: white;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease-in;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 20em;
+}
+
+.info h1 {
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.info p {
+  margin-top: 2em;
+  transition: all 0.3s ease-in;
+}
+
+.active {
+  transform: translateY(-70%) translateX(-50%);
+  gap: .25em;
+}
+
+.active.info p {
+  margin-top: 0;
+}
+
+.hover {
+  filter: brightness(50%);
+}
+
+.count {
+  text-transform: uppercase;
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  background-color: #14a2d5;
+  padding: .5em;
+  border-radius: .5em;
+  color: white;
+  font-size: .85em;
+}
