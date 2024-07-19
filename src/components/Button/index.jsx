@@ -8,13 +8,13 @@ export default function Button(
     caption,
     isLoading,
     onClick,
-    isSubmitButton = false,
+    submitButton = false,
   },
 ) {
   return (
     <button
       onClick={onClick}
-      type={isSubmitButton ? 'submit' : 'button'}
+      type={submitButton ? 'submit' : 'button'}
       className={`${style.button} ${style[variant]} ${isLoading ? style.loading : null}`}
     >
       {caption}
@@ -28,5 +28,5 @@ Button.propTypes = {
   caption: PropTypes.string,
   isLoading: PropTypes.bool,
   onClick: PropTypes.func,
-  isSubmitButton: PropTypes.bool,
+  submitButton: PropTypes.bool,
 };
