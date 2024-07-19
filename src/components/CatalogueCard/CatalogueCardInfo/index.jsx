@@ -28,12 +28,11 @@ export default function CatalogueCardInfo(
           {author}
         </p>
 
-        <div>
+        <div className={style.comments}>
           <p>{totalComments}</p>
           <FontAwesomeIcon icon={faComment} />
         </div>
       </div>
-
     </div>
   );
 }
