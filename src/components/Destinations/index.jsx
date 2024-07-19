@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 
 import Container from '../Container';
-import DestinationsGrid from '../DestinationsGrid';
+import Grid from '../Grid';
+import DestinationCard from '../DestinationCard';
 
 import destinationPropTypes from '../../propTypes/destinationPropTypes';
+
+import style from './index.module.css';
 
 export default function Destinations({ destinations }) {
   const firstRow = destinations.slice(0, 3);
@@ -13,12 +16,23 @@ export default function Destinations({ destinations }) {
     <Container
       heading="Around the world"
     >
-      <DestinationsGrid
-        destinations={firstRow}
-      />
-      <DestinationsGrid
-        destinations={secondRow}
-      />
+      <Grid>
+        {firstRow.map((destination) => (
+          <DestinationCard
+            key={destination._id}
+            destination={destination}
+          />
+        ))}
+      </Grid>
+
+      <Grid outerClassName={style['second-row']}>
+        {secondRow.map((destination) => (
+          <DestinationCard
+            key={destination._id}
+            destination={destination}
+          />
+        ))}
+      </Grid>
 
     </Container>
   );
