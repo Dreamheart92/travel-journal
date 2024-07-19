@@ -1,9 +1,9 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import useForm from '../hooks/useForm';
-import useOnFetch from '../hooks/useOnFetch';
 
-import { login } from '../services/authService';
+import { login, userActions } from '../store/userSlice';
 import { storeUserData } from '../utility/storage';
 import { PATHS } from '../constants/paths';
 
@@ -12,6 +12,7 @@ import VALIDATIONS from '../constants/validations';
 import Form from '../components/Form';
 import TextInput from '../components/Input/TextInput';
 import Button from '../components/Button';
+import constructLoginData from './helpers';
 
 export default function LoginForm() {
   const {
@@ -22,46 +23,40 @@ export default function LoginForm() {
     isSubmittedAndHasErrors,
   } = useForm();
 
-  const {
-    data: userData,
-    error,
-    isLoading,
-    fetch,
-  } = useOnFetch();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const { handlers: emailHandlers, state: emailState } = register('email', '', { required: true, minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH });
+  const { isLoading, fetchData, fetchError } = useSelector((state) => state.user);
+
+  const { handlers: emailHandlers, state: emailState } = register('email', '', { required: true, minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH, email: true });
   const { handlers: passwordHandlers, state: passwordState } = register('password', '', { required: true, minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH });
 
   useEffect(() => {
     if (loginData) {
-      const data = {
-        email: loginData.email.value,
-        password: loginData.password.value,
-      };
-
-      fetch(login(data));
+      dispatch(login({ loginData: constructLoginData(loginData) }));
     }
+
+    return () => dispatch(userActions.resetState());
   }, [loginData]);
 
   useEffect(() => {
-    if (userData) {
-      storeUserData(userData.data);
+    if (fetchData) {
+      storeUserData(fetchData);
       navigate(PATHS.HOME);
     }
-  }, [userData, navigate]);
+  }, [fetchData]);
 
   useEffect(() => {
-    if (error) {
+    if (fetchError) {
       clearFieldValue('password');
     }
-  }, [error]);
+  }, [fetchError]);
 
   return (
     <Form
       onSubmit={handleSubmit}
-      error={error}
+      error={fetchError}
     >
       <TextInput
         isSubmittedAndHasErrors={isSubmittedAndHasErrors}
