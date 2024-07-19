@@ -42,8 +42,7 @@ export default function DestinationCard({ destination }) {
 
         <div className={style.count}>
           <p>
-            {count}
-            {count !== 1 ? 'journals' : 'journal'}
+            {`${count} ${count !== 1 ? 'journals' : 'journal'}`}
           </p>
         </div>
 
