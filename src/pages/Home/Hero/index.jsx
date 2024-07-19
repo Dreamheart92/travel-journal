@@ -2,6 +2,7 @@ import Image from '../../../components/Image';
 import InfoBlock from '../../../components/InfoBlock';
 
 import heroBanner from '/hero.jpg';
+
 import style from './index.module.css';
 
 export default function Hero() {
