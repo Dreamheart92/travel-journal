@@ -9,6 +9,13 @@ import style from './index.module.css';
 import destinationPropTypes from '../../propTypes/destinationPropTypes';
 
 export default function DestinationCard({ destination }) {
+  const {
+    name,
+    imageUrl,
+    description,
+    count,
+  } = destination;
+
   const [isHover, setIsHover] = useState(false);
 
   const cardImageClass = `${style['card-image']} ${isHover ? style.hover : ''}`;
@@ -23,20 +30,20 @@ export default function DestinationCard({ destination }) {
       >
 
         <div className={cardImageClass}>
-          <Image imageUrl={destination.imageUrl} />
+          <Image imageUrl={imageUrl} />
         </div>
 
         <div className={infoClass}>
           <InfloBlock
-            title={destination.name}
-            caption={destination.description}
+            title={name}
+            caption={description}
           />
         </div>
 
         <div className={style.count}>
           <p>
-            {destination.count}
-            {destination.count !== 1 ? 'journals' : 'journal'}
+            {count}
+            {count !== 1 ? 'journals' : 'journal'}
           </p>
         </div>
 
