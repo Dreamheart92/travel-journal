@@ -1,10 +1,11 @@
 import { useParams } from 'react-router-dom';
-import Container from '../../components/Container';
 import useFetch from '../../hooks/useFetch';
 import journalService from '../../services/journalService';
 import Loading from '../../components/Loading';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import DestinationHeader from '../../components/DestinationHeader';
+import Container from '../../components/Container';
+import JournalsList from '../../components/JournalsList';
 
 export default function Catalogue() {
   const { destination } = useParams();
@@ -25,9 +26,14 @@ export default function Catalogue() {
     return <Loading />;
   }
 
+  const currentDestination = destination
+    ? destinations.data.find((destinationFilter) => destinationFilter.name === destination)
+    : null;
+
   return (
     <DefaultLayout>
-      <DestinationHeader />
+      <DestinationHeader destination={currentDestination} />
+      <JournalsList journals={journals.data.journals} />
     </DefaultLayout>
   );
 }
