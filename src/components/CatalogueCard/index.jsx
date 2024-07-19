@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
-import Container from '../Container';
 import Image from '../Image';
 import { PATHS } from '../../constants/paths';
 import journalPropTypes from '../../propTypes/journalPropTypes';
 import CatalogueCardInfo from './CatalogueCardInfo';
 import CatalogueCardDestinationLabel from './CatalogueCardDestinationLabel';
+import style from './index.module.css';
 
 export default function JournalCatalogueCard({ journal }) {
   const {
     date,
-    totalComments,
+    comments,
     author,
     description,
     title,
@@ -17,7 +17,7 @@ export default function JournalCatalogueCard({ journal }) {
   } = journal;
 
   return (
-    <Container>
+    <div className={style.wrapper}>
       <Link
         to={`${PATHS.DETAILS}/${journal._id}`}
       >
@@ -26,7 +26,7 @@ export default function JournalCatalogueCard({ journal }) {
         />
         <CatalogueCardInfo
           date={date}
-          totalComments={totalComments}
+          totalComments={comments.length}
           author={author.username}
           description={description}
           title={title}
@@ -35,7 +35,7 @@ export default function JournalCatalogueCard({ journal }) {
           destination={destination.name}
         />
       </Link>
-    </Container>
+    </div>
   );
 }
 
