@@ -1,0 +1,37 @@
+.journal-image {
+  overflow: hidden;
+  width: 25em;
+  border-radius: .25em;
+}
+
+.journal-image img {
+  height: 15em;
+  transition: all 0.3s ease-in-out;
+}
+
+.journal-image img:hover {
+  transform: scale(1.05);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: .25em;
+  flex-wrap: wrap;
+  width: 90%;
+}
+
+.info h2:hover {
+  color: blue;
+}
+
+.description {
+  color: #575757;
+}
+
+.author {
+  padding-top: .25em;
+  display: flex;
+  gap: .25em;
+  align-items: center
+}
