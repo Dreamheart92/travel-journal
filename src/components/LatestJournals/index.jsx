@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import Container from '../Container';
 import Grid from '../Grid';
-import JournalCard from '../JournalCard';
+import HomeCard from '../HomeCard';
 
 import journalPropTypes from '../../propTypes/journalPropTypes';
 
@@ -14,7 +14,7 @@ export default function LatestJournals({ journals }) {
     >
       <Grid>
         {journals.map((journal) => (
-          <JournalCard
+          <HomeCard
             key={journal._id}
             journal={journal}
           />
