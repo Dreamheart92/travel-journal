@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Image from '../Image';
 import InfloBlock from '../InfoBlock';
-
 import { PATHS } from '../../constants/paths';
-
 import style from './index.module.css';
 import destinationPropTypes from '../../propTypes/destinationPropTypes';
 
