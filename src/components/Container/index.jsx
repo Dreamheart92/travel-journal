@@ -2,10 +2,12 @@ import PropTypes from 'prop-types';
 
 import style from './index.module.css';
 
-export default function Container({ children, heading }) {
+export default function Container({ children, width = '100%', heading }) {
   return (
-    <div className={style.container}>
-
+    <div
+      style={{ width }}
+      className={style.container}
+    >
       {heading
         && <h1 className={style.heading}>{heading}</h1>}
 
@@ -15,6 +17,7 @@ export default function Container({ children, heading }) {
 }
 
 Container.propTypes = {
-  children: PropTypes.node.isRequired,
   heading: PropTypes.string,
+  width: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
