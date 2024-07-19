@@ -1,0 +1,18 @@
+.destination-header {
+    width: 100%;
+    height: 20em;
+    position: relative;
+}
+
+.destination-header img {
+    filter: brightness(50%);
+}
+
+.caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    color: white;
+    font-size: 3em;
+}
