@@ -1,7 +1,7 @@
 import sendHttpRequest from './sendHttpRequest';
 import API from '../constants/api';
 
-const getJournals = () => sendHttpRequest(API.JOURNAL.JOURNALS);
+const getJournals = (destination) => sendHttpRequest(`${API.JOURNAL.JOURNALS}/${destination || ''}`);
 const getDestinations = () => sendHttpRequest(API.JOURNAL.DESTINATIONS);
 
 export default {
