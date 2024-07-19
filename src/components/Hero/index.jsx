@@ -1,5 +1,5 @@
-import Image from '../../../components/Image';
-import InfoBlock from '../../../components/InfoBlock';
+import Image from '../Image';
+import InfoBlock from '../InfoBlock';
 
 import heroBanner from '/hero.jpg';
 

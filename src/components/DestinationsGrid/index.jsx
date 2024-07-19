@@ -1,6 +1,6 @@
-import DestinationCard from '../../../../components/DestinationCard';
+import DestinationCard from '../DestinationCard';
 
-import destinationPropTypes from '../../../../propTypes/destinationPropTypes';
+import destinationPropTypes from '../../propTypes/destinationPropTypes';
 import style from './index.module.css';
 
 export default function DestinationsGrid({ destinations }) {
