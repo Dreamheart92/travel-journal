@@ -1,0 +1,9 @@
+.label {
+    position: absolute;
+    right: 0;
+    top: 8%;
+    background-color: #f97316;
+    padding: .5em 2em;
+    color: white;
+    pointer-events: none;
+}
