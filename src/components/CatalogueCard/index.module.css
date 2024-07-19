@@ -1,0 +1,6 @@
+.wrapper {
+    width: 50em;
+    height: fit-content;
+    padding: .5em 0;
+    position: relative;
+}
