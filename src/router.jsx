@@ -5,6 +5,7 @@ import App from './App';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Catalogue from './pages/Catalogue';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: PATHS.SIGNUP,
         element: <Signup />,
+      },
+      {
+        path: PATHS.CATALOGUE,
+        element: <Catalogue />,
+      },
+      {
+        path: `${PATHS.CATALOGUE}/:destination`,
+        element: <Catalogue />,
       },
     ],
   },
