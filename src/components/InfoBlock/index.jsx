@@ -2,7 +2,13 @@ import PropTypes from 'prop-types';
 
 import style from './index.module.css';
 
-export default function InfoBlock({ textAlign = 'center', title, caption }) {
+export default function InfoBlock(
+  {
+    textAlign = 'center',
+    title,
+    caption,
+  },
+) {
   return (
     <div
       style={{ textAlign }}
@@ -17,4 +23,5 @@ export default function InfoBlock({ textAlign = 'center', title, caption }) {
 InfoBlock.propTypes = {
   title: PropTypes.string.isRequired,
   caption: PropTypes.string.isRequired,
+  textAlign: PropTypes.string,
 };
