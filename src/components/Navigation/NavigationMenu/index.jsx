@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import NavigationLink from '../NavigationLink';
+import NavigationLink from '../../NavigationLink';
 import { PATHS } from '../../../constants/paths';
 
 import style from './index.module.css';
