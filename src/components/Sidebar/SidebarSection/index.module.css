@@ -3,3 +3,7 @@
     flex-direction: column;
     gap: .5em;
 }
+
+.sidebar-section h3 {
+    font-weight: 500;
+}
