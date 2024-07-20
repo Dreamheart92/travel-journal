@@ -12,7 +12,7 @@ const getJournalsSettings = (destination, search) => {
   };
 };
 
-const getJournalByIdSettings = (journalId) => ({ url: `${API.JOURNAL}/${journalId}` });
+const getJournalByIdSettings = (journalId) => ({ url: `${API.JOURNAL.JOURNAL}/${journalId}` });
 
 const getDestinationsSettings = () => ({
   url: API.JOURNAL.DESTINATIONS,
