@@ -1,5 +1,5 @@
 import style from './index.module.css';
 
-export default function Comments() {
+export default function CommentsSection() {
 
 }
