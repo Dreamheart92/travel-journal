@@ -1,5 +1,6 @@
 import style from './index.module.css';
 import JournalHeader from './JournalHeader';
+import Image from '../Image';
 
 export default function Journal(
   {
@@ -23,6 +24,8 @@ export default function Journal(
         imageUrl={imageUrl}
         description={description}
       />
+
+      <Image imageUrl={imageUrl} />
     </div>
   );
 }
