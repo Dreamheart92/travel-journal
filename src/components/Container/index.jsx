@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import style from './index.module.css';
 
-export default function Container({ children, width = '100%', heading }) {
+export default function Container({ children, width = 'fitContent', heading }) {
   return (
     <div
       style={{ width }}
