@@ -13,17 +13,15 @@ const useFetch = (fetchSettings) => {
   };
 
   useEffect(() => {
-    const controller = new AbortController();
     resetLoadingAndSuccessState();
+
+    const controller = new AbortController();
+    const { url, settings = {} } = fetchSettings();
+    settings.signal = controller.signal;
 
     const fetchData = async () => {
       try {
-        const fetchedData = await sendHttpRequest(
-          {
-            ...fetchSettings(),
-            signal: controller.signal,
-          },
-        );
+        const fetchedData = await sendHttpRequest(url, settings);
         setData(fetchedData);
         setIsSuccess(true);
       } catch (fetchError) {
