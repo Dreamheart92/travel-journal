@@ -1,9 +1,16 @@
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import style from './index.module.css';
 import SidebarSection from '../Sidebar/SidebarSection';
+import style from './index.module.css';
 
 export default function Search() {
+  const [search, setSearch] = useState('');
+
+  const handleChange = (event) => {
+    setSearch(event.target.value);
+  };
+
   return (
     <SidebarSection
       heading="Search"
@@ -15,6 +22,8 @@ export default function Search() {
           id="search"
           name="search"
           placeholder="Search journals..."
+          value={search}
+          onChange={handleChange}
         />
         <FontAwesomeIcon className={style.icon} icon={faMagnifyingGlass} />
       </div>
