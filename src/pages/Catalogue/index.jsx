@@ -7,6 +7,7 @@ import DestinationHeader from '../../components/DestinationHeader';
 import JournalsList from '../../components/JournalsList';
 import Sidebar from '../../components/Sidebar';
 import style from './index.module.css';
+import CreateJournal from '../../components/Sidebar/CreateJournal';
 
 export default function Catalogue() {
   const { destination } = useParams();
@@ -36,7 +37,11 @@ export default function Catalogue() {
       <DestinationHeader destination={currentDestination} />
       <div className={style.wrapper}>
         <JournalsList journals={journals.data.journals} />
-        <Sidebar width="20%" />
+        <Sidebar
+          width="20%"
+        >
+          <CreateJournal />
+        </Sidebar>
       </div>
     </DefaultLayout>
   );
