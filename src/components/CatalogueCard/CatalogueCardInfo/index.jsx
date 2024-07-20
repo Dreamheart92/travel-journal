@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
-
+import { faComments } from '@fortawesome/free-regular-svg-icons/faComments';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
+import { faPencil } from '@fortawesome/free-solid-svg-icons/faPencil';
+import { formatDate } from '../../../utility/utility';
+import CatalogueCardButton from '../CatalogueCardButton';
+import InfoBlock from '../../InfoBlock';
 import style from './index.module.css';
 
 export default function CatalogueCardInfo(
@@ -16,22 +19,36 @@ export default function CatalogueCardInfo(
 ) {
   return (
     <div className={style.info}>
+      <div className={style.header}>
+        <div className={style['info-container']}>
+          <FontAwesomeIcon icon={faCalendar} />
+          <p>{formatDate(date)}</p>
+        </div>
+
+        <div className={style['info-container']}>
+          <FontAwesomeIcon icon={faPencil} />
+          <p>{author}</p>
+        </div>
+      </div>
+
       <div className={style.description}>
-        <p>{date}</p>
-        <h1>{title}</h1>
-        <p>{`${description.slice(0, 500)}...`}</p>
+        <InfoBlock
+          textAlign="left"
+          title={title}
+          caption={`${description.slice(0, 500)}...`}
+        />
       </div>
 
       <div className={style['additional-info']}>
-        <p>
-          Post by:
-          {author}
-        </p>
+        <CatalogueCardButton
+          caption="Read more"
+        />
 
         <div className={style.comments}>
           <p>{totalComments}</p>
-          <FontAwesomeIcon icon={faComment} />
+          <FontAwesomeIcon icon={faComments} />
         </div>
+
       </div>
     </div>
   );
