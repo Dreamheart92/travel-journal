@@ -35,7 +35,7 @@ export default function Details() {
         id={_id}
         title={title}
         location={location}
-        author={author}
+        author={author.username}
         date={date}
         imageUrl={imageUrl}
         description={description}
