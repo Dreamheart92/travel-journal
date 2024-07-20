@@ -1,0 +1,5 @@
+.sidebar {
+    height: fit-content;
+    position: sticky;
+    inset: 0;
+}
