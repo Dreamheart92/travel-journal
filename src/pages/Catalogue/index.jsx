@@ -9,6 +9,7 @@ import Sidebar from '../../components/Sidebar';
 import style from './index.module.css';
 import CreateJournal from '../../components/Sidebar/CreateJournal';
 import Search from '../../components/Search';
+import FiltersSection from '../../components/Sidebar/FiltersSection';
 
 export default function Catalogue() {
   const { destination } = useParams();
@@ -16,7 +17,7 @@ export default function Catalogue() {
   const {
     data: journals,
     isLoading: isJournalsLoading,
-    error: journalsError
+    error: journalsError,
   } = useFetch(() => journalService.getJournals(destination));
 
   const {
@@ -43,6 +44,7 @@ export default function Catalogue() {
         >
           <CreateJournal />
           <Search />
+          <FiltersSection destinations={destinations.data} />
         </Sidebar>
       </div>
     </DefaultLayout>
