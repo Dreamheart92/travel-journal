@@ -1,6 +1,7 @@
+import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
-import journalService from '../../services/journalService';
+import journalServiceSettings from '../../services/journalServiceSettings';
 import Loading from '../../components/Loading';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import DestinationHeader from '../../components/DestinationHeader';
@@ -16,17 +17,17 @@ export default function Catalogue() {
 
   const {
     data: journals,
-    isLoading: isJournalsLoading,
+    isSuccess: journalsSuccess,
     error: journalsError,
-  } = useFetch(() => journalService.getJournals(destination));
+  } = useFetch(useCallback(() => journalServiceSettings.getJournalsSettings(destination), [destination]));
 
   const {
     data: destinations,
-    isLoading: isDestinationsLoading,
+    isSuccess: destinationsSuccess,
     error: destinationsError,
-  } = useFetch(journalService.getDestinations);
+  } = useFetch(journalServiceSettings.getDestinationsSettings);
 
-  if (isJournalsLoading || isDestinationsLoading) {
+  if (!journalsSuccess || !destinationsSuccess) {
     return <Loading />;
   }
 
