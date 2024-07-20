@@ -30,6 +30,7 @@ const useFetch = (fetchSettings) => {
         setIsLoading(false);
       }
     };
+
     fetchData();
 
     return () => {
