@@ -1,0 +1,10 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    padding-top: .5em;
+}
+
+.content p {
+    font-size: .95em;
+}
