@@ -2,4 +2,7 @@
     height: fit-content;
     position: sticky;
     inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
 }
