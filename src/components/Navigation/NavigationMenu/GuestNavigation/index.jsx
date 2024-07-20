@@ -1,4 +1,4 @@
-import NavigationLink from '../../NavigationLink';
+import NavigationLink from '../../../NavigationLink';
 import { PATHS } from '../../../../constants/paths';
 
 export default function GuestNavigation() {
