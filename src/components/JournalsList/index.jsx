@@ -6,7 +6,7 @@ import journalPropTypes from '../../propTypes/journalPropTypes';
 
 export default function JournalsList({ journals }) {
   return (
-    <Container width="40%">
+    <Container>
       {journals.map((journal) => (
         <CatalogueCard
           key={journal._id}
