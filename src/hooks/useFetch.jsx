@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import sendHttpRequest from '../services/sendHttpRequest';
 
-const useFetch = (fetchCallback) => {
+const useFetch = (fetchSettings) => {
   const [data, setData] = useState();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +20,7 @@ const useFetch = (fetchCallback) => {
       try {
         const fetchedData = await sendHttpRequest(
           {
-            ...fetchCallback(),
+            ...fetchSettings(),
             signal: controller.signal,
           },
         );
@@ -37,7 +37,7 @@ const useFetch = (fetchCallback) => {
     return () => {
       controller.abort();
     };
-  }, [fetchCallback]);
+  }, [fetchSettings]);
 
   return {
     data,
