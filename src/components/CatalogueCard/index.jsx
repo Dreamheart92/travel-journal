@@ -21,9 +21,11 @@ export default function JournalCatalogueCard({ journal }) {
       <Link
         to={`${PATHS.DETAILS}/${journal._id}`}
       >
-        <Image
-          imageUrl={journal.imageUrl}
-        />
+        <div className={style['image-wrapper']}>
+          <Image
+            imageUrl={journal.imageUrl}
+          />
+        </div>
         <CatalogueCardInfo
           date={date}
           totalComments={comments.length}
