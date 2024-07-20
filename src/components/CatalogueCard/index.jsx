@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import Image from '../Image';
 import { PATHS } from '../../constants/paths';
 import journalPropTypes from '../../propTypes/journalPropTypes';
-import CatalogueCardInfo from './CatalogueCardInfo';
 import CatalogueCardDestinationLabel from './CatalogueCardDestinationLabel';
 import style from './index.module.css';
+import JournalContent from '../JournalContent';
 
 export default function JournalCatalogueCard({ journal }) {
   const {
@@ -27,13 +27,16 @@ export default function JournalCatalogueCard({ journal }) {
             imageUrl={imageUrl}
           />
         </div>
-        <CatalogueCardInfo
+
+        <JournalContent
           date={date}
           totalComments={comments.length}
           author={author.username}
-          description={description}
+          content={description}
           title={title}
+          readMore
         />
+
         <CatalogueCardDestinationLabel
           destination={destination.name}
         />
