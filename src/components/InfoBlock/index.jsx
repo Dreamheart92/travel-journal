@@ -2,9 +2,12 @@ import PropTypes from 'prop-types';
 
 import style from './index.module.css';
 
-export default function InfoBlock({ title, caption }) {
+export default function InfoBlock({ textAlign = 'center', title, caption }) {
   return (
-    <div className={style['info-block']}>
+    <div
+      style={{ textAlign }}
+      className={style['info-block']}
+    >
       <h1>{title}</h1>
       <p>{caption}</p>
     </div>
