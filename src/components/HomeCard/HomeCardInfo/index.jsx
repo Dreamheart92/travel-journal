@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import style from '../index.module.css';
 
-export default function HomeCardInfo({
-                                       author,
-                                       title,
-                                       description,
-                                     }) {
+export default function HomeCardInfo(
+  {
+    author,
+    title,
+    description,
+  },
+) {
   return (
     <div className={style.info}>
       <div className={style.author}>
