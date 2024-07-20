@@ -1,0 +1,51 @@
+.button {
+    background-color: transparent;
+    border: none;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    height: 1.4em;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    width: 9em;
+}
+
+.button span {
+    font-family: 'Cinzel';
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25em;
+}
+
+.button:hover .arrow-icon {
+    right: -10%;
+}
+
+.button:hover .visible {
+    transform: translateY(-100%);
+}
+
+.button:hover .hidden {
+    transform: translateY(-100%);
+}
+
+.arrow-icon {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+
+.visible {
+    transform: translateY(0);
+}
+
+.hidden {
+    transform: translateY(100%);
+}
