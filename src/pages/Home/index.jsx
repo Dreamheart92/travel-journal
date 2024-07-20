@@ -1,6 +1,5 @@
 import useFetch from '../../hooks/useFetch';
-import journalService from '../../services/journalService';
-
+import journalServiceSettings from '../../services/journalServiceSettings';
 import Container from '../../components/Container';
 import Hero from '../../components/Hero';
 import Destinations from '../../components/Destinations';
@@ -10,17 +9,17 @@ import LatestJournals from '../../components/LatestJournals';
 export default function Home() {
   const {
     data: destinations,
-    isLoading: isDestinationsLoading,
-    error: destinationsError
-  } = useFetch(journalService.getDestinations);
+    error: destinationsError,
+    isSuccess: destinationsSuccess,
+  } = useFetch(journalServiceSettings.getDestinationsSettings);
 
   const {
     data: journalsData,
-    isLoading: isJournalsLoading,
-    error: journalsError
-  } = useFetch(journalService.getJournals);
+    error: journalsError,
+    isSuccess: journalsSuccess,
+  } = useFetch(journalServiceSettings.getJournalsSettings);
 
-  if (isDestinationsLoading || isJournalsLoading) {
+  if (!journalsSuccess || !destinationsSuccess) {
     return <Loading />;
   }
 
