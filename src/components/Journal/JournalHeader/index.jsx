@@ -7,7 +7,6 @@ export default function JournalHeader(
     location,
     author,
     date,
-    id,
   },
 ) {
   return (
