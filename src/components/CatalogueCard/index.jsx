@@ -14,6 +14,7 @@ export default function JournalCatalogueCard({ journal }) {
     description,
     title,
     destination,
+    imageUrl,
   } = journal;
 
   return (
@@ -23,7 +24,7 @@ export default function JournalCatalogueCard({ journal }) {
       >
         <div className={style['image-wrapper']}>
           <Image
-            imageUrl={journal.imageUrl}
+            imageUrl={imageUrl}
           />
         </div>
         <CatalogueCardInfo
