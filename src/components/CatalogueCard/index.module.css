@@ -1,6 +1,11 @@
 .wrapper {
-    width: 50em;
+    width: 60em;
     height: fit-content;
     padding: .5em 0;
     position: relative;
+}
+
+.image-wrapper {
+    width: 60em;
+    height: 30em;
 }
