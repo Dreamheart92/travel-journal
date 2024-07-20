@@ -1,8 +1,16 @@
 import API from '../constants/api';
 
-const getJournalsSettings = (destination) => ({
-  url: `${API.JOURNAL.JOURNALS}/${destination || ''}`,
-});
+const getJournalsSettings = (destination, search) => {
+  let query = '?';
+
+  if (search) {
+    query += `search=${search}`;
+  }
+
+  return {
+    url: `${API.JOURNAL.JOURNALS}/${destination || ''}${query}`,
+  };
+};
 
 const getDestinationsSettings = () => ({
   url: API.JOURNAL.DESTINATIONS,
