@@ -40,13 +40,13 @@ export default function Catalogue() {
       <DestinationHeader destination={currentDestination} />
       <div className={style.wrapper}>
         <JournalsList journals={journals.data.journals} />
-        <Sidebar
-          width="20em"
-        >
+
+        <Sidebar width="20em">
           <CreateJournal />
           <Search />
           <FiltersSection destinations={destinations.data} />
         </Sidebar>
+
       </div>
     </DefaultLayout>
   );
