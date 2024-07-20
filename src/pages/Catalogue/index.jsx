@@ -8,6 +8,7 @@ import JournalsList from '../../components/JournalsList';
 import Sidebar from '../../components/Sidebar';
 import style from './index.module.css';
 import CreateJournal from '../../components/Sidebar/CreateJournal';
+import Search from '../../components/Search';
 
 export default function Catalogue() {
   const { destination } = useParams();
@@ -38,9 +39,10 @@ export default function Catalogue() {
       <div className={style.wrapper}>
         <JournalsList journals={journals.data.journals} />
         <Sidebar
-          width="20%"
+          width="20em"
         >
           <CreateJournal />
+          <Search />
         </Sidebar>
       </div>
     </DefaultLayout>
