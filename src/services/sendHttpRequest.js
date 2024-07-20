@@ -1,6 +1,4 @@
-const sentHttpRequest = async ({ url, settings = {}, signal }) => {
-  settings.signal = signal;
-
+const sentHttpRequest = async (url, settings) => {
   try {
     const response = await fetch(url, settings);
 
