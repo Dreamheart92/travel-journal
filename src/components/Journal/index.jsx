@@ -1,11 +1,12 @@
-import style from './index.module.css';
-import JournalHeader from './JournalHeader';
+import PropTypes from 'prop-types';
+
 import Image from '../Image';
-import JournalContent from './JournalContent';
+import JournalContent from '../JournalContent';
+
+import style from './index.module.css';
 
 export default function Journal(
   {
-    id,
     title,
     location,
     author,
@@ -16,16 +17,24 @@ export default function Journal(
 ) {
   return (
     <div className={style.container}>
-      <JournalHeader
-        title={title}
-        location={location}
-        author={author.username}
-        date={date}
-      />
-
       <Image imageUrl={imageUrl} />
 
-      <JournalContent description={description} />
+      <JournalContent
+        title={title}
+        date={date}
+        content={description}
+        author={author}
+        location={location}
+      />
     </div>
   );
 }
+
+Journal.propTypes = {
+  title: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+};
