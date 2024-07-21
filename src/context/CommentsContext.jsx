@@ -2,16 +2,21 @@ import { createContext, useState } from 'react';
 
 export const CommentsContext = createContext();
 
-const CommentsProvider = ({ children }) => {
+function CommentsProvider({ children }) {
   const [comments, setComments] = useState([]);
 
   const handleInitComments = (newComments) => {
     setComments(newComments);
   };
 
+  const handleAddNewComment = (newComment) => {
+    setComments((prevState) => [newComment, ...prevState]);
+  };
+
   const context = {
     comments,
     onInitComments: handleInitComments,
+    onAddNewComment: handleAddNewComment,
   };
 
   return (
@@ -19,6 +24,6 @@ const CommentsProvider = ({ children }) => {
       {children}
     </CommentsContext.Provider>
   );
-};
+}
 
 export default CommentsProvider;
