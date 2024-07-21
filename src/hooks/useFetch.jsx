@@ -19,7 +19,7 @@ const useFetch = (fetchSettings) => {
     const { url, settings = {} } = fetchSettings();
     settings.signal = controller.signal;
 
-    const fetchData = async () => {
+    (async () => {
       try {
         const fetchedData = await sendHttpRequest(url, settings);
         setData(fetchedData);
@@ -29,9 +29,7 @@ const useFetch = (fetchSettings) => {
       } finally {
         setIsLoading(false);
       }
-    };
-
-    fetchData();
+    })();
 
     return () => {
       controller.abort();
