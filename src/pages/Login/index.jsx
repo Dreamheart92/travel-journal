@@ -15,11 +15,11 @@ export default function Login() {
     data: userData,
     isLoading,
     error,
-    fetch: submitLogin,
+    fetch: sendLoginRequest,
   } = useOnFetch();
 
   const handleLoginSubmit = (formData) => {
-    submitLogin(authService.login(constructLoginData(formData)));
+    sendLoginRequest(authService.login(constructLoginData(formData)));
   };
 
   useEffect(() => {
