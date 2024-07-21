@@ -47,8 +47,9 @@ export default function CommentsSection(
   return (
     <>
       <CommentsSectionHeader user={!!user} />
+
       {user
-        && <CreateCommentForm user={user} journalId={journalId} />}
+        && <CreateCommentForm onSendCreateCommentRequest={handleCreateCommentSubmit} />}
 
       <div className={style['comments-count']}>
         {formatCommentsCount(comments)}
