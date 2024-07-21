@@ -4,7 +4,7 @@ import useForm from '../../hooks/useForm';
 import { storeUserData } from '../../helpers/storage';
 import { PATHS } from '../../constants/paths';
 import useOnFetch from '../../hooks/useOnFetch';
-import { constructSignupData, resetPasswordFields } from '../helpers/signupFormHelpers';
+import { constructSignupData, resetPasswordFields } from '../helpers/signupForm';
 import VALIDATIONS from '../../constants/validations';
 import Form from '../../components/Form';
 import authService from '../../services/authService';

@@ -9,7 +9,7 @@ import {
   buildTemporaryCommentId,
   constructLocalComment,
   handleEmptyComment,
-} from '../helpers/createCommentFormHelpers';
+} from '../helpers/createCommentForm';
 
 import TextAreaInput from '../../components/Input/TextAreaInput';
 import Button from '../../components/Button';
