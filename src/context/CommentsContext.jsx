@@ -16,7 +16,7 @@ function CommentsProvider({ children }) {
   const context = {
     comments,
     onInitComments: handleInitComments,
-    onAddNewComment: handleAddNewComment,
+    onAddLocalComment: handleAddNewComment,
   };
 
   return (
