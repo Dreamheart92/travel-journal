@@ -2,6 +2,7 @@ import CommentsSectionHeader from './CommentsSectionHeader';
 import CreateCommentForm from '../../forms/CreateCommentForm';
 
 import style from './index.module.css';
+import CommentCard from '../CommentCard';
 
 export default function CommentsSection(
   {
@@ -22,6 +23,15 @@ export default function CommentsSection(
 
       <div className={style['comments-count']}>
         {totalComments()}
+      </div>
+
+      <div className={style['comments-list']}>
+        {comments.map((comment) => (
+          <CommentCard
+            key={comment._id}
+            comment={comment}
+          />
+        ))}
       </div>
     </>
   );
