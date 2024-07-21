@@ -1,36 +1,17 @@
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import useOnFetch from '../../hooks/useOnFetch';
 import useForm from '../../hooks/useForm';
-import authService from '../../services/authService';
-
-import { storeUserData } from '../../helpers/storage';
-import { PATHS } from '../../constants/paths';
-
 import VALIDATIONS from '../../constants/validations';
-
 import Form from '../../components/Form';
 import TextInput from '../../components/Input/TextInput';
 import Button from '../../components/Button';
-import { constructLoginData } from '../helpers/helpers';
 
-export default function LoginForm() {
-  const navigate = useNavigate();
-
+export default function LoginForm({ onLoginSubmit, isSubmitting, error }) {
   const {
     register,
     handleSubmit,
     clearFieldValue,
-    formData: loginData,
     isSubmittedAndHasErrors,
-  } = useForm();
-
-  const {
-    data: userData,
-    isLoading,
-    error,
-    fetch,
-  } = useOnFetch();
+  } = useForm({ submitCallback: onLoginSubmit });
 
   const {
     handlers: emailHandlers,
@@ -48,19 +29,6 @@ export default function LoginForm() {
     required: true,
     minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH,
   });
-
-  useEffect(() => {
-    if (loginData) {
-      fetch(authService.login(constructLoginData(loginData)));
-    }
-  }, [loginData]);
-
-  useEffect(() => {
-    if (userData) {
-      storeUserData(userData.data);
-      navigate(PATHS.HOME);
-    }
-  }, [userData]);
 
   useEffect(() => {
     if (error) {
@@ -93,7 +61,7 @@ export default function LoginForm() {
       <Button
         submitButton
         caption="Login"
-        isLoading={isLoading}
+        isLoading={isSubmitting}
       />
     </Form>
   );
