@@ -3,14 +3,12 @@ export const resetPasswordFields = (clearFieldValue) => {
   clearFieldValue('confirmPassword');
 };
 
-export const constructSignupData = (signupData) => {
-  const data = {
-    email: signupData.email.value,
-    username: signupData.username.value,
-    firstName: signupData.firstName.value,
-    lastName: signupData.lastName.value,
-    password: signupData.password.value,
-  };
-
-  return data;
-};
+export const constructSignupData = (signupData) => (
+  {
+    email: signupData.email,
+    username: signupData.username,
+    firstName: signupData.firstName,
+    lastName: signupData.lastName,
+    password: signupData.password,
+  }
+);
