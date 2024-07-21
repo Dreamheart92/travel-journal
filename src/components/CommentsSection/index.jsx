@@ -1,9 +1,13 @@
-import CommentsSectionHeader from './CommentsSectionHeader';
-import CreateCommentForm from '../../forms/CreateCommentForm';
-
-import style from './index.module.css';
-import CommentCard from '../CommentCard';
+import { useContext, useEffect } from 'react';
 import useOnFetch from '../../hooks/useOnFetch';
+import { CommentsContext } from '../../context/CommentsContext';
+import CommentsSectionHeader from './CommentsSectionHeader';
+import CommentCard from '../CommentCard';
+import style from './index.module.css';
+import { formatCommentsCount } from '../../helpers';
+import CreateCommentForm from '../../forms/CreateCommentForm';
+import { constructLocalComment } from '../../forms/helpers/createCommentForm';
+import commentService from '../../services/commentService';
 
 export default function CommentsSection(
   {
@@ -12,6 +16,8 @@ export default function CommentsSection(
     journalId,
   },
 ) {
+  const { onUpdateCommentWithRealData, onAddLocalComment } = useContext(CommentsContext);
+
   const {
     data: submittedCommentData,
     error,
