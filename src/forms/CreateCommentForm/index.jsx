@@ -1,53 +1,53 @@
-import {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-
-import {
-  buildTemporaryCommentId,
-  constructLocalComment,
-  handleEmptyComment,
-} from '../helpers/createCommentForm';
-
 import TextAreaInput from '../../components/Input/TextAreaInput';
 import Button from '../../components/Button';
-import style from './index.module.css';
 import useForm from '../../hooks/useForm';
-import { CommentsContext } from '../../context/CommentsContext';
-
 import Form from '../../components/Form';
 import ErrorMessage from '../../components/ErrorMessage';
-import useOnFetch from '../../hooks/useOnFetch';
-import commentService from '../../services/commentService';
+import style from './index.module.css';
+import { useEffect, useState } from 'react';
 
-export default function CreateCommentForm({ user, journalId }) {
-  const { onAddLocalComment, onUpdateCommentWithRealData } = useContext(CommentsContext);
+export default function CreateCommentForm({ onSendCreateCommentRequest }) {
+  const [isEmptyComment, setIsEmptyComment] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+
+  const handleCreateCommentSubmit = (commentData) => {
+    setIsTyping(false);
+
+    if (isEmptyComment) {
+      setIsEmptyComment(false);
+    }
+    if (commentData.comment.trim() === '') {
+      setIsEmptyComment(true);
+      return;
+    }
+
+    clearFieldValue('comment');
+    onSendCreateCommentRequest(commentData);
+  };
 
   const {
     register,
     handleSubmit,
     clearFieldValue,
-  } = useForm();
+    formState,
+  } = useForm({ submitCallback: handleCreateCommentSubmit });
 
-  const [isCommentEmpty, setIsCommentEmpty] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
-
-  const { handlers, state } = register('comment', '');
-  const temporaryLocalCommentId = useRef(null);
+  const {
+    handlers,
+    state,
+  } = register('comment', '');
 
   useEffect(() => {
-    if (submittedCommentData) {
-      onUpdateCommentWithRealData(submittedCommentData.data, temporaryLocalCommentId.current);
+    if (!isTyping && formState.comment.value.trim() !== '') {
+      setIsTyping(true);
     }
-  }, [submittedCommentData]);
+  }, [formState.comment]);
 
   return (
     <div className={style.container}>
       <Form onSubmit={handleSubmit}>
 
-        {isCommentEmpty && !isTyping
+        {isEmptyComment && !isTyping
           && <ErrorMessage message="Please enter your comment before submitting" />}
 
         <TextAreaInput handlers={handlers} state={state} />
