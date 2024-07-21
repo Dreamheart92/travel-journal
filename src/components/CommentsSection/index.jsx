@@ -38,6 +38,12 @@ export default function CommentsSection(
     }, journalId));
   };
 
+  useEffect(() => {
+    if (submittedCommentData) {
+      onUpdateCommentWithRealData(submittedCommentData.data);
+    }
+  }, [submittedCommentData]);
+
   return (
     <>
       <CommentsSectionHeader user={!!user} />
