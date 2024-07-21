@@ -20,7 +20,6 @@ export default function CommentsSection(
 
   const {
     data: submittedCommentData,
-    error,
     fetch: sendCreateCommentRequest,
   } = useOnFetch();
 
