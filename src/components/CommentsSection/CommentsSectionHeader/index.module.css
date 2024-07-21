@@ -1,0 +1,9 @@
+.leave-comment {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    background-color: #1E90FF;
+    color: white;
+    padding: 1em;
+    width: 67em;
+}
