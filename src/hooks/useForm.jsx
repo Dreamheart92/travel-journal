@@ -104,7 +104,11 @@ const useForm = ({ initialState = {}, submitCallback } = {}) => {
       const isValidForm = Object.values(fieldErrors).every((requirement) => requirement === null);
 
       if (isValidForm) {
-        
+        const formData = Object.entries(formState).reduce((form, [field, fieldState]) => {
+          return Object.assign(form, { [field]: fieldState.value });
+        }, {});
+
+        submitCallback(formData);
       } else {
         setIsSubmittedAndHasErrors(true);
       }
