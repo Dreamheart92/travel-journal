@@ -8,6 +8,7 @@ export default function CommentsSection(
   {
     user,
     comments,
+    journalId,
   },
 ) {
   const caption = user ? 'Leave a comment' : 'Login to leave a comment';
@@ -19,7 +20,7 @@ export default function CommentsSection(
       <CommentsSectionHeader caption={caption} />
 
       {user
-        && <CreateCommentForm />}
+        && <CreateCommentForm user={user} journalId={journalId} />}
 
       <div className={style['comments-count']}>
         {totalComments()}
