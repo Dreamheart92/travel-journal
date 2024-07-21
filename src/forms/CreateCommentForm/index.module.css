@@ -1,9 +1,9 @@
 .container {
-    width: 30%;
     margin-top: 1em;
     display: flex;
     flex-direction: column;
     gap: 2em;
+    width: 90%;
 }
 
 .button {
