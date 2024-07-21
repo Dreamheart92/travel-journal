@@ -5,9 +5,12 @@ import journalServiceSettings from '../../services/journalServiceSettings';
 import Loading from '../../components/Loading';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import Journal from '../../components/Journal';
+import CommentsSection from '../../components/CommentsSection';
+import { useSelector } from 'react-redux';
 
 export default function Details() {
   const { journalId } = useParams();
+  const { user } = useSelector((state) => state.user);
 
   const {
     data: journalData,
@@ -31,6 +34,7 @@ export default function Details() {
 
   return (
     <DefaultLayout>
+
       <Journal
         id={_id}
         title={title}
@@ -39,6 +43,10 @@ export default function Details() {
         date={date}
         imageUrl={imageUrl}
         description={description}
+      />
+
+      <CommentsSection
+        user={user}
       />
     </DefaultLayout>
   );
