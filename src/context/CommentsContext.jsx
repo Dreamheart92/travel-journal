@@ -30,12 +30,14 @@ function CommentsProvider({ children }) {
     });
   };
 
-  const context = {
+  const createCommentsContextValue = () => ({
     comments,
     onInitComments: handleInitComments,
     onAddLocalComment: handleAddNewComment,
     onUpdateCommentWithRealData: handleUpdateCommentWithRealData,
-  };
+  });
+
+  const context = useMemo(createCommentsContextValue, [comments]);
 
   return (
     <CommentsContext.Provider value={context}>
