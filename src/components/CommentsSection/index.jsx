@@ -51,7 +51,7 @@ export default function CommentsSection(
         && <CreateCommentForm user={user} journalId={journalId} />}
 
       <div className={style['comments-count']}>
-        {totalComments()}
+        {formatCommentsCount(comments)}
       </div>
 
       <div className={style['comments-list']}>
