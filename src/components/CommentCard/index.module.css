@@ -1,7 +1,7 @@
 .comment-card {
     display: flex;
     gap: .5em;
-    border: 1px solid #EEE;
+    border: 1px solid #cdcdcd;
     padding: 1em;
     border-radius: .25em;
     position: relative;
