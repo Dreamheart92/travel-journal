@@ -23,7 +23,7 @@ import useOnFetch from '../../hooks/useOnFetch';
 import commentService from '../../services/commentService';
 
 export default function CreateCommentForm({ user, journalId }) {
-  const { onAddLocalComment } = useContext(CommentsContext);
+  const { onAddLocalComment, onUpdateCommentWithRealData } = useContext(CommentsContext);
 
   const {
     register,
@@ -67,6 +67,12 @@ export default function CreateCommentForm({ user, journalId }) {
       }
     }
   }, [commentData]);
+
+  useEffect(() => {
+    if (submittedCommentData) {
+      onUpdateCommentWithRealData(submittedCommentData.data, temporaryLocalCommentId.current);
+    }
+  }, [submittedCommentData]);
 
   return (
     <div className={style.container}>
