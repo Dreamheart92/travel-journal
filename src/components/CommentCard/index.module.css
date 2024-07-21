@@ -1,0 +1,9 @@
+.comment-card {
+    display: flex;
+    gap: .5em;
+    border: 1px solid #EEE;
+    padding: 1em;
+    border-radius: .25em;
+    position: relative;
+    width: 100%;
+}
