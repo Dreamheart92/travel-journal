@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
@@ -6,7 +7,6 @@ import Loading from '../../components/Loading';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import Journal from '../../components/Journal';
 import CommentsSection from '../../components/CommentsSection';
-import { useSelector } from 'react-redux';
 import Container from '../../components/Container';
 
 export default function Details() {
@@ -14,7 +14,7 @@ export default function Details() {
   const { user } = useSelector((state) => state.user);
 
   const {
-    data: journalData,
+    data,
     isSuccess,
     error,
   } = useFetch(useCallback(() => journalServiceSettings.getJournalByIdSettings(journalId), []));
@@ -32,7 +32,7 @@ export default function Details() {
     imageUrl,
     description,
     comments,
-  } = journalData.data;
+  } = data.data;
 
   return (
     <DefaultLayout>
