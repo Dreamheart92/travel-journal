@@ -13,7 +13,10 @@ function CommentsProvider({ children }) {
   };
 
   const handleAddNewComment = (newComment) => {
-    setComments((prevState) => [newComment, ...prevState]);
+    temporaryLocalCommentId.current = buildTemporaryCommentId();
+    setComments((prevState) => [
+      { ...newComment, _id: temporaryLocalCommentId.current },
+      ...prevState]);
   };
 
   const handleUpdateCommentWithRealData = (realCommentData, temporaryId) => {
