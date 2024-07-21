@@ -1,9 +1,12 @@
-import { createContext, useState } from 'react';
+import { createContext, useMemo, useRef, useState } from 'react';
+import { buildTemporaryCommentId } from '../forms/helpers/createCommentForm';
 
 export const CommentsContext = createContext();
 
 function CommentsProvider({ children }) {
   const [comments, setComments] = useState([]);
+
+  const temporaryLocalCommentId = useRef(null);
 
   const handleInitComments = (newComments) => {
     setComments(newComments);
