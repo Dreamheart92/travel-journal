@@ -19,8 +19,9 @@ function CommentsProvider({ children }) {
       ...prevState]);
   };
 
-  const handleUpdateCommentWithRealData = (realCommentData, temporaryId) => {
-    const localCommentIndex = comments.findIndex((localComment) => localComment._id === temporaryId);
+  const handleUpdateCommentWithRealData = (realCommentData) => {
+    const localCommentIndex = comments.findIndex((localComment) => (
+      localComment._id === temporaryLocalCommentId.current));
 
     setComments((prevState) => {
       const updatedLocalComments = [...prevState];
