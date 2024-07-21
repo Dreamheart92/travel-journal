@@ -7,7 +7,7 @@ import {
 
 import {
   buildTemporaryCommentId,
-  handleAddLocalComment,
+  constructLocalComment,
   handleEmptyComment,
 } from '../helpers/createCommentFormHelpers';
 
@@ -20,10 +20,10 @@ import { CommentsContext } from '../../context/CommentsContext';
 import Form from '../../components/Form';
 import ErrorMessage from '../../components/ErrorMessage';
 import useOnFetch from '../../hooks/useOnFetch';
-import commentServiceSettings from '../../services/commentServiceSettings';
+import commentService from '../../services/commentService';
 
 export default function CreateCommentForm({ user, journalId }) {
-  const { onAddNewComment } = useContext(CommentsContext);
+  const { onAddLocalComment } = useContext(CommentsContext);
 
   const {
     register,
@@ -52,21 +52,17 @@ export default function CreateCommentForm({ user, journalId }) {
         clearFieldValue('comment');
         temporaryLocalCommentId.current = buildTemporaryCommentId();
 
-        const localCommentData = {
-          content: commentData.comment.value,
-          createdAt: new Date(),
-          id: temporaryLocalCommentId.current,
-        };
-
-        handleAddLocalComment(
+        const localComment = constructLocalComment(
           user,
-          localCommentData,
-          onAddNewComment,
+          commentData.comment.value,
+          temporaryLocalCommentId.current,
         );
 
-        submitNewComment(commentServiceSettings.createCommentSettings({
+        onAddLocalComment(localComment);
+
+        submitNewComment(commentService.createComment({
           comment: commentData.comment.value,
-          createdAt: localCommentData.createdAt,
+          createdAt: localComment.createdAt,
         }, journalId));
       }
     }
