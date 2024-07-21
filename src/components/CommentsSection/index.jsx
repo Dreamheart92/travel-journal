@@ -31,7 +31,6 @@ export default function CommentsSection(
 
     onAddLocalComment(localComment);
 
-  const totalComments = () => `${comments.length} comment${comments.length > 1 ? 's' : ''}`;
     sendCreateCommentRequest(commentService.createComment({
       comment: commentData.comment,
       createdAt: localComment.createdAt,
