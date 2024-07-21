@@ -7,6 +7,7 @@ import DefaultLayout from '../../layouts/DefaultLayout';
 import Journal from '../../components/Journal';
 import CommentsSection from '../../components/CommentsSection';
 import { useSelector } from 'react-redux';
+import Container from '../../components/Container';
 
 export default function Details() {
   const { journalId } = useParams();
@@ -30,24 +31,27 @@ export default function Details() {
     date,
     imageUrl,
     description,
+    comments,
   } = journalData.data;
 
   return (
     <DefaultLayout>
+      <Container width="80em">
+        <Journal
+          id={_id}
+          title={title}
+          location={location}
+          author={author.username}
+          date={date}
+          imageUrl={imageUrl}
+          description={description}
+        />
 
-      <Journal
-        id={_id}
-        title={title}
-        location={location}
-        author={author.username}
-        date={date}
-        imageUrl={imageUrl}
-        description={description}
-      />
-
-      <CommentsSection
-        user={user}
-      />
+        <CommentsSection
+          user={user}
+          comments={comments}
+        />
+      </Container>
     </DefaultLayout>
   );
 }
