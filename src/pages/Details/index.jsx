@@ -32,7 +32,6 @@ export default function Details() {
   }
 
   const {
-    _id,
     title,
     location,
     author,
@@ -45,7 +44,7 @@ export default function Details() {
     <DefaultLayout>
       <Container width="80em">
         <Journal
-          id={_id}
+          id={journalId}
           title={title}
           location={location}
           author={author.username}
@@ -57,6 +56,7 @@ export default function Details() {
         <CommentsSection
           user={user}
           comments={comments}
+          journalId={journalId}
         />
       </Container>
     </DefaultLayout>
