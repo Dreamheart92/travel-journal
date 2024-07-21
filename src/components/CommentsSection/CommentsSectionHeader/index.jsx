@@ -4,7 +4,9 @@ import { faComments } from '@fortawesome/free-regular-svg-icons/faComments';
 
 import style from './index.module.css';
 
-export default function CommentsSectionHeader({ caption }) {
+export default function CommentsSectionHeader({ user }) {
+  const caption = user ? 'Leave a comment' : 'Login to leave a comment';
+
   return (
     <div className={style['leave-comment']}>
       <FontAwesomeIcon icon={faComments} />
@@ -14,5 +16,5 @@ export default function CommentsSectionHeader({ caption }) {
 }
 
 CommentsSectionHeader.propTypes = {
-  caption: PropTypes.string,
+  user: PropTypes.bool,
 };
