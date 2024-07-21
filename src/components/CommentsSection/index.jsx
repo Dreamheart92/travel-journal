@@ -3,6 +3,7 @@ import CreateCommentForm from '../../forms/CreateCommentForm';
 
 import style from './index.module.css';
 import CommentCard from '../CommentCard';
+import useOnFetch from '../../hooks/useOnFetch';
 
 export default function CommentsSection(
   {
@@ -11,6 +12,14 @@ export default function CommentsSection(
     journalId,
   },
 ) {
+  const {
+    data: submittedCommentData,
+    error,
+    fetch: sendCreateCommentRequest,
+  } = useOnFetch();
+
+  
+
   const caption = user ? 'Leave a comment' : 'Login to leave a comment';
 
   const totalComments = () => `${comments.length} comment${comments.length > 1 ? 's' : ''}`;
