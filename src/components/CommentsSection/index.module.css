@@ -4,3 +4,10 @@
     margin-top: 1em;
     width: 100%;
 }
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    width: 100%;
+}
