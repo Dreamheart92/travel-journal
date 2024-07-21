@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { normalizeName } from '../../../utility/utility';
+import { normalizeName } from '../../../helpers';
 
 import style from './index.module.css';
 

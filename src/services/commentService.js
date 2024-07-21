@@ -1,5 +1,5 @@
 import API from '../constants/api';
-import { getAccessTokenAndId } from '../utility/storage';
+import { getAccessTokenAndId } from '../helpers/storage';
 import sendHttpRequest from './sendHttpRequest';
 
 const createComment = (commentData, journalId) => {

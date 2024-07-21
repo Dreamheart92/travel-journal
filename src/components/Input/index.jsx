@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import ErrorMessage from '../ErrorMessage';
 
 import { statePropType } from '../../propTypes/inputPropTypes';
-import { normalizeName } from '../../utility/utility';
+import { normalizeName } from '../../helpers';
 
 import style from './index.module.css';
 

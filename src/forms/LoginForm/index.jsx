@@ -4,7 +4,7 @@ import useOnFetch from '../../hooks/useOnFetch';
 import useForm from '../../hooks/useForm';
 import authService from '../../services/authService';
 
-import { storeUserData } from '../../utility/storage';
+import { storeUserData } from '../../helpers/storage';
 import { PATHS } from '../../constants/paths';
 
 import VALIDATIONS from '../../constants/validations';

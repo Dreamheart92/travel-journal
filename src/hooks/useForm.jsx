@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { normalizeName } from '../utility/utility';
+import { normalizeName } from '../helpers';
 
 const validateField = (value, validations, fieldName) => {
   const errors = {};

@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import DefaultLayout from './layouts/DefaultLayout';
 import Navigation from './components/Navigation';
 import { userActions } from './store/userSlice';
-import { getUserDataFromStorage } from './utility/storage';
+import { getUserDataFromStorage } from './helpers/storage';
 import Loading from './components/Loading';
 
 export default function App() {

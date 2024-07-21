@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
-import { normalizeName } from '../../../utility/utility';
+import { normalizeName } from '../../../helpers';
 
 import Wrapper from '..';
 

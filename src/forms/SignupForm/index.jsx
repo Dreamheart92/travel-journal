@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
-import { storeUserData } from '../../utility/storage';
+import { storeUserData } from '../../helpers/storage';
 import { PATHS } from '../../constants/paths';
 import useOnFetch from '../../hooks/useOnFetch';
 import { constructSignupData, resetPasswordFields } from '../helpers/signupFormHelpers';
