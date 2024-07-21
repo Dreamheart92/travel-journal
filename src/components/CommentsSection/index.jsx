@@ -1,6 +1,8 @@
 import CommentsSectionHeader from './CommentsSectionHeader';
 import CreateCommentForm from '../../forms/CreateCommentForm';
 
+import style from './index.module.css';
+
 export default function CommentsSection(
   {
     user,
@@ -15,6 +17,10 @@ export default function CommentsSection(
 
       {user
         && <CreateCommentForm />}
+
+      <div className={style['comments-count']}>
+        {comments.length}
+      </div>
     </>
   );
 }
