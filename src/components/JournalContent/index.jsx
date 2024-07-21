@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-regular-svg-icons/faComments';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
 import { faPencil } from '@fortawesome/free-solid-svg-icons/faPencil';
-import { formatDate } from '../../utility/utility';
+import { formatDate, splitByNewLine } from '../../utility/utility';
 import CatalogueCardButton from '../CatalogueCard/CatalogueCardButton';
 
 import style from './index.module.css';
@@ -45,7 +45,7 @@ export default function JournalContent(
         {!readMore
           && (
             <div className={style.content}>
-              {rawContent.split('\n').map((chunk, index) => (
+              {splitByNewLine(rawContent).map((chunk, index) => (
                 <p key={index}>{chunk}</p>
               ))}
             </div>
