@@ -1,74 +1,97 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import useForm from '../../hooks/useForm';
-import { storeUserData } from '../../helpers/storage';
-import { PATHS } from '../../constants/paths';
-import useOnFetch from '../../hooks/useOnFetch';
-import { constructSignupData, resetPasswordFields } from '../helpers/signupForm';
 import VALIDATIONS from '../../constants/validations';
 import Form from '../../components/Form';
-import authService from '../../services/authService';
 import TextInput from '../../components/Input/TextInput';
-import ErrorMessage from '../../components/ErrorMessage';
 import Button from '../../components/Button';
+import { resetPasswordFields } from '../helpers/signupForm';
+import ErrorMessage from '../../components/ErrorMessage';
 
-export default function SignupForm() {
+export default function SignupForm({ onSignupSubmit, isSubmitting, error, passwordsNotMatching }) {
   const {
     register,
     handleSubmit,
     clearFieldValue,
-    formData: signupData,
-  } = useForm();
+  } = useForm({ submitCallback: onSignupSubmit });
+
+  const { handlers: emailHandlers, state: emailState } = register('email', '', {
+    required: true,
+    email: true,
+    minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH,
+  });
 
   const {
-    data,
-    isLoading,
-    error,
-    fetch,
-  } = useOnFetch();
+    handlers: usernameHandlers,
+    state: usernameState,
+  } = register(
+    'username',
+    '',
+    {
+      required: true,
+      minLength: VALIDATIONS.USER.USERNAME_MIN_LENGTH,
+    },
+  );
 
-  const [isPasswordsMatching, setIsPasswordsMatching] = useState(null);
+  const {
+    handlers: firstNameHandlers,
+    state: firstNameState,
+  } = register(
+    'firstName',
+    '',
+    {
+      required: true,
+      minLength: VALIDATIONS.USER.FIRST_NAME_MIN_LENGTH,
+    },
+  );
 
-  const navigate = useNavigate();
+  const {
+    handlers: lastNameHandlers,
+    state: lastNameState,
+  } = register(
+    'lastName',
+    '',
+    {
+      required: true,
+      minLength: VALIDATIONS.USER.LAST_NAME_MIN_LENGTH,
+    },
+  );
 
-  const { handlers: emailHandlers, state: emailState } = register('email', '', { required: true, email: true, minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH });
-  const { handlers: usernameHandlers, state: usernameState } = register('username', '', { required: true, minLength: VALIDATIONS.USER.USERNAME_MIN_LENGTH });
-  const { handlers: firstNameHandlers, state: firstNameState } = register('firstName', '', { required: true, minLength: VALIDATIONS.USER.FIRST_NAME_MIN_LENGTH });
-  const { handlers: lastNameHandlers, state: lastNameState } = register('lastName', '', { required: true, minLength: VALIDATIONS.USER.LAST_NAME_MIN_LENGTH });
-  const { handlers: passwordHandlers, state: passwordState } = register('password', '', { required: true, minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH });
-  const { handlers: confirmPasswordHandlers, state: confirmPasswordState } = register('confirmPassword', '', { required: true, minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH });
+  const {
+    handlers: passwordHandlers,
+    state: passwordState,
+  } = register(
+    'password',
+    '',
+    {
+      required: true,
+      minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH,
+    },
+  );
+
+  const {
+    handlers: confirmPasswordHandlers,
+    state: confirmPasswordState,
+  } = register(
+    'confirmPassword',
+    '',
+    {
+      required: true,
+      minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH,
+    },
+  );
 
   useEffect(() => {
-    if (signupData) {
-      if (signupData.password.value !== signupData.confirmPassword.value) {
-        setIsPasswordsMatching(false);
-        resetPasswordFields(clearFieldValue);
-      } else {
-        fetch(authService.signup(constructSignupData(signupData)));
-      }
-    }
-  }, [signupData]);
-
-  useEffect(() => {
-    if (data) {
-      storeUserData(data);
-      navigate(PATHS.HOME);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (error) {
-      setIsPasswordsMatching(null);
+    if (error || passwordsNotMatching) {
       resetPasswordFields(clearFieldValue);
     }
-  }, [error]);
+  }, [error, passwordsNotMatching]);
 
   return (
     <Form
+      isSubmitting={isSubmitting}
       onSubmit={handleSubmit}
-      error={isPasswordsMatching === null && error ? error : null}
+      error={error}
     >
-
       <TextInput
         handlers={emailHandlers}
         state={emailState}
@@ -107,13 +130,13 @@ export default function SignupForm() {
         placeholder="Confirm password"
       />
 
-      {isPasswordsMatching === false
+      {passwordsNotMatching
         && <ErrorMessage message="Passwords not matching" />}
 
       <Button
         caption="Signup"
         submitButton
-        isLoading={isLoading}
+        isLoading={isSubmitting}
       />
     </Form>
   );
