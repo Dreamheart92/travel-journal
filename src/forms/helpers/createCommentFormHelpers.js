@@ -1,11 +1,11 @@
-export const constructLocalComment = (user, commentData, temporaryCommentId) => ({
+export const constructLocalComment = (user, comment, id) => ({
+  _id: id,
+  createdAt: new Date(),
   author: user,
-  comment: commentData.content,
-  createdAt: commentData.createdAt,
+  comment,
   dislikes: [],
   likes: [],
   totalLikes: 0,
-  _id: commentData.id,
 });
 
 export const buildTemporaryCommentId = () => `${Math.random() * 1000}___temporary`;
@@ -13,13 +13,4 @@ export const buildTemporaryCommentId = () => `${Math.random() * 1000}___temporar
 export const handleEmptyComment = (setIsCommentEmpty, setIsTyping) => {
   setIsCommentEmpty(true);
   setIsTyping(false);
-};
-
-export const handleAddLocalComment = (user, commentData, onAddNewComment) => {
-  const localComment = constructLocalComment(
-    user,
-    commentData,
-  );
-
-  onAddNewComment(localComment);
 };
