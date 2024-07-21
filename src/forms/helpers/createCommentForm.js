@@ -9,8 +9,3 @@ export const constructLocalComment = (user, comment, id) => ({
 });
 
 export const buildTemporaryCommentId = () => `${Math.random() * 1000}___temporary`;
-
-export const handleEmptyComment = (setIsCommentEmpty, setIsTyping) => {
-  setIsCommentEmpty(true);
-  setIsTyping(false);
-};
