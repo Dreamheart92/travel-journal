@@ -26,14 +26,28 @@ export default function LoginForm() {
   } = useForm();
 
   const {
-    data,
+    data: userData,
     isLoading,
     error,
     fetch,
   } = useOnFetch();
 
-  const { handlers: emailHandlers, state: emailState } = register('email', '', { required: true, minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH, email: true });
-  const { handlers: passwordHandlers, state: passwordState } = register('password', '', { required: true, minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH });
+  const {
+    handlers: emailHandlers,
+    state: emailState,
+  } = register('email', '', {
+    required: true,
+    minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH,
+    email: true,
+  });
+
+  const {
+    handlers: passwordHandlers,
+    state: passwordState,
+  } = register('password', '', {
+    required: true,
+    minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH,
+  });
 
   useEffect(() => {
     if (loginData) {
@@ -42,11 +56,11 @@ export default function LoginForm() {
   }, [loginData]);
 
   useEffect(() => {
-    if (data) {
-      storeUserData(data);
+    if (userData) {
+      storeUserData(userData.data);
       navigate(PATHS.HOME);
     }
-  }, [data]);
+  }, [userData]);
 
   useEffect(() => {
     if (error) {
