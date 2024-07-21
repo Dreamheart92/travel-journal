@@ -7,3 +7,5 @@ export const formatDate = (date) => moment(new Date(date)).format('MMMM Do YYYY'
 export const convertToRelativeTime = (date) => moment(new Date(date)).fromNow();
 
 export const splitByNewLine = (content) => content.split('\n');
+
+export const formatCommentsCount = (comments) => `${comments.length} comment${comments.length > 1 ? 's' : ''}`;
