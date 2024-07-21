@@ -39,9 +39,9 @@ const validateField = (value, validations, fieldName) => {
   return Object.keys(errors).length > 0 ? errors : null;
 };
 
-const useForm = (initialValue = {}) => {
-  const [formState, setFormState] = useState(initialValue);
-  const [formData, setFormData] = useState(null);
+const useForm = ({ initialState = {}, submitCallback } = {}) => {
+
+  const [formState, setFormState] = useState(initialState);
 
   const [fieldErrors, setFieldErrors] = useState(null);
   const [isSubmittedAndHasErrors, setIsSubmittedAndHasErrors] = useState(false);
@@ -104,7 +104,7 @@ const useForm = (initialValue = {}) => {
       const isValidForm = Object.values(fieldErrors).every((requirement) => requirement === null);
 
       if (isValidForm) {
-        setFormData(formState);
+        
       } else {
         setIsSubmittedAndHasErrors(true);
       }
@@ -124,7 +124,6 @@ const useForm = (initialValue = {}) => {
     formState,
     register,
     handleSubmit,
-    formData,
     clearFieldValue,
   };
 };
