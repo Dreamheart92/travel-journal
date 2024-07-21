@@ -5,7 +5,14 @@ export const CommentsContext = createContext();
 const CommentsProvider = ({ children }) => {
   const [comments, setComments] = useState([]);
 
-  const context = {};
+  const handleInitComments = (newComments) => {
+    setComments(newComments);
+  };
+
+  const context = {
+    comments,
+    onInitComments: handleInitComments,
+  };
 
   return (
     <CommentsContext.Provider value={context}>
@@ -13,3 +20,5 @@ const CommentsProvider = ({ children }) => {
     </CommentsContext.Provider>
   );
 };
+
+export default CommentsProvider;
