@@ -17,3 +17,5 @@ const useModal = () => {
     onCloseModal: handleClose,
   };
 };
+
+export default useModal;
