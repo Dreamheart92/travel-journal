@@ -67,8 +67,8 @@ export default function CommentsSection(
           <CommentCard
             key={comment._id}
             comment={comment}
-            userId={user._id}
-            onOpenModal={onOpenModal}
+            userId={user?._id}
+            onSetModalTargetItemId={onSetTargetItemId}
           />
         ))}
       </div>
