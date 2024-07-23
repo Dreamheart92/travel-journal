@@ -7,7 +7,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Catalogue from './pages/Catalogue';
 import Details from './pages/Details';
-import CommentsProvider from './context/CommentsContext';
 
 const router = createBrowserRouter([
   {
