@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import UserProfileImage from '../UserProfileImage';
-
-import style from './index.module.css';
 import CommentCardContent from './CommentCardContent';
 import CommentCardReaction from './CommentCardReaction';
 import style from './index.module.css';
