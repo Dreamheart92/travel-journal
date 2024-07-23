@@ -18,12 +18,26 @@ export default function CommentCard({ comment, userId }) {
 
   const dispatch = useDispatch();
 
-export default function CommentCard(
-  {
-    comment,
-  },
-) {
-  const { author, createdAt, comment: content, _id: id } = comment;
+  const handleCommentReaction = (reactionType, isReacted) => {
+    if (!commentId.endsWith('___temporary')) {
+      dispatch(detailsActions.localCommentReaction(
+        {
+          reactionType,
+          isReacted,
+          commentId,
+          userId,
+        },
+      ));
+
+      const path = reactionType === 'likes' ? 'like' : 'dislike';
+      const requestMethod = isReacted ? 'Delete' : 'Get';
+
+      dispatch(postCommentReaction({ path, requestMethod, commentId }));
+    }
+  };
+
+  const isLikedComment = likes.includes(userId);
+  const isDislikedComment = dislikes.includes(userId);
 
   return (
     <div className={style['comment-card']}>
