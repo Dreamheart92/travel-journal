@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import UserProfileImage from '../UserProfileImage';
 import CommentCardContent from './CommentCardContent';
 import CommentCardReaction from './CommentCardReaction';
@@ -7,7 +7,7 @@ import { detailsActions } from '../../store/details';
 import { postCommentReaction } from '../../store/details/thunks';
 import Button from '../Button';
 
-export default function CommentCard({ comment, userId }) {
+export default function CommentCard({ comment, userId, onOpenModal }) {
   const {
     author,
     createdAt,
@@ -66,12 +66,12 @@ export default function CommentCard({ comment, userId }) {
           && (
             <div className={style['delete-control']}>
               <Button
+                onClick={() => onOpenModal()}
                 variant="warning"
                 caption="Delete"
               />
             </div>
           )}
-
       </div>
     </div>
   );
