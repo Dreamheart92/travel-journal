@@ -1,13 +1,12 @@
-import { useContext, useEffect } from 'react';
-import useOnFetch from '../../hooks/useOnFetch';
-import { CommentsContext } from '../../context/CommentsContext';
+import { useDispatch } from 'react-redux';
 import CommentsSectionHeader from './CommentsSectionHeader';
 import CommentCard from '../CommentCard';
 import style from './index.module.css';
 import { formatCommentsCount } from '../../helpers';
 import CreateCommentForm from '../../forms/CreateCommentForm';
-import { constructLocalComment } from '../../forms/helpers/createCommentForm';
-import commentService from '../../services/commentService';
+import { buildLocalComment } from '../../forms/helpers/createCommentForm';
+import { detailsActions } from '../../store/details';
+import { postComment } from '../../store/details/thunks';
 
 export default function CommentsSection(
   {
@@ -36,17 +35,18 @@ export default function CommentsSection(
       <CommentsSectionHeader user={!!user} />
 
       {user
-        && <CreateCommentForm onSendCreateCommentRequest={handleCreateCommentSubmit} />}
+        && <CreateCommentForm onCreateCommentSubmit={handleCreateCommentSubmit} />}
 
       <div className={style['comments-count']}>
         {formatCommentsCount(comments)}
       </div>
 
       <div className={style['comments-list']}>
-        {comments.map((comment) => (
+        {comments?.map((comment) => (
           <CommentCard
             key={comment._id}
             comment={comment}
+            userId={user._id}
           />
         ))}
       </div>
