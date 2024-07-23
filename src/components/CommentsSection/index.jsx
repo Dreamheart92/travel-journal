@@ -9,6 +9,7 @@ import { detailsActions } from '../../store/details';
 import { postComment } from '../../store/details/thunks';
 import Modal from '../Modal';
 import DeleteModal from '../Modal/DeleteModal';
+import useModal from '../../hooks/useModal';
 
 export default function CommentsSection(
   {
@@ -18,6 +19,7 @@ export default function CommentsSection(
   },
 ) {
   const dispatch = useDispatch();
+  const { isOpen, onOpenModal, onCloseModal } = useModal();
 
   const handleCreateCommentSubmit = (comment) => {
     const localComment = buildLocalComment(user, comment);
