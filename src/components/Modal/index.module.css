@@ -1,0 +1,24 @@
+.dialog {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    transition: all 0.5s ease-in;
+    margin: auto;
+}
+
+.content {
+    background-color: white;
+    padding: 3em;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.open {
+    transform: scale(1);
+}
+
+.dialog::backdrop {
+    opacity: 0.3;
+    background-color: black;
+}
