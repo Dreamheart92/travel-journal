@@ -43,6 +43,14 @@ export default function CommentsSection(
     }));
   };
 
+  const handleDeleteComment = () => {
+    if (targetItemId) {
+      dispatch(detailsActions.deleteLocalComment(targetItemId));
+      dispatch(deleteComment(targetItemId));
+      onCloseModal();
+    }
+  };
+
   return (
     <>
       <CommentsSectionHeader user={!!user} />
