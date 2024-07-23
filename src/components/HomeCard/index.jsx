@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import Image from '../Image';
 import { PATHS } from '../../constants/paths';
 import journalPropTypes from '../../propTypes/journalPropTypes';
 import JournalCardInfo from './HomeCardInfo';
@@ -16,14 +15,10 @@ export default function JournalCard({ journal }) {
 
   return (
     <div>
-      <Link
-        to={`${PATHS.DETAILS}/${journalId}`}
-      >
-
+      <Link to={`${PATHS.DETAILS}/${journalId}`}>
         <JournalCardImage
           imageUrl={imageUrl}
         />
-
         <JournalCardInfo
           author={author.username}
           title={title}
@@ -34,4 +29,3 @@ export default function JournalCard({ journal }) {
   );
 }
 
-JournalCard.propTypes = journalPropTypes;
