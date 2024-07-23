@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchJournalById, postComment } from './thunks';
+import { deleteComment, fetchJournalById, postComment } from './thunks';
 
 const initialState = {
   journal: null,
@@ -12,6 +12,10 @@ const initialState = {
       success: false,
       loading: false,
     },
+    delete: {
+      success: false,
+      loading: false,
+    },
   },
 };
 
@@ -21,6 +25,16 @@ const detailsSlice = createSlice({
   reducers: {
     addLocalComment(state, action) {
       state.comments.unshift(action.payload);
+    },
+    deleteLocalComment(state, action) {
+      const commentId = action.payload;
+
+      const indexOfTargetedComment = state.comments.findIndex((localComment) => (
+        localComment._id === commentId));
+
+      if (indexOfTargetedComment !== -1) {
+        state.comments.splice(indexOfTargetedComment, 1);
+      }
     },
     localCommentReaction(state, action) {
       const {
@@ -87,9 +101,20 @@ const detailsSlice = createSlice({
 
       state.comments[localCommentIndex] = commentRealData;
       state.commentCrud.create.loading = false;
+      state.commentCrud.create.success = true;
     });
     builder.addCase(postComment.rejected, (state, action) => {
       state.commentCrud.create.loading = false;
+    });
+    builder.addCase(deleteComment.pending, (state) => {
+      state.commentCrud.delete.loading = true;
+    });
+    builder.addCase(deleteComment.fulfilled, (state) => {
+      state.commentCrud.delete.loading = false;
+      state.commentCrud.delete.success = true;
+    });
+    builder.addCase(deleteComment.rejected, (state) => {
+      state.commentCrud.delete.loading = false;
     });
   },
 });
