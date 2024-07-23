@@ -51,6 +51,7 @@ export default function CommentsSection(
             key={comment._id}
             comment={comment}
             userId={user._id}
+            onOpenModal={onOpenModal}
           />
         ))}
       </div>
