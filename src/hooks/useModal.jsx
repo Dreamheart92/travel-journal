@@ -2,12 +2,14 @@ import { useState } from 'react';
 
 const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [targetItemId, setTargetItemId] = useState(null);
 
   const handleOpen = () => {
     setIsOpen(true);
   };
 
   const handleClose = () => {
+    setTargetItemId(null);
     setIsOpen(false);
   };
 
