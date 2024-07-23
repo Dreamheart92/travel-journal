@@ -35,11 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${PATHS.DETAILS}/:journalId`,
-        element: (
-          <CommentsProvider>
-            <Details />
-          </CommentsProvider>
-        ),
+        element: <Details />,
       },
     ],
   },
