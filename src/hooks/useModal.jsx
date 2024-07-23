@@ -11,10 +11,17 @@ const useModal = () => {
     setIsOpen(false);
   };
 
+  const handleTargetItemId = (itemId) => {
+    setIsOpen(true);
+    setTargetItemId(itemId);
+  };
+
   return {
     isOpen,
+    targetItemId,
     onOpenModal: handleOpen,
     onCloseModal: handleClose,
+    onSetTargetItemId: handleTargetItemId,
   };
 };
 
