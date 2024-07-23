@@ -1,33 +1,38 @@
-import useFetch from '../../hooks/useFetch';
-import journalServiceSettings from '../../services/journalServiceSettings';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Container from '../../components/Container';
 import Hero from '../../components/Hero';
 import Destinations from '../../components/Destinations';
-import Loading from '../../components/Loading';
 import LatestJournals from '../../components/LatestJournals';
+import { selectHomeState } from '../../store/home/selectors';
+import Loading from '../../components/Loading';
+import { selectDestinations } from '../../store/destinations/selectors';
+import { fetchLatestJournals } from '../../store/home/thunks';
+import { homeActions } from '../../store/home';
 
 export default function Home() {
-  const {
-    data: destinations,
-    error: destinationsError,
-    isSuccess: destinationsSuccess,
-  } = useFetch(journalServiceSettings.getDestinationsSettings);
+  const dispatch = useDispatch();
 
-  const {
-    data: journalsData,
-    error: journalsError,
-    isSuccess: journalsSuccess,
-  } = useFetch(journalServiceSettings.getJournalsSettings);
+  const { latestJournals, loading } = useSelector(selectHomeState);
+  const { destinations } = useSelector(selectDestinations);
 
-  if (!journalsSuccess || !destinationsSuccess) {
+  useEffect(() => {
+    dispatch(fetchLatestJournals());
+
+    return () => {
+      dispatch(homeActions.resetState());
+    };
+  }, []);
+
+  if (loading || !latestJournals) {
     return <Loading />;
   }
 
   return (
     <Container>
       <Hero />
-      <Destinations destinations={destinations.data} />
-      <LatestJournals journals={journalsData.data.journals} />
+      <Destinations destinations={destinations} />
+      <LatestJournals journals={latestJournals} />
     </Container>
   );
 }
