@@ -41,11 +41,13 @@ export default function App() {
   if (!initApp) {
     return <Loading />;
   }
+  const appIsLoaded = initApp && success;
 
   return (
     <DefaultLayout>
       <Navigation />
-      <Outlet />
+      {!appIsLoaded && <Loading />}
+      {appIsLoaded && <Outlet />}
     </DefaultLayout>
   );
 }
