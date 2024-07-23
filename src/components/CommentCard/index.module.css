@@ -15,3 +15,10 @@
     width: 70%;
     height: 100%;
 }
+
+.delete-control {
+    position: absolute;
+    right: 0;
+    bottom: 10%;
+    width: 10em;
+}
