@@ -16,25 +16,19 @@ export default function CommentsSection(
     journalId,
   },
 ) {
-  const { onUpdateCommentWithRealData, onAddLocalComment } = useContext(CommentsContext);
+  const dispatch = useDispatch();
 
-  const {
-    data: submittedCommentData,
-    fetch: sendCreateCommentRequest,
-  } = useOnFetch();
+  const handleCreateCommentSubmit = (comment) => {
+    const localComment = buildLocalComment(user, comment);
 
-  const handleCreateCommentSubmit = (commentData) => {
-    const localComment = constructLocalComment(
-      user,
-      commentData.comment,
-    );
-
-    onAddLocalComment(localComment);
-
-    sendCreateCommentRequest(commentService.createComment({
-      comment: commentData.comment,
-      createdAt: localComment.createdAt,
-    }, journalId));
+    dispatch(detailsActions.addLocalComment(localComment));
+    dispatch(postComment({
+      commentData: {
+        comment: localComment.comment,
+        createdAt: localComment.createdAt,
+      },
+      journalId,
+    }));
   };
 
   useEffect(() => {
