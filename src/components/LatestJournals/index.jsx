@@ -24,7 +24,3 @@ export default function LatestJournals({ journals }) {
     </Container>
   );
 }
-
-LatestJournals.propTypes = {
-  journals: PropTypes.arrayOf(PropTypes.shape(journalPropTypes)),
-};
