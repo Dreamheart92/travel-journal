@@ -1,7 +1,6 @@
-import { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useFetch from '../../hooks/useFetch';
-import journalServiceSettings from '../../services/journalServiceSettings';
 import Loading from '../../components/Loading';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import DestinationHeader from '../../components/DestinationHeader';
@@ -12,42 +11,44 @@ import CreateJournal from '../../components/Sidebar/CreateJournal';
 import Search from '../../components/Search';
 import FiltersSection from '../../components/Sidebar/FiltersSection';
 import useQuery from '../../hooks/useQuery';
-import Container from '../../components/Container';
+import { selectDestinations } from '../../store/destinations/selectors';
+import { selectCatalogue } from '../../store/catalogue/selectors';
+import { fetchCatalogue } from '../../store/catalogue/thunks';
+import { catalogueActions } from '../../store/catalogue';
 
 export default function Catalogue() {
+  const dispatch = useDispatch();
   const { searchParams, onQuery } = useQuery();
   const { destination } = useParams();
   const [isSearching, setIsSearching] = useState(false);
 
-  const getJournalsSettings = useCallback(() => {
+  const {
+    catalogue,
+    loading,
+  } = useSelector(selectCatalogue);
+
+  const { destinations } = useSelector(selectDestinations);
+
+  useEffect(() => {
     const search = searchParams.get('search');
-    return journalServiceSettings.getJournalsSettings(destination, search);
+    dispatch(fetchCatalogue({ search, destination }));
+
+    return () => {
+      dispatch(catalogueActions.resetState());
+    };
   }, [destination, searchParams]);
-
-  const {
-    data: journals,
-    isSuccess: journalsSuccess,
-    error: journalsError,
-    isLoading: journalsLoading,
-  } = useFetch(getJournalsSettings);
-
-  const {
-    data: destinations,
-    isSuccess: destinationsSuccess,
-    error: destinationsError,
-  } = useFetch(journalServiceSettings.getDestinationsSettings);
-
-  if (!journalsSuccess || !destinationsSuccess) {
-    return <Loading />;
-  }
 
   const handleSearching = () => {
     setIsSearching(true);
   };
 
   const currentDestination = destination
-    ? destinations.data.find((destinationFilter) => destinationFilter.name === destination)
+    ? destinations.find((destinationFilter) => destinationFilter.name === destination)
     : null;
+
+  if (loading || !catalogue) {
+    return <Loading />;
+  }
 
   return (
     <DefaultLayout>
@@ -55,11 +56,10 @@ export default function Catalogue() {
       <div className={style.wrapper}>
 
         <div className={style['journals-container']}>
-          {isSearching && journalsLoading
-            && <Loading />}
+          {/*{isSearching && journalsLoading*/}
+          {/*  && <Loading />}*/}
 
-          {!journalsLoading
-            && <JournalsList journals={journals.data.journals} />}
+          <JournalsList journals={catalogue} />
         </div>
 
         <Sidebar width="20em">
@@ -70,7 +70,7 @@ export default function Catalogue() {
             urlSearch={searchParams.get('search')}
             onQuery={onQuery}
           />
-          <FiltersSection destinations={destinations.data} />
+          <FiltersSection destinations={destinations} />
         </Sidebar>
 
       </div>
