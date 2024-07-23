@@ -64,6 +64,10 @@ li {
     list-style: none;
 }
 
+.no-scroll {
+    overflow: hidden;
+}
+
 @media screen and (max-width: 640px) {
     html {
         font-size: 10px;
