@@ -1,0 +1,18 @@
+.reaction {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.reaction div {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    padding: .5em;
+    cursor: pointer;
+}
+
+.reaction div:hover {
+    background-color: #EEE;
+    border-radius: 100%;
+}
