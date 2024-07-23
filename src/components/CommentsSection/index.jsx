@@ -73,9 +73,12 @@ export default function CommentsSection(
         ))}
       </div>
 
-      <Modal>
+      <Modal isOpen={isOpen}>
         <DeleteModal
           text="Are you sure you want to delete this comment?"
+          onDelete={handleDeleteComment}
+          onCloseModal={onCloseModal}
+          isDeleting={isDeletingComment}
         />
       </Modal>
     </>
