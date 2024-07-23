@@ -7,7 +7,7 @@ import { detailsActions } from '../../store/details';
 import { postCommentReaction } from '../../store/details/thunks';
 import Button from '../Button';
 
-export default function CommentCard({ comment, userId, onOpenModal }) {
+export default function CommentCard({ comment, userId, onSetModalTargetItemId }) {
   const {
     author,
     createdAt,
@@ -37,7 +37,7 @@ export default function CommentCard({ comment, userId, onOpenModal }) {
     }
   };
 
-  const isCommentOwner = comment.author._id === userId;
+  const isCommentOwner = userId && comment.author._id === userId;
   const isLikedComment = likes.includes(userId);
   const isDislikedComment = dislikes.includes(userId);
 
@@ -66,7 +66,7 @@ export default function CommentCard({ comment, userId, onOpenModal }) {
           && (
             <div className={style['delete-control']}>
               <Button
-                onClick={() => onOpenModal()}
+                onClick={() => onSetModalTargetItemId(commentId)}
                 variant="warning"
                 caption="Delete"
               />
