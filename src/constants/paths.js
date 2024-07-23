@@ -1,6 +1,6 @@
 export const PATHS = {
   HOME: '/',
-  CATALOGUE: '/journals',
+  CATALOGUE: '/catalogue',
   DETAILS: '/journal',
   LOGIN: '/login',
   SIGNUP: '/signup',
