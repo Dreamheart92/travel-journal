@@ -7,6 +7,8 @@ import CreateCommentForm from '../../forms/CreateCommentForm';
 import { buildLocalComment } from '../../forms/helpers/createCommentForm';
 import { detailsActions } from '../../store/details';
 import { postComment } from '../../store/details/thunks';
+import Modal from '../Modal';
+import DeleteModal from '../Modal/DeleteModal';
 
 export default function CommentsSection(
   {
@@ -50,6 +52,12 @@ export default function CommentsSection(
           />
         ))}
       </div>
+
+      <Modal>
+        <DeleteModal
+          text="Are you sure you want to delete this comment?"
+        />
+      </Modal>
     </>
   );
 }
