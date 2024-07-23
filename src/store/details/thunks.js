@@ -29,3 +29,21 @@ export const postComment = createAsyncThunk(
     return sendHttpRequest(`${API.COMMENTS.COMMENTS}/${journalId}`, settings);
   },
 );
+
+export const postCommentReaction = createAsyncThunk(
+  'details/postCommentReaction',
+  async (reactionMetaData, { signal }) => {
+    const { accessToken } = getAccessTokenAndId();
+
+    const { path, requestMethod, commentId } = reactionMetaData;
+
+    const settings = {
+      requestMethod,
+      headers: {
+        Authorization: accessToken,
+      },
+    };
+
+    return sendHttpRequest(`${API.COMMENTS.COMMENTS}/${path}/${commentId}`, settings);
+  },
+);
