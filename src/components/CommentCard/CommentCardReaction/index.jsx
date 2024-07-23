@@ -14,4 +14,24 @@ export default function CommentCardReaction(
     onCommentReaction,
   },
 ) {
+  return (
+    <div className={style.reaction}>
+      <div onClick={() => onCommentReaction('likes', isLikedComment)}>
+        <FontAwesomeIcon
+          icon={isLikedComment ? faSolidThumbsUp : faRegularThumbsUp}
+          style={{ color: '#3b82f6' }}
+        />
+
+        <span>{likes}</span>
+      </div>
+
+      <div onClick={() => onCommentReaction('dislikes', isDislikedComment)}>
+        <FontAwesomeIcon
+          icon={isDislikedComment ? faSolidThumbsDown : faRegularThumbsDown}
+          style={{ color: '#3b82f6' }}
+        />
+        <span>{dislikes}</span>
+      </div>
+    </div>
+  );
 }
