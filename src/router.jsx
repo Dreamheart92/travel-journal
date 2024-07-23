@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Catalogue from './pages/Catalogue';
 import Details from './pages/Details';
+import Create from './pages/Create';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: `${PATHS.DETAILS}/:journalId`,
         element: <Details />,
+      },
+      {
+        path: PATHS.CREATE,
+        element: <Create />,
       },
     ],
   },
