@@ -5,6 +5,7 @@ import CommentCardReaction from './CommentCardReaction';
 import style from './index.module.css';
 import { detailsActions } from '../../store/details';
 import { postCommentReaction } from '../../store/details/thunks';
+import Button from '../Button';
 
 export default function CommentCard({ comment, userId }) {
   const {
@@ -59,6 +60,14 @@ export default function CommentCard({ comment, userId }) {
           dislikes={dislikes.length}
           onCommentReaction={handleCommentReaction}
         />
+
+        <div className={style['delete-control']}>
+          <Button
+            variant="warning"
+            caption="Delete"
+          />
+        </div>
+
       </div>
     </div>
   );
