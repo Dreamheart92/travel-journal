@@ -38,9 +38,6 @@ export default function App() {
     setInitApp(true);
   }, []);
 
-  if (!initApp) {
-    return <Loading />;
-  }
   const appIsLoaded = initApp && success;
 
   return (
