@@ -43,12 +43,23 @@ export default function CommentCard({ comment, userId }) {
     <div className={style['comment-card']}>
       <UserProfileImage imageUrl={author.imageUrl} />
 
-      <CommentCardContent
-        author={author.username}
-        content={content}
-        createdAt={createdAt}
-        id={id}
-      />
+      <div className={style.wrapper}>
+        <CommentCardContent
+          author={author.username}
+          content={content}
+          createdAt={createdAt}
+          id={commentId}
+        />
+
+        <CommentCardReaction
+          commentId={commentId}
+          isLikedComment={isLikedComment}
+          isDislikedComment={isDislikedComment}
+          likes={likes.length}
+          dislikes={dislikes.length}
+          onCommentReaction={handleCommentReaction}
+        />
+      </div>
     </div>
   );
 }
