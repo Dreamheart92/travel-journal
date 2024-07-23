@@ -13,6 +13,7 @@ export default function App() {
   const dispatch = useDispatch();
   const [initApp, setInitApp] = useState(false);
 
+  const { success } = useSelector(selectDestinations);
 
   const handleUserStorageChange = useCallback((event) => {
     if (event.detail.type === 'update') {
@@ -32,6 +33,7 @@ export default function App() {
 
   useEffect(() => {
     const userData = getUserDataFromStorage();
+    dispatch(fetchDestinations());
     dispatch(userActions.storeUser({ userData }));
     setInitApp(true);
   }, []);
