@@ -31,12 +31,6 @@ export default function CommentsSection(
     }));
   };
 
-  useEffect(() => {
-    if (submittedCommentData) {
-      onUpdateCommentWithRealData(submittedCommentData.data);
-    }
-  }, [submittedCommentData]);
-
   return (
     <>
       <CommentsSectionHeader user={!!user} />
