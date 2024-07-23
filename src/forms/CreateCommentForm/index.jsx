@@ -1,12 +1,12 @@
+import { useEffect, useState } from 'react';
 import TextAreaInput from '../../components/Input/TextAreaInput';
 import Button from '../../components/Button';
 import useForm from '../../hooks/useForm';
 import Form from '../../components/Form';
 import ErrorMessage from '../../components/ErrorMessage';
 import style from './index.module.css';
-import { useEffect, useState } from 'react';
 
-export default function CreateCommentForm({ onSendCreateCommentRequest }) {
+export default function CreateCommentForm({ onCreateCommentSubmit }) {
   const [isEmptyComment, setIsEmptyComment] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
 
@@ -16,13 +16,14 @@ export default function CreateCommentForm({ onSendCreateCommentRequest }) {
     if (isEmptyComment) {
       setIsEmptyComment(false);
     }
+
     if (commentData.comment.trim() === '') {
       setIsEmptyComment(true);
       return;
     }
 
+    onCreateCommentSubmit(commentData.comment);
     clearFieldValue('comment');
-    onSendCreateCommentRequest(commentData);
   };
 
   const {
