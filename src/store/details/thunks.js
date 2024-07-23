@@ -30,6 +30,22 @@ export const postComment = createAsyncThunk(
   },
 );
 
+export const deleteComment = createAsyncThunk(
+  'details/deleteComment',
+  async (commentId, { signal }) => {
+    const { accessToken } = getAccessTokenAndId();
+
+    const settings = {
+      method: 'Delete',
+      headers: {
+        Authorization: accessToken,
+      },
+    };
+
+    return sendHttpRequest(`${API.COMMENTS.COMMENTS}/${commentId}`, settings);
+  },
+);
+
 export const postCommentReaction = createAsyncThunk(
   'details/postCommentReaction',
   async (reactionMetaData, { signal }) => {
