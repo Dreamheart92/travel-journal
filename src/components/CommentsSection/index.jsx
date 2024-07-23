@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CommentsSectionHeader from './CommentsSectionHeader';
 import CommentCard from '../CommentCard';
 import style from './index.module.css';
@@ -6,10 +6,11 @@ import { formatCommentsCount } from '../../helpers';
 import CreateCommentForm from '../../forms/CreateCommentForm';
 import { buildLocalComment } from '../../forms/helpers/createCommentForm';
 import { detailsActions } from '../../store/details';
-import { postComment } from '../../store/details/thunks';
+import { deleteComment, postComment } from '../../store/details/thunks';
 import Modal from '../Modal';
 import DeleteModal from '../Modal/DeleteModal';
 import useModal from '../../hooks/useModal';
+import { selectCommentDeleteState } from '../../store/details/selectors';
 
 export default function CommentsSection(
   {
@@ -19,7 +20,15 @@ export default function CommentsSection(
   },
 ) {
   const dispatch = useDispatch();
-  const { isOpen, onOpenModal, onCloseModal } = useModal();
+
+  const { loading: isDeletingComment } = useSelector(selectCommentDeleteState);
+
+  const {
+    isOpen,
+    targetItemId,
+    onSetTargetItemId,
+    onCloseModal,
+  } = useModal();
 
   const handleCreateCommentSubmit = (comment) => {
     const localComment = buildLocalComment(user, comment);
