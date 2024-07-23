@@ -37,6 +37,7 @@ export default function CommentCard({ comment, userId }) {
     }
   };
 
+  const isCommentOwner = comment.author._id === userId;
   const isLikedComment = likes.includes(userId);
   const isDislikedComment = dislikes.includes(userId);
 
@@ -61,12 +62,15 @@ export default function CommentCard({ comment, userId }) {
           onCommentReaction={handleCommentReaction}
         />
 
-        <div className={style['delete-control']}>
-          <Button
-            variant="warning"
-            caption="Delete"
-          />
-        </div>
+        {isCommentOwner
+          && (
+            <div className={style['delete-control']}>
+              <Button
+                variant="warning"
+                caption="Delete"
+              />
+            </div>
+          )}
 
       </div>
     </div>
