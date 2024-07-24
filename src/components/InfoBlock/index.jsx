@@ -7,11 +7,12 @@ export default function InfoBlock(
     textAlign = 'center',
     title,
     caption,
+    paddingBottom = '0',
   },
 ) {
   return (
     <div
-      style={{ textAlign }}
+      style={{ textAlign, paddingBottom }}
       className={style['info-block']}
     >
       <h1>{title}</h1>
