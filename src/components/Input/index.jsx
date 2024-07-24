@@ -11,6 +11,8 @@ export default function Wrapper(
     label,
     children,
     state,
+    isFile = false,
+    fileWrapper,
   },
 ) {
   const displayError = state.error && (state.isDirty
@@ -18,10 +20,10 @@ export default function Wrapper(
 
   return (
     <>
-      {label
+      {label && !isFile
         && <label htmlFor={label}>{normalizeName(label)}</label>}
 
-      <div className={style.wrapper}>
+      <div className={`${isFile ? fileWrapper : style.wrapper}`}>
         {children}
         {displayError
           && <ErrorMessage message={Object.entries(state.error)[0][1]} />}
