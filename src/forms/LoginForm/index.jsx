@@ -42,7 +42,6 @@ export default function LoginForm({ onLoginSubmit, isSubmitting, error }) {
       error={error}
     >
       <TextInput
-        isSubmittedAndHasErrors={isSubmittedAndHasErrors}
         handlers={emailHandlers}
         state={emailState}
         placeholder="Email"
@@ -52,7 +51,6 @@ export default function LoginForm({ onLoginSubmit, isSubmitting, error }) {
 
       <TextInput
         type="password"
-        isSubmittedAndHasErrors={isSubmittedAndHasErrors}
         handlers={passwordHandlers}
         state={passwordState}
         placeholder="Password"
