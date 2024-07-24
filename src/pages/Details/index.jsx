@@ -14,7 +14,12 @@ export default function Details() {
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
-  const { journal, comments, loading } = useSelector(selectDetailsState);
+  const {
+    journal,
+    comments,
+    loading,
+    isJournalOwner,
+  } = useSelector(selectDetailsState);
 
   useEffect(() => {
     dispatch(fetchJournalById(journalId));
@@ -28,13 +33,14 @@ export default function Details() {
     <DefaultLayout>
       <Container width="80em">
         <Journal
-          id={journalId}
+          journalId={journalId}
           title={journal.title}
           location={journal.location}
           author={journal.author?.username}
           date={journal.date}
           imageUrl={journal.imageUrl}
           description={journal.description}
+          isJournalOwner={isJournalOwner}
         />
 
         <CommentsSection
