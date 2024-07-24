@@ -35,6 +35,18 @@ export default function Journal(
   const handleDeleteJournal = () => {
     dispatch(deleteJournal(journalId));
   };
+
+  useEffect(() => {
+    if (success) {
+      navigate(PATHS.CATALOGUE);
+    }
+
+    return () => {
+      onCloseModal();
+      dispatch(journalEditorActions.resetState());
+    };
+  }, [success]);
+
   return (
     <div className={style.container}>
       <div className={style['journal-image-wrapper']}>
