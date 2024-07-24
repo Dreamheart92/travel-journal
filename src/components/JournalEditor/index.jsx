@@ -2,6 +2,7 @@ import Container from '../Container';
 import InfoBlock from '../InfoBlock';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import JournalForm from '../../forms/JournalForm';
+import { buildFormInitialState } from '../../helpers';
 
 export default function JournalEditor(
   {
@@ -11,8 +12,11 @@ export default function JournalEditor(
     submitCallback,
     error,
     isSubmitting,
+    journal,
   },
 ) {
+  const formInitialState = buildFormInitialState(journal);
+
   return (
     <DefaultLayout>
       <Container>
@@ -27,6 +31,7 @@ export default function JournalEditor(
           error={error}
           isSubmitting={isSubmitting}
           submitCallback={submitCallback}
+          initialState={formInitialState}
         />
       </Container>
     </DefaultLayout>
