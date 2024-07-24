@@ -1,9 +1,18 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import Image from '../Image';
 import JournalContent from '../JournalContent';
-
 import style from './index.module.css';
+import Button from '../Button';
+import Modal from '../Modal';
+import DeleteModal from '../Modal/DeleteModal';
+import useModal from '../../hooks/useModal';
+import { deleteJournal } from '../../store/journalEditor/thunks';
+import { selectDeleteState } from '../../store/journalEditor/selectors';
+import { PATHS } from '../../constants/paths';
+import { journalEditorActions } from '../../store/journalEditor';
 
 export default function Journal(
   {
@@ -13,6 +22,8 @@ export default function Journal(
     date,
     imageUrl,
     description,
+    isJournalOwner,
+    journalId,
   },
 ) {
   return (
