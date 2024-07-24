@@ -26,3 +26,15 @@ export const buildJournalUrlRequest = (queryParams) => {
 
   return API.JOURNAL.JOURNALS;
 };
+
+export const buildJournalFormData = (journalData) => {
+  const formData = new FormData();
+  formData.append('image', journalData.image);
+  formData.append('description', journalData.description);
+  formData.append('title', journalData.title);
+  formData.append('location', journalData.location);
+  formData.append('date', journalData.date);
+  formData.append('destination', journalData.destination);
+
+  return formData;
+};
