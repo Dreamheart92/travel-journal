@@ -8,7 +8,6 @@ import { selectHomeState } from '../../store/home/selectors';
 import Loading from '../../components/Loading';
 import { selectDestinations } from '../../store/destinations/selectors';
 import { fetchLatestJournals } from '../../store/home/thunks';
-import { homeActions } from '../../store/home';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -18,10 +17,6 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(fetchLatestJournals());
-
-    return () => {
-      dispatch(homeActions.resetState());
-    };
   }, []);
 
   if (loading || !latestJournals) {
@@ -29,7 +24,7 @@ export default function Home() {
   }
 
   return (
-    <Container>
+    <Container width="100%">
       <Hero />
       <Destinations destinations={destinations} />
       <LatestJournals journals={latestJournals} />
