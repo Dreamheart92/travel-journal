@@ -19,6 +19,11 @@ export default function Edit() {
 
   const { journal, loading: journalLoading } = useSelector(selectDetailsState);
   const { loading: isUpdating, success: isJournalUpdated } = useSelector(selectUpdateState);
+
+  const handleUpdateJournalSubmit = (journalData) => {
+    dispatch(updateJournal({ journalData: buildJournalFormData(journalData), journalId }));
+  };
+
   useEffect(() => {
     dispatch(fetchJournalById(journalId));
   }, []);
