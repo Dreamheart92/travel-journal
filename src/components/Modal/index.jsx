@@ -12,9 +12,12 @@ export default function Modal({ isOpen, children }) {
         document.body.classList.add('no-scroll');
       } else {
         dialogRef.current.close();
-        document.body.classList.remove('no-scroll');
       }
     }
+
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
   }, [isOpen]);
 
   return (
