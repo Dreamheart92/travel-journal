@@ -38,3 +38,12 @@ export const buildJournalFormData = (journalData) => {
 
   return formData;
 };
+
+export const buildFormInitialState = (journal) => ({
+  title: journal?.title || '',
+  image: journal?.imageUrl || '',
+  location: journal?.location || '',
+  date: journal?.date || '',
+  description: journal?.description || '',
+  destination: journal?.destination?._id || '',
+});
