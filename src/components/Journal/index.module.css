@@ -6,9 +6,19 @@
     gap: .5em;
     background-color: white;
     padding: 3em;
+    position: relative;
 }
 
 .journal-image-wrapper {
     width: 100%;
     height: 30em;
+}
+
+.controls {
+    display: flex;
+    gap: 1em;
+    width: 20%;
+    position: absolute;
+    right: 3em;
+    top: 34em;
 }
