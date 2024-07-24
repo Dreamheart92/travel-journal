@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { Form } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
 import { selectDestinations } from '../../store/destinations/selectors';
-import { normalizeName } from '../../helpers';
 import FileInput from '../../components/Input/FileInput';
 import TextInput from '../../components/Input/TextInput';
 import SelectInput from '../../components/Input/SelectInput';
@@ -18,6 +17,7 @@ export default function JournalForm(
     submitCallback,
     error,
     isSubmitting,
+    initialState,
   },
 ) {
   const {
@@ -30,14 +30,18 @@ export default function JournalForm(
   const {
     handlers: imageHandlers,
     state: imageState,
-  } = register('image', '', { required: true });
+  } = register(
+    'image',
+    initialState.image,
+    { required: true },
+  );
 
   const {
     handlers: titleHandlers,
     state: titleState,
   } = register(
     'title',
-    '',
+    initialState.title,
     {
       required: true,
       minLength: VALIDATIONS.JOURNAL.TITLE_MIN_LENGTH,
@@ -49,7 +53,7 @@ export default function JournalForm(
     state: destinationState,
   } = register(
     'destination',
-    '',
+    initialState.destination,
     {
       required: true,
     },
@@ -60,7 +64,7 @@ export default function JournalForm(
     state: locationState,
   } = register(
     'location',
-    '',
+    initialState.location,
     {
       required: true,
       minLength: VALIDATIONS.JOURNAL.LOCATION_MIN_LENGTH,
@@ -72,7 +76,7 @@ export default function JournalForm(
     state: dateState,
   } = register(
     'date',
-    '',
+    initialState.date,
     { required: true },
   );
 
@@ -81,7 +85,7 @@ export default function JournalForm(
     state: descriptionState,
   } = register(
     'description',
-    '',
+    initialState.description,
     {
       required: true,
       minLength: VALIDATIONS.JOURNAL.DESCRIPTION_MIN_LENGTH,
@@ -97,7 +101,7 @@ export default function JournalForm(
         <FileInput
           handlers={imageHandlers}
           state={imageState}
-          isJournal={type === 'journal'}
+          isJournal
         />
 
         <div className={style.fields}>
@@ -133,7 +137,7 @@ export default function JournalForm(
           <Button
             submitButton
             isLoading={isSubmitting}
-            caption={normalizeName(type)}
+            caption={type}
           />
         </div>
       </div>
