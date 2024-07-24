@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { deleteJournal, postJournal } from './thunks';
+import { deleteJournal, postJournal, updateJournal } from './thunks';
 
 const initialState = {
   create: {
@@ -9,6 +9,12 @@ const initialState = {
     error: null,
   },
   delete: {
+    loading: false,
+    success: false,
+    error: null,
+  },
+  update: {
+    data: null,
     loading: false,
     success: false,
     error: null,
@@ -43,8 +49,20 @@ const journalEditorSlice = createSlice({
       state.delete.success = true;
     });
     builder.addCase(deleteJournal.rejected, (state, action) => {
-      console.log(action);
       state.delete.loading = false;
+    });
+    builder.addCase(updateJournal.pending, (state) => {
+      state.update.loading = true;
+      state.update.success = false;
+    });
+    builder.addCase(updateJournal.fulfilled, (state, action) => {
+      state.update.data = action.payload.data;
+      state.update.loading = false;
+      state.update.success = true;
+    });
+    builder.addCase(updateJournal.rejected, (state, action) => {
+      state.update.loading = false;
+      state.update.error = true;
     });
   },
 });
