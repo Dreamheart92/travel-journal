@@ -28,6 +28,16 @@ export default function Edit() {
     dispatch(fetchJournalById(journalId));
   }, []);
 
+  useEffect(() => {
+    if (isJournalUpdated) {
+      navigate(`${PATHS.DETAILS}/${journalId}`);
+    }
+
+    return () => {
+      dispatch(journalEditorActions.resetState());
+    };
+  }, [isJournalUpdated]);
+
   return (
     <JournalEditor
       title="Refine Your Story!"
