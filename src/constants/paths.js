@@ -6,6 +6,7 @@ export const PATHS = {
   SIGNUP: '/signup',
   CREATE: '/create',
   ACCOUNT: '/account',
+  EDIT: '/edit',
 };
 
 export const ACCOUNT_SUB_PATHS = {
