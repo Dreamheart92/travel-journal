@@ -32,6 +32,9 @@ export default function Journal(
   const { isOpen, onOpenModal, onCloseModal } = useModal();
   const { success, loading } = useSelector(selectDeleteState);
 
+  const handleDeleteJournal = () => {
+    dispatch(deleteJournal(journalId));
+  };
   return (
     <div className={style.container}>
       <div className={style['journal-image-wrapper']}>
