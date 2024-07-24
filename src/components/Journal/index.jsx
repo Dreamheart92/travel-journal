@@ -64,6 +64,7 @@ export default function Journal(
       {isJournalOwner && (
         <div className={style.controls}>
           <Button
+            onClick={() => navigate(`${PATHS.EDIT}/${journalId}`)}
             variant="secondary"
             caption="Edit"
           />
