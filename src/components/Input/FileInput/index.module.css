@@ -4,6 +4,23 @@
     align-items: center;
 }
 
+.column {
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+}
+
 .image-wrapper button {
     width: 14em;
+}
+
+.journal {
+    width: 20em;
+    height: 20em;
+}
+
+.account {
+
 }
