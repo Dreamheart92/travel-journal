@@ -60,6 +60,29 @@ export default function Journal(
         author={author}
         location={location}
       />
+
+      {isJournalOwner && (
+        <div className={style.controls}>
+          <Button
+            variant="secondary"
+            caption="Edit"
+          />
+          <Button
+            onClick={() => onOpenModal()}
+            variant="warning"
+            caption="Delete"
+          />
+        </div>
+      )}
+
+      <Modal isOpen={isOpen}>
+        <DeleteModal
+          text="Are you sure you want to delete this journal?"
+          isDeleting={loading}
+          onCloseModal={onCloseModal}
+          onDelete={handleDeleteJournal}
+        />
+      </Modal>
     </div>
   );
 }
@@ -71,4 +94,6 @@ Journal.propTypes = {
   date: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  isJournalOwner: PropTypes.bool,
+  journalId: PropTypes.string.isRequired,
 };
