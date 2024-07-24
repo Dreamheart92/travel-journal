@@ -1,6 +1,6 @@
 import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
-
 import Wrapper from '..';
+import style from './index.module.css';
 
 export default function DateInput(
   {
@@ -12,10 +12,16 @@ export default function DateInput(
   const date = dateValue ? dateValue.slice(0, 10) : null;
 
   return (
-    <Wrapper
-      state={state}
-    >
-      <input onChange={handlers.onChange} onBlur={handlers.onBlur} defaultValue={date} name="date" id="date" type="date" />
+    <Wrapper state={state}>
+      <input
+        className={style.date}
+        onChange={handlers.onChange}
+        onBlur={handlers.onBlur}
+        defaultValue={date}
+        name="date"
+        id="date"
+        type="date"
+      />
     </Wrapper>
   );
 }
