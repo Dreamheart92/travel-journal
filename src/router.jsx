@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Catalogue from './pages/Catalogue';
 import Details from './pages/Details';
 import Create from './pages/Create';
+import Edit from './pages/Edit';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: PATHS.CREATE,
         element: <Create />,
+      },
+      {
+        path: `${PATHS.EDIT}/:journalId`,
+        element: <Edit />,
       },
     ],
   },
