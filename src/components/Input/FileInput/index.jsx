@@ -4,28 +4,24 @@ import Button from '../../Button';
 import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
 
 import style from './index.module.css';
+import Wrapper from '../index';
 
 export default function FileInput(
   {
-    buttonCaption,
     isUserProfile,
-    placeholderSize,
-    flexDirection,
-    borderRadius,
-    error,
     handlers,
     state,
+    isJournal = false,
   },
 ) {
-  const width = placeholderSize?.width || '100%';
-  const height = placeholderSize?.height || '100%';
+  const fileStyle = `${style['image-wrapper']} ${isJournal ? style.column : style.row}`;
+  const imageClassName = `${isJournal ? style.journal : style.account}`;
 
-  const handleUploadImage = (event) => {
-    event.preventDefault();
-    document.getElementById('file').click();
-  };
-
-  const flexDirectionStyle = flexDirection || 'row';
+  const
+    handleUploadImage = (event) => {
+      event.preventDefault();
+      document.getElementById('file').click();
+    };
 
   let imagePlaceholder;
 
@@ -40,38 +36,28 @@ export default function FileInput(
   }
 
   return (
-    <>
-      <div
-        style={{ flexDirection: flexDirectionStyle }}
-        className={style['image-wrapper']}
-      >
-        <img
-          style={{ width, height, borderRadius }}
-          src={imagePlaceholder}
-          alt=""
-        />
+    <Wrapper
+      state={state}
+      label="Image"
+      isFile
+      fileWrapper={fileStyle}
+    >
+      <img
+        className={imageClassName}
+        src={imagePlaceholder}
+        alt=""
+      />
 
-        <Button onClick={handleUploadImage}>{buttonCaption}</Button>
-
-        {error
-          && <p className="error-message">Image is required</p>}
-      </div>
+      <Button onClick={handleUploadImage} caption="Upload your image" />
 
       <input type="file" id="file" hidden onChange={handlers.onChange} onBlur={handlers.onBlur} accept=".jpg, .jpeg" />
-    </>
+    </Wrapper>
   );
 }
 
 FileInput.propTypes = {
-  buttonCaption: PropTypes.string,
   isUserProfile: PropTypes.bool,
-  placeholderSize: PropTypes.objectOf(PropTypes.shape([{
-    width: PropTypes.string,
-    height: PropTypes.string,
-  }])),
-  borderRadius: PropTypes.string,
-  flexDirection: PropTypes.string,
-  error: PropTypes.bool,
   handlers: handlersPropType,
   state: statePropType,
+  isJournal: PropTypes.bool,
 };
