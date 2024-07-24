@@ -20,6 +20,24 @@ export const postJournal = createAsyncThunk(
   },
 );
 
+export const updateJournal = createAsyncThunk(
+  'journalEditor/updateJournal',
+  async (journalMetaData, { signal }) => {
+    const { accessToken } = getAccessTokenAndId();
+    const { journalData, journalId } = journalMetaData;
+
+    const settings = {
+      method: 'Put',
+      headers: {
+        Authorization: accessToken,
+      },
+      body: journalData,
+    };
+
+    return sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, settings);
+  },
+);
+
 export const deleteJournal = createAsyncThunk(
   'journalEditor/deleteJournal',
   async (journalId, { signal }) => {
