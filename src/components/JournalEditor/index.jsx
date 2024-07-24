@@ -16,7 +16,18 @@ export default function JournalEditor(
   return (
     <DefaultLayout>
       <Container>
-        <InfoBlock caption={caption} title={title} />
+        <InfoBlock
+          caption={caption}
+          title={title}
+          paddingBottom="2em"
+        />
+
+        <JournalForm
+          type={type}
+          error={error}
+          isSubmitting={isSubmitting}
+          submitCallback={submitCallback}
+        />
       </Container>
     </DefaultLayout>
   );
