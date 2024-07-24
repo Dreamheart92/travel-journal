@@ -37,12 +37,3 @@ export default function SelectInput(
     </Wrapper>
   );
 }
-
-SelectInput.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape([{
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }])),
-  handlers: handlersPropType,
-  state: statePropType,
-};
