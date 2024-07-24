@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { deleteComment, fetchJournalById, postComment } from './thunks';
+import { getAccessTokenAndId } from '../../helpers/storage';
 
 const initialState = {
   journal: null,
   comments: null,
   loading: false,
   error: null,
+  isJournalOwner: null,
   commentCrud: {
     create: {
       commentData: null,
@@ -80,8 +82,12 @@ const detailsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchJournalById.fulfilled, (state, action) => {
+      const { _id: userId } = getAccessTokenAndId();
+
       state.journal = action.payload.data;
       state.comments = action.payload.data.comments;
+      state.isJournalOwner = userId && action.payload.data.author._id === userId;
+
       state.loading = false;
     });
     builder.addCase(fetchJournalById.rejected, (state, action) => {
