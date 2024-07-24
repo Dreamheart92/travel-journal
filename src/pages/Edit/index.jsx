@@ -38,6 +38,10 @@ export default function Edit() {
     };
   }, [isJournalUpdated]);
 
+  if (journalLoading || !journal) {
+    return <Loading />;
+  }
+
   return (
     <JournalEditor
       title="Refine Your Story!"
