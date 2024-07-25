@@ -1,33 +1,44 @@
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import LoginForm from '../../forms/LoginForm';
 import AuthLayout from '../../layouts/AuthLayout';
-import useOnFetch from '../../hooks/useOnFetch';
-import authService from '../../services/authService';
 import { constructLoginData } from '../../forms/helpers/loginForm';
-import { storeUserData } from '../../helpers/storage';
+import crudConstants from '../../constants/crudConstants';
+import crudActionsConstants from '../../constants/crudActionsConstants';
+import { selectReadState } from '../../store/crud/selectors';
+import { sendLoginRequest } from '../../store/crud/thunks';
+import { crudActions } from '../../store/crud';
 import { PATHS } from '../../constants/paths';
+import { storeUserData } from '../../helpers/storage';
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     data: userData,
-    isLoading,
+    loading,
     error,
-    fetch: sendLoginRequest,
-  } = useOnFetch();
-
-  const handleLoginSubmit = (formData) => {
-    sendLoginRequest(authService.login(constructLoginData(formData)));
-  };
+    success,
+  } = useSelector(selectReadState);
 
   useEffect(() => {
-    if (userData) {
-      storeUserData(userData.data);
+    dispatch(crudActions.resetState({ key: crudConstants.READ }));
+
+    if (success) {
+      storeUserData(userData);
       navigate(PATHS.HOME);
     }
-  }, [userData]);
+  }, [success]);
+
+  const handleLoginSubmit = (formData) => {
+    dispatch(sendLoginRequest({
+      key: crudConstants.READ,
+      currentAction: crudActionsConstants.LOGIN,
+      loginData: constructLoginData(formData),
+    }));
+  };
 
   return (
     <AuthLayout
@@ -36,7 +47,7 @@ export default function Login() {
       form={(
         <LoginForm
           onLoginSubmit={handleLoginSubmit}
-          isSubmitting={isLoading}
+          isSubmitting={loading}
           error={error}
         />
       )}
