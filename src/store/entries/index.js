@@ -26,6 +26,9 @@ const entriesSlice = createSlice({
   name: 'entries',
   initialState,
   reducers: {
+    addLocalComment(state, action) {
+      state[entriesConstants.COMMENTS].results.unshift(action.payload);
+    },
   },
 });
 
