@@ -10,9 +10,9 @@ export default function NavigationLink(
     filter = false,
     children,
     onClick,
+    end = false,
   },
 ) {
-
   const linkClass = `${style.link} ${filter ? style.filter : ''}`;
 
   return (
@@ -20,6 +20,7 @@ export default function NavigationLink(
       to={to}
       className={({ isActive }) => `${linkClass} ${isActive && to !== '' ? style.active : ''}`}
       onClick={onClick}
+      end={end}
     >
       {children}
     </NavLink>
@@ -31,4 +32,5 @@ NavigationLink.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   filter: PropTypes.bool,
+  end: PropTypes.bool,
 };
