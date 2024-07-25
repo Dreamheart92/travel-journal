@@ -10,28 +10,39 @@ import crudActionsConstants from '../../../constants/crudActionsConstants';
 import { selectUpdateState } from '../../../store/crud/selectors';
 import { deleteUserDataFromStorage, storeUserData } from '../../../helpers/storage';
 import { selectUser } from '../../../store/auth/selectors';
+import { useEffect } from 'react';
+import { crudActions } from '../../../store/crud';
 
 export default function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const user = useSelector(selectUser);
-  const { loading } = useSelector(selectUpdateState);
+
+  const {
+    data: updatedUserData,
+    loading,
+    success,
+  } = useSelector(selectUpdateState);
+
+  useEffect(() => {
+    dispatch(crudActions.resetState({ key: crudConstants.UPDATE }));
+
+    if (success) {
+      deleteUserDataFromStorage();
+      storeUserData(updatedUserData);
+      navigate(PATHS.ACCOUNT);
+    }
+  }, [success]);
 
   const formInitialState = buildUserFormInitialState(user);
 
-  const handleUpdateProfileSubmit = async (userData) => {
-    const isSuccess = await dispatch(updateProfileRequest({
+  const handleUpdateProfileSubmit = (userData) => {
+    dispatch(updateProfileRequest({
       key: crudConstants.UPDATE,
       currentAction: crudActionsConstants.UPDATE_PROFILE,
       userData: buildUserFormData(userData),
     }));
-
-    if (isSuccess?.payload?.success) {
-      deleteUserDataFromStorage();
-      storeUserData(isSuccess.payload.data);
-      navigate(PATHS.ACCOUNT);
-    }
   };
 
   return (
