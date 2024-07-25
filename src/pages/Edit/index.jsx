@@ -9,7 +9,6 @@ import { updateJournalRequest } from '../../store/crud/thunks';
 import crudConstants from '../../constants/crudConstants';
 import crudActionsConstants from '../../constants/crudActionsConstants';
 import { selectUpdateState } from '../../store/crud/selectors';
-import { fetchEntry } from '../../store/entries/thunks';
 import { selectJournalEntry } from '../../store/entries/selectors';
 import { crudActions } from '../../store/crud';
 
@@ -22,10 +21,6 @@ export default function Edit() {
   const { result: journal, loading: journalLoading } = useSelector(selectJournalEntry);
 
   const { loading: isUpdating, success } = useSelector(selectUpdateState);
-
-  useEffect(() => {
-    dispatch(fetchEntry({ journalId }));
-  }, []);
 
   useEffect(() => {
     dispatch(crudActions.resetState({ key: crudConstants.UPDATE }));
