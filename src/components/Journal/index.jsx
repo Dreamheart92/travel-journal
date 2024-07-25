@@ -55,7 +55,7 @@ export default function Journal({ journalId }) {
   return (
     <div className={style.container}>
       <div className={style['journal-image-wrapper']}>
-        <Image imageUrl={imageUrl} />
+        <Image imageUrl={journal.imageUrl} />
       </div>
 
       <JournalContent
