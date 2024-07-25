@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import Journal from '../../components/Journal';
@@ -7,7 +6,6 @@ import Container from '../../components/Container';
 
 export default function Details() {
   const { journalId } = useParams();
-  const { user } = useSelector((state) => state.user);
 
   return (
     <DefaultLayout>
@@ -15,7 +13,6 @@ export default function Details() {
         <Journal journalId={journalId} />
 
         <CommentsSection
-          user={user}
           journalId={journalId}
         />
       </Container>
