@@ -7,8 +7,6 @@ import CatalogueCardButton from '../CatalogueCard/CatalogueCardButton';
 
 import style from './index.module.css';
 
-// Todo: pass the total comments
-
 export default function JournalContent({ journal, readMore = false }) {
   const content = readMore ? `${journal.description.slice(0, 500)}...` : journal.description;
 
@@ -51,8 +49,7 @@ export default function JournalContent({ journal, readMore = false }) {
             />
 
             <div className={style.comments}>
-              {/*<p>{totalComments}</p>*/}
-              <p>ADD THE TOTAL COMMENTS</p>
+              <p>{journal.comments.length}</p>
               <FontAwesomeIcon icon={faComments} />
             </div>
           </div>
