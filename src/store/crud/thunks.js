@@ -39,3 +39,27 @@ export const updateJournalRequest = createAsyncThunk(
     return sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, settings);
   },
 );
+
+export const postCommentRequest = createAsyncThunk(
+  'crud/thunk/postCommentRequest',
+  async (arg, { dispatch, signal }) => {
+    const { commentData, journalId } = arg.commentMetaData;
+
+    const { accessToken } = getAccessTokenAndId();
+
+    const settings = {
+      method: 'Post',
+      headers: {
+        Authorization: accessToken,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(commentData),
+    };
+
+    const result = await sendHttpRequest(`${API.COMMENTS.COMMENTS}/${journalId}`, settings);
+
+    dispatch(entriesActions.updateLocalCommentWithRealData(result));
+    return result.data;
+  },
+);
+
