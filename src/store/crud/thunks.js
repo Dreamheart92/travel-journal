@@ -178,3 +178,20 @@ export const sendLoginRequest = createAsyncThunk(
   },
 );
 
+export const sendSignupRequest = createAsyncThunk(
+  'crud/thunk/sendSignupRequest',
+  async (arg, { signal }) => {
+    const { signupData } = arg;
+
+    const settings = {
+      method: 'Post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(signupData),
+    };
+
+    const result = await sendHttpRequest(API.AUTH.SIGNUP, settings);
+    return result.data;
+  },
+);
