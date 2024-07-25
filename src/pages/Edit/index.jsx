@@ -11,6 +11,7 @@ import crudActionsConstants from '../../constants/crudActionsConstants';
 import { selectUpdateState } from '../../store/crud/selectors';
 import { fetchEntry } from '../../store/entries/thunks';
 import { selectJournalEntry } from '../../store/entries/selectors';
+import { crudActions } from '../../store/crud';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -19,10 +20,23 @@ export default function Edit() {
   const { journalId } = useParams();
 
   const { result: journal, loading: journalLoading } = useSelector(selectJournalEntry);
-  const { loading: isUpdating } = useSelector(selectUpdateState);
+
+  const { loading: isUpdating, success } = useSelector(selectUpdateState);
+
+  useEffect(() => {
+    dispatch(fetchEntry({ journalId }));
+  }, []);
+
+  useEffect(() => {
+    dispatch(crudActions.resetState({ key: crudConstants.UPDATE }));
+
+    if (success) {
+      navigate(`${PATHS.DETAILS}/${journalId}`);
+    }
+  }, [success]);
 
   const handleUpdateJournalSubmit = async (journalData) => {
-    const isSuccess = await dispatch(updateJournalRequest({
+    dispatch(updateJournalRequest({
       key: crudConstants.UPDATE,
       currentAction: crudActionsConstants.UPDATE_JOURNAL,
       journalMetaData: {
@@ -30,15 +44,7 @@ export default function Edit() {
         journalId,
       },
     }));
-
-    if (isSuccess?.payload?.data) {
-      navigate(`${PATHS.DETAILS}/${journalId}`);
-    }
   };
-
-  useEffect(() => {
-    dispatch(fetchEntry({ journalId }));
-  }, []);
 
   if (journalLoading || !journal) {
     return <Loading />;
