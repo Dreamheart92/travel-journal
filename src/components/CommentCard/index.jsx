@@ -3,9 +3,10 @@ import UserProfileImage from '../UserProfileImage';
 import CommentCardContent from './CommentCardContent';
 import CommentCardReaction from './CommentCardReaction';
 import style from './index.module.css';
-import { detailsActions } from '../../store/details';
-import { postCommentReaction } from '../../store/details/thunks';
 import Button from '../Button';
+import { postCommentReactionRequest } from '../../store/crud/thunks';
+import crudConstants from '../../constants/crudConstants';
+import crudActionsConstants from '../../constants/crudActionsConstants';
 
 export default function CommentCard({ comment, userId, onSetModalTargetItemId }) {
   const {
@@ -21,19 +22,16 @@ export default function CommentCard({ comment, userId, onSetModalTargetItemId })
 
   const handleCommentReaction = (reactionType, isReacted) => {
     if (!commentId.endsWith('___temporary')) {
-      dispatch(detailsActions.localCommentReaction(
-        {
+      dispatch(postCommentReactionRequest({
+        key: crudConstants.CREATE,
+        currentAction: crudActionsConstants.REACT_JOURNAL,
+        reactionMetaData: {
           reactionType,
           isReacted,
           commentId,
           userId,
         },
-      ));
-
-      const path = reactionType === 'likes' ? 'like' : 'dislike';
-      const requestMethod = isReacted ? 'Delete' : 'Get';
-
-      dispatch(postCommentReaction({ path, requestMethod, commentId }));
+      }));
     }
   };
 
