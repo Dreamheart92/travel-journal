@@ -142,3 +142,20 @@ export const deleteJournalRequest = createAsyncThunk(
   },
 );
 
+export const updateProfileRequest = createAsyncThunk(
+  'crud/thunk/updateProfileRequest',
+  async (arg, { signal }) => {
+    const { userData } = arg;
+    const { accessToken } = getAccessTokenAndId();
+
+    const settings = {
+      method: 'Put',
+      headers: {
+        Authorization: accessToken,
+      },
+      body: userData,
+    };
+
+    return sendHttpRequest(API.AUTH.UPDATE_PROFILE, settings);
+  },
+);
