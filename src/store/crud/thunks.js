@@ -159,3 +159,22 @@ export const updateProfileRequest = createAsyncThunk(
     return sendHttpRequest(API.AUTH.UPDATE_PROFILE, settings);
   },
 );
+
+export const sendLoginRequest = createAsyncThunk(
+  'crud/thunk/sendLoginRequest',
+  async (arg, { signal }) => {
+    const { loginData } = arg;
+
+    const settings = {
+      method: 'Post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    };
+
+    const result = await sendHttpRequest(API.AUTH.LOGIN, settings);
+    return result.data;
+  },
+);
+
