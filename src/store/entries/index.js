@@ -40,6 +40,18 @@ const entriesSlice = createSlice({
         state[entriesConstants.COMMENTS].results.splice(indexOfTargetedComment, 1);
       }
     },
+    updateLocalCommentWithRealData(state, action) {
+      const commentRealData = action.payload.data;
+
+      const localCommentIndex = state[entriesConstants.COMMENTS].results
+        .findIndex((localComment) => (
+          String(new Date(localComment.createdAt)) === String(new Date(commentRealData.createdAt))
+          && localComment.comment === commentRealData.comment
+          && localComment.author._id === commentRealData.author._id
+        ));
+
+      state[entriesConstants.COMMENTS].results[localCommentIndex] = commentRealData;
+    },
   },
 });
 
