@@ -21,3 +21,21 @@ export const postJournalRequest = createAsyncThunk(
     return sendHttpRequest(API.JOURNAL.JOURNAL, settings);
   },
 );
+
+export const updateJournalRequest = createAsyncThunk(
+  'crud/thunk/updateJournalRequest',
+  async (arg, { signal }) => {
+    const { accessToken } = getAccessTokenAndId();
+    const { journalData, journalId } = arg.journalMetaData;
+
+    const settings = {
+      method: 'Put',
+      headers: {
+        Authorization: accessToken,
+      },
+      body: journalData,
+    };
+
+    return sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, settings);
+  },
+);
