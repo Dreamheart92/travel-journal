@@ -120,3 +120,25 @@ export const postCommentReactionRequest = createAsyncThunk(
   },
 );
 
+export const deleteJournalRequest = createAsyncThunk(
+  'crud/thunk/deleteJournalRequest',
+  async (arg, { signal }) => {
+    const { journalId } = arg;
+    const { accessToken } = getAccessTokenAndId();
+
+    const settings = {
+      method: 'Delete',
+      headers: {
+        Authorization: accessToken,
+      },
+    };
+
+    try {
+      await sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, settings);
+      return { success: true };
+    } catch (error) {
+      throw error;
+    }
+  },
+);
+
