@@ -1,8 +1,8 @@
-import Container from '../Container';
 import InfoBlock from '../InfoBlock';
-import DefaultLayout from '../../layouts/DefaultLayout';
 import JournalForm from '../../forms/JournalForm';
 import { buildFormInitialState } from '../../helpers';
+
+import style from './index.module.css';
 
 export default function JournalEditor(
   {
@@ -18,22 +18,20 @@ export default function JournalEditor(
   const formInitialState = buildFormInitialState(journal);
 
   return (
-    <DefaultLayout>
-      <Container>
-        <InfoBlock
-          caption={caption}
-          title={title}
-          paddingBottom="2em"
-        />
+    <div className={style.container}>
+      <InfoBlock
+        caption={caption}
+        title={title}
+        paddingBottom="2em"
+      />
 
-        <JournalForm
-          type={type}
-          error={error}
-          isSubmitting={isSubmitting}
-          submitCallback={submitCallback}
-          initialState={formInitialState}
-        />
-      </Container>
-    </DefaultLayout>
+      <JournalForm
+        type={type}
+        error={error}
+        isSubmitting={isSubmitting}
+        submitCallback={submitCallback}
+        initialState={formInitialState}
+      />
+    </div>
   );
 }
