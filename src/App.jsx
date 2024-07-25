@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 import DefaultLayout from './layouts/DefaultLayout';
 import Navigation from './components/Navigation';
 import { userActions } from './store/userSlice';
@@ -13,7 +13,7 @@ export default function App() {
   const dispatch = useDispatch();
   const [initApp, setInitApp] = useState(false);
 
-  const { success } = useSelector(selectDestinations);
+  const { success: destinationsLoaded } = useSelector(selectDestinations);
 
   const handleUserStorageChange = useCallback((event) => {
     if (event.detail.type === 'update') {
@@ -38,13 +38,14 @@ export default function App() {
     setInitApp(true);
   }, []);
 
-  const appIsLoaded = initApp && success;
+  const appIsLoaded = initApp && destinationsLoaded;
 
   return (
     <DefaultLayout>
       <Navigation />
       {!appIsLoaded && <Loading />}
       {appIsLoaded && <Outlet />}
+      <ScrollRestoration />
     </DefaultLayout>
   );
 }
