@@ -25,9 +25,11 @@ export default function Journal({ journalId }) {
   const { isOpen, onOpenModal, onCloseModal } = useModal();
   const { loading } = useSelector(selectDeleteState);
 
-  const handleDeleteJournal = () => {
-    dispatch(deleteJournal(journalId));
-  };
+  const {
+    result: journal,
+    loading: journalLoading,
+    isJournalOwner,
+  } = useSelector(selectJournalEntry);
 
   useEffect(() => {
     if (success) {
