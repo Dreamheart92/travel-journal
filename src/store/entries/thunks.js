@@ -17,3 +17,20 @@ export const fetchEntries = createAsyncThunk(
   },
 );
 
+export const fetchEntry = createAsyncThunk(
+  'entries/fetchEntry',
+  async (arg, { signal }) => {
+    const { journalId } = arg;
+    const result = await sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`);
+
+    const { id: userId } = getAccessTokenAndId();
+    const isJournalOwner = result.data.author._id === userId;
+
+    return {
+      result: result.data,
+      comments: result.data.comments,
+      isJournalOwner,
+    };
+  },
+);
+
