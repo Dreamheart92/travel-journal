@@ -110,6 +110,37 @@ const entriesSlice = createSlice({
       state[entriesConstants.JOURNAL_ENTRY].loading = false;
       state[entriesConstants.JOURNAL_ENTRY].error = true;
     });
+    builder.addMatcher(
+      (action) => action.type.startsWith('entries/fetchEntries'),
+      (state, action) => {
+        const { requestStatus } = action.meta;
+
+        switch (requestStatus) {
+          case 'pending': {
+            state[entriesConstants.JOURNAL_ENTRIES].loading = true;
+            state[entriesConstants.JOURNAL_ENTRIES].success = false;
+            state[entriesConstants.JOURNAL_ENTRIES].error = null;
+            break;
+          }
+          case 'fulfilled': {
+            state[entriesConstants.JOURNAL_ENTRIES].results = {
+              journals: action.payload.journals,
+              totalPages: action.payload.totalPages,
+            };
+
+            state[entriesConstants.JOURNAL_ENTRIES].loading = false;
+            state[entriesConstants.JOURNAL_ENTRIES].success = true;
+            break;
+          }
+          case 'rejected': {
+            state[entriesConstants.JOURNAL_ENTRIES].loading = false;
+            state[entriesConstants.JOURNAL_ENTRIES].error = true;
+            break;
+          }
+          default:
+        }
+      },
+    );
   },
 });
 
