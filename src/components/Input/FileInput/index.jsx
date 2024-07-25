@@ -8,7 +8,6 @@ import Wrapper from '../index';
 
 export default function FileInput(
   {
-    isUserProfile,
     handlers,
     state,
     isJournal = false,
@@ -32,7 +31,7 @@ export default function FileInput(
       imagePlaceholder = state.value;
     }
   } else {
-    imagePlaceholder = isUserProfile ? '/userPlaceholder.png' : '/imagePlaceholder.jpg';
+    imagePlaceholder = !isJournal ? '/userPlaceholder.png' : '/imagePlaceholder.jpg';
   }
 
   return (
@@ -56,7 +55,6 @@ export default function FileInput(
 }
 
 FileInput.propTypes = {
-  isUserProfile: PropTypes.bool,
   handlers: handlersPropType,
   state: statePropType,
   isJournal: PropTypes.bool,
