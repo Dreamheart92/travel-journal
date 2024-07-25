@@ -18,7 +18,9 @@ export const postJournalRequest = createAsyncThunk(
       body: journalData,
     };
 
-    return sendHttpRequest(API.JOURNAL.JOURNAL, settings);
+    const result = await sendHttpRequest(API.JOURNAL.JOURNAL, settings);
+
+    return result.data;
   },
 );
 
@@ -36,7 +38,8 @@ export const updateJournalRequest = createAsyncThunk(
       body: journalData,
     };
 
-    return sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, settings);
+    const result = await sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, settings);
+    return result.data;
   },
 );
 
@@ -156,7 +159,8 @@ export const updateProfileRequest = createAsyncThunk(
       body: userData,
     };
 
-    return sendHttpRequest(API.AUTH.UPDATE_PROFILE, settings);
+    const result = await sendHttpRequest(API.AUTH.UPDATE_PROFILE, settings);
+    return result.data;
   },
 );
 
