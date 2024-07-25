@@ -15,6 +15,7 @@ import { selectDestinations } from '../../store/destinations/selectors';
 export default function Catalogue() {
   const { searchParams, onQuery } = useQuery();
   const { destination } = useParams();
+
   const [isSearching, setIsSearching] = useState(false);
 
   const { destinations } = useSelector(selectDestinations);
@@ -41,7 +42,7 @@ export default function Catalogue() {
           <Search
             isSearching={isSearching}
             onSearching={handleSearching}
-            urlSearch={searchParams.get('search')}
+            urlSearch={searchParams.get('search') || ''}
             onQuery={onQuery}
           />
           <FiltersSection />
