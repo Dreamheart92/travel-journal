@@ -92,6 +92,24 @@ const entriesSlice = createSlice({
       }
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchEntry.pending, (state) => {
+      state[entriesConstants.JOURNAL_ENTRY].loading = true;
+      state[entriesConstants.JOURNAL_ENTRY].success = false;
+      state[entriesConstants.JOURNAL_ENTRY].error = null;
+    });
+    builder.addCase(fetchEntry.fulfilled, (state, action) => {
+      state[entriesConstants.JOURNAL_ENTRY].result = action.payload.result;
+      state[entriesConstants.JOURNAL_ENTRY].isJournalOwner = action.payload.isJournalOwner;
+      state[entriesConstants.COMMENTS].results = action.payload.comments;
+
+      state[entriesConstants.JOURNAL_ENTRY].loading = false;
+      state[entriesConstants.JOURNAL_ENTRY].success = true;
+    });
+    builder.addCase(fetchEntry.rejected, (state, action) => {
+      state[entriesConstants.JOURNAL_ENTRY].loading = false;
+      state[entriesConstants.JOURNAL_ENTRY].error = true;
+    });
   },
 });
 
