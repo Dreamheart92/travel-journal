@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import entriesConstants from '../../constants/entriesConstants';
-import { fetchEntries, fetchEntry, fetchUserEntries } from './thunks';
+import { fetchEntry } from './thunks';
 
 const INITIAL_KEY_STATE = {
   results: null,
@@ -26,6 +26,10 @@ const entriesSlice = createSlice({
   name: 'entries',
   initialState,
   reducers: {
+    resetState(state, action) {
+      const { key } = action.payload;
+      state[key] = INITIAL_KEY_STATE;
+    },
     addLocalComment(state, action) {
       state[entriesConstants.COMMENTS].results.unshift(action.payload);
     },
