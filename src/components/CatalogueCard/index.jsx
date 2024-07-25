@@ -28,14 +28,7 @@ export default function JournalCatalogueCard({ journal }) {
           />
         </div>
 
-        <JournalContent
-          date={date}
-          totalComments={comments.length}
-          author={author.username}
-          content={description}
-          title={title}
-          readMore
-        />
+        <JournalContent journal={journal} readMore />
 
         <CatalogueCardDestinationLabel
           destination={destination.name}
