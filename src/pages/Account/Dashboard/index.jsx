@@ -3,9 +3,10 @@ import UserProfileImage from '../../../components/UserProfileImage';
 import { normalizeName } from '../../../helpers';
 
 import style from './index.module.css';
+import { selectUser } from '../../../store/auth/selectors';
 
 export default function Dashboard() {
-  const { user } = useSelector((state) => state.user);
+  const user = useSelector(selectUser);
 
   return (
     <div className={style['dashboard-container']}>
