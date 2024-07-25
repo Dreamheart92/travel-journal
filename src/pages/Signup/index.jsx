@@ -1,22 +1,36 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useOnFetch from '../../hooks/useOnFetch';
 import AuthLayout from '../../layouts/AuthLayout';
 import SignupForm from '../../forms/SignupForm';
 import { constructSignupData } from '../../forms/helpers/signupForm';
-import { storeUserData } from '../../helpers/storage';
+import crudConstants from '../../constants/crudConstants';
+import crudActionsConstants from '../../constants/crudActionsConstants';
+import { sendSignupRequest } from '../../store/crud/thunks';
+import { selectCreateState } from '../../store/crud/selectors';
+import { crudActions } from '../../store/crud';
 import { PATHS } from '../../constants/paths';
-import authService from '../../services/authService';
+import { storeUserData } from '../../helpers/storage';
 
 export default function Signup() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
-    data: success,
-    isLoading,
+    data: userData,
+    loading,
     error,
-    fetch: sendSignupRequest,
-  } = useOnFetch();
+    success,
+  } = useSelector(selectCreateState);
+
+  useEffect(() => {
+    dispatch(crudActions.resetState({ key: crudConstants.CREATE }));
+
+    if (success) {
+      storeUserData(userData);
+      navigate(PATHS.HOME);
+    }
+  }, [success]);
 
   const [passwordsNotMatching, setPasswordsNotMatching] = useState(false);
 
@@ -28,15 +42,12 @@ export default function Signup() {
       return;
     }
 
-    sendSignupRequest(authService.signup(constructSignupData(signupData)));
+    dispatch(sendSignupRequest({
+      key: crudConstants.CREATE,
+      currentAction: crudActionsConstants.SIGNUP,
+      signupData: constructSignupData(signupData),
+    }));
   };
-
-  useEffect(() => {
-    if (success) {
-      storeUserData(success.data);
-      navigate(PATHS.HOME);
-    }
-  }, [success]);
 
   return (
     <AuthLayout
@@ -45,7 +56,7 @@ export default function Signup() {
       form={(
         <SignupForm
           onSignupSubmit={handleSignupSubmit}
-          isSubmitting={isLoading}
+          isSubmitting={loading}
           error={passwordsNotMatching ? null : error}
           passwordsNotMatching={passwordsNotMatching}
         />
