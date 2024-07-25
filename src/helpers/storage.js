@@ -16,7 +16,7 @@ export const getAccessTokenAndId = () => {
   const userData = JSON.parse(localStorage.getItem('user'));
 
   return {
-    _id: userData._id,
-    accessToken: userData.accessToken,
+    id: userData?._id || null,
+    accessToken: userData?.accessToken || null,
   };
 };
