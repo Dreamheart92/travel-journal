@@ -40,12 +40,6 @@ export default function Edit() {
     dispatch(fetchJournalById(journalId));
   }, []);
 
-  useEffect(() => {
-    if (isJournalUpdated) {
-      navigate(`${PATHS.DETAILS}/${journalId}`);
-    }
-
-
   if (journalLoading || !journal) {
     return <Loading />;
   }
