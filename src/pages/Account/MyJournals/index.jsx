@@ -11,6 +11,10 @@ export default function MyJournals() {
   const { user } = useSelector((state) => state.user);
   const { results, loading } = useSelector(selectJournalsEntries);
 
+  useEffect(() => {
+    dispatch(fetchUserEntries({ userId: user._id }));
+  }, []);
+
   if (loading) {
     return <Loading />;
   }
