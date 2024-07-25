@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { ACCOUNT_SUB_PATHS, PATHS } from './constants/paths';
+import { PATHS } from './constants/paths';
 
 import App from './App';
 import Home from './pages/Home';
@@ -13,6 +13,9 @@ import Account from './pages/Account';
 import Dashboard from './pages/Account/Dashboard';
 import EditProfile from './pages/Account/EditProfile';
 import MyJournals from './pages/Account/MyJournals';
+import JournalOwnerGuard from './guards/JournalOwnerGuard';
+import AuthGuard from './guards/AuthGuard';
+import RestrictAuthenticatedGuard from './guards/RestrictAuthenticatedGuard';
 
 const router = createBrowserRouter([
   {
@@ -24,11 +27,19 @@ const router = createBrowserRouter([
       },
       {
         path: PATHS.LOGIN,
-        element: <Login />,
+        element: (
+          <RestrictAuthenticatedGuard>
+            <Login />
+          </RestrictAuthenticatedGuard>
+        ),
       },
       {
         path: PATHS.SIGNUP,
-        element: <Signup />,
+        element: (
+          <RestrictAuthenticatedGuard>
+            <Signup />
+          </RestrictAuthenticatedGuard>
+        ),
       },
       {
         path: PATHS.CATALOGUE,
@@ -48,11 +59,21 @@ const router = createBrowserRouter([
       },
       {
         path: `${PATHS.EDIT}/:journalId`,
-        element: <Edit />,
+        element: (
+          <AuthGuard>
+            <JournalOwnerGuard>
+              <Edit />
+            </JournalOwnerGuard>
+          </AuthGuard>
+        ),
       },
       {
         path: PATHS.ACCOUNT,
-        element: <Account />,
+        element: (
+          <AuthGuard>
+            <Account />
+          </AuthGuard>
+        ),
         children: [
           {
             path: '',
