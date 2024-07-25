@@ -31,16 +31,9 @@ export default function Journal({ journalId }) {
     isJournalOwner,
   } = useSelector(selectJournalEntry);
 
-  useEffect(() => {
-    if (success) {
       navigate(PATHS.CATALOGUE);
     }
 
-    return () => {
-      onCloseModal();
-      dispatch(journalEditorActions.resetState());
-    };
-  }, [success]);
 
   return (
     <div className={style.container}>
