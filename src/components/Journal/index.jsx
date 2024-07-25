@@ -58,13 +58,7 @@ export default function Journal({ journalId }) {
         <Image imageUrl={journal.imageUrl} />
       </div>
 
-      <JournalContent
-        title={title}
-        date={date}
-        content={description}
-        author={author}
-        location={location}
-      />
+      <JournalContent journal={journal} />
 
       {isJournalOwner && (
         <div className={style.controls}>
