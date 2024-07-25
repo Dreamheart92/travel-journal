@@ -11,4 +11,9 @@ import { selectUpdateState } from '../../../store/crud/selectors';
 import { deleteUserDataFromStorage, storeUserData } from '../../../helpers/storage';
 
 export default function EditProfile() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.user);
+  const { loading } = useSelector(selectUpdateState);
 }
