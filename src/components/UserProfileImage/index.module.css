@@ -1,4 +1,8 @@
 .profile-image {
-    width: 3em;
-    height: 3em;
+    width: 4em;
+    height: 4em;
+}
+
+.profile-image img {
+    border-radius: 100%;
 }
