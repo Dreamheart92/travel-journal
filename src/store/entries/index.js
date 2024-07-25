@@ -29,6 +29,17 @@ const entriesSlice = createSlice({
     addLocalComment(state, action) {
       state[entriesConstants.COMMENTS].results.unshift(action.payload);
     },
+    deleteLocalComment(state, action) {
+      const { commentId } = action.payload;
+
+      const indexOfTargetedComment = state[entriesConstants.COMMENTS].results
+        .findIndex((localComment) => (
+          localComment._id === commentId));
+
+      if (indexOfTargetedComment !== -1) {
+        state[entriesConstants.COMMENTS].results.splice(indexOfTargetedComment, 1);
+      }
+    },
   },
 });
 
