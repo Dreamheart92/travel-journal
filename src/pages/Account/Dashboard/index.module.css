@@ -1,0 +1,10 @@
+.dashboard-container {
+    display: flex;
+    gap: 2em;
+}
+
+.wrapper {
+    display: flex;
+    gap: 3em;
+    font-size: 1.2em;
+}
