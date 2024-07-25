@@ -1,4 +1,6 @@
 const crudActionsConstants = {
+  LOGIN: 'login',
+  SIGNUP: 'signup',
   POST_JOURNAL: 'post_journal',
   UPDATE_JOURNAL: 'update_journal',
   DELETE_JOURNAL: 'delete_journal',
