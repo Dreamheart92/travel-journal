@@ -2,14 +2,15 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import JournalEditor from '../../components/JournalEditor';
-import { selectDetailsState } from '../../store/details/selectors';
-import { fetchJournalById } from '../../store/details/thunks';
 import Loading from '../../components/Loading';
-import { updateJournal } from '../../store/journalEditor/thunks';
-import { selectUpdateState } from '../../store/journalEditor/selectors';
 import { PATHS } from '../../constants/paths';
-import { journalEditorActions } from '../../store/journalEditor';
 import { buildJournalFormData } from '../../helpers';
+import { updateJournalRequest } from '../../store/crud/thunks';
+import crudConstants from '../../constants/crudConstants';
+import crudActionsConstants from '../../constants/crudActionsConstants';
+import { selectUpdateState } from '../../store/crud/selectors';
+import { fetchEntry } from '../../store/entries/thunks';
+import { selectJournalEntry } from '../../store/entries/selectors';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -17,8 +18,8 @@ export default function Edit() {
 
   const { journalId } = useParams();
 
-  const { journal, loading: journalLoading } = useSelector(selectDetailsState);
-  const { loading: isUpdating, success: isJournalUpdated } = useSelector(selectUpdateState);
+  const { result: journal, loading: journalLoading } = useSelector(selectJournalEntry);
+  const { loading: isUpdating } = useSelector(selectUpdateState);
 
   const handleUpdateJournalSubmit = (journalData) => {
     dispatch(updateJournal({ journalData: buildJournalFormData(journalData), journalId }));
@@ -33,10 +34,6 @@ export default function Edit() {
       navigate(`${PATHS.DETAILS}/${journalId}`);
     }
 
-    return () => {
-      dispatch(journalEditorActions.resetState());
-    };
-  }, [isJournalUpdated]);
 
   if (journalLoading || !journal) {
     return <Loading />;
