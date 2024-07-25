@@ -31,6 +31,15 @@ export default function Journal({ journalId }) {
     isJournalOwner,
   } = useSelector(selectJournalEntry);
 
+  const handleDeleteJournal = async () => {
+    const isSuccess = await dispatch(deleteJournalRequest({
+      key: crudConstants.DELETE,
+      currentAction: crudActionsConstants.DELETE_JOURNAL,
+      journalId,
+    }));
+
+    if (isSuccess?.payload?.success) {
+      dispatch(crudActions.resetState({ key: crudConstants.DELETE }));
       navigate(PATHS.CATALOGUE);
     }
 
