@@ -47,8 +47,11 @@ export default function CommentsSection({ user, journalId }) {
 
   const handleDeleteComment = () => {
     if (targetItemId) {
-      dispatch(detailsActions.deleteLocalComment(targetItemId));
-      dispatch(deleteComment(targetItemId));
+      dispatch(deleteCommentRequest({
+        key: crudConstants.DELETE,
+        currentAction: crudActionsConstants.DELETE_COMMENT,
+        commentId: targetItemId,
+      }));
       onCloseModal();
     }
   };
