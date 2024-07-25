@@ -14,9 +14,11 @@ import { entriesActions } from '../../store/entries';
 import { deleteCommentRequest, postCommentRequest } from '../../store/crud/thunks';
 import crudConstants from '../../constants/crudConstants';
 import crudActionsConstants from '../../constants/crudActionsConstants';
+import { selectAuth } from '../../store/auth/selectors';
 
-export default function CommentsSection({ user, journalId }) {
+export default function CommentsSection({ journalId }) {
   const dispatch = useDispatch();
+  const { user, isAuthenticated } = useSelector(selectAuth);
 
   const { comments, loading } = useSelector(selectComments);
 
@@ -63,9 +65,9 @@ export default function CommentsSection({ user, journalId }) {
 
   return (
     <>
-      <CommentsSectionHeader user={!!user} />
+      <CommentsSectionHeader user={isAuthenticated} />
 
-      {user
+      {isAuthenticated
         && <CreateCommentForm onCreateCommentSubmit={handleCreateCommentSubmit} />}
 
       <div className={style['comments-count']}>
