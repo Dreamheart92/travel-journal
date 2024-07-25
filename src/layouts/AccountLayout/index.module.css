@@ -1,0 +1,28 @@
+.image-header {
+    width: 100%;
+    height: 20em;
+    position: relative;
+}
+
+.image-header img {
+    filter: brightness(50%);
+}
+
+.header-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.header-title h1 {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.content-container {
+    display: flex;
+    width: 100%;
+    padding: 2em;
+}
