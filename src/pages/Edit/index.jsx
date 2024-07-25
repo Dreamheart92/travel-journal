@@ -21,8 +21,19 @@ export default function Edit() {
   const { result: journal, loading: journalLoading } = useSelector(selectJournalEntry);
   const { loading: isUpdating } = useSelector(selectUpdateState);
 
-  const handleUpdateJournalSubmit = (journalData) => {
-    dispatch(updateJournal({ journalData: buildJournalFormData(journalData), journalId }));
+  const handleUpdateJournalSubmit = async (journalData) => {
+    const isSuccess = await dispatch(updateJournalRequest({
+      key: crudConstants.UPDATE,
+      currentAction: crudActionsConstants.UPDATE_JOURNAL,
+      journalMetaData: {
+        journalData: buildJournalFormData(journalData),
+        journalId,
+      },
+    }));
+
+    if (isSuccess?.payload?.data) {
+      navigate(`${PATHS.DETAILS}/${journalId}`);
+    }
   };
 
   useEffect(() => {
