@@ -7,4 +7,22 @@ import { fetchUserEntries } from '../../../store/entries/thunks';
 import { selectJournalsEntries } from '../../../store/entries/selectors';
 
 export default function MyJournals() {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const { results, loading } = useSelector(selectJournalsEntries);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  return (
+    <Grid>
+      {results.journals.map((journal) => (
+        <HomeCard
+          key={journal._id}
+          journal={journal}
+        />
+      ))}
+    </Grid>
+  );
 }
