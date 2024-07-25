@@ -13,6 +13,14 @@ export default function JournalsList({ destination, searchParams }) {
     loading,
   } = useSelector(selectJournalsEntries);
 
+  useEffect(() => {
+    const search = searchParams.get('search');
+    dispatch(fetchEntries({ query: { search, destination } }));
+  }, [destination, searchParams]);
+
+  if (loading || !results) {
+    return <Loading />;
+  }
 
   return (
     <>
