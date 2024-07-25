@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import style from './index.module.css';
 
 export default function SidebarSection({ heading, children }) {
@@ -10,8 +8,3 @@ export default function SidebarSection({ heading, children }) {
     </div>
   );
 }
-
-SidebarSection.propTypes = {
-  heading: PropTypes.string,
-  children: PropTypes.node.isRequired,
-};

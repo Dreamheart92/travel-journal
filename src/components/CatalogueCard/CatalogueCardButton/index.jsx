@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight';
 import style from './index.module.css';
@@ -17,7 +16,3 @@ export default function CatalogueCardButton({ caption }) {
     </button>
   );
 }
-
-CatalogueCardButton.propTypes = {
-  caption: PropTypes.string.isRequired,
-};

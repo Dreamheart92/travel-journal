@@ -1,7 +1,4 @@
 import { NavLink } from 'react-router-dom';
-
-import PropTypes from 'prop-types';
-
 import style from './index.module.css';
 
 export default function NavigationLink(
@@ -26,11 +23,3 @@ export default function NavigationLink(
     </NavLink>
   );
 }
-
-NavigationLink.propTypes = {
-  to: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
-  children: PropTypes.node.isRequired,
-  filter: PropTypes.bool,
-  end: PropTypes.bool,
-};

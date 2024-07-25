@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import style from './index.module.css';
 
 export default function Container(
@@ -22,9 +20,3 @@ export default function Container(
     </div>
   );
 }
-
-Container.propTypes = {
-  heading: PropTypes.string,
-  width: PropTypes.string,
-  children: PropTypes.node.isRequired,
-};

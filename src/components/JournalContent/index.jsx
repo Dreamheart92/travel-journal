@@ -9,7 +9,6 @@ import style from './index.module.css';
 
 // Todo: pass the total comments
 
-
 export default function JournalContent({ journal, readMore = false }) {
   const content = readMore ? `${journal.description.slice(0, 500)}...` : journal.description;
 

@@ -1,12 +1,7 @@
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-
 import Container from '../Container';
 import Grid from '../Grid';
 import DestinationCard from '../DestinationCard';
-
-import destinationPropTypes from '../../propTypes/destinationPropTypes';
-
 import style from './index.module.css';
 import { selectDestinations } from '../../store/destinations/selectors';
 
@@ -41,7 +36,3 @@ export default function Destinations() {
     </Container>
   );
 }
-
-Destinations.propTypes = {
-  destinations: PropTypes.arrayOf(PropTypes.shape(destinationPropTypes)),
-};

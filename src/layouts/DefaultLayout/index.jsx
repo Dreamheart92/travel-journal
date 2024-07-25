@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import style from './index.module.css';
 
 export default function DefaultLayout({ children }) {
@@ -9,7 +7,3 @@ export default function DefaultLayout({ children }) {
     </div>
   );
 }
-
-DefaultLayout.propTypes = {
-  children: PropTypes.node.isRequired,
-};

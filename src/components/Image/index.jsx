@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import style from './index.module.css';
 
 export default function Image({ imageUrl }) {
@@ -11,7 +9,3 @@ export default function Image({ imageUrl }) {
     />
   );
 }
-
-Image.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
-};

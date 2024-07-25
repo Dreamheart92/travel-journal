@@ -1,9 +1,5 @@
-import PropTypes from 'prop-types';
 import ErrorMessage from '../ErrorMessage';
-
-import { statePropType } from '../../propTypes/inputPropTypes';
 import { normalizeName } from '../../helpers';
-
 import style from './index.module.css';
 
 export default function Wrapper(
@@ -31,9 +27,3 @@ export default function Wrapper(
     </>
   );
 }
-
-Wrapper.propTypes = {
-  label: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  state: statePropType,
-};

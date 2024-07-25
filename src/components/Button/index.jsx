@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import style from './index.module.css';
 
 export default function Button(
@@ -22,11 +20,3 @@ export default function Button(
     </button>
   );
 }
-
-Button.propTypes = {
-  variant: PropTypes.string,
-  caption: PropTypes.string,
-  isLoading: PropTypes.bool,
-  onClick: PropTypes.func,
-  submitButton: PropTypes.bool,
-};

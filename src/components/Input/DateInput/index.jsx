@@ -1,4 +1,3 @@
-import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
 import Wrapper from '..';
 import style from './index.module.css';
 
@@ -25,8 +24,3 @@ export default function DateInput(
     </Wrapper>
   );
 }
-
-DateInput.propTypes = {
-  handlers: handlersPropType,
-  state: statePropType,
-};

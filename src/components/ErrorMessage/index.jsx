@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import style from './index.module.css';
 
 export default function ErrorMessage({ message }) {
@@ -7,7 +5,3 @@ export default function ErrorMessage({ message }) {
     <p className={style['error-message']}>{message}</p>
   );
 }
-
-ErrorMessage.propTypes = {
-  message: PropTypes.string.isRequired,
-};

@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Image from '../Image';
-import InfloBlock from '../InfoBlock';
+import InfoBlock from '../InfoBlock';
 import { PATHS } from '../../constants/paths';
 import style from './index.module.css';
-import destinationPropTypes from '../../propTypes/destinationPropTypes';
 
 export default function DestinationCard({ destination }) {
   const {
@@ -20,7 +19,7 @@ export default function DestinationCard({ destination }) {
   const infoClass = `${style.info} ${isHover ? style.active : ''}`;
 
   return (
-    <Link to={PATHS.CATALOGUE}>
+    <Link to={`${PATHS.CATALOGUE}/${name}`}>
       <div
         className={style['destination-card']}
         onMouseEnter={() => setIsHover(true)}
@@ -32,7 +31,7 @@ export default function DestinationCard({ destination }) {
         </div>
 
         <div className={infoClass}>
-          <InfloBlock
+          <InfoBlock
             title={name}
             caption={description}
           />
@@ -48,5 +47,3 @@ export default function DestinationCard({ destination }) {
     </Link>
   );
 }
-
-DestinationCard.propTypes = destinationPropTypes;

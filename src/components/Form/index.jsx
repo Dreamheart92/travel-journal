@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import ErrorMessage from '../ErrorMessage/index';
 import style from './index.module.css';
 
@@ -25,13 +24,3 @@ export default function Form(
     </form>
   );
 }
-
-Form.propTypes = {
-  error: PropTypes.oneOf([
-    PropTypes.shape({ error: PropTypes.bool, message: PropTypes.string }),
-    PropTypes.oneOf([null]),
-  ]),
-  onSubmit: PropTypes.func,
-  isSubmitting: PropTypes.bool,
-  children: PropTypes.node,
-};

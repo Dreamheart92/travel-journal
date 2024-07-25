@@ -1,9 +1,5 @@
-import PropTypes from 'prop-types';
-import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
 import { normalizeName } from '../../../helpers';
-
 import Wrapper from '..';
-
 import style from '../index.module.css';
 
 export default function SelectInput(

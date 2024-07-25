@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import style from './index.module.css';
 
 export default function InfoBlock(
@@ -20,9 +18,3 @@ export default function InfoBlock(
     </div>
   );
 }
-
-InfoBlock.propTypes = {
-  title: PropTypes.string.isRequired,
-  caption: PropTypes.string.isRequired,
-  textAlign: PropTypes.string,
-};

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 
 import style from './index.module.css';
@@ -15,7 +14,3 @@ export default function NavigationLayout({ children }) {
     </header>
   );
 }
-
-NavigationLayout.propTypes = {
-  children: PropTypes.node.isRequired,
-};

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-regular-svg-icons/faComments';
 
@@ -14,7 +13,3 @@ export default function CommentsSectionHeader({ user }) {
     </div>
   );
 }
-
-CommentsSectionHeader.propTypes = {
-  user: PropTypes.bool,
-};

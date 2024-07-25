@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -58,10 +57,3 @@ export default function Search(
     </SidebarSection>
   );
 }
-
-Search.propTypes = {
-  onQuery: PropTypes.func,
-  urlSearch: PropTypes.string,
-  isSearching: PropTypes.bool,
-  onSearching: PropTypes.func,
-};

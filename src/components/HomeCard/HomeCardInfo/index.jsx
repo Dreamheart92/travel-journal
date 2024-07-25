@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import style from '../index.module.css';
 
 export default function HomeCardInfo(
@@ -37,9 +36,3 @@ export default function HomeCardInfo(
     </div>
   );
 }
-
-HomeCardInfo.propTypes = {
-  author: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-};

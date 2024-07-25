@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../constants/paths';
-import journalPropTypes from '../../propTypes/journalPropTypes';
 import JournalCardInfo from './HomeCardInfo';
 import JournalCardImage from './HomeCardImage';
 

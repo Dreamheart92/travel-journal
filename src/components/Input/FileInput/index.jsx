@@ -1,7 +1,4 @@
-import PropTypes from 'prop-types';
 import Button from '../../Button';
-
-import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
 
 import style from './index.module.css';
 import Wrapper from '../index';
@@ -53,9 +50,3 @@ export default function FileInput(
     </Wrapper>
   );
 }
-
-FileInput.propTypes = {
-  handlers: handlersPropType,
-  state: statePropType,
-  isJournal: PropTypes.bool,
-};

@@ -1,6 +1,4 @@
 import Image from '../Image';
-import destinationPropTypes from '../../propTypes/destinationPropTypes';
-
 import style from './index.module.css';
 
 export default function DestinationHeader({ destination }) {
@@ -14,5 +12,3 @@ export default function DestinationHeader({ destination }) {
     </div>
   );
 }
-
-DestinationHeader.propTypes = destinationPropTypes;

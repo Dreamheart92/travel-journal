@@ -1,9 +1,5 @@
-import PropTypes from 'prop-types';
-
 import Wrapper from '..';
-
 import style from '../index.module.css';
-import { handlersPropType, statePropType } from '../../../propTypes/inputPropTypes';
 
 export default function TextInput(
   {
@@ -30,11 +26,3 @@ export default function TextInput(
     </Wrapper>
   );
 }
-
-TextInput.propTypes = {
-  label: PropTypes.string,
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  handlers: handlersPropType,
-  state: statePropType,
-};

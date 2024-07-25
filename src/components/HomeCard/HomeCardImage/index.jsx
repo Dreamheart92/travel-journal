@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import Image from '../../Image';
 
 import style from '../index.module.css';
@@ -10,7 +9,3 @@ export default function HomeCardImage({ imageUrl }) {
     </div>
   );
 }
-
-HomeCardImage.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
-};

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 
 import InfoBlock from '../../components/InfoBlock';
@@ -32,9 +31,3 @@ export default function AuthLayout({ form, title, caption }) {
     </div>
   );
 }
-
-AuthLayout.propTypes = {
-  title: PropTypes.string.isRequired,
-  caption: PropTypes.string.isRequired,
-  form: PropTypes.node.isRequired,
-};

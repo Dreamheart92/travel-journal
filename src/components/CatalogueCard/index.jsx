@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import Image from '../Image';
 import { PATHS } from '../../constants/paths';
-import journalPropTypes from '../../propTypes/journalPropTypes';
 import CatalogueCardDestinationLabel from './CatalogueCardDestinationLabel';
 import style from './index.module.css';
 import JournalContent from '../JournalContent';
@@ -37,5 +36,3 @@ export default function JournalCatalogueCard({ journal }) {
     </div>
   );
 }
-
-JournalCatalogueCard.propTypes = journalPropTypes;
