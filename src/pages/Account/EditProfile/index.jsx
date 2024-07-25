@@ -16,4 +16,7 @@ export default function EditProfile() {
 
   const { user } = useSelector((state) => state.user);
   const { loading } = useSelector(selectUpdateState);
+
+  const formInitialState = buildUserFormInitialState(user);
+
 }
