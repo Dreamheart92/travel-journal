@@ -5,23 +5,20 @@ import style from './index.module.css';
 import { formatCommentsCount } from '../../helpers';
 import CreateCommentForm from '../../forms/CreateCommentForm';
 import { buildLocalComment } from '../../forms/helpers/createCommentForm';
-import { detailsActions } from '../../store/details';
-import { deleteComment, postComment } from '../../store/details/thunks';
 import Modal from '../Modal';
 import DeleteModal from '../Modal/DeleteModal';
 import useModal from '../../hooks/useModal';
-import { selectCommentDeleteState } from '../../store/details/selectors';
+import Loading from '../Loading';
+import { selectComments } from '../../store/entries/selectors';
+import { entriesActions } from '../../store/entries';
+import { deleteCommentRequest, postCommentRequest } from '../../store/crud/thunks';
+import crudConstants from '../../constants/crudConstants';
+import crudActionsConstants from '../../constants/crudActionsConstants';
 
-export default function CommentsSection(
-  {
-    user,
-    comments,
-    journalId,
-  },
-) {
+export default function CommentsSection({ user, journalId }) {
   const dispatch = useDispatch();
 
-  const { loading: isDeletingComment } = useSelector(selectCommentDeleteState);
+  const { comments, loading } = useSelector(selectComments);
 
   const {
     isOpen,
@@ -30,14 +27,19 @@ export default function CommentsSection(
     onCloseModal,
   } = useModal();
 
-  const handleCreateCommentSubmit = (comment) => {
+  const handleCreateCommentSubmit = async (comment) => {
     const localComment = buildLocalComment(user, comment);
 
-    dispatch(detailsActions.addLocalComment(localComment));
-    dispatch(postComment({
-      commentData: {
-        comment: localComment.comment,
-        createdAt: localComment.createdAt,
+    dispatch(entriesActions.addLocalComment(localComment));
+    dispatch(postCommentRequest({
+      key: crudConstants.CREATE,
+      currentAction: crudActionsConstants.POST_COMMENT,
+      commentMetaData: {
+        commentData: {
+          comment: localComment.comment,
+          createdAt: localComment.createdAt,
+        },
+        journalId,
       },
       journalId,
     }));
@@ -51,6 +53,12 @@ export default function CommentsSection(
     }
   };
 
+  // Todo : Handle better loading
+
+  if (!comments.results || loading) {
+    return;
+  }
+
   return (
     <>
       <CommentsSectionHeader user={!!user} />
@@ -59,11 +67,11 @@ export default function CommentsSection(
         && <CreateCommentForm onCreateCommentSubmit={handleCreateCommentSubmit} />}
 
       <div className={style['comments-count']}>
-        {formatCommentsCount(comments)}
+        {formatCommentsCount(comments.results)}
       </div>
 
       <div className={style['comments-list']}>
-        {comments?.map((comment) => (
+        {comments.results.map((comment) => (
           <CommentCard
             key={comment._id}
             comment={comment}
@@ -78,7 +86,6 @@ export default function CommentsSection(
           text="Are you sure you want to delete this comment?"
           onDelete={handleDeleteComment}
           onCloseModal={onCloseModal}
-          isDeleting={isDeletingComment}
         />
       </Modal>
     </>
