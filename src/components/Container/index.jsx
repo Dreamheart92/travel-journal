@@ -2,10 +2,17 @@ import PropTypes from 'prop-types';
 
 import style from './index.module.css';
 
-export default function Container({ children, width = 'fitContent', heading }) {
+export default function Container(
+  {
+    children,
+    width = 'fitContent',
+    heading,
+    direction = 'column',
+  },
+) {
   return (
     <div
-      style={{ width }}
+      style={{ width, flexDirection: direction }}
       className={style.container}
     >
       {heading
