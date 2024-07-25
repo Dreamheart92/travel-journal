@@ -63,3 +63,26 @@ export const postCommentRequest = createAsyncThunk(
   },
 );
 
+export const deleteCommentRequest = createAsyncThunk(
+  'crud/thunk/DeleteCommentRequest',
+  async (arg, { dispatch, signal }) => {
+    const { commentId } = arg;
+    const { accessToken } = getAccessTokenAndId();
+
+    const settings = {
+      method: 'Delete',
+      headers: {
+        Authorization: accessToken,
+      },
+    };
+
+    dispatch(entriesActions.deleteLocalComment({ commentId }));
+
+    try {
+      await sendHttpRequest(`${API.COMMENTS.COMMENTS}/${commentId}`, settings);
+      return { success: true };
+    } catch (error) {
+      throw error;
+    }
+  },
+);
