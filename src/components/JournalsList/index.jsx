@@ -1,12 +1,22 @@
-import PropTypes from 'prop-types';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import CatalogueCard from '../CatalogueCard';
-import journalPropTypes from '../../propTypes/journalPropTypes';
+import Loading from '../Loading';
+import { fetchEntries } from '../../store/entries/thunks';
+import { selectJournalsEntries } from '../../store/entries/selectors';
 
-export default function JournalsList({ journals }) {
+export default function JournalsList({ destination, searchParams }) {
+  const dispatch = useDispatch();
+
+  const {
+    results,
+    loading,
+  } = useSelector(selectJournalsEntries);
+
+
   return (
     <>
-      {journals.map((journal) => (
+      {results.journals.map((journal) => (
         <CatalogueCard
           key={journal._id}
           journal={journal}
@@ -15,7 +25,3 @@ export default function JournalsList({ journals }) {
     </>
   );
 }
-
-JournalsList.propTypes = {
-  journals: PropTypes.arrayOf(PropTypes.shape(journalPropTypes)),
-};
