@@ -19,4 +19,27 @@ export default function EditProfile() {
 
   const formInitialState = buildUserFormInitialState(user);
 
+  const handleUpdateProfileSubmit = async (userData) => {
+    const isSuccess = await dispatch(updateProfileRequest({
+      key: crudConstants.UPDATE,
+      currentAction: crudActionsConstants.UPDATE_PROFILE,
+      userData: buildUserFormData(userData),
+    }));
+
+    if (isSuccess?.payload?.success) {
+      deleteUserDataFromStorage();
+      storeUserData(isSuccess.payload.data);
+      navigate(PATHS.ACCOUNT);
+    }
+  };
+
+  return (
+    <Container width="40%">
+      <EditProfileForm
+        initialState={formInitialState}
+        submitCallback={handleUpdateProfileSubmit}
+        isSubmitting={loading}
+      />
+    </Container>
+  );
 }
