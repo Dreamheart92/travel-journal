@@ -3,11 +3,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import DefaultLayout from './layouts/DefaultLayout';
 import Navigation from './components/Navigation';
-import { userActions } from './store/userSlice';
 import { getUserDataFromStorage } from './helpers/storage';
 import Loading from './components/Loading';
 import { selectDestinations } from './store/destinations/selectors';
 import { fetchDestinations } from './store/destinations/thunks';
+import { authActions } from './store/auth';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -17,9 +17,9 @@ export default function App() {
 
   const handleUserStorageChange = useCallback((event) => {
     if (event.detail.type === 'update') {
-      dispatch(userActions.storeUser({ userData: event.detail.data }));
+      dispatch(authActions.storeUser({ userData: event.detail.data }));
     } else if (event.detail.type === 'remove') {
-      dispatch(userActions.deleteUser());
+      dispatch(authActions.clearUser());
     }
   }, []);
 
@@ -34,7 +34,11 @@ export default function App() {
   useEffect(() => {
     const userData = getUserDataFromStorage();
     dispatch(fetchDestinations());
-    dispatch(userActions.storeUser({ userData }));
+
+    if (userData) {
+      dispatch(authActions.storeUser({ userData }));
+    }
+
     setInitApp(true);
   }, []);
 
