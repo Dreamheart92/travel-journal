@@ -39,6 +39,17 @@ export const buildJournalFormData = (journalData) => {
   return formData;
 };
 
+export const buildUserFormData = (userData) => {
+  const formData = new FormData();
+  formData.append('image', userData.image);
+  formData.append('username', userData.username);
+  formData.append('firstName', userData.firstName);
+  formData.append('lastName', userData.lastName);
+  formData.append('email', userData.email);
+
+  return formData;
+};
+
 export const buildFormInitialState = (journal) => ({
   title: journal?.title || '',
   image: journal?.imageUrl || '',
