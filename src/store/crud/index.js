@@ -57,7 +57,7 @@ const crudSlice = createSlice({
 
           case 'rejected': {
             state[key].loading = false;
-            state[key].error = true;
+            state[key].error = { error: true, message: action.error.message };
             break;
           }
 
