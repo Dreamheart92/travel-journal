@@ -86,3 +86,37 @@ export const deleteCommentRequest = createAsyncThunk(
     }
   },
 );
+
+export const postCommentReactionRequest = createAsyncThunk(
+  'crud/thunk/postCommentReactionRequest',
+  async (arg, { dispatch, signal }) => {
+    const { accessToken } = getAccessTokenAndId();
+
+    const {
+      reactionType,
+      isReacted,
+      commentId,
+      userId,
+    } = arg.reactionMetaData;
+
+    dispatch(entriesActions.updateLocalCommentReaction({
+      reactionType,
+      isReacted,
+      commentId,
+      userId,
+    }));
+
+    const path = reactionType === 'likes' ? 'like' : 'dislike';
+    const requestMethod = isReacted ? 'Delete' : 'Get';
+
+    const settings = {
+      requestMethod,
+      headers: {
+        Authorization: accessToken,
+      },
+    };
+
+    return sendHttpRequest(`${API.COMMENTS.COMMENTS}/${path}/${commentId}`, settings);
+  },
+);
+
