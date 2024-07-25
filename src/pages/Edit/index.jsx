@@ -37,7 +37,7 @@ export default function Edit() {
   };
 
   useEffect(() => {
-    dispatch(fetchJournalById(journalId));
+    dispatch(fetchEntry({ journalId }));
   }, []);
 
   if (journalLoading || !journal) {
