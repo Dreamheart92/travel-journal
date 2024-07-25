@@ -1,19 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './userSlice';
-import homeReducer from './home';
 import destinationsReducer from './destinations';
-import catalogueReducer from './catalogue';
-import detailsReducer from './details';
-import journalEditorReducer from './journalEditor';
+import crudReducer from './crud';
+import entriesReducer from './entries';
 
 const store = configureStore({
   reducer: {
     user: userSlice,
-    home: homeReducer,
     destinations: destinationsReducer,
-    catalogue: catalogueReducer,
-    details: detailsReducer,
-    journalEditor: journalEditorReducer,
+    crud: crudReducer,
+    entries: entriesReducer,
   },
 });
 
