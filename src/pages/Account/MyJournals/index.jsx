@@ -5,10 +5,11 @@ import Grid from '../../../components/Grid';
 import HomeCard from '../../../components/HomeCard';
 import { fetchUserEntries } from '../../../store/entries/thunks';
 import { selectJournalsEntries } from '../../../store/entries/selectors';
+import { selectUser } from '../../../store/auth/selectors';
 
 export default function MyJournals() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const user = useSelector(selectUser);
   const { results, loading } = useSelector(selectJournalsEntries);
 
   useEffect(() => {
