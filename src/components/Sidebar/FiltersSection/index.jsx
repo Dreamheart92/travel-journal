@@ -1,10 +1,13 @@
-import PropTypes from 'prop-types';
-import destinationPropTypes from '../../../propTypes/destinationPropTypes';
+import { useSelector } from 'react-redux';
+import { selectDestinations } from '../../../store/destinations/selectors';
+
 import SidebarSection from '../SidebarSection';
-import style from './index.module.css';
 import Filter from '../Filter';
 
-export default function FiltersSection({ destinations }) {
+import style from './index.module.css';
+
+export default function FiltersSection() {
+  const { destinations } = useSelector(selectDestinations);
   return (
     <SidebarSection
       heading="Destinations"
@@ -19,7 +22,3 @@ export default function FiltersSection({ destinations }) {
     </SidebarSection>
   );
 }
-
-FiltersSection.propTypes = {
-  destinations: PropTypes.arrayOf(PropTypes.shape(destinationPropTypes)),
-};
