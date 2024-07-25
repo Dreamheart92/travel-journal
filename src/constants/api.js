@@ -15,6 +15,7 @@ const API = {
     JOURNAL,
     JOURNALS,
     DESTINATIONS: `${BASE_URL}/destinations`,
+    USER_JOURNALS: `${JOURNALS}/user`,
   },
   COMMENTS: {
     COMMENTS,
