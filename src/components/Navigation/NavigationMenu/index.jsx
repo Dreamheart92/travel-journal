@@ -6,16 +6,17 @@ import { PATHS } from '../../../constants/paths';
 import style from './index.module.css';
 import UserNavigation from './UserNavigation';
 import GuestNavigation from './GuestNavigation';
+import { selectIsAuthenticated } from '../../../store/auth/selectors';
 
 export default function NavigationMenu({ onLogout }) {
-  const { user } = useSelector((state) => state.user);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   return (
     <div>
       <ul className={style.navigation}>
         <NavigationLink to={PATHS.HOME}>Home</NavigationLink>
         <NavigationLink to={`${PATHS.CATALOGUE}`}>Journals</NavigationLink>
-        {user ? <UserNavigation onLogout={onLogout} /> : <GuestNavigation />}
+        {isAuthenticated ? <UserNavigation onLogout={onLogout} /> : <GuestNavigation />}
       </ul>
     </div>
   );
