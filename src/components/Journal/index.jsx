@@ -42,7 +42,15 @@ export default function Journal({ journalId }) {
       dispatch(crudActions.resetState({ key: crudConstants.DELETE }));
       navigate(PATHS.CATALOGUE);
     }
+  };
 
+  useEffect(() => {
+    dispatch(fetchEntry({ journalId }));
+  }, []);
+
+  if (journalLoading || !journal) {
+    return <Loading />;
+  }
 
   return (
     <div className={style.container}>
