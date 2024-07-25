@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-regular-svg-icons/faComments';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
@@ -8,44 +7,37 @@ import CatalogueCardButton from '../CatalogueCard/CatalogueCardButton';
 
 import style from './index.module.css';
 
-export default function JournalContent(
-  {
-    title,
-    date,
-    content: rawContent,
-    author,
-    totalComments,
-    location,
-    readMore = false,
-  },
-) {
-  const content = readMore ? `${rawContent.slice(0, 500)}...` : rawContent;
+// Todo: pass the total comments
+
+
+export default function JournalContent({ journal, readMore = false }) {
+  const content = readMore ? `${journal.description.slice(0, 500)}...` : journal.description;
 
   return (
     <div className={style.info}>
       <div className={style.header}>
         <div className={style['info-container']}>
           <FontAwesomeIcon icon={faCalendar} />
-          <p>{formatDate(date)}</p>
+          <p>{formatDate(journal.date)}</p>
         </div>
 
         <div className={style['info-container']}>
           <FontAwesomeIcon icon={faPencil} />
-          <p>{author}</p>
+          <p>{journal.author.username}</p>
         </div>
       </div>
 
       <div className={style.description}>
-        <h1>{title}</h1>
-        {location
-          && <h4>{location}</h4>}
+        <h1>{journal.title}</h1>
+        {journal.location
+          && <h4>{journal.location}</h4>}
         {readMore
           && <p>{content}</p>}
 
         {!readMore
           && (
             <div className={style.content}>
-              {splitByNewLine(rawContent).map((chunk, index) => (
+              {splitByNewLine(journal.description).map((chunk, index) => (
                 <p key={index}>{chunk}</p>
               ))}
             </div>
@@ -60,7 +52,8 @@ export default function JournalContent(
             />
 
             <div className={style.comments}>
-              <p>{totalComments}</p>
+              {/*<p>{totalComments}</p>*/}
+              <p>ADD THE TOTAL COMMENTS</p>
               <FontAwesomeIcon icon={faComments} />
             </div>
           </div>
@@ -69,12 +62,3 @@ export default function JournalContent(
     </div>
   );
 }
-
-JournalContent.propTypes = {
-  title: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  totalComments: PropTypes.number,
-  readMore: PropTypes.bool,
-};
