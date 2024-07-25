@@ -52,6 +52,46 @@ const entriesSlice = createSlice({
 
       state[entriesConstants.COMMENTS].results[localCommentIndex] = commentRealData;
     },
+    updateLocalCommentReaction(state, action) {
+      const {
+        reactionType,
+        isReacted,
+        commentId,
+        userId,
+      } = action.payload;
+
+      const reactions = {
+        likes: 'likes',
+        dislikes: 'dislikes',
+      };
+
+      const currentReaction = reactions[reactionType];
+
+      const oppositeReaction = currentReaction === reactions.likes
+        ? reactions.dislikes
+        : reactions.likes;
+
+      const reactedLocalComment = state[entriesConstants.COMMENTS].results.find((localComment) => (
+        localComment._id === commentId));
+
+      if (isReacted) {
+        const indexOfReactedUser = reactedLocalComment[currentReaction].findIndex((reactedId) => (
+          reactedId === userId));
+
+        reactedLocalComment[currentReaction].splice(indexOfReactedUser, 1);
+      } else {
+        reactedLocalComment[currentReaction].push(userId);
+
+        const indexOfOppositeReaction = reactedLocalComment[oppositeReaction]
+          .findIndex((reactedId) => (
+            reactedId === userId));
+
+        if (indexOfOppositeReaction !== -1) {
+          reactedLocalComment[oppositeReaction].splice(indexOfOppositeReaction, 1);
+        }
+      }
+    },
+  },
   },
 });
 
