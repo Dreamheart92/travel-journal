@@ -9,12 +9,13 @@ import crudConstants from '../../../constants/crudConstants';
 import crudActionsConstants from '../../../constants/crudActionsConstants';
 import { selectUpdateState } from '../../../store/crud/selectors';
 import { deleteUserDataFromStorage, storeUserData } from '../../../helpers/storage';
+import { selectUser } from '../../../store/auth/selectors';
 
 export default function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state.user);
+  const user = useSelector(selectUser);
   const { loading } = useSelector(selectUpdateState);
 
   const formInitialState = buildUserFormInitialState(user);
