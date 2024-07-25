@@ -34,3 +34,24 @@ export const fetchEntry = createAsyncThunk(
   },
 );
 
+export const fetchUserEntries = createAsyncThunk(
+  'entries/fetchEntries',
+  async (arg, { signal }) => {
+    const { userId } = arg;
+    const { accessToken } = getAccessTokenAndId();
+
+    const settings = {
+      method: 'Get',
+      headers: {
+        Authorization: accessToken,
+      },
+    };
+
+    const result = await sendHttpRequest(`${API.JOURNAL.USER_JOURNALS}/${userId}`, settings);
+
+    return {
+      journals: result.data,
+      totalPages: 1,
+    };
+  },
+);
