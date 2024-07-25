@@ -58,3 +58,11 @@ export const buildFormInitialState = (journal) => ({
   description: journal?.description || '',
   destination: journal?.destination?._id || '',
 });
+
+export const buildUserFormInitialState = (user) => ({
+  email: user?.email || '',
+  username: user?.username || '',
+  firstName: user?.firstName || '',
+  lastName: user?.lastName || '',
+  image: user?.imageUrl || '',
+});
