@@ -22,6 +22,11 @@ const crudSlice = createSlice({
   name: 'crud',
   initialState,
   reducers: {
+    resetState(state, action) {
+      const { key } = action.payload;
+      state[key] = INITIAL_KEY_STATE;
+    },
+  },
   },
 });
 
