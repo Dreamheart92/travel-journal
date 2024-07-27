@@ -31,6 +31,11 @@ export default function Form({ children }) {
     setFormInitialState(initialState);
     initFormState.current = true;
   }, []);
+
+  return (
+    <form className={style.form}>
+      {initFormState.current
+        && children}
     </form>
   );
 }
