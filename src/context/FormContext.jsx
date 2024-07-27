@@ -64,6 +64,16 @@ function FormProvider({ children }) {
     setFormState(initialState);
     setErrors(initialErrorsState);
   }, []);
+
+  const handleChange = (event) => {
+    const fieldName = event.target.name;
+    const fieldValue = event.target.value;
+
+    setFormState((prevState) => ({
+      ...prevState,
+      [fieldName]: { ...prevState[fieldName], state: { value: fieldValue, isDirty: true } },
+    }));
+  };
   return (
     <FormContext.Provider value={contextValue}>
       {children}
