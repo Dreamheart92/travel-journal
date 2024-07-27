@@ -39,3 +39,5 @@ export default function Form({ children }) {
     </form>
   );
 }
+
+Form.Text = TextInput;
