@@ -1,0 +1,20 @@
+.field {
+    padding: .75em 1em;
+    background-color: #f6f6f6;
+    border-radius: .5em;
+    width: 100%;
+    border: .10em solid #dddddd;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+}
+
+.field:hover,
+.field:focus,
+.success {
+    border-color: #1E90FF;
+}
+
+.error {
+    transition: all 0.2s ease-in-out;
+    border-color: red !important;
+}
