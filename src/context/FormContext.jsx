@@ -114,6 +114,18 @@ function FormProvider({ children }) {
   }, [formState]);
 
   const getFieldErrors = (fieldName) => errors[fieldName];
+
+  const context = () => ({
+    formState,
+    setFormInitialState,
+    onChange: handleChange,
+    onBlur: handleBlur,
+    isValidForm,
+    getFieldErrors,
+  });
+
+  const contextValue = useMemo(context, [formState, handleChange, handleBlur, isValidForm, errors]);
+
   return (
     <FormContext.Provider value={contextValue}>
       {children}
