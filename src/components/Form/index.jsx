@@ -7,10 +7,6 @@ export default function Form({ children }) {
   const { setFormInitialState, isValidForm } = useContext(FormContext);
   const initFormState = useRef(false);
 
-      <div className={style['error-container']}>
-        {error && !isSubmitting
-          && <ErrorMessage message={error.message} />}
-      </div>
 
       {children}
     </form>
