@@ -1,19 +1,8 @@
-import ErrorMessage from '../ErrorMessage/index';
+import { Children, useContext, useEffect, useRef } from 'react';
 import style from './index.module.css';
+import TextInput from './Input/TextInput';
+import { FormContext } from '../../context/FormContext';
 
-export default function Form(
-  {
-    error,
-    children,
-    onSubmit,
-    isSubmitting,
-  },
-) {
-  return (
-    <form
-      onSubmit={onSubmit}
-      className={style.form}
-    >
 
       <div className={style['error-container']}>
         {error && !isSubmitting
