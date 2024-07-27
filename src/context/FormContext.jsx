@@ -53,6 +53,17 @@ function FormProvider({ children }) {
   const [formState, setFormState] = useState();
   const [errors, setErrors] = useState();
   const [isValidForm, setIsValidForm] = useState(false);
+
+  const setFormInitialState = useCallback((initialState) => {
+    const initialErrorsState = {};
+
+    Object.keys(initialState).forEach((fieldName) => {
+      initialErrorsState[fieldName] = [];
+    });
+
+    setFormState(initialState);
+    setErrors(initialErrorsState);
+  }, []);
   return (
     <FormContext.Provider value={contextValue}>
       {children}
