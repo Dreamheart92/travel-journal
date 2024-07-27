@@ -112,6 +112,8 @@ function FormProvider({ children }) {
       setErrors(currentErrors);
     }
   }, [formState]);
+
+  const getFieldErrors = (fieldName) => errors[fieldName];
   return (
     <FormContext.Provider value={contextValue}>
       {children}
