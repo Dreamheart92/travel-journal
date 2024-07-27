@@ -89,6 +89,29 @@ function FormProvider({ children }) {
       },
     }));
   };
+
+  useEffect(() => {
+    if (formState) {
+      const currentErrors = {};
+      let isFormValid = true;
+
+      Object.entries(formState).forEach(([fieldName, fieldData]) => {
+        const { value: fieldValue } = fieldData.state;
+        const { validators } = fieldData;
+
+        const fieldErrors = validateField(validators, fieldValue);
+
+        if (fieldErrors.length > 0 && isFormValid) {
+          isFormValid = false;
+        }
+
+        currentErrors[fieldName] = fieldErrors;
+      });
+
+      setIsValidForm(isFormValid);
+      setErrors(currentErrors);
+    }
+  }, [formState]);
   return (
     <FormContext.Provider value={contextValue}>
       {children}
