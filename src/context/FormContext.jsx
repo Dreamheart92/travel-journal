@@ -74,6 +74,21 @@ function FormProvider({ children }) {
       [fieldName]: { ...prevState[fieldName], state: { value: fieldValue, isDirty: true } },
     }));
   };
+
+  const handleBlur = (event) => {
+    const fieldName = event.target.name;
+
+    setFormState((prevState) => ({
+      ...prevState,
+      [fieldName]: {
+        ...prevState[fieldName],
+        state: {
+          ...prevState[fieldName].state,
+          isDirty: true,
+        },
+      },
+    }));
+  };
   return (
     <FormContext.Provider value={contextValue}>
       {children}
