@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import TextAreaInput from '../../components/Input/TextAreaInput';
+import { useState } from 'react';
 import Button from '../../components/Button';
-import useForm from '../../hooks/useForm';
 import Form from '../../components/Form';
 import ErrorMessage from '../../components/ErrorMessage';
 import style from './index.module.css';
+import useForm from '../../hooks/useForm';
 
 export default function CreateCommentForm({ onCreateCommentSubmit }) {
   const [isEmptyComment, setIsEmptyComment] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [form] = useForm();
 
   const handleCreateCommentSubmit = (commentData) => {
     setIsTyping(false);
@@ -23,43 +23,27 @@ export default function CreateCommentForm({ onCreateCommentSubmit }) {
     }
 
     onCreateCommentSubmit(commentData.comment);
-    clearFieldValue('comment');
+    form.resetField('comment');
   };
-
-  const {
-    register,
-    handleSubmit,
-    clearFieldValue,
-    formState,
-  } = useForm({ submitCallback: handleCreateCommentSubmit });
-
-  const {
-    handlers,
-    state,
-  } = register('comment', '');
-
-  useEffect(() => {
-    if (!isTyping && formState.comment.value.trim() !== '') {
-      setIsTyping(true);
-    }
-  }, [formState.comment]);
 
   return (
     <div className={style.container}>
-      <Form onSubmit={handleSubmit}>
 
-        {isEmptyComment && !isTyping
-          && <ErrorMessage message="Please enter your comment before submitting" />}
+      {isEmptyComment && !isTyping
+        && <ErrorMessage message="Please enter your comment before submitting" />}
 
-        <TextAreaInput handlers={handlers} state={state} />
+      <Form
+        submitCallback={handleCreateCommentSubmit}
+      >
+        <Form.Input
+          name="comment"
+          inputType="text-area"
+        />
 
-        <div className={style.button}>
-          <Button
-            submitButton
-            caption="Comment"
-          />
-        </div>
-
+        <Button
+          submitButton
+          caption="Comment"
+        />
       </Form>
     </div>
   );
