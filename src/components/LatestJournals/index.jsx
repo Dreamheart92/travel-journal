@@ -12,7 +12,11 @@ export default function LatestJournals() {
   const { results, loading } = useSelector(selectJournalsEntries);
 
   useEffect(() => {
-    dispatch(fetchEntries());
+    const promise = dispatch(fetchEntries());
+
+    return () => {
+      promise.abort();
+    };
   }, []);
 
   if (loading || !results) {
