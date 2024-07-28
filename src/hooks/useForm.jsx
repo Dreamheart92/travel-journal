@@ -1,14 +1,13 @@
-import { FormContext } from '../context/FormContext';
-import { useContext } from 'react';
+import { useFormContext } from '../context/FormContext';
 
 const useForm = () => {
-  const formContext = useContext(FormContext);
+  const { formContextActions, formContextSelectors } = useFormContext();
 
-  if (!formContext) {
-    throw new Error('Use useForm inside a FormProvider');
-  }
-
-  return ['test'];
+  return [{
+    isValidForm: formContextSelectors.isValidForm(),
+    hasBeenSubmitted: formContextSelectors.hasBeenSubmitted(),
+    resetField: formContextActions.resetField,
+  }];
 };
 
 export default useForm;
