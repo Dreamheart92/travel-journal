@@ -8,11 +8,11 @@ export default function JournalEditor(
   {
     title,
     caption,
-    type,
+    buttonCaption,
     submitCallback,
-    error,
     isSubmitting,
     journal,
+    requestError,
   },
 ) {
   const formInitialState = buildFormInitialState(journal);
@@ -26,11 +26,11 @@ export default function JournalEditor(
       />
 
       <JournalForm
-        type={type}
-        error={error}
+        buttonCaption={buttonCaption}
         isSubmitting={isSubmitting}
         submitCallback={submitCallback}
         initialState={formInitialState}
+        requestError={requestError}
       />
     </div>
   );
