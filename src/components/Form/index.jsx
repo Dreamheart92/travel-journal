@@ -1,7 +1,38 @@
-import { Children, useContext, useEffect, useRef } from 'react';
+import {
+  Children,
+  useEffect,
+  useState,
+} from 'react';
+
 import style from './index.module.css';
-import TextInput from './Input/TextInput';
-import { FormContext } from '../../context/FormContext';
+import ErrorMessage from '../ErrorMessage';
+import FormInput from './Input/FormInput';
+import { useFormContext } from '../../context/FormContext';
+
+export default function Form(
+  {
+    children,
+    submitCallback,
+    error,
+    layoutStyle,
+  },
+) {
+  const [initForm, setInitForm] = useState(false);
+  const { formContextActions, formContextSelectors } = useFormContext();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    formContextActions.onSubmit();
+
+    if (formContextSelectors.isValidForm()) {
+      const formData = Object.entries(formContextSelectors.formState())
+        .reduce((form, [fieldName, fieldData]) => {
+          const { value: fieldValue } = fieldData.state;
+          return {
+            ...form,
+            [fieldName]: fieldValue,
+          };
+        }, {});
 
 export default function Form({ children }) {
   const { setFormInitialState, isValidForm } = useContext(FormContext);
