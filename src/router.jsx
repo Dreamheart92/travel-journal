@@ -55,7 +55,11 @@ const router = createBrowserRouter([
       },
       {
         path: PATHS.CREATE,
-        element: <Create />,
+        element: (
+          <AuthGuard>
+            <Create />
+          </AuthGuard>
+        ),
       },
       {
         path: `${PATHS.EDIT}/:journalId`,
