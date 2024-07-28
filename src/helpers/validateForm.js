@@ -42,3 +42,26 @@ const validateField = (validations, fieldValue) => {
 
   return errors;
 };
+
+export const getErrorsAndValidateForm = (formState) => {
+  const errors = {};
+  let isValidForm = true;
+
+  Object.entries(formState).forEach(([fieldName, fieldData]) => {
+    const { value: fieldValue } = fieldData.state;
+    const { validators } = fieldData;
+
+    const fieldErrors = validateField(validators, fieldValue);
+
+    if (fieldErrors.length > 0 && isValidForm) {
+      isValidForm = false;
+    }
+
+    errors[fieldName] = fieldErrors;
+  });
+
+  return {
+    errors,
+    isValidForm,
+  };
+};
