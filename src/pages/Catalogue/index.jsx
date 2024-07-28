@@ -11,13 +11,15 @@ import Search from '../../components/Search';
 import FiltersSection from '../../components/Sidebar/FiltersSection';
 import useQuery from '../../hooks/useQuery';
 import { selectDestinations } from '../../store/destinations/selectors';
+import { selectIsAuthenticated } from '../../store/auth/selectors';
 
 export default function Catalogue() {
-  const { searchParams, onQuery } = useQuery();
   const { destination } = useParams();
+  const { searchParams, onQuery } = useQuery();
 
   const [isSearching, setIsSearching] = useState(false);
 
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const { destinations } = useSelector(selectDestinations);
 
   const handleSearching = () => {
@@ -38,13 +40,17 @@ export default function Catalogue() {
         </div>
 
         <Sidebar width="20em">
-          <CreateJournal />
+
+          {isAuthenticated
+            && <CreateJournal />}
+
           <Search
             isSearching={isSearching}
             onSearching={handleSearching}
             urlSearch={searchParams.get('search') || ''}
             onQuery={onQuery}
           />
+
           <FiltersSection />
         </Sidebar>
 
