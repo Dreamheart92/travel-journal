@@ -3,7 +3,7 @@ const sentHttpRequest = async (url, settings) => {
     const response = await fetch(url, settings);
 
     if (response.status === 404) {
-      return window.location.replace('404');
+      throw response;
     }
 
     if (response.status === 204) {
