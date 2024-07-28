@@ -57,8 +57,8 @@ export default function Form(
       };
     }, {});
 
-    setFormInitialState(initialState);
-    initFormState.current = true;
+    formContextActions.initFormState(initialState);
+    setInitForm(true);
   }, []);
 
   return (
