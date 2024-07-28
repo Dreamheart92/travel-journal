@@ -16,11 +16,9 @@ export default function Login() {
       title="Welcome Back, Explorer!"
       caption="Log in to your Travel Journal and continue your journey of sharing adventures and discovering new destinations."
       form={(
-        <LoginForm
-          onLoginSubmit={handleLoginSubmit}
-          isSubmitting={loading}
-          error={error}
-        />
+        <FormProvider>
+          <LoginForm />
+        </FormProvider>
       )}
     />
   );
