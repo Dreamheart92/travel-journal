@@ -15,6 +15,7 @@ import { deleteCommentRequest, postCommentRequest } from '../../store/crud/thunk
 import crudConstants from '../../constants/crudConstants';
 import crudActionsConstants from '../../constants/crudActionsConstants';
 import { selectAuth } from '../../store/auth/selectors';
+import FormProvider from '../../context/FormContext';
 
 export default function CommentsSection({ journalId }) {
   const dispatch = useDispatch();
@@ -68,7 +69,11 @@ export default function CommentsSection({ journalId }) {
       <CommentsSectionHeader user={isAuthenticated} />
 
       {isAuthenticated
-        && <CreateCommentForm onCreateCommentSubmit={handleCreateCommentSubmit} />}
+        && (
+          <FormProvider>
+            <CreateCommentForm onCreateCommentSubmit={handleCreateCommentSubmit} />
+          </FormProvider>
+        )}
 
       <div className={style['comments-count']}>
         {formatCommentsCount(comments.results)}
