@@ -1,24 +1,23 @@
-export default function TextInput({ fieldProps }) {
+export default function TextAreaInput({ fieldProps }) {
   const {
     name,
-    placeholder,
+    value,
     onChange,
     onBlur,
-    value,
-    type = 'text',
+    placeholder,
     inputClassName,
   } = fieldProps;
 
   return (
-    <input
+    <textarea
       className={inputClassName}
-      name={name}
-      id={name}
-      placeholder={placeholder}
       onChange={onChange}
       onBlur={onBlur}
       value={value}
-      type={type}
+      name={name}
+      placeholder={placeholder}
+      rows="10"
+      cols="50"
     />
   );
 }
