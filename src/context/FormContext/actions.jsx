@@ -8,6 +8,9 @@ const contextActions = (dispatch) => {
     onChange: (event) => {
       dispatch({ type: actionTypes.HANDLE_CHANGE, payload: { event } });
     },
+    onBlur: (event) => {
+      dispatch({ type: actionTypes.HANDLE_BLUR, payload: { event } });
+    },
   };
 };
 
