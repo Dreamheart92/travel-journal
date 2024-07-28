@@ -1,103 +1,90 @@
 import Form from '../../components/Form';
-import FileInput from '../../components/Input/FileInput';
-import TextInput from '../../components/Input/TextInput';
-import useForm from '../../hooks/useForm';
 import Button from '../../components/Button';
 import VALIDATIONS from '../../constants/validations';
 
 export default function EditProfileForm({ initialState, submitCallback, isSubmitting }) {
-  const {
-    register,
-    handleSubmit,
-  } = useForm({ submitCallback });
-
-  const {
-    handlers: imageHandlers,
-    state: imageState,
-  } = register(
-    'image',
-    initialState.image,
-  );
-
-  const {
-    handlers: usernameHandlers,
-    state: usernameState,
-  } = register(
-    'username',
-    initialState.username,
-    {
-      required: true,
-      minLength: VALIDATIONS.USER.USERNAME_MIN_LENGTH,
-    },
-  );
-
-  const {
-    handlers: firstNameHandlers,
-    state: firstNameState,
-  } = register(
-    'firstName',
-    initialState.firstName,
-    {
-      required: true,
-      minLength: VALIDATIONS.USER.FIRST_NAME_MIN_LENGTH,
-    },
-  );
-
-  const {
-    handlers: lastNameHandlers,
-    state: lastNameState,
-  } = register(
-    'lastName',
-    initialState.lastName,
-    {
-      required: true,
-      minLength: VALIDATIONS.USER.LAST_NAME_MIN_LENGTH,
-    },
-  );
-
-  const {
-    handlers: emailHandlers,
-    state: emailState,
-  } = register(
-    'email',
-    initialState.email,
-    {
-      required: true,
-      minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH,
-    },
-  );
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FileInput
-        handlers={imageHandlers}
-        state={imageState}
+    <Form submitCallback={submitCallback}>
+      <Form.Input
+        name="image"
+        initialValue={initialState.image}
+        inputType="file"
+        validators={[
+          {
+            required: true,
+            message: 'Image is required',
+          },
+        ]}
       />
 
-      <TextInput
+      <Form.Input
+        name="username"
         placeholder="Username"
-        handlers={usernameHandlers}
-        state={usernameState}
+        inputType="text"
+        initialValue={initialState.username}
+        validators={[
+          {
+            required: true,
+            message: 'Username is required',
+          },
+          {
+            minLength: VALIDATIONS.USER.USERNAME_MIN_LENGTH,
+            message: `Username must be at least ${VALIDATIONS.USER.USERNAME_MIN_LENGTH} characters long`,
+          },
+        ]}
       />
 
-      <TextInput
+      <Form.Input
+        name="email"
         placeholder="Email"
-        handlers={emailHandlers}
-        state={emailState}
+        inputType="text"
+        initialValue={initialState.email}
+        validators={[
+          {
+            required: true,
+            message: 'Email is required',
+          },
+          {
+            email: true,
+            message: 'Email address is invalid',
+          },
+        ]}
       />
 
-      <TextInput
-        placeholder="First name"
-        handlers={firstNameHandlers}
-        state={firstNameState}
+      <Form.Input
+        name="firstName"
+        placeholder="First Name"
+        inputType="text"
+        initialValue={initialState.firstName}
+        validators={[
+          {
+            required: true,
+            message: 'First Name is required',
+          },
+          {
+            minLength: VALIDATIONS.USER.FIRST_NAME_MIN_LENGTH,
+            message: `First Name must be at least ${VALIDATIONS.USER.FIRST_NAME_MIN_LENGTH} characters long`,
+          },
+        ]}
       />
 
-      <TextInput
-        placeholder="Last name"
-        handlers={lastNameHandlers}
-        state={lastNameState}
+      <Form.Input
+        name="lastName"
+        placeholder="Last Name"
+        inputType="text"
+        initialValue={initialState.lastName}
+        validators={[
+          {
+            required: true,
+            message: 'Last Name is required',
+          },
+          {
+            minLength: VALIDATIONS.USER.LAST_NAME_MIN_LENGTH,
+            message: `Last Name must be at least ${VALIDATIONS.USER.LAST_NAME_MIN_LENGTH} characters long`,
+          },
+        ]}
       />
-
       <Button
         submitButton
         caption="Update"
