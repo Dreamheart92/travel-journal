@@ -73,6 +73,16 @@ function formReducer(state, action) {
         isSubmitted: false,
       };
     }
+    case actionTypes.HANDLE_SUBMIT: {
+      return {
+        ...state,
+        isSubmitted: true,
+        hasBeenSubmitted: true,
+      };
+    }
+    default:
+      return state;
+  }
 }
 
 export default formReducer;
