@@ -54,6 +54,25 @@ function formReducer(state, action) {
       }
       return state;
     }
+    case actionTypes.RESET_FIELD: {
+      const { fieldName } = action.payload;
+
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
+          [fieldName]: [],
+        },
+        formState: {
+          ...state.formState,
+          [fieldName]: {
+            ...state.formState[fieldName],
+            state: { value: '', isDirty: false },
+          },
+        },
+        isSubmitted: false,
+      };
+    }
 }
 
 export default formReducer;
