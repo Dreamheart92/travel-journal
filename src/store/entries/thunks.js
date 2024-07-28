@@ -9,7 +9,7 @@ export const fetchEntries = createAsyncThunk(
   async (arg, { signal }) => {
     const query = arg?.query || '';
     const url = buildJournalUrlRequest(query);
-    const result = await sendHttpRequest(url);
+    const result = await sendHttpRequest(url, { signal });
     return {
       journals: result.data.journals,
       totalPages: result.data.totalPages,
@@ -21,7 +21,7 @@ export const fetchEntry = createAsyncThunk(
   'entries/fetchEntry',
   async (arg, { signal }) => {
     const { journalId } = arg;
-    const result = await sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`);
+    const result = await sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, { signal });
 
     const { id: userId } = getAccessTokenAndId();
     const isJournalOwner = result.data.author._id === userId;
