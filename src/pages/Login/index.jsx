@@ -1,44 +1,15 @@
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import LoginForm from '../../forms/LoginForm';
 import AuthLayout from '../../layouts/AuthLayout';
-import { constructLoginData } from '../../forms/helpers/loginForm';
-import crudConstants from '../../constants/crudConstants';
-import crudActionsConstants from '../../constants/crudActionsConstants';
-import { selectReadState } from '../../store/crud/selectors';
-import { sendLoginRequest } from '../../store/crud/thunks';
 import { crudActions } from '../../store/crud';
-import { PATHS } from '../../constants/paths';
-import { storeUserData } from '../../helpers/storage';
+import crudConstants from '../../constants/crudConstants';
+import FormProvider from '../../context/FormContext';
 
 export default function Login() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {
-    data: userData,
-    loading,
-    error,
-    success,
-  } = useSelector(selectReadState);
-
-  useEffect(() => {
-    dispatch(crudActions.resetState({ key: crudConstants.READ }));
-
-    if (success) {
-      storeUserData(userData);
-      navigate(PATHS.HOME);
-    }
-  }, [success]);
-
-  const handleLoginSubmit = (formData) => {
-    dispatch(sendLoginRequest({
-      key: crudConstants.READ,
-      currentAction: crudActionsConstants.LOGIN,
-      loginData: constructLoginData(formData),
-    }));
-  };
+  useEffect(() => () => dispatch(crudActions.resetState({ key: crudConstants.READ })));
 
   return (
     <AuthLayout
