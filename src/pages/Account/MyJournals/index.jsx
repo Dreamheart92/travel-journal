@@ -16,7 +16,7 @@ export default function MyJournals() {
     dispatch(fetchUserEntries({ userId: user._id }));
   }, []);
 
-  if (loading) {
+  if (loading || !results) {
     return <Loading />;
   }
 
