@@ -1,146 +1,116 @@
 import { useSelector } from 'react-redux';
-import { Form } from 'react-router-dom';
-import useForm from '../../hooks/useForm';
+import Form from '../../components/Form';
 import { selectDestinations } from '../../store/destinations/selectors';
-import FileInput from '../../components/Input/FileInput';
-import TextInput from '../../components/Input/TextInput';
-import SelectInput from '../../components/Input/SelectInput';
-import DateInput from '../../components/Input/DateInput';
-import TextAreaInput from '../../components/Input/TextAreaInput';
 import Button from '../../components/Button';
-import style from './index.module.css';
 import VALIDATIONS from '../../constants/validations';
 
 export default function JournalForm(
   {
-    type,
+    buttonCaption,
     submitCallback,
-    error,
     isSubmitting,
     initialState,
+    requestError,
   },
 ) {
-  const {
-    register,
-    handleSubmit,
-  } = useForm({ submitCallback });
-
   const { destinations } = useSelector(selectDestinations);
-
-  const {
-    handlers: imageHandlers,
-    state: imageState,
-  } = register(
-    'image',
-    initialState.image,
-    { required: true },
-  );
-
-  const {
-    handlers: titleHandlers,
-    state: titleState,
-  } = register(
-    'title',
-    initialState.title,
-    {
-      required: true,
-      minLength: VALIDATIONS.JOURNAL.TITLE_MIN_LENGTH,
-    },
-  );
-
-  const {
-    handlers: destinationHandlers,
-    state: destinationState,
-  } = register(
-    'destination',
-    initialState.destination,
-    {
-      required: true,
-    },
-  );
-
-  const {
-    handlers: locationHandlers,
-    state: locationState,
-  } = register(
-    'location',
-    initialState.location,
-    {
-      required: true,
-      minLength: VALIDATIONS.JOURNAL.LOCATION_MIN_LENGTH,
-    },
-  );
-
-  const {
-    handlers: dateHandlers,
-    state: dateState,
-  } = register(
-    'date',
-    initialState.date,
-    { required: true },
-  );
-
-  const {
-    handlers: descriptionHandlers,
-    state: descriptionState,
-  } = register(
-    'description',
-    initialState.description,
-    {
-      required: true,
-      minLength: VALIDATIONS.JOURNAL.DESCRIPTION_MIN_LENGTH,
-    },
-  );
-
   return (
     <Form
-      onSubmit={handleSubmit}
-      error={error}
+      initialState={initialState}
+      submitCallback={submitCallback}
+      error={requestError}
+      layoutStyle={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1em' }}
     >
-      <div className={style.wrapper}>
-        <FileInput
-          handlers={imageHandlers}
-          state={imageState}
-          isJournal
-        />
 
-        <div className={style.fields}>
-          <TextInput
-            placeholder="Title"
-            handlers={titleHandlers}
-            state={titleState}
-          />
+      <Form.Input
+        name="title"
+        placeholder="Title"
+        inputType="text"
+        initialValue={initialState.title}
+        validators={[
+          {
+            required: true,
+            message: 'Title is required',
+          },
+          {
+            minLength: VALIDATIONS.JOURNAL.TITLE_MIN_LENGTH,
+            message: `Title must be at least ${VALIDATIONS.JOURNAL.TITLE_MIN_LENGTH} characters long`,
+          },
+        ]}
+      />
 
-          <SelectInput
-            handlers={destinationHandlers}
-            state={destinationState}
-            options={destinations}
-          />
+      <Form.Input
+        name="destination"
+        options={destinations}
+        initialValue={initialState.destination}
+        inputType="select"
+        validators={[{
+          required: true,
+          message: 'Destination is required',
+        }]}
+      />
 
-          <TextInput
-            placeholder="Location"
-            handlers={locationHandlers}
-            state={locationState}
-          />
+      <Form.Input
+        name="location"
+        placeholder="Location"
+        initialValue={initialState.location}
+        inputType="text"
+        validators={[
+          {
+            required: true,
+            message: 'Location is required',
+          },
+          {
+            minLength: VALIDATIONS.JOURNAL.LOCATION_MIN_LENGTH,
+            message: `Location must be at least ${VALIDATIONS.JOURNAL.LOCATION_MIN_LENGTH}`,
+          },
+        ]}
+      />
 
-          <DateInput
-            handlers={dateHandlers}
-            state={dateState}
-          />
+      <Form.Input
+        name="date"
+        inputType="date"
+        initialValue={initialState.date}
+        validators={[{
+          required: true,
+          message: 'Date is required',
+        }]}
+      />
 
-          <TextAreaInput
-            placeholder="Share your journey"
-            handlers={descriptionHandlers}
-            state={descriptionState}
-          />
+      <Form.Input
+        name="description"
+        placeholder="Share your journey"
+        initialValue={initialState.description}
+        inputType="text-area"
+        validators={[
+          {
+            required: true,
+            message: 'Description is required',
+          },
+          {
+            minLength: VALIDATIONS.JOURNAL.DESCRIPTION_MIN_LENGTH,
+            message: `Description must be at least ${VALIDATIONS.JOURNAL.DESCRIPTION_MIN_LENGTH} characters long`,
+          },
+        ]}
+      />
 
-          <Button
-            submitButton
-            isLoading={isSubmitting}
-            caption={type}
-          />
-        </div>
-      </div>
+      <Form.Input
+        name="image"
+        placeholder="image"
+        initialValue={initialState.image}
+        isJournal
+        inputType="file"
+        validators={[{
+          required: true,
+          message: 'Image is required',
+        }]}
+      />
+
+      <Button
+        submitButton
+        isLoading={isSubmitting}
+        caption={buttonCaption}
+      />
     </Form>
   );
 }
