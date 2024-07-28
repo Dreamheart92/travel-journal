@@ -8,6 +8,7 @@ import Loading from './components/Loading';
 import { selectDestinations } from './store/destinations/selectors';
 import { fetchDestinations } from './store/destinations/thunks';
 import { authActions } from './store/auth';
+import Footer from './components/Footer';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ export default function App() {
       <Navigation />
       {!appIsLoaded && <Loading />}
       {appIsLoaded && <Outlet />}
+      <Footer />
       <ScrollRestoration />
     </DefaultLayout>
   );
