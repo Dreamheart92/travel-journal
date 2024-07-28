@@ -4,6 +4,8 @@ import CatalogueCard from '../CatalogueCard';
 import Loading from '../Loading';
 import { fetchEntries } from '../../store/entries/thunks';
 import { selectJournalsEntries } from '../../store/entries/selectors';
+import { entriesActions } from '../../store/entries';
+import entriesConstants from '../../constants/entriesConstants';
 
 export default function JournalsList({ destination, searchParams }) {
   const dispatch = useDispatch();
@@ -14,9 +16,14 @@ export default function JournalsList({ destination, searchParams }) {
   } = useSelector(selectJournalsEntries);
 
   useEffect(() => {
+    dispatch(entriesActions.resetState({ key: entriesConstants.JOURNAL_ENTRIES }));
     const search = searchParams.get('search');
-    dispatch(fetchEntries({ query: { search, destination } }));
-  }, [destination, searchParams]);
+    const promise = dispatch(fetchEntries({ query: { search, destination } }));
+
+    return () => {
+      promise.abort();
+    };
+  }, [dispatch, destination, searchParams]);
 
   if (loading || !results) {
     return <Loading />;
