@@ -62,9 +62,18 @@ export default function Form(
   }, []);
 
   return (
-    <form className={style.form}>
-      {initFormState.current
+    <form
+      style={layoutStyle}
+      onSubmit={handleSubmit}
+      className={style.form}
+    >
+
+      {error
+        && <ErrorMessage message={error.message} />}
+
+      {initForm
         && children}
+
     </form>
   );
 }
