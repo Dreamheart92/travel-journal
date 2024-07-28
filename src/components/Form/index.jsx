@@ -34,9 +34,6 @@ export default function Form(
           };
         }, {});
 
-export default function Form({ children }) {
-  const { setFormInitialState, isValidForm } = useContext(FormContext);
-  const initFormState = useRef(false);
       submitCallback(formData);
     }
   };
@@ -49,9 +46,7 @@ export default function Form({ children }) {
         return state;
       }
 
-      const fieldName = child.props.name;
-      const fieldValue = child.props?.initialValue || '';
-      const validators = child.props?.validators || [];
+      const { name: fieldName, fieldValue = '', validators = [] } = child.props;
 
       return {
         ...state,
