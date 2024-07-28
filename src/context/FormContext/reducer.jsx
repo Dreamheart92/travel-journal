@@ -33,6 +33,27 @@ function formReducer(state, action) {
         isValidForm,
       };
     }
+    case actionTypes.HANDLE_BLUR: {
+      const { event } = action.payload;
+      const fieldName = event.target.name;
+
+      const { isDirty } = state.formState[fieldName].state;
+
+      if (!isDirty) {
+        return {
+          ...state,
+          formState: {
+            ...state.formState,
+            [fieldName]:
+              {
+                ...state.formState[fieldName],
+                state: { value: state.formState[fieldName].state.value, isDirty: true },
+              },
+          },
+        };
+      }
+      return state;
+    }
 }
 
 export default formReducer;
