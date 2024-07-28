@@ -6,6 +6,9 @@ import { FormContext } from '../../context/FormContext';
 export default function Form({ children }) {
   const { setFormInitialState, isValidForm } = useContext(FormContext);
   const initFormState = useRef(false);
+      submitCallback(formData);
+    }
+  };
 
   useEffect(() => {
     const childrenArray = Children.toArray(children);
