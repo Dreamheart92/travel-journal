@@ -1,64 +1,96 @@
 import { useEffect } from 'react';
-import useForm from '../../hooks/useForm';
-import VALIDATIONS from '../../constants/validations';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Form from '../../components/Form';
-import TextInput from '../../components/Input/TextInput';
 import Button from '../../components/Button';
+import VALIDATIONS from '../../constants/validations';
+import { selectReadState } from '../../store/crud/selectors';
+import crudConstants from '../../constants/crudConstants';
+import { storeUserData } from '../../helpers/storage';
+import { PATHS } from '../../constants/paths';
+import { sendLoginRequest } from '../../store/crud/thunks';
+import crudActionsConstants from '../../constants/crudActionsConstants';
+import { constructLoginData } from '../helpers/loginForm';
+import useForm from '../../hooks/useForm';
 
-export default function LoginForm({ onLoginSubmit, isSubmitting, error }) {
-  const {
-    register,
-    handleSubmit,
-    clearFieldValue,
-    isSubmittedAndHasErrors,
-  } = useForm({ submitCallback: onLoginSubmit });
+export default function LoginForm() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [form] = useForm();
+
+  const disableSubmitButton = !form.isValidForm && form.hasBeenSubmitted;
+
+  const handleLoginSubmit = (formData) => {
+    dispatch(sendLoginRequest({
+      key: crudConstants.READ,
+      currentAction: crudActionsConstants.LOGIN,
+      loginData: constructLoginData(formData),
+    }));
+  };
 
   const {
-    handlers: emailHandlers,
-    state: emailState,
-  } = register('email', '', {
-    required: true,
-    minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH,
-    email: true,
-  });
-
-  const {
-    handlers: passwordHandlers,
-    state: passwordState,
-  } = register('password', '', {
-    required: true,
-    minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH,
-  });
+    data: userData,
+    loading: isSubmitting,
+    error,
+    success,
+  } = useSelector(selectReadState);
 
   useEffect(() => {
-    if (error) {
-      clearFieldValue('password');
+    if (success) {
+      storeUserData(userData);
+      navigate(PATHS.HOME);
     }
-  }, [error]);
+
+    if (error) {
+      form.resetField('password');
+    }
+  }, [success, error]);
 
   return (
     <Form
-      onSubmit={handleSubmit}
+      submitCallback={handleLoginSubmit}
       error={error}
     >
-      <TextInput
-        handlers={emailHandlers}
-        state={emailState}
-        placeholder="Email"
-      >
-        Email
-      </TextInput>
-
-      <TextInput
-        type="password"
-        handlers={passwordHandlers}
-        state={passwordState}
-        placeholder="Password"
+      <Form.Input
+        name="email"
+        placeholder="Enter your email"
+        inputType="text"
+        validators={[
+          {
+            required: true,
+            message: 'Email is required',
+          },
+          {
+            minLength: VALIDATIONS.USER.EMAIL_MIN_LENGTH,
+            message: `Email must be at least ${VALIDATIONS.USER.EMAIL_MIN_LENGTH} characters long`,
+          },
+          {
+            email: true,
+            message: 'Email is invalid',
+          },
+        ]}
       />
 
+      <Form.Input
+        name="password"
+        placeholder="Enter your password"
+        type="password"
+        inputType="text"
+        validators={[
+          {
+            required: true,
+            message: 'Password is required',
+          },
+          {
+            minLength: VALIDATIONS.USER.PASSWORD_MIN_LENGTH,
+            message: `Password must be at least ${VALIDATIONS.USER.PASSWORD_MIN_LENGTH} characters long`,
+          },
+        ]}
+      />
       <Button
         submitButton
         caption="Login"
+        disabled={disableSubmitButton}
         isLoading={isSubmitting}
       />
     </Form>
