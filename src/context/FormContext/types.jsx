@@ -1,0 +1,5 @@
+export const INIT_FORM_STATE = 'INIT_FORM_STATE';
+export const HANDLE_CHANGE = 'HANDLE_CHANGE';
+export const HANDLE_BLUR = 'HANDLE_BLUR';
+export const RESET_FIELD = 'RESET_FIELD';
+export const HANDLE_SUBMIT = 'HANDLE_SUBMIT';
