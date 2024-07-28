@@ -18,3 +18,37 @@
     transition: all 0.2s ease-in-out;
     border-color: red !important;
 }
+
+.image-wrapper {
+    display: flex;
+    gap: 1em;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.image-wrapper button {
+    width: 14em;
+}
+
+.journal {
+    width: 30em;
+    height: 13.4em;
+}
+
+.account {
+    width: 4em;
+    height: 4em;
+    border-radius: 100%;
+}
+
+.date {
+    background-color: #EEE;
+    padding: .75em 1em;
+    cursor: pointer;
+}
