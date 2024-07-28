@@ -11,6 +11,7 @@ import crudActionsConstants from '../../constants/crudActionsConstants';
 import { selectUpdateState } from '../../store/crud/selectors';
 import { selectJournalEntry } from '../../store/entries/selectors';
 import { crudActions } from '../../store/crud';
+import FormProvider from '../../context/FormContext';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -46,13 +47,15 @@ export default function Edit() {
   }
 
   return (
-    <JournalEditor
-      title="Refine Your Story!"
-      caption="Update your travel journal to reflect your latest adventures and insights. Edit your stories, photos, and experiences to keep your journey alive and inspiring."
-      type="Edit"
-      journal={journal}
-      submitCallback={handleUpdateJournalSubmit}
-      isSubmitting={isUpdating}
-    />
+    <FormProvider>
+      <JournalEditor
+        title="Refine Your Story!"
+        caption="Update your travel journal to reflect your latest adventures and insights. Edit your stories, photos, and experiences to keep your journey alive and inspiring."
+        buttonCaption="Edit"
+        journal={journal}
+        submitCallback={handleUpdateJournalSubmit}
+        isSubmitting={isUpdating}
+      />
+    </FormProvider>
   );
 }
