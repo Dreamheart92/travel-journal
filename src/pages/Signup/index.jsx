@@ -18,12 +18,9 @@ export default function Signup() {
       title="Join the Adventure!"
       caption="Sign up to create your Travel Journal, share your stories, and explore a world of new destinations with fellow travelers."
       form={(
-        <SignupForm
-          onSignupSubmit={handleSignupSubmit}
-          isSubmitting={loading}
-          error={passwordsNotMatching ? null : error}
-          passwordsNotMatching={passwordsNotMatching}
-        />
+        <FormProvider>
+          <SignupForm />
+        </FormProvider>
       )}
     />
   );
