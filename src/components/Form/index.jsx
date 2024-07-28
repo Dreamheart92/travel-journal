@@ -78,4 +78,4 @@ export default function Form(
   );
 }
 
-Form.Text = TextInput;
+Form.Input = FormInput;
