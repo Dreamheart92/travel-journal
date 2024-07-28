@@ -7,12 +7,14 @@ export default function Button(
     isLoading,
     onClick,
     submitButton = false,
+    disabled = false,
   },
 ) {
   return (
     <button
       onClick={onClick}
       type={submitButton ? 'submit' : 'button'}
+      disabled={disabled}
       className={`${style.button} ${style[variant]} ${isLoading ? style.loading : null}`}
     >
       {caption}
