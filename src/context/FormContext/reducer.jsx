@@ -14,6 +14,25 @@ function formReducer(state, action) {
         errors,
       };
     }
+    case actionTypes.HANDLE_CHANGE: {
+      const { event } = action.payload;
+      const fieldName = event.target.name;
+
+      const fieldValue = event.target.type === 'file' ? event.target.files[0] : event.target.value;
+
+      const { formState } = state;
+
+      formState[fieldName].state = { value: fieldValue, isDirty: true };
+
+      const { errors, isValidForm } = getErrorsAndValidateForm(state.formState);
+
+      return {
+        ...state,
+        errors,
+        formState,
+        isValidForm,
+      };
+    }
 }
 
 export default formReducer;
