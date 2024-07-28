@@ -17,6 +17,8 @@ import { deleteJournalRequest } from '../../store/crud/thunks';
 import crudConstants from '../../constants/crudConstants';
 import crudActionsConstants from '../../constants/crudActionsConstants';
 import { crudActions } from '../../store/crud';
+import { entriesActions } from '../../store/entries';
+import entriesConstants from '../../constants/entriesConstants';
 
 export default function Journal({ journalId }) {
   const dispatch = useDispatch();
@@ -45,7 +47,12 @@ export default function Journal({ journalId }) {
   };
 
   useEffect(() => {
-    dispatch(fetchEntry({ journalId }));
+    dispatch(entriesActions.resetState({ key: entriesConstants.JOURNAL_ENTRY }));
+    const promise = dispatch(fetchEntry({ journalId }));
+
+    return () => {
+      promise.abort();
+    };
   }, []);
 
   if (journalLoading || !journal) {
