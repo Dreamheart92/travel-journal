@@ -14,6 +14,9 @@ const contextActions = (dispatch) => {
     resetField: (fieldName) => {
       dispatch({ type: actionTypes.RESET_FIELD, payload: { fieldName } });
     },
+    onSubmit: () => {
+      dispatch({ type: actionTypes.HANDLE_SUBMIT });
+    },
   };
 };
 
