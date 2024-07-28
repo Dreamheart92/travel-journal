@@ -11,6 +11,9 @@ const contextActions = (dispatch) => {
     onBlur: (event) => {
       dispatch({ type: actionTypes.HANDLE_BLUR, payload: { event } });
     },
+    resetField: (fieldName) => {
+      dispatch({ type: actionTypes.RESET_FIELD, payload: { fieldName } });
+    },
   };
 };
 
