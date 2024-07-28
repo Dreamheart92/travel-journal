@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import EditProfileForm from '../../../forms/EditProfileForm';
@@ -10,8 +11,8 @@ import crudActionsConstants from '../../../constants/crudActionsConstants';
 import { selectUpdateState } from '../../../store/crud/selectors';
 import { deleteUserDataFromStorage, storeUserData } from '../../../helpers/storage';
 import { selectUser } from '../../../store/auth/selectors';
-import { useEffect } from 'react';
 import { crudActions } from '../../../store/crud';
+import FormProvider from '../../../context/FormContext';
 
 export default function EditProfile() {
   const dispatch = useDispatch();
@@ -46,12 +47,14 @@ export default function EditProfile() {
   };
 
   return (
-    <Container width="40%">
-      <EditProfileForm
-        initialState={formInitialState}
-        submitCallback={handleUpdateProfileSubmit}
-        isSubmitting={loading}
-      />
-    </Container>
+    <FormProvider>
+      <Container width="40%">
+        <EditProfileForm
+          initialState={formInitialState}
+          submitCallback={handleUpdateProfileSubmit}
+          isSubmitting={loading}
+        />
+      </Container>
+    </FormProvider>
   );
 }
