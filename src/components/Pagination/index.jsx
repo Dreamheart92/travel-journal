@@ -8,6 +8,12 @@ export default function Pagination(
     children,
   },
 ) {
+  const handlePagination = (direction) => {
+    onQuery('page', direction === 'next' ? currentPage + 1 : currentPage - 1);
+  };
+
+  const isLastPage = currentPage === totalPages;
+
   return (
     <>
     </>
