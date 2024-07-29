@@ -1,28 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useForm from '../../../hooks/useForm';
 
 import { PATHS } from '../../../constants/paths';
 import VALIDATIONS from '../../../constants/validations';
-import crudKeys from '../../../store/crud/types';
-
-import crudActionsConstants from '../../../constants/crudActionsConstants';
-
-import { sendSignupRequest } from '../../../store/crud/services';
-import { constructSignupData } from '../../../forms/helpers/signupForm';
-
-import { selectCreateState } from '../../../store/crud/selectors';
 
 import Form from '../../../components/Form';
 import Button from '../../../components/Button';
 import useAuth from '../../../hooks/useAuth';
+import useCreate from '../../../hooks/useCreate';
 
 export default function SignupForm() {
   const [form] = useForm();
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const auth = useAuth();
 
@@ -31,7 +22,8 @@ export default function SignupForm() {
     loading,
     success,
     error,
-  } = useSelector(selectCreateState);
+    signup,
+  } = useCreate();
 
   useEffect(() => {
     if (success) {
@@ -58,12 +50,7 @@ export default function SignupForm() {
     }
 
     setPasswordsMatching(true);
-
-    dispatch(sendSignupRequest({
-      key: crudKeys.CREATE,
-      currentAction: crudActionsConstants.SIGNUP,
-      signupData: constructSignupData(signupData),
-    }));
+    signup(signupData);
   };
 
   const requestError = !passwordsMatching
