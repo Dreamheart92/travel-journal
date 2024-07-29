@@ -1,16 +1,13 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import DefaultLayout from '../../layouts/DefaultLayout';
-import DestinationHeader from '../../components/DestinationHeader';
-import JournalsList from '../../components/JournalsList';
-import Sidebar from '../../components/Sidebar';
+import DestinationHeader from '../../modules/CatalogueModule/components/DestinationHeader';
 import style from './index.module.css';
-import CreateJournal from '../../components/Sidebar/CreateJournal';
-import Search from '../../components/Search';
-import FiltersSection from '../../components/Sidebar/FiltersSection';
 import useQuery from '../../hooks/useQuery';
 import { selectIsAuthenticated } from '../../store/auth/selectors';
 import useDestinations from '../../hooks/useDestinations';
+import CatalogueListModule from '../../modules/CatalogueModule/CatalogueListModule';
+import CatalogueSidebarModule from '../../modules/CatalogueModule/CatalogueSidebarModule';
 
 export default function Catalogue() {
   const { destination } = useParams();
@@ -27,28 +24,19 @@ export default function Catalogue() {
   return (
     <DefaultLayout>
       <DestinationHeader destination={currentDestination} />
+
       <div className={style.wrapper}>
 
-        <div className={style['journals-container']}>
-          <JournalsList
-            onQuery={onQuery}
-            destination={destination}
-            searchParams={searchParams}
-          />
-        </div>
+        <CatalogueListModule
+          onQuery={onQuery}
+          destination={destination}
+          searchParams={searchParams}
+        />
 
-        <Sidebar width="20em">
-
-          {isAuthenticated
-            && <CreateJournal />}
-
-          <Search
-            urlSearch={searchParams.get('search') || ''}
-            onQuery={onQuery}
-          />
-
-          <FiltersSection />
-        </Sidebar>
+        <CatalogueSidebarModule
+          isAuthenticated={isAuthenticated}
+          onQuery={onQuery}
+        />
 
       </div>
     </DefaultLayout>
