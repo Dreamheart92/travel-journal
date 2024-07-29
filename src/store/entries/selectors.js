@@ -8,9 +8,9 @@ export const selectJournalsEntries = (state) => state.entries[entriesKeys.JOURNA
 export const selectJournalEntry = (state) => state.entries[entriesKeys.JOURNAL_ENTRY];
 
 export const selectComments = createSelector(
-  [selectEntriesSlice, selectJournalEntry],
-  (entriesSlice, journalEntry) => ({
+  [selectEntriesSlice, selectJournalsEntries],
+  (entriesSlice, journalEntries) => ({
     comments: entriesSlice[entriesKeys.COMMENTS],
-    loading: journalEntry.loading,
+    loading: journalEntries.loading,
   }),
 );
