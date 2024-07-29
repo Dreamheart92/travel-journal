@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import useForm from '../../hooks/useForm';
+import useForm from '../../../hooks/useForm';
 
-import { PATHS } from '../../constants/paths';
-import VALIDATIONS from '../../constants/validations';
-import crudKeys from '../../store/crud/types';
+import { PATHS } from '../../../constants/paths';
+import VALIDATIONS from '../../../constants/validations';
+import crudKeys from '../../../store/crud/types';
 
-import crudActionsConstants from '../../constants/crudActionsConstants';
+import crudActionsConstants from '../../../constants/crudActionsConstants';
 
-import { sendSignupRequest } from '../../store/crud/services';
-import { constructSignupData } from '../helpers/signupForm';
+import { sendSignupRequest } from '../../../store/crud/services';
+import { constructSignupData } from '../../../forms/helpers/signupForm';
 
-import { selectCreateState } from '../../store/crud/selectors';
+import { selectCreateState } from '../../../store/crud/selectors';
 
-import Form from '../../components/Form';
-import Button from '../../components/Button';
-import useAuth from '../../hooks/useAuth';
+import Form from '../../../components/Form';
+import Button from '../../../components/Button';
+import useAuth from '../../../hooks/useAuth';
 
 export default function SignupForm() {
   const [form] = useForm();

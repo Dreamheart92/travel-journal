@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Form from '../../components/Form';
-import Button from '../../components/Button';
-import VALIDATIONS from '../../constants/validations';
-import { selectReadState } from '../../store/crud/selectors';
-import crudKeys from '../../store/crud/types';
-import { PATHS } from '../../constants/paths';
-import { sendLoginRequest } from '../../store/crud/services';
-import crudActionsConstants from '../../constants/crudActionsConstants';
-import { constructLoginData } from '../helpers/loginForm';
-import useForm from '../../hooks/useForm';
-import useAuth from '../../hooks/useAuth';
+import Form from '../../../components/Form';
+import Button from '../../../components/Button';
+import VALIDATIONS from '../../../constants/validations';
+import { selectReadState } from '../../../store/crud/selectors';
+import crudKeys from '../../../store/crud/types';
+import { PATHS } from '../../../constants/paths';
+import { sendLoginRequest } from '../../../store/crud/services';
+import crudActionsConstants from '../../../constants/crudActionsConstants';
+import { constructLoginData } from '../../../forms/helpers/loginForm';
+import useForm from '../../../hooks/useForm';
+import useAuth from '../../../hooks/useAuth';
 
 export default function LoginForm() {
   const navigate = useNavigate();
