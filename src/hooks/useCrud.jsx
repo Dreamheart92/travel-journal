@@ -61,6 +61,16 @@ const useCrud = (type) => {
             },
           }));
         },
+        updateProfile: (userData) => {
+          dispatch(updateProfileRequest({
+            key: crudKeys.UPDATE,
+            currentAction: crudActionsConstants.UPDATE_PROFILE,
+            userData: buildUserFormData(userData),
+          }));
+        },
+      };
+      break;
+    }
     default:
   }
 
