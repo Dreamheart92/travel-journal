@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 import LoginForm from '../../forms/LoginForm';
 import AuthLayout from '../../layouts/AuthLayout';
 import { crudActions } from '../../store/crud';
-import crudConstants from '../../constants/crudConstants';
+import crudKeys from '../../store/crud/types';
 import FormProvider from '../../context/FormContext';
 
 export default function Login() {
   const dispatch = useDispatch();
 
-  useEffect(() => () => dispatch(crudActions.resetState({ key: crudConstants.READ })));
+  useEffect(() => () => dispatch(crudActions.resetState({ key: crudKeys.READ })));
 
   return (
     <AuthLayout
