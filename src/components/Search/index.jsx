@@ -1,20 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import SidebarSection from '../Sidebar/SidebarSection';
 import style from './index.module.css';
-import { selectSearch } from '../../store/search/selectors';
-import { searchActions } from '../../store/search';
+import useSearch from '../../hooks/useSearch';
 
 export default function Search({ onQuery }) {
-  const dispatch = useDispatch();
-  const { search, isSearching } = useSelector(selectSearch);
+  const { search, isSearching, onSearch } = useSearch();
 
   const debounceQueryTimeout = useRef(null);
 
   const handleChange = (event) => {
-    dispatch(searchActions.setSearch({ search: event.target.value }));
+    onSearch(event.target.value);
   };
 
   useEffect(() => {
