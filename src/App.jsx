@@ -13,7 +13,7 @@ export default function App() {
   const { success: destinationsLoaded, fetchDestinations } = useDestinations();
 
   useEffect(() => {
-    dispatch(fetchDestinations());
+    fetchDestinations();
     setInitApp(true);
   }, []);
 
