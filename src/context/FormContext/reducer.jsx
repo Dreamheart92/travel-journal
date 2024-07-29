@@ -71,6 +71,7 @@ function formReducer(state, action) {
           },
         },
         isSubmitted: false,
+        isValidForm: false,
       };
     }
     case actionTypes.HANDLE_SUBMIT: {
