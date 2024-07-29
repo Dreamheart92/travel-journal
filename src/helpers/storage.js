@@ -1,18 +1,14 @@
-import userStorageChange from './customEvents';
-
-export const storeUserData = (userData) => {
+export const saveUserDataToLocalStorage = (userData) => {
   localStorage.setItem('user', JSON.stringify(userData));
-  window.dispatchEvent(userStorageChange({ type: 'update', data: userData }));
 };
 
-export const deleteUserDataFromStorage = () => {
+export const deleteUserDataFromLocalStorage = () => {
   localStorage.removeItem('user');
-  window.dispatchEvent(userStorageChange({ type: 'remove' }));
 };
 
-export const getUserDataFromStorage = () => JSON.parse(localStorage.getItem('user'));
+export const getUserDataFromLocalStorage = () => JSON.parse(localStorage.getItem('user'));
 
-export const getAccessTokenAndId = () => {
+export const getAccessTokenAndIdFromLocalStorage = () => {
   const userData = JSON.parse(localStorage.getItem('user'));
 
   return {
