@@ -20,6 +20,27 @@ const useCrud = (type) => {
   const typeState = useSelector((state) => state.crud[type]);
 
   let actions;
+
+  switch (type) {
+    case crudKeys.CREATE: {
+      actions = {
+        postJournal: (formData) => dispatch(postJournalRequest({
+          key: crudKeys.CREATE,
+          currentAction: crudActionsConstants.POST_JOURNAL,
+          journalData: buildJournalFormData(formData),
+        })),
+        signup: (signupData) => dispatch(sendSignupRequest({
+          key: crudKeys.CREATE,
+          currentAction: crudActionsConstants.SIGNUP,
+          signupData: constructSignupData(signupData),
+        })),
+      };
+      break;
+    }
+    default:
+  }
+
+  return { ...typeState, ...actions };
 };
 
 export default useCrud;
