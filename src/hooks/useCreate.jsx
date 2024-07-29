@@ -7,6 +7,15 @@ import { buildJournalFormData } from '../helpers';
 import { constructSignupData } from '../forms/helpers/signupForm';
 
 const useCreate = () => {
+  const dispatch = useDispatch();
+
+  const {
+    data,
+    loading,
+    success,
+    error,
+  } = useSelector(selectCreateState);
+
 };
 
 export default useCreate;
