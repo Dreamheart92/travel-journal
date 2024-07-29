@@ -7,6 +7,7 @@ const useOptimisticActions = () => {
   const dispatch = useDispatch();
 
   const handlePostComment = (localComment, journalId) => {
+    dispatch(entriesActions.addLocalComment(localComment));
     dispatch(postCommentRequest({
       key: optimisticKeys.POST_COMMENT,
       commentMetaData: {
