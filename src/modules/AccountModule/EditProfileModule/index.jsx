@@ -3,30 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import EditProfileForm from '../Forms/EditProfileForm';
 import Container from '../../../components/Container';
-import { buildUserFormData, buildUserFormInitialState } from '../../../helpers';
+import { buildUserFormInitialState } from '../../../helpers';
 import { PATHS } from '../../../constants/paths';
-import { updateProfileRequest } from '../../../store/crud/services';
 import crudKeys from '../../../store/crud/types';
-import crudActionsConstants from '../../../constants/crudActionsConstants';
-import { selectUpdateState } from '../../../store/crud/selectors';
 import { selectUser } from '../../../store/auth/selectors';
 import { crudActions } from '../../../store/crud';
 import FormProvider from '../../../context/FormContext';
 import useAuth from '../../../hooks/useAuth';
+import useUpdate from '../../../hooks/useUpdate';
 
 export default function EditProfileModule() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const auth = useAuth();
-
   const user = useSelector(selectUser);
 
   const {
     data: updatedUserData,
     loading,
     success,
-  } = useSelector(selectUpdateState);
+    updateProfile,
+  } = useUpdate();
 
   useEffect(() => {
     dispatch(crudActions.resetState({ key: crudKeys.UPDATE }));
@@ -40,11 +38,7 @@ export default function EditProfileModule() {
   const formInitialState = buildUserFormInitialState(user);
 
   const handleUpdateProfileSubmit = (userData) => {
-    dispatch(updateProfileRequest({
-      key: crudKeys.UPDATE,
-      currentAction: crudActionsConstants.UPDATE_PROFILE,
-      userData: buildUserFormData(userData),
-    }));
+    updateProfile(userData);
   };
 
   return (
