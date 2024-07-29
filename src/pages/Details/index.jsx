@@ -23,6 +23,23 @@ export default function Details() {
     error,
   } = useSelector(selectJournalEntry);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const promise = dispatch(fetchEntry({ journalId }));
+
+    return () => {
+      dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRY }));
+      promise.abort();
+    };
+  }, []);
+
+  // Todo : Create and redirect to 404 page
+
+  if (error?.message === 'Journal not found') {
+    return <Navigate to={PATHS.CATALOGUE} />;
+  }
+
   return (
     <DefaultLayout>
       <Container width="80em">
