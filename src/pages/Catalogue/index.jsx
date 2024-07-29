@@ -17,14 +17,8 @@ export default function Catalogue() {
   const { destination } = useParams();
   const { searchParams, onQuery } = useQuery();
 
-  const [isSearching, setIsSearching] = useState(false);
-
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const { destinations } = useSelector(selectDestinations);
-
-  const handleSearching = () => {
-    setIsSearching(true);
-  };
 
   const currentDestination = destination
     ? destinations.find((destinationFilter) => destinationFilter.name === destination)
@@ -45,8 +39,6 @@ export default function Catalogue() {
             && <CreateJournal />}
 
           <Search
-            isSearching={isSearching}
-            onSearching={handleSearching}
             urlSearch={searchParams.get('search') || ''}
             onQuery={onQuery}
           />
