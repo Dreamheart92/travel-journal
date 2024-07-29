@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Image from '../../../components/Image';
 import JournalContent from '../../../components/JournalContent';
 import style from './index.module.css';
@@ -8,25 +8,19 @@ import Modal from '../../../components/Modal';
 import DeleteModal from '../../../components/Modal/DeleteModal';
 import useModal from '../../../hooks/useModal';
 import { PATHS } from '../../../constants/paths';
-import { selectDeleteState } from '../../../store/crud/selectors';
-import { deleteJournalRequest } from '../../../store/crud/services';
 import crudKeys from '../../../store/crud/types';
-import crudActionsConstants from '../../../constants/crudActionsConstants';
 import { crudActions } from '../../../store/crud';
+import useDelete from '../../../hooks/useDelete';
 
 export default function JournalModule({ journalId, journal }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { isOpen, onOpenModal, onCloseModal } = useModal();
-  const { loading } = useSelector(selectDeleteState);
+  const { loading, deleteJournal } = useDelete();
 
   const handleDeleteJournal = async () => {
-    const isSuccess = await dispatch(deleteJournalRequest({
-      key: crudKeys.DELETE,
-      currentAction: crudActionsConstants.DELETE_JOURNAL,
-      journalId,
-    }));
+    const isSuccess = await deleteJournal(journalId);
 
     if (isSuccess?.payload?.success) {
       dispatch(crudActions.resetState({ key: crudKeys.DELETE }));
