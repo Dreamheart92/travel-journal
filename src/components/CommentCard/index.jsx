@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import UserProfileImage from '../UserProfileImage';
 import CommentCardContent from './CommentCardContent';
 import CommentCardReaction from './CommentCardReaction';
@@ -7,8 +7,7 @@ import style from './index.module.css';
 import Button from '../Button';
 import { selectIsAuthenticated } from '../../store/auth/selectors';
 import { PATHS } from '../../constants/paths';
-import { postCommentReactionRequest } from '../../store/optimistic/services';
-import optimisticKeys from '../../store/optimistic/types';
+import useOptimisticActions from '../../hooks/useOptimisticActions';
 
 export default function CommentCard({ comment, userId, onSetModalTargetItemId }) {
   const navigate = useNavigate();
@@ -22,21 +21,19 @@ export default function CommentCard({ comment, userId, onSetModalTargetItemId })
     dislikes,
   } = comment;
 
-  const dispatch = useDispatch();
+  const { postCommentReactionOptimistic } = useOptimisticActions();
+
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const handleCommentReaction = (reactionType, isReacted) => {
     if (isAuthenticated) {
       if (!commentId.endsWith('___temporary')) {
-        dispatch(postCommentReactionRequest({
-          key: optimisticKeys.POST_COMMENT_REACTION,
-          reactionMetaData: {
-            reactionType,
-            isReacted,
-            commentId,
-            userId,
-          },
-        }));
+        postCommentReactionOptimistic({
+          reactionType,
+          isReacted,
+          commentId,
+          userId,
+        });
       }
     } else {
       navigate(PATHS.LOGIN);
