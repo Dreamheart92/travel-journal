@@ -23,6 +23,23 @@ const useCreate = () => {
       journalData: buildJournalFormData(formData),
     }));
   };
+
+  const handleSignupRequest = (signupData) => {
+    dispatch(sendSignupRequest({
+      key: crudKeys.CREATE,
+      currentAction: crudActionsConstants.SIGNUP,
+      signupData: constructSignupData(signupData),
+    }));
+  };
+
+  return {
+    data,
+    loading,
+    success,
+    error,
+    postJournal: handlePostJournalRequest,
+    signup: handleSignupRequest,
+  };
 };
 
 export default useCreate;
