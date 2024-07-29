@@ -1,14 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { crudActions } from '../../store/crud';
 import crudKeys from '../../store/crud/types';
-import { selectCreateState } from '../../store/crud/selectors';
-import { postJournalRequest } from '../../store/crud/services';
-import crudActionsConstants from '../../constants/crudActionsConstants';
-import { buildJournalFormData } from '../../helpers';
 import { PATHS } from '../../constants/paths';
 import JournalEditorModule from '../../modules/JournalEditorModule';
+import useCreate from '../../hooks/useCreate';
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -19,21 +16,19 @@ export default function Create() {
     loading: isSubmitting,
     success,
     error,
-  } = useSelector(selectCreateState);
+    postJournal,
+  } = useCreate();
 
   useEffect(() => {
     dispatch(crudActions.resetState({ key: crudKeys.CREATE }));
+
     if (success) {
       navigate(`${PATHS.DETAILS}/${journalData._id}`);
     }
   }, [success]);
 
   const handleCreateJournalSubmit = (formData) => {
-    dispatch(postJournalRequest({
-      key: crudKeys.CREATE,
-      currentAction: crudActionsConstants.POST_JOURNAL,
-      journalData: buildJournalFormData(formData),
-    }));
+    postJournal(formData);
   };
 
   const settings = {
