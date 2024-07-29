@@ -19,6 +19,10 @@ export default function CreateCommentForm({ onCreateCommentSubmit }) {
         <Form.Input
           name="comment"
           inputType="text-area"
+          validators={[{
+            required: true,
+            message: 'Please enter your comment before submitting',
+          }]}
         />
 
         <Button
