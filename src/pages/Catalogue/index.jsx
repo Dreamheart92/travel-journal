@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import DestinationHeader from '../../components/DestinationHeader';
@@ -10,15 +9,16 @@ import CreateJournal from '../../components/Sidebar/CreateJournal';
 import Search from '../../components/Search';
 import FiltersSection from '../../components/Sidebar/FiltersSection';
 import useQuery from '../../hooks/useQuery';
-import { selectDestinations } from '../../store/destinations/selectors';
 import { selectIsAuthenticated } from '../../store/auth/selectors';
+import useDestinations from '../../hooks/useDestinations';
 
 export default function Catalogue() {
   const { destination } = useParams();
+  const { destinations } = useDestinations();
+
   const { searchParams, onQuery } = useQuery();
 
   const isAuthenticated = useSelector(selectIsAuthenticated);
-  const { destinations } = useSelector(selectDestinations);
 
   const currentDestination = destination
     ? destinations.find((destinationFilter) => destinationFilter.name === destination)

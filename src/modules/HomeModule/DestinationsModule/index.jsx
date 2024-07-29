@@ -1,12 +1,11 @@
-import { useSelector } from 'react-redux';
 import Container from '../../../components/Container';
 import Grid from '../../../components/Grid';
 import DestinationCard from '../../../components/DestinationCard';
 import style from './index.module.css';
-import { selectDestinations } from '../../../store/destinations/selectors';
+import useDestinations from '../../../hooks/useDestinations';
 
 export default function DestinationsModule() {
-  const { destinations } = useSelector(selectDestinations);
+  const { destinations } = useDestinations();
 
   const firstRow = destinations.slice(0, 3);
   const secondRow = destinations.slice(3, 5);
