@@ -10,5 +10,14 @@ export default function AuthModule({ settings }) {
 
   )
   return (
+    <AuthLayout
+      title={title}
+      caption={caption}
+      form={(
+        <FormProvider>
+          {form}
+        </FormProvider>
+      )}
+    />
   );
 }
