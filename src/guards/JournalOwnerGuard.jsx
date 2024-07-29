@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEntry } from '../store/entries/thunks';
+import { fetchEntry } from '../store/entries/services';
 import { selectJournalEntry } from '../store/entries/selectors';
 import { selectUser } from '../store/auth/selectors';
 import { PATHS } from '../constants/paths';
