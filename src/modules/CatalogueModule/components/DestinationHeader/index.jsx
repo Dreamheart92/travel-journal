@@ -1,4 +1,4 @@
-import Image from '../Image';
+import Image from '../../../../components/Image';
 import style from './index.module.css';
 
 export default function DestinationHeader({ destination }) {
