@@ -8,6 +8,11 @@ import { optimisticErrorMessages } from '../../../constants/errorMessages';
 
 export default function OptimisticErrorModal() {
   const { isOpen: isModalOpen, onOpenModal } = useModal();
+
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const optimisticErrors = useSelector(selectOptimisticErrors);
+
   return (
     <Modal isOpen={isModalOpen}>
     </Modal>
