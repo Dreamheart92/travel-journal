@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getAccessTokenAndIdFromLocalStorage } from '../../helpers/storage';
-import { entriesActions } from '../entries';
 import sendHttpRequest from '../../services/sendHttpRequest';
 import API from '../../constants/api';
 
@@ -15,13 +14,6 @@ export const postCommentReactionRequest = createAsyncThunk(
       commentId,
       userId,
     } = arg.reactionMetaData;
-
-    dispatch(entriesActions.updateLocalCommentReaction({
-      reactionType,
-      isReacted,
-      commentId,
-      userId,
-    }));
 
     const path = reactionType === 'likes' ? 'like' : 'dislike';
     const requestMethod = isReacted ? 'Delete' : 'Get';
@@ -71,8 +63,6 @@ export const deleteCommentRequest = createAsyncThunk(
         Authorization: accessToken,
       },
     };
-
-    dispatch(entriesActions.deleteLocalComment({ commentId }));
 
     try {
       await sendHttpRequest(`${API.COMMENTS.COMMENTS}/${commentId}`, settings);
