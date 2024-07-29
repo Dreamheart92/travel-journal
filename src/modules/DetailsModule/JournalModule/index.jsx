@@ -10,14 +10,14 @@ import useModal from '../../../hooks/useModal';
 import { PATHS } from '../../../constants/paths';
 import crudKeys from '../../../store/crud/types';
 import { crudActions } from '../../../store/crud';
-import useDelete from '../../../hooks/useDelete';
+import useCrud from '../../../hooks/useCrud';
 
 export default function JournalModule({ journalId, journal }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { isOpen, onOpenModal, onCloseModal } = useModal();
-  const { loading, deleteJournal } = useDelete();
+  const { loading, deleteJournal } = useCrud(crudKeys.DELETE);
 
   const handleDeleteJournal = async () => {
     const isSuccess = await deleteJournal(journalId);
