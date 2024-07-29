@@ -13,11 +13,21 @@ const useDelete = () => {
     success,
     error,
   } = useSelector(selectDeleteState);
+
+  const handleDeleteJournalRequest = (journalId) => {
+    return dispatch(deleteJournalRequest({
+      key: crudKeys.DELETE,
+      currentAction: crudActionsConstants.DELETE_JOURNAL,
+      journalId,
+    }));
+  };
+
   return {
     data,
     loading,
     success,
     error,
+    deleteJournal: handleDeleteJournalRequest,
   };
 };
 
