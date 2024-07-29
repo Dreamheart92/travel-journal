@@ -1,21 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
 import CommentsSectionHeader from './CommentsSectionHeader';
-import CommentCard from '../CommentCard';
+import CommentCard from '../../../components/CommentCard';
 import style from './index.module.css';
-import { formatCommentsCount } from '../../helpers';
-import CreateCommentForm from '../../forms/CreateCommentForm';
-import { buildLocalComment } from '../../forms/helpers/createCommentForm';
-import Modal from '../Modal';
-import DeleteModal from '../Modal/DeleteModal';
-import useModal from '../../hooks/useModal';
-import { selectComments } from '../../store/entries/selectors';
-import { entriesActions } from '../../store/entries';
-import { postCommentRequest, deleteCommentRequest } from '../../store/optimistic/services';
-import { selectAuth } from '../../store/auth/selectors';
-import FormProvider from '../../context/FormContext';
-import optimisticKeys from '../../store/optimistic/types';
+import { formatCommentsCount } from '../../../helpers';
+import CreateCommentForm from '../Forms/CreateCommentForm';
+import { buildLocalComment } from '../../../forms/helpers/createCommentForm';
+import Modal from '../../../components/Modal';
+import DeleteModal from '../../../components/Modal/DeleteModal';
+import useModal from '../../../hooks/useModal';
+import { selectComments } from '../../../store/entries/selectors';
+import { entriesActions } from '../../../store/entries';
+import { postCommentRequest, deleteCommentRequest } from '../../../store/optimistic/services';
+import { selectAuth } from '../../../store/auth/selectors';
+import FormProvider from '../../../context/FormContext';
+import optimisticKeys from '../../../store/optimistic/types';
 
-export default function CommentsSection({ journalId }) {
+export default function CommentsModule({ journalId }) {
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector(selectAuth);
 
