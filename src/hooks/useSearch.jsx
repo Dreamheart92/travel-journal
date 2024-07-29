@@ -12,11 +12,16 @@ const useSearch = () => {
     isSearching,
   } = useSelector(selectSearch);
 
+  const handleSearch = (searchValue) => {
+    dispatch(searchActions.setSearch({ search: searchValue }));
+  };
+
   return {
     search,
     currentPage,
     totalPages,
     isSearching,
+    onSearch: handleSearch,
   };
 };
 
