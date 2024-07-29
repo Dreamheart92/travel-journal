@@ -5,8 +5,8 @@ import JournalEditor from '../../components/JournalEditor';
 import Loading from '../../components/Loading';
 import { PATHS } from '../../constants/paths';
 import { buildJournalFormData } from '../../helpers';
-import { updateJournalRequest } from '../../store/crud/thunks';
-import crudConstants from '../../constants/crudConstants';
+import { updateJournalRequest } from '../../store/crud/services';
+import crudKeys from '../../store/crud/types';
 import crudActionsConstants from '../../constants/crudActionsConstants';
 import { selectUpdateState } from '../../store/crud/selectors';
 import { selectJournalEntry } from '../../store/entries/selectors';
@@ -24,7 +24,7 @@ export default function Edit() {
   const { loading: isUpdating, success } = useSelector(selectUpdateState);
 
   useEffect(() => {
-    dispatch(crudActions.resetState({ key: crudConstants.UPDATE }));
+    dispatch(crudActions.resetState({ key: crudKeys.UPDATE }));
 
     if (success) {
       navigate(`${PATHS.DETAILS}/${journalId}`);
@@ -33,7 +33,7 @@ export default function Edit() {
 
   const handleUpdateJournalSubmit = async (journalData) => {
     dispatch(updateJournalRequest({
-      key: crudConstants.UPDATE,
+      key: crudKeys.UPDATE,
       currentAction: crudActionsConstants.UPDATE_JOURNAL,
       journalMetaData: {
         journalData: buildJournalFormData(journalData),
