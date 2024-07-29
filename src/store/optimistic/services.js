@@ -55,8 +55,6 @@ export const postCommentRequest = createAsyncThunk(
     };
 
     const result = await sendHttpRequest(`${API.COMMENTS.COMMENTS}/${journalId}`, settings);
-
-    dispatch(entriesActions.updateLocalCommentWithRealData(result));
     return result.data;
   },
 );
