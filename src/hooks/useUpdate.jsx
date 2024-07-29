@@ -15,6 +15,17 @@ const useUpdate = () => {
     error,
   } = useSelector(selectUpdateState);
 
+  const handleUpdateJournalRequest = (journalData, journalId) => {
+    dispatch(updateJournalRequest({
+      key: crudKeys.UPDATE,
+      currentAction: crudActionsConstants.UPDATE_JOURNAL,
+      journalMetaData: {
+        journalData: buildJournalFormData(journalData),
+        journalId,
+      },
+    }));
+  };
+
   const handleUpdateProfileRequest = (userData) => {
     dispatch(updateProfileRequest({
       key: crudKeys.UPDATE,
@@ -28,6 +39,7 @@ const useUpdate = () => {
     loading,
     success,
     error,
+    updateJournal: handleUpdateJournalRequest,
     updateProfile: handleUpdateProfileRequest,
   };
 };
