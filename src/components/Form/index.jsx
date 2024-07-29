@@ -42,7 +42,6 @@ export default function Form(
     const childrenArray = Children.toArray(children);
 
     const initialState = childrenArray.reduce((state, child) => {
-
       if (child.type.name === 'FormInput') {
         const { name: fieldName, initialValue: fieldValue = '', validators = [] } = child.props;
 
