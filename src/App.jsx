@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import Loading from './components/Loading';
 import Footer from './components/Footer';
 import useDestinations from './hooks/useDestinations';
+import OptimisticModule from './modules/OptimisticModule';
 
 export default function App() {
   const { success: destinationsLoaded, fetchDestinations } = useDestinations();
@@ -22,7 +23,7 @@ export default function App() {
       <Navigation />
       <Outlet />
       <Footer />
-      <OptimisticErrorModal />
+      <OptimisticModule />
       <ScrollRestoration />
     </DefaultLayout>
   );
