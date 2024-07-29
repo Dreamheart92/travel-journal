@@ -14,7 +14,7 @@ import { crudActions } from '../../../store/crud';
 import FormProvider from '../../../context/FormContext';
 import useAuth from '../../../hooks/useAuth';
 
-export default function EditProfile() {
+export default function EditProfileModule() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
