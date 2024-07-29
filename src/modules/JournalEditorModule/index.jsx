@@ -17,5 +17,21 @@ export default function JournalEditorModule({ settings }) {
   const formInitialState = buildFormInitialState(journal);
 
   return (
+    <FormProvider>
+      <JournalEditorLayout
+        title={title}
+        caption={caption}
+      >
+
+        <JournalForm
+          buttonCaption={buttonCaption}
+          isSubmitting={isSubmitting}
+          submitCallback={submitCallback}
+          initialState={formInitialState}
+          requestError={requestError}
+        />
+
+      </JournalEditorLayout>
+    </FormProvider>
   );
 }
