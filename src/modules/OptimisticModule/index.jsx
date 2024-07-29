@@ -9,5 +9,13 @@ import optimisticKeys from '../../store/optimistic/types';
 import { entriesActions } from '../../store/entries';
 
 export default function OptimisticModule() {
+  const dispatch = useDispatch();
+
+  const { isOpen: isModalOpen, onOpenModal } = useModal();
+
+  const [errorMessage, setErrorMessage] = useState(null);
+
+    <Modal isOpen={isModalOpen}>
+    </Modal>
   );
 }
