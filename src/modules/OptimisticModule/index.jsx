@@ -24,6 +24,12 @@ export default function OptimisticModule() {
     [optimisticKeys.DELETE_COMMENT]: optimisticState[optimisticKeys.DELETE_COMMENT].error,
     [optimisticKeys.POST_COMMENT_REACTION]: optimisticState[optimisticKeys.POST_COMMENT_REACTION].error,
   };
+
+  useEffect(() => {
+    if (postCommentSuccessData) {
+      dispatch(entriesActions.updateLocalCommentWithRealData(postCommentSuccessData));
+    }
+  }, [postCommentSuccessData]);
     <Modal isOpen={isModalOpen}>
     </Modal>
   );
