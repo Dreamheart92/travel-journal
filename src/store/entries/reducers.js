@@ -23,7 +23,7 @@ const deleteLocalComment = (state, action) => {
 };
 
 const updateLocalCommentWithRealData = (state, action) => {
-  const commentRealData = action.payload.data;
+  const commentRealData = action.payload;
 
   const localCommentIndex = state[entriesKeys.COMMENTS].results
     .findIndex((localComment) => (
