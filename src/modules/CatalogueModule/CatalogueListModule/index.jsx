@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import CatalogueCard from '../CatalogueCard';
-import Loading from '../Loading';
-import { fetchEntries } from '../../store/entries/services';
-import { selectJournalsEntries } from '../../store/entries/selectors';
-import { entriesActions } from '../../store/entries';
-import entriesKeys from '../../store/entries/types';
-import { buildQueryString } from '../../helpers';
-import { searchActions } from '../../store/search';
-import ErrorMessage from '../ErrorMessage';
-import Pagination from '../Pagination';
+import CatalogueCard from '../../../components/CatalogueCard';
+import Loading from '../../../components/Loading';
+import { fetchEntries } from '../../../store/entries/services';
+import { selectJournalsEntries } from '../../../store/entries/selectors';
+import { entriesActions } from '../../../store/entries';
+import entriesKeys from '../../../store/entries/types';
+import { buildQueryString } from '../../../helpers';
+import { searchActions } from '../../../store/search';
+import ErrorMessage from '../../../components/ErrorMessage';
+import Pagination from '../../../components/Pagination';
+import style from './index.module.css';
 
-export default function JournalsList({ destination, searchParams, onQuery }) {
+export default function CatalogueListModule({ destination, searchParams, onQuery }) {
   const dispatch = useDispatch();
 
   const {
@@ -39,7 +40,7 @@ export default function JournalsList({ destination, searchParams, onQuery }) {
   }, [destination]);
 
   return (
-    <>
+    <div className={style['journals-container']}>
       {(loading || (!success && !error))
         && <Loading />}
 
@@ -61,6 +62,6 @@ export default function JournalsList({ destination, searchParams, onQuery }) {
 
       {error
         && <ErrorMessage large message={error.message} />}
-    </>
+    </div>
   );
 }
