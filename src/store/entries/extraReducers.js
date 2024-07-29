@@ -10,7 +10,7 @@ const extraReducers = (builder) => {
   });
   builder.addCase(fetchEntry.fulfilled, (state, action) => {
     state[entriesKeys.JOURNAL_ENTRY].result = action.payload.result;
-    state[entriesKeys.JOURNAL_ENTRY].isJournalOwner = action.payload.isJournalOwner;
+    state[entriesKeys.JOURNAL_ENTRY].result.isJournalOwner = action.payload.isJournalOwner;
     state[entriesKeys.COMMENTS].results = action.payload.comments;
 
     state[entriesKeys.JOURNAL_ENTRY].loading = false;
