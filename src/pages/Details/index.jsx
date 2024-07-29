@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 import DefaultLayout from '../../layouts/DefaultLayout';
-import Journal from '../../components/Journal';
-import CommentsSection from '../../components/CommentsSection';
 import Container from '../../components/Container';
 import { selectJournalEntry } from '../../store/entries/selectors';
 import Loading from '../../components/Loading';
@@ -12,6 +10,8 @@ import { entriesActions } from '../../store/entries';
 import entriesKeys from '../../store/entries/types';
 import ErrorMessage from '../../components/ErrorMessage';
 import { PATHS } from '../../constants/paths';
+import JournalModule from '../../modules/DetailsModule/JournalModule';
+import CommentsModule from '../../modules/DetailsModule/CommentsModule';
 
 export default function Details() {
   const { journalId } = useParams();
@@ -50,9 +50,12 @@ export default function Details() {
         {!loading && success
           && (
             <>
-              <Journal journal={journal} journalId={journalId} />
+              <JournalModule
+                journal={journal}
+                journalId={journalId}
+              />
 
-              <CommentsSection
+              <CommentsModule
                 journalId={journalId}
               />
             </>
