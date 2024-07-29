@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import CommentsSectionHeader from './CommentsSectionHeader';
 import CommentCard from '../../../components/CommentCard';
 import style from './index.module.css';
@@ -9,13 +9,11 @@ import Modal from '../../../components/Modal';
 import DeleteModal from '../../../components/Modal/DeleteModal';
 import useModal from '../../../hooks/useModal';
 import { selectComments } from '../../../store/entries/selectors';
-import { entriesActions } from '../../../store/entries';
 import { selectAuth } from '../../../store/auth/selectors';
 import FormProvider from '../../../context/FormContext';
 import useOptimisticActions from '../../../hooks/useOptimisticActions';
 
 export default function CommentsModule({ journalId }) {
-  const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector(selectAuth);
 
   const { comments } = useSelector(selectComments);
@@ -31,8 +29,6 @@ export default function CommentsModule({ journalId }) {
 
   const handleCreateCommentSubmit = async (comment) => {
     const localComment = buildLocalComment(user, comment);
-
-    dispatch(entriesActions.addLocalComment(localComment));
     postCommentOptimistic(localComment, journalId);
   };
 
