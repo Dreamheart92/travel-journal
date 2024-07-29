@@ -11,20 +11,15 @@ export const splitByNewLine = (content) => content.split('\n');
 
 export const formatCommentsCount = (comments) => `${comments.length} comment${comments.length > 1 ? 's' : ''}`;
 
-export const buildJournalUrlRequest = (queryParams) => {
-  if (queryParams) {
-    const { search, destination } = queryParams;
+export const buildQueryString = (searchParams) => {
+  const queries = [];
 
-    let query = '?';
+  searchParams.entries().forEach(([searchKey, searchValue]) => {
+    queries.push(`${searchKey}=${searchValue}`);
+  });
 
-    if (search) {
-      query += `search=${search}`;
-    }
-
-    return `${API.JOURNAL.JOURNALS}/${destination || ''}${query}`;
-  }
-
-  return API.JOURNAL.JOURNALS;
+  const query = queries.length > 0 ? `?${queries.join('&')}` : '';
+  return query;
 };
 
 export const buildJournalFormData = (journalData) => {
