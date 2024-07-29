@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useForm from '../../../hooks/useForm';
+import useCrud from '../../../hooks/useCrud';
+import useAuth from '../../../hooks/useAuth';
 
 import { PATHS } from '../../../constants/paths';
 import VALIDATIONS from '../../../constants/validations';
 
 import Form from '../../../components/Form';
 import Button from '../../../components/Button';
-import useAuth from '../../../hooks/useAuth';
-import useCreate from '../../../hooks/useCreate';
+import crudKeys from '../../../store/crud/types';
 
 export default function SignupForm() {
   const [form] = useForm();
@@ -23,7 +24,7 @@ export default function SignupForm() {
     success,
     error,
     signup,
-  } = useCreate();
+  } = useCrud(crudKeys.CREATE);
 
   useEffect(() => {
     if (success) {
