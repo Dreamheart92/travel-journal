@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import JournalEditor from '../../components/JournalEditor';
@@ -8,7 +9,6 @@ import { selectCreateState } from '../../store/crud/selectors';
 import { postJournalRequest } from '../../store/crud/services';
 import crudActionsConstants from '../../constants/crudActionsConstants';
 import { buildJournalFormData } from '../../helpers';
-import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../constants/paths';
 
 export default function Create() {
@@ -19,7 +19,7 @@ export default function Create() {
     data: journalData,
     loading,
     success,
-    error
+    error,
   } = useSelector(selectCreateState);
 
   useEffect(() => {
