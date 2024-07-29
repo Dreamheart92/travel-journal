@@ -1,7 +1,7 @@
-const entriesConstants = {
+const entriesKeys = {
   JOURNAL_ENTRY: 'journal',
   JOURNAL_ENTRIES: 'journals',
   COMMENTS: 'comments',
 };
 
-export default entriesConstants;
+export default entriesKeys;

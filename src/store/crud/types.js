@@ -1,4 +1,4 @@
-const crudConstants = {
+const crudKeys = {
   LIST: 'list',
   CURRENT: 'current',
   CREATE: 'create',
@@ -7,4 +7,4 @@ const crudConstants = {
   DELETE: 'delete',
 };
 
-export default crudConstants;
+export default crudKeys;

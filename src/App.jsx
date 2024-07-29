@@ -22,11 +22,11 @@ export default function App() {
 
   const appIsLoaded = initApp && destinationsLoaded;
 
+  if (!appIsLoaded) {
   return (
     <DefaultLayout>
       <Navigation />
-      {!appIsLoaded && <Loading />}
-      {appIsLoaded && <Outlet />}
+      <Outlet />
       <Footer />
       <OptimisticErrorModel />
       <ScrollRestoration />
