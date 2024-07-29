@@ -10,8 +10,8 @@ import style from './index.module.css';
 export default function AuthLayout({ form, title, caption }) {
   const location = useLocation();
 
-  const isLogginPage = location.pathname === '/login';
-  const paddingTop = isLogginPage ? '15%' : '10%';
+  const isLoginPage = location.pathname === '/login';
+  const paddingTop = isLoginPage ? '15%' : '10%';
 
   return (
     <div className={style.container}>
