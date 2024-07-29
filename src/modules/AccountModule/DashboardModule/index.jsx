@@ -5,7 +5,7 @@ import { normalizeName } from '../../../helpers';
 import style from './index.module.css';
 import { selectUser } from '../../../store/auth/selectors';
 
-export default function Dashboard() {
+export default function DashboardModule() {
   const user = useSelector(selectUser);
 
   return (
