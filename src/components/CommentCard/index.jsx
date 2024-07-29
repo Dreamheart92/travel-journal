@@ -1,14 +1,18 @@
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import UserProfileImage from '../UserProfileImage';
 import CommentCardContent from './CommentCardContent';
 import CommentCardReaction from './CommentCardReaction';
 import style from './index.module.css';
 import Button from '../Button';
-import { postCommentReactionRequest } from '../../store/crud/thunks';
-import crudConstants from '../../constants/crudConstants';
-import crudActionsConstants from '../../constants/crudActionsConstants';
+import { selectIsAuthenticated } from '../../store/auth/selectors';
+import { PATHS } from '../../constants/paths';
+import { postCommentReactionRequest } from '../../store/optimistic/services';
+import optimisticKeys from '../../store/optimistic/types';
 
 export default function CommentCard({ comment, userId, onSetModalTargetItemId }) {
+  const navigate = useNavigate();
+
   const {
     author,
     createdAt,
@@ -19,19 +23,23 @@ export default function CommentCard({ comment, userId, onSetModalTargetItemId })
   } = comment;
 
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const handleCommentReaction = (reactionType, isReacted) => {
-    if (!commentId.endsWith('___temporary')) {
-      dispatch(postCommentReactionRequest({
-        key: crudConstants.CREATE,
-        currentAction: crudActionsConstants.REACT_JOURNAL,
-        reactionMetaData: {
-          reactionType,
-          isReacted,
-          commentId,
-          userId,
-        },
-      }));
+    if (isAuthenticated) {
+      if (!commentId.endsWith('___temporary')) {
+        dispatch(postCommentReactionRequest({
+          key: optimisticKeys.POST_COMMENT_REACTION,
+          reactionMetaData: {
+            reactionType,
+            isReacted,
+            commentId,
+            userId,
+          },
+        }));
+      }
+    } else {
+      navigate(PATHS.LOGIN);
     }
   };
 
