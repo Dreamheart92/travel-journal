@@ -1,9 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import CatalogueCard from '../../../components/CatalogueCard';
 import Loading from '../../../components/Loading';
-import { fetchEntries } from '../../../store/entries/services';
-import { selectJournalsEntries } from '../../../store/entries/selectors';
 import { entriesActions } from '../../../store/entries';
 import entriesKeys from '../../../store/entries/types';
 import { buildQueryString } from '../../../helpers';
@@ -11,16 +9,19 @@ import ErrorMessage from '../../../components/ErrorMessage';
 import Pagination from '../../../components/Pagination';
 import style from './index.module.css';
 import useSearch from '../../../hooks/useSearch';
+import useJournals from '../../../hooks/useJournals';
 
 export default function CatalogueListModule({ destination, searchParams, onQuery }) {
   const dispatch = useDispatch();
 
   const {
-    results,
+    journals,
+    totalPages,
     loading,
     success,
     error,
-  } = useSelector(selectJournalsEntries);
+    fetchJournals,
+  } = useJournals();
 
   const { resetSearch } = useSearch();
 
@@ -30,7 +31,7 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
     dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES }));
 
     const query = buildQueryString(searchParams);
-    const promise = dispatch(fetchEntries({ query, destination }));
+    const promise = fetchJournals(query, destination);
 
     return () => {
       promise.abort();
@@ -46,14 +47,14 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
       {(loading || (!success && !error))
         && <Loading />}
 
-      {!loading && results
+      {!loading && journals
         && (
           <Pagination
             onQuery={onQuery}
-            totalPages={results.totalPages}
+            totalPages={totalPages}
             currentPage={currentPage}
           >
-            {results.journals.map((journal) => (
+            {journals.map((journal) => (
               <CatalogueCard
                 key={journal._id}
                 journal={journal}
