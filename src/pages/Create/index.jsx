@@ -5,7 +5,7 @@ import { crudActions } from '../../store/crud';
 import crudKeys from '../../store/crud/types';
 import { PATHS } from '../../constants/paths';
 import JournalEditorModule from '../../modules/JournalEditorModule';
-import useCreate from '../../hooks/useCreate';
+import useCrud from '../../hooks/useCrud';
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export default function Create() {
     success,
     error,
     postJournal,
-  } = useCreate();
+  } = useCrud(crudKeys.CREATE);
 
   useEffect(() => {
     dispatch(crudActions.resetState({ key: crudKeys.CREATE }));
