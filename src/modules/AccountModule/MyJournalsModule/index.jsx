@@ -9,7 +9,7 @@ import { selectUser } from '../../../store/auth/selectors';
 import { entriesActions } from '../../../store/entries';
 import entriesKeys from '../../../store/entries/types';
 
-export default function MyJournals() {
+export default function MyJournalsModule() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const { results, loading } = useSelector(selectJournalsEntries);
