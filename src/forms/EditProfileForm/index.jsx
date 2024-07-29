@@ -3,7 +3,6 @@ import Button from '../../components/Button';
 import VALIDATIONS from '../../constants/validations';
 
 export default function EditProfileForm({ initialState, submitCallback, isSubmitting }) {
-
   return (
     <Form submitCallback={submitCallback}>
       <Form.Input
