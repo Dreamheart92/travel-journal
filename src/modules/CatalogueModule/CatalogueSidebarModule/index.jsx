@@ -5,5 +5,12 @@ import FiltersSection from '../../../components/Sidebar/FiltersSection';
 
 export default function CatalogueSidebarModule({ isAuthenticated, onQuery }) {
   return (
+    <Sidebar width="20em">
+      {isAuthenticated
+        && <CreateJournal />}
+
+      <Search onQuery={onQuery} />
+      <FiltersSection />
+    </Sidebar>
   );
 }
