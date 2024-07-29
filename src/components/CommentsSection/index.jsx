@@ -8,14 +8,12 @@ import { buildLocalComment } from '../../forms/helpers/createCommentForm';
 import Modal from '../Modal';
 import DeleteModal from '../Modal/DeleteModal';
 import useModal from '../../hooks/useModal';
-import Loading from '../Loading';
 import { selectComments } from '../../store/entries/selectors';
 import { entriesActions } from '../../store/entries';
-import { deleteCommentRequest, postCommentRequest } from '../../store/crud/thunks';
-import crudConstants from '../../constants/crudConstants';
-import crudActionsConstants from '../../constants/crudActionsConstants';
+import { postCommentRequest, deleteCommentRequest } from '../../store/optimistic/services';
 import { selectAuth } from '../../store/auth/selectors';
 import FormProvider from '../../context/FormContext';
+import optimisticKeys from '../../store/optimistic/types';
 
 export default function CommentsSection({ journalId }) {
   const dispatch = useDispatch();
@@ -35,8 +33,7 @@ export default function CommentsSection({ journalId }) {
 
     dispatch(entriesActions.addLocalComment(localComment));
     dispatch(postCommentRequest({
-      key: crudConstants.CREATE,
-      currentAction: crudActionsConstants.POST_COMMENT,
+      key: optimisticKeys.POST_COMMENT,
       commentMetaData: {
         commentData: {
           comment: localComment.comment,
@@ -50,19 +47,12 @@ export default function CommentsSection({ journalId }) {
   const handleDeleteComment = () => {
     if (targetItemId) {
       dispatch(deleteCommentRequest({
-        key: crudConstants.DELETE,
-        currentAction: crudActionsConstants.DELETE_COMMENT,
+        key: optimisticKeys.DELETE_COMMENT,
         commentId: targetItemId,
       }));
       onCloseModal();
     }
   };
-
-  // Todo : Handle better loading
-
-  if (!comments.results || loading) {
-    return;
-  }
 
   return (
     <>
