@@ -44,9 +44,22 @@ export default function Details() {
     <DefaultLayout>
       <Container width="80em">
 
-        <CommentsSection
-          journalId={journalId}
-        />
+        {(loading || (!success && !error))
+          && <Loading />}
+
+        {!loading && success
+          && (
+            <>
+              <Journal journal={journal} journalId={journalId} />
+
+              <CommentsSection
+                journalId={journalId}
+              />
+            </>
+          )}
+
+        {error
+          && <ErrorMessage large message={error.message} />}
       </Container>
     </DefaultLayout>
   );
