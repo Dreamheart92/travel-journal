@@ -7,7 +7,7 @@ import crudKeys from '../../store/crud/types';
 import { selectJournalEntry } from '../../store/entries/selectors';
 import { crudActions } from '../../store/crud';
 import JournalEditorModule from '../../modules/JournalEditorModule';
-import useUpdate from '../../hooks/useUpdate';
+import useCrud from '../../hooks/useCrud';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function Edit() {
     success: isUpdatedJournal,
     error,
     updateJournal,
-  } = useUpdate();
+  } = useCrud(crudKeys.UPDATE);
 
   useEffect(() => {
     dispatch(crudActions.resetState({ key: crudKeys.UPDATE }));
