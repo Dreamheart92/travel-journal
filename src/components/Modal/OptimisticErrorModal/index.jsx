@@ -29,6 +29,7 @@ export default function OptimisticErrorModal() {
 
   return (
     <Modal isOpen={isModalOpen}>
+      <ErrorMessage isRefreshError large message={errorMessage} />
     </Modal>
   );
 }
