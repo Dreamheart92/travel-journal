@@ -15,11 +15,20 @@ const useRead = () => {
     error,
   } = useSelector(selectReadState);
 
+  const handleLoginRequest = (loginData) => {
+    dispatch(sendLoginRequest({
+      key: crudKeys.READ,
+      currentAction: crudActionsConstants.LOGIN,
+      loginData: constructLoginData(loginData),
+    }));
+  };
+
   return {
     data,
     loading,
     success,
     error,
+    login: handleLoginRequest,
   };
 };
 
