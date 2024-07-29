@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import entriesConstants from '../../constants/entriesConstants';
-import { fetchEntry } from './thunks';
+import entriesKeys from './types';
+import INITIAL_KEY_STATE from './initialState';
+import extraReducers from './extraReducers';
 
 const INITIAL_KEY_STATE = {
   results: null,
@@ -10,14 +11,14 @@ const INITIAL_KEY_STATE = {
 };
 
 const initialState = {
-  [entriesConstants.JOURNAL_ENTRY]: {
+  [entriesKeys.JOURNAL_ENTRY]: {
     result: null,
     loading: false,
     success: false,
     error: null,
   },
-  [entriesConstants.JOURNAL_ENTRIES]: INITIAL_KEY_STATE,
-  [entriesConstants.COMMENTS]: {
+  [entriesKeys.JOURNAL_ENTRIES]: INITIAL_KEY_STATE,
+  [entriesKeys.COMMENTS]: {
     results: null,
   },
 };
@@ -26,6 +27,11 @@ const entriesSlice = createSlice({
   name: 'entries',
   initialState,
   reducers: {
+    resetState,
+    addLocalComment,
+    deleteLocalComment,
+    updateLocalCommentWithRealData,
+    updateLocalCommentReaction,
   },
   extraReducers,
 });
