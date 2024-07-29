@@ -5,25 +5,26 @@ import useForm from '../../hooks/useForm';
 
 import { PATHS } from '../../constants/paths';
 import VALIDATIONS from '../../constants/validations';
-import crudConstants from '../../constants/crudConstants';
+import crudKeys from '../../store/crud/types';
 
 import crudActionsConstants from '../../constants/crudActionsConstants';
 
-import { sendSignupRequest } from '../../store/crud/thunks';
+import { sendSignupRequest } from '../../store/crud/services';
 import { constructSignupData } from '../helpers/signupForm';
 
 import { selectCreateState } from '../../store/crud/selectors';
 
-import { deleteUserDataFromStorage, storeUserData } from '../../helpers/storage';
-
 import Form from '../../components/Form';
 import Button from '../../components/Button';
+import useAuth from '../../hooks/useAuth';
 
 export default function SignupForm() {
   const [form] = useForm();
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const auth = useAuth();
 
   const {
     data: userData,
@@ -34,8 +35,7 @@ export default function SignupForm() {
 
   useEffect(() => {
     if (success) {
-      deleteUserDataFromStorage();
-      storeUserData(userData);
+      auth.saveUser(userData);
       navigate(PATHS.HOME);
     }
 
@@ -60,7 +60,7 @@ export default function SignupForm() {
     setPasswordsMatching(true);
 
     dispatch(sendSignupRequest({
-      key: crudConstants.CREATE,
+      key: crudKeys.CREATE,
       currentAction: crudActionsConstants.SIGNUP,
       signupData: constructSignupData(signupData),
     }));
@@ -70,7 +70,7 @@ export default function SignupForm() {
     ? { error: true, message: 'Passwords not matching' }
     : error;
 
-  const disableSubmitButton = (!form.isValidForm || !passwordsMatching) && form.hasBeenSubmitted;
+  const disableSubmitButton = !form.isValidForm && form.hasBeenSubmitted;
 
   return (
     <Form
@@ -145,6 +145,7 @@ export default function SignupForm() {
         name="password"
         placeholder="Password"
         inputType="text"
+        type="password"
         validators={[
           {
             required: true,
@@ -161,6 +162,7 @@ export default function SignupForm() {
         name="confirmPassword"
         placeholder="Confirm Password"
         inputType="text"
+        type="password"
         validators={[
           {
             required: true,
