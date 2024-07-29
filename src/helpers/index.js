@@ -61,3 +61,8 @@ export const buildUserFormInitialState = (user) => ({
   lastName: user?.lastName || '',
   image: user?.imageUrl || '',
 });
+
+export const buildErrorObject = (message) => ({
+  error: true,
+  message,
+});
