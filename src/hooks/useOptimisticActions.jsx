@@ -22,7 +22,32 @@ const useOptimisticActions = () => {
       key: optimisticKeys.DELETE_COMMENT,
       commentId: targetItemId,
     }));
+  };
+
+  const handleCommentReaction = (metaData) => {
+    const {
+      reactionType,
+      isReacted,
+      commentId,
+      userId,
+    } = metaData;
+
+    dispatch(postCommentReactionRequest({
+      key: optimisticKeys.POST_COMMENT_REACTION,
+      reactionMetaData: {
+        reactionType,
+        isReacted,
+        commentId,
+        userId,
+      },
+    }));
+  };
+
+  return {
     postCommentOptimistic: handlePostComment,
+    deleteCommentOptimistic: handleDeleteComment,
+    postCommentReactionOptimistic: handleCommentReaction,
+  };
 };
 
 export default useOptimisticActions;
