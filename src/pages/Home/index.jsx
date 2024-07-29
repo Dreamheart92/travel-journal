@@ -5,7 +5,7 @@ import LatestJournalsModule from '../../modules/HomeModule/LatestJournalsModule'
 
 export default function Home() {
   return (
-    <Container width="100%">
+    <Container customStyle={{ width: '100%' }}>
       <Hero />
       <DestinationsModule />
       <LatestJournalsModule />
