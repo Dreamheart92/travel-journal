@@ -8,7 +8,6 @@ export default function AuthModule({ settings }) {
     form,
   } = settings;
 
-  )
   return (
     <AuthLayout
       title={title}
