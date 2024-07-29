@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import JournalEditor from '../../components/JournalEditor';
 import Loading from '../../components/Loading';
 import { PATHS } from '../../constants/paths';
 import { buildJournalFormData } from '../../helpers';
@@ -11,7 +10,7 @@ import crudActionsConstants from '../../constants/crudActionsConstants';
 import { selectUpdateState } from '../../store/crud/selectors';
 import { selectJournalEntry } from '../../store/entries/selectors';
 import { crudActions } from '../../store/crud';
-import FormProvider from '../../context/FormContext';
+import JournalEditorModule from '../../modules/JournalEditorModule';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -21,7 +20,7 @@ export default function Edit() {
 
   const { result: journal, loading: journalLoading } = useSelector(selectJournalEntry);
 
-  const { loading: isUpdating, success } = useSelector(selectUpdateState);
+  const { loading: isUpdating, success, error } = useSelector(selectUpdateState);
 
   useEffect(() => {
     dispatch(crudActions.resetState({ key: crudKeys.UPDATE }));
@@ -46,16 +45,15 @@ export default function Edit() {
     return <Loading />;
   }
 
-  return (
-    <FormProvider>
-      <JournalEditor
-        title="Refine Your Story!"
-        caption="Update your travel journal to reflect your latest adventures and insights. Edit your stories, photos, and experiences to keep your journey alive and inspiring."
-        buttonCaption="Edit"
-        journal={journal}
-        submitCallback={handleUpdateJournalSubmit}
-        isSubmitting={isUpdating}
-      />
-    </FormProvider>
-  );
+  const settings = {
+    title: 'Refine Your Story!',
+    caption: 'Update your travel journal to reflect your latest adventures and insights. Edit your stories, photos, and experiences to keep your journey alive and inspiring.',
+    buttonCaption: 'Edit',
+    submitCallback: handleUpdateJournalSubmit,
+    isSubmitting: isUpdating,
+    requestError: error,
+    journal,
+  };
+
+  return <JournalEditorModule settings={settings} />;
 }
