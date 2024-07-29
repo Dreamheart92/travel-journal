@@ -4,10 +4,12 @@ export default function Container(
   {
     children,
     heading,
+    customStyle = {},
   },
 ) {
   return (
     <div
+      style={customStyle}
       className={style.container}
     >
       {heading
