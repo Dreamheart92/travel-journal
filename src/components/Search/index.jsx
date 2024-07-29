@@ -1,27 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import SidebarSection from '../Sidebar/SidebarSection';
 import style from './index.module.css';
+import { selectSearch } from '../../store/search/selectors';
+import { searchActions } from '../../store/search';
 
-export default function Search(
-  {
-    onQuery,
-    urlSearch,
-    isSearching,
-    onSearching,
-  },
-) {
-  const [search, setSearch] = useState(urlSearch);
+export default function Search({ onQuery }) {
+  const dispatch = useDispatch();
+  const { search, isSearching } = useSelector(selectSearch);
 
   const debounceQueryTimeout = useRef(null);
 
   const handleChange = (event) => {
-    if (!isSearching) {
-      onSearching(true);
-    }
-
-    setSearch(event.target.value);
+    dispatch(searchActions.setSearch({ search: event.target.value }));
   };
 
   useEffect(() => {
