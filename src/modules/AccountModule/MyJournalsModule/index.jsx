@@ -24,18 +24,25 @@ export default function MyJournalsModule() {
     };
   }, []);
 
-  if (loading || !results) {
-    return <Loading />;
-  }
-
   return (
-    <Grid>
-      {results.journals.map((journal) => (
-        <HomeCard
-          key={journal._id}
-          journal={journal}
-        />
-      ))}
-    </Grid>
+    <>
+      {(loading || (!success && !error))
+        && <Loading />}
+
+      {!loading && success
+        && (
+          <Grid>
+            {journals.map((journal) => (
+              <HomeCard
+                key={journal._id}
+                journal={journal}
+              />
+            ))}
+          </Grid>
+        )}
+
+      {error
+        && <ErrorMessage large message={error.message} />}
+    </>
   );
 }
