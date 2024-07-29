@@ -44,7 +44,10 @@ export default function OptimisticModule() {
       }
     }
   }, [optimisticErrors]);
+
+  return (
     <Modal isOpen={isModalOpen}>
+      <ErrorMessage isRefreshError large message={errorMessage} />
     </Modal>
   );
 }
