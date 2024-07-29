@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import crudConstants from '../../constants/crudConstants';
+import crudKeys from '../../store/crud/types';
 import { crudActions } from '../../store/crud/index';
 
 import AuthLayout from '../../layouts/AuthLayout';
@@ -11,7 +11,7 @@ import FormProvider from '../../context/FormContext';
 export default function Signup() {
   const dispatch = useDispatch();
 
-  useEffect(() => () => dispatch(crudActions.resetState({ key: crudConstants.CREATE })));
+  useEffect(() => () => dispatch(crudActions.resetState({ key: crudKeys.CREATE })));
 
   return (
     <AuthLayout
