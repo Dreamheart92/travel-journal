@@ -6,7 +6,8 @@ import VALIDATIONS from '../../../constants/validations';
 import { PATHS } from '../../../constants/paths';
 import useForm from '../../../hooks/useForm';
 import useAuth from '../../../hooks/useAuth';
-import useRead from '../../../hooks/useRead';
+import useCrud from '../../../hooks/useCrud';
+import crudKeys from '../../../store/crud/types';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function LoginForm() {
     error,
     success,
     login,
-  } = useRead();
+  } = useCrud(crudKeys.READ);
 
   const handleLoginSubmit = (loginData) => {
     login(loginData);
