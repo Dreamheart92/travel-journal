@@ -49,6 +49,18 @@ const useCrud = (type) => {
       };
       break;
     }
+    case crudKeys.UPDATE: {
+      actions = {
+        updateJournal: (journalData, journalId) => {
+          dispatch(updateJournalRequest({
+            key: crudKeys.UPDATE,
+            currentAction: crudActionsConstants.UPDATE_JOURNAL,
+            journalMetaData: {
+              journalData: buildJournalFormData(journalData),
+              journalId,
+            },
+          }));
+        },
     default:
   }
 
