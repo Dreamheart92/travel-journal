@@ -5,18 +5,20 @@ import EditProfileForm from '../../../forms/EditProfileForm';
 import Container from '../../../components/Container';
 import { buildUserFormData, buildUserFormInitialState } from '../../../helpers';
 import { PATHS } from '../../../constants/paths';
-import { updateProfileRequest } from '../../../store/crud/thunks';
-import crudConstants from '../../../constants/crudConstants';
+import { updateProfileRequest } from '../../../store/crud/services';
+import crudKeys from '../../../store/crud/types';
 import crudActionsConstants from '../../../constants/crudActionsConstants';
 import { selectUpdateState } from '../../../store/crud/selectors';
-import { deleteUserDataFromStorage, storeUserData } from '../../../helpers/storage';
 import { selectUser } from '../../../store/auth/selectors';
 import { crudActions } from '../../../store/crud';
 import FormProvider from '../../../context/FormContext';
+import useAuth from '../../../hooks/useAuth';
 
 export default function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const auth = useAuth();
 
   const user = useSelector(selectUser);
 
@@ -27,11 +29,10 @@ export default function EditProfile() {
   } = useSelector(selectUpdateState);
 
   useEffect(() => {
-    dispatch(crudActions.resetState({ key: crudConstants.UPDATE }));
+    dispatch(crudActions.resetState({ key: crudKeys.UPDATE }));
 
     if (success) {
-      deleteUserDataFromStorage();
-      storeUserData(updatedUserData);
+      auth.updateUser(updatedUserData);
       navigate(PATHS.ACCOUNT);
     }
   }, [success]);
@@ -40,7 +41,7 @@ export default function EditProfile() {
 
   const handleUpdateProfileSubmit = (userData) => {
     dispatch(updateProfileRequest({
-      key: crudConstants.UPDATE,
+      key: crudKeys.UPDATE,
       currentAction: crudActionsConstants.UPDATE_PROFILE,
       userData: buildUserFormData(userData),
     }));
