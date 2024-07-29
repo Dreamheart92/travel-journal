@@ -3,14 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading';
 import { PATHS } from '../../constants/paths';
-import { buildJournalFormData } from '../../helpers';
-import { updateJournalRequest } from '../../store/crud/services';
 import crudKeys from '../../store/crud/types';
-import crudActionsConstants from '../../constants/crudActionsConstants';
-import { selectUpdateState } from '../../store/crud/selectors';
 import { selectJournalEntry } from '../../store/entries/selectors';
 import { crudActions } from '../../store/crud';
 import JournalEditorModule from '../../modules/JournalEditorModule';
+import useUpdate from '../../hooks/useUpdate';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -20,25 +17,23 @@ export default function Edit() {
 
   const { result: journal, loading: journalLoading } = useSelector(selectJournalEntry);
 
-  const { loading: isUpdating, success, error } = useSelector(selectUpdateState);
+  const {
+    loading: isUpdating,
+    success: isUpdatedJournal,
+    error,
+    updateJournal,
+  } = useUpdate();
 
   useEffect(() => {
     dispatch(crudActions.resetState({ key: crudKeys.UPDATE }));
 
-    if (success) {
+    if (isUpdatedJournal) {
       navigate(`${PATHS.DETAILS}/${journalId}`);
     }
-  }, [success]);
+  }, [isUpdatedJournal]);
 
   const handleUpdateJournalSubmit = async (journalData) => {
-    dispatch(updateJournalRequest({
-      key: crudKeys.UPDATE,
-      currentAction: crudActionsConstants.UPDATE_JOURNAL,
-      journalMetaData: {
-        journalData: buildJournalFormData(journalData),
-        journalId,
-      },
-    }));
+    updateJournal(journalData, journalId);
   };
 
   if (journalLoading || !journal) {
