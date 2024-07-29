@@ -1,5 +1,26 @@
+.error-container {
+    display: flex;
+    gap: .3em;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
 .error-message {
-    color: red;
+    color: #ef4444;
+}
+
+.large {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.small {
     font-weight: 500;
     font-size: .8em;
+}
+
+.refresh {
+    color: #15803d;
+    cursor: pointer;
 }
