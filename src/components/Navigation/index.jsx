@@ -2,15 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import NavigationLayout from '../../layouts/NavigationLayout';
 import Logo from './Logo';
 import NavigationMenu from './NavigationMenu';
-import { deleteUserDataFromStorage } from '../../helpers/storage';
 import { PATHS } from '../../constants/paths';
+import useAuth from '../../hooks/useAuth';
 
 export default function Navigation() {
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleLogout = (event) => {
     event.preventDefault();
-    deleteUserDataFromStorage();
+    auth.clearUser();
     navigate(PATHS.HOME);
   };
 
