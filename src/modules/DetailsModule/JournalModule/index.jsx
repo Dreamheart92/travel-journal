@@ -1,24 +1,20 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Image from '../Image';
-import JournalContent from '../JournalContent';
+import Image from '../../../components/Image';
+import JournalContent from '../../../components/JournalContent';
 import style from './index.module.css';
-import Button from '../Button';
-import Modal from '../Modal';
-import DeleteModal from '../Modal/DeleteModal';
-import useModal from '../../hooks/useModal';
-import { PATHS } from '../../constants/paths';
-import { fetchEntry } from '../../store/entries/services';
-import { selectDeleteState } from '../../store/crud/selectors';
-import { deleteJournalRequest } from '../../store/crud/services';
-import crudKeys from '../../store/crud/types';
-import crudActionsConstants from '../../constants/crudActionsConstants';
-import { crudActions } from '../../store/crud';
-import { entriesActions } from '../../store/entries';
-import entriesKeys from '../../store/entries/types';
+import Button from '../../../components/Button';
+import Modal from '../../../components/Modal';
+import DeleteModal from '../../../components/Modal/DeleteModal';
+import useModal from '../../../hooks/useModal';
+import { PATHS } from '../../../constants/paths';
+import { selectDeleteState } from '../../../store/crud/selectors';
+import { deleteJournalRequest } from '../../../store/crud/services';
+import crudKeys from '../../../store/crud/types';
+import crudActionsConstants from '../../../constants/crudActionsConstants';
+import { crudActions } from '../../../store/crud';
 
-export default function Journal({ journalId, journal }) {
+export default function JournalModule({ journalId, journal }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
