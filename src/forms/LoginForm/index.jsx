@@ -5,24 +5,26 @@ import Form from '../../components/Form';
 import Button from '../../components/Button';
 import VALIDATIONS from '../../constants/validations';
 import { selectReadState } from '../../store/crud/selectors';
-import crudConstants from '../../constants/crudConstants';
-import { storeUserData } from '../../helpers/storage';
+import crudKeys from '../../store/crud/types';
 import { PATHS } from '../../constants/paths';
-import { sendLoginRequest } from '../../store/crud/thunks';
+import { sendLoginRequest } from '../../store/crud/services';
 import crudActionsConstants from '../../constants/crudActionsConstants';
 import { constructLoginData } from '../helpers/loginForm';
 import useForm from '../../hooks/useForm';
+import useAuth from '../../hooks/useAuth';
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form] = useForm();
 
+  const auth = useAuth();
+
   const disableSubmitButton = !form.isValidForm && form.hasBeenSubmitted;
 
   const handleLoginSubmit = (formData) => {
     dispatch(sendLoginRequest({
-      key: crudConstants.READ,
+      key: crudKeys.READ,
       currentAction: crudActionsConstants.LOGIN,
       loginData: constructLoginData(formData),
     }));
@@ -37,7 +39,7 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (success) {
-      storeUserData(userData);
+      auth.saveUser(userData);
       navigate(PATHS.HOME);
     }
 
