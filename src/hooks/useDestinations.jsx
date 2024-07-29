@@ -11,6 +11,18 @@ const useDestinations = () => {
     loading,
     success,
   } = useSelector(selectDestinations);
+
+  const handleFetchDestinations = () => {
+    dispatch(fetchDestinations());
+  };
+
+  return {
+    destinations,
+    error,
+    loading,
+    success,
+    fetchDestinations: handleFetchDestinations,
+  };
 };
 
 export default useDestinations;
