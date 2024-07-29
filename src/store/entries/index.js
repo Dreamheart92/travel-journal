@@ -1,27 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import entriesKeys from './types';
-import INITIAL_KEY_STATE from './initialState';
+import { initialState } from './initialState';
 import extraReducers from './extraReducers';
 
-const INITIAL_KEY_STATE = {
-  results: null,
-  loading: false,
-  success: false,
-  error: null,
-};
-
-const initialState = {
-  [entriesKeys.JOURNAL_ENTRY]: {
-    result: null,
-    loading: false,
-    success: false,
-    error: null,
-  },
-  [entriesKeys.JOURNAL_ENTRIES]: INITIAL_KEY_STATE,
-  [entriesKeys.COMMENTS]: {
-    results: null,
-  },
-};
+import {
+  resetState,
+  addLocalComment,
+  deleteLocalComment,
+  updateLocalCommentWithRealData,
+  updateLocalCommentReaction,
+} from './reducers';
 
 const entriesSlice = createSlice({
   name: 'entries',
