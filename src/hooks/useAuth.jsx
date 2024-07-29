@@ -10,7 +10,13 @@ const useAuth = () => {
     dispatch(authActions.storeUser({ userData }));
   };
 
+  const handleClearUser = () => {
+    deleteUserDataFromLocalStorage();
+    dispatch(authActions.clearUser());
+  };
+
     saveUser: handleStoreUser,
+    clearUser: handleClearUser,
 };
 
 export default useAuth;
