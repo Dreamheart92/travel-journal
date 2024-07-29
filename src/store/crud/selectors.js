@@ -1,15 +1,15 @@
-import crudConstants from '../../constants/crudConstants';
+import crudKeys from './types';
 
 export const selectCrud = (state) => state.crud;
 
-export const selectListState = (state) => state.crud[crudConstants.LIST];
+export const selectListState = (state) => state.crud[crudKeys.LIST];
 
-export const selectCurrentState = (state) => state.crud[crudConstants.CURRENT];
+export const selectCurrentState = (state) => state.crud[crudKeys.CURRENT];
 
-export const selectReadState = (state) => state.crud[crudConstants.READ];
+export const selectReadState = (state) => state.crud[crudKeys.READ];
 
-export const selectCreateState = (state) => state.crud[crudConstants.CREATE];
+export const selectCreateState = (state) => state.crud[crudKeys.CREATE];
 
-export const selectUpdateState = (state) => state.crud[crudConstants.UPDATE];
+export const selectUpdateState = (state) => state.crud[crudKeys.UPDATE];
 
-export const selectDeleteState = (state) => state.crud[crudConstants.DELETE];
+export const selectDeleteState = (state) => state.crud[crudKeys.DELETE];
