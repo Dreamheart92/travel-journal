@@ -16,6 +16,13 @@ const useCreate = () => {
     error,
   } = useSelector(selectCreateState);
 
+  const handlePostJournalRequest = (formData) => {
+    dispatch(postJournalRequest({
+      key: crudKeys.CREATE,
+      currentAction: crudActionsConstants.POST_JOURNAL,
+      journalData: buildJournalFormData(formData),
+    }));
+  };
 };
 
 export default useCreate;
