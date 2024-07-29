@@ -4,9 +4,14 @@ import { useDispatch } from 'react-redux';
 import crudKeys from '../../store/crud/types';
 import { crudActions } from '../../store/crud/index';
 
-import AuthLayout from '../../layouts/AuthLayout';
-import SignupForm from '../../forms/SignupForm';
-import FormProvider from '../../context/FormContext';
+import SignupForm from '../../modules/AuthModule/Forms/SignupForm';
+import AuthModule from '../../modules/AuthModule';
+
+const settings = {
+  title: 'Join the Adventure!',
+  caption: 'Sign up to create your Travel Journal, share your stories, and explore a world of new destinations with fellow travelers.',
+  form: <SignupForm />,
+};
 
 export default function Signup() {
   const dispatch = useDispatch();
