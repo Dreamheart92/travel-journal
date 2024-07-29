@@ -3,21 +3,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../../components/Loading';
 import Grid from '../../../components/Grid';
 import HomeCard from '../../../components/HomeCard';
-import { fetchUserEntries } from '../../../store/entries/services';
-import { selectJournalsEntries } from '../../../store/entries/selectors';
 import { selectUser } from '../../../store/auth/selectors';
 import { entriesActions } from '../../../store/entries';
 import entriesKeys from '../../../store/entries/types';
+import useJournals from '../../../hooks/useJournals';
+import ErrorMessage from '../../../components/ErrorMessage';
 
 export default function MyJournalsModule() {
   const dispatch = useDispatch();
+
   const user = useSelector(selectUser);
-  const { results, loading } = useSelector(selectJournalsEntries);
+
+  const {
+    journals,
+    loading,
+    success,
+    error,
+    fetchUserJournals,
+  } = useJournals();
 
   useEffect(() => {
     dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES }));
 
-    const promise = dispatch(fetchUserEntries({ userId: user._id }));
+    const promise = fetchUserJournals(user._id);
 
     return () => {
       promise.abort();
