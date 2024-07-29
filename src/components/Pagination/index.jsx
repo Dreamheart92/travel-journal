@@ -16,6 +16,29 @@ export default function Pagination(
 
   return (
     <>
+      {currentPage !== 1
+        && (
+          <button
+            type="button"
+            onClick={() => handlePagination('previous')}
+            className={`${style.pagination} ${style['pagination-left']}`}
+          >
+            Previous Page
+          </button>
+        )}
+
+      {children}
+
+      {!isLastPage
+        && (
+          <button
+            type="button"
+            onClick={() => handlePagination('next')}
+            className={`${style.pagination} ${style['pagination-right']}`}
+          >
+            Next Page
+          </button>
+        )}
     </>
   );
 }
