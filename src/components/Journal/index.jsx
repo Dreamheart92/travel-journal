@@ -9,55 +9,34 @@ import Modal from '../Modal';
 import DeleteModal from '../Modal/DeleteModal';
 import useModal from '../../hooks/useModal';
 import { PATHS } from '../../constants/paths';
-import Loading from '../Loading';
-import { fetchEntry } from '../../store/entries/thunks';
-import { selectJournalEntry } from '../../store/entries/selectors';
+import { fetchEntry } from '../../store/entries/services';
 import { selectDeleteState } from '../../store/crud/selectors';
-import { deleteJournalRequest } from '../../store/crud/thunks';
-import crudConstants from '../../constants/crudConstants';
+import { deleteJournalRequest } from '../../store/crud/services';
+import crudKeys from '../../store/crud/types';
 import crudActionsConstants from '../../constants/crudActionsConstants';
 import { crudActions } from '../../store/crud';
 import { entriesActions } from '../../store/entries';
-import entriesConstants from '../../constants/entriesConstants';
+import entriesKeys from '../../store/entries/types';
 
-export default function Journal({ journalId }) {
+export default function Journal({ journalId, journal }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { isOpen, onOpenModal, onCloseModal } = useModal();
   const { loading } = useSelector(selectDeleteState);
 
-  const {
-    result: journal,
-    loading: journalLoading,
-    isJournalOwner,
-  } = useSelector(selectJournalEntry);
-
   const handleDeleteJournal = async () => {
     const isSuccess = await dispatch(deleteJournalRequest({
-      key: crudConstants.DELETE,
+      key: crudKeys.DELETE,
       currentAction: crudActionsConstants.DELETE_JOURNAL,
       journalId,
     }));
 
     if (isSuccess?.payload?.success) {
-      dispatch(crudActions.resetState({ key: crudConstants.DELETE }));
+      dispatch(crudActions.resetState({ key: crudKeys.DELETE }));
       navigate(PATHS.CATALOGUE);
     }
   };
-
-  useEffect(() => {
-    dispatch(entriesActions.resetState({ key: entriesConstants.JOURNAL_ENTRY }));
-    const promise = dispatch(fetchEntry({ journalId }));
-
-    return () => {
-      promise.abort();
-    };
-  }, []);
-
-  if (journalLoading || !journal) {
-    return <Loading />;
-  }
 
   return (
     <div className={style.container}>
@@ -67,7 +46,7 @@ export default function Journal({ journalId }) {
 
       <JournalContent journal={journal} />
 
-      {isJournalOwner && (
+      {journal.isJournalOwner && (
         <div className={style.controls}>
           <Button
             onClick={() => navigate(`${PATHS.EDIT}/${journalId}`)}
