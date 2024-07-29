@@ -1,16 +1,31 @@
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useParams } from 'react-router-dom';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import Journal from '../../components/Journal';
 import CommentsSection from '../../components/CommentsSection';
 import Container from '../../components/Container';
+import { selectJournalEntry } from '../../store/entries/selectors';
+import Loading from '../../components/Loading';
+import { fetchEntry } from '../../store/entries/services';
+import { entriesActions } from '../../store/entries';
+import entriesKeys from '../../store/entries/types';
+import ErrorMessage from '../../components/ErrorMessage';
+import { PATHS } from '../../constants/paths';
 
 export default function Details() {
   const { journalId } = useParams();
 
+  const {
+    result: journal,
+    loading,
+    success,
+    error,
+  } = useSelector(selectJournalEntry);
+
   return (
     <DefaultLayout>
       <Container width="80em">
-        <Journal journalId={journalId} />
 
         <CommentsSection
           journalId={journalId}
