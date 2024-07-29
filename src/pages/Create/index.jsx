@@ -1,15 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import JournalEditor from '../../components/JournalEditor';
 import { crudActions } from '../../store/crud';
 import crudKeys from '../../store/crud/types';
-import FormProvider from '../../context/FormContext';
 import { selectCreateState } from '../../store/crud/selectors';
 import { postJournalRequest } from '../../store/crud/services';
 import crudActionsConstants from '../../constants/crudActionsConstants';
 import { buildJournalFormData } from '../../helpers';
 import { PATHS } from '../../constants/paths';
+import JournalEditorModule from '../../modules/JournalEditorModule';
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -17,7 +16,7 @@ export default function Create() {
 
   const {
     data: journalData,
-    loading,
+    loading: isSubmitting,
     success,
     error,
   } = useSelector(selectCreateState);
@@ -37,17 +36,14 @@ export default function Create() {
     }));
   };
 
-  return (
-    <FormProvider>
-      <JournalEditor
-        title="Share your journey!"
-        caption="Create your travel journal and capture every moment of your adventure. Share your stories,
-                photos, and experiences with the world."
-        buttonCaption="Create"
-        submitCallback={handleCreateJournalSubmit}
-        isSubmitting={loading}
-        requestError={error}
-      />
-    </FormProvider>
-  );
+  const settings = {
+    title: 'Share your journey!',
+    caption: 'Create your travel journal and capture every moment of your adventure. Share your stories, photos, and experiences with the world.',
+    buttonCaption: 'Create',
+    isSubmitting,
+    submitCallback: handleCreateJournalSubmit,
+    requestError: error,
+  };
+
+  return <JournalEditorModule settings={settings} />;
 }
