@@ -31,7 +31,7 @@ export default function LatestJournalsModule() {
 
   return (
     <Container
-      width="70%"
+      customStyle={{ width: '70%' }}
       heading="Latest journals"
     >
       {(loading || (!success && !error))

@@ -49,7 +49,7 @@ export default function EditProfileModule() {
 
   return (
     <FormProvider>
-      <Container width="40%">
+      <Container customStyle={{ width: '40%' }}>
         <EditProfileForm
           initialState={formInitialState}
           submitCallback={handleUpdateProfileSubmit}

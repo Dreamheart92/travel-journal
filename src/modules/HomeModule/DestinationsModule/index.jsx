@@ -11,9 +11,7 @@ export default function DestinationsModule() {
   const secondRow = destinations.slice(3, 5);
 
   return (
-    <Container
-      heading="Around the world"
-    >
+    <Container heading="Around the world">
       <Grid>
         {firstRow.map((destination) => (
           <DestinationCard
