@@ -16,12 +16,17 @@ const useSearch = () => {
     dispatch(searchActions.setSearch({ search: searchValue }));
   };
 
+  const handleResetState = () => {
+    dispatch(searchActions.resetState());
+  };
+
   return {
     search,
     currentPage,
     totalPages,
     isSearching,
     onSearch: handleSearch,
+    resetSearch: handleResetState,
   };
 };
 
