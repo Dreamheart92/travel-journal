@@ -10,11 +10,12 @@ import Details from './pages/Details';
 import Create from './pages/Create';
 import Edit from './pages/Edit';
 import Account from './pages/Account';
-import Dashboard from './pages/Account/Dashboard';
-import EditProfile from './pages/Account/EditProfile';
-import MyJournals from './pages/Account/MyJournals';
-import JournalOwnerGuard from './guards/JournalOwnerGuard';
+import DashboardModule from './modules/AccountModule/DashboardModule';
+import EditProfileModule from './modules/AccountModule/EditProfileModule';
+import MyJournalsModule from './modules/AccountModule/MyJournalsModule';
+
 import AuthGuard from './guards/AuthGuard';
+import JournalOwnerGuard from './guards/JournalOwnerGuard';
 import RestrictAuthenticatedGuard from './guards/RestrictAuthenticatedGuard';
 
 const router = createBrowserRouter([
@@ -81,15 +82,15 @@ const router = createBrowserRouter([
         children: [
           {
             path: '',
-            element: <Dashboard />,
+            element: <DashboardModule />,
           },
           {
             path: 'edit-profile',
-            element: <EditProfile />,
+            element: <EditProfileModule />,
           },
           {
             path: 'my-journals',
-            element: <MyJournals />,
+            element: <MyJournalsModule />,
           },
         ],
       },
