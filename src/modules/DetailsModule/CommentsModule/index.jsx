@@ -10,16 +10,17 @@ import DeleteModal from '../../../components/Modal/DeleteModal';
 import useModal from '../../../hooks/useModal';
 import { selectComments } from '../../../store/entries/selectors';
 import { entriesActions } from '../../../store/entries';
-import { postCommentRequest, deleteCommentRequest } from '../../../store/optimistic/services';
 import { selectAuth } from '../../../store/auth/selectors';
 import FormProvider from '../../../context/FormContext';
-import optimisticKeys from '../../../store/optimistic/types';
+import useOptimisticActions from '../../../hooks/useOptimisticActions';
 
 export default function CommentsModule({ journalId }) {
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector(selectAuth);
 
-  const { comments, loading } = useSelector(selectComments);
+  const { comments } = useSelector(selectComments);
+
+  const { postCommentOptimistic, deleteCommentOptimistic } = useOptimisticActions();
 
   const {
     isOpen,
@@ -32,24 +33,12 @@ export default function CommentsModule({ journalId }) {
     const localComment = buildLocalComment(user, comment);
 
     dispatch(entriesActions.addLocalComment(localComment));
-    dispatch(postCommentRequest({
-      key: optimisticKeys.POST_COMMENT,
-      commentMetaData: {
-        commentData: {
-          comment: localComment.comment,
-          createdAt: localComment.createdAt,
-        },
-        journalId,
-      },
-    }));
+    postCommentOptimistic(localComment, journalId);
   };
 
   const handleDeleteComment = () => {
     if (targetItemId) {
-      dispatch(deleteCommentRequest({
-        key: optimisticKeys.DELETE_COMMENT,
-        commentId: targetItemId,
-      }));
+      deleteCommentOptimistic(targetItemId);
       onCloseModal();
     }
   };
