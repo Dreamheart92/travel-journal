@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import EditProfileForm from '../../../forms/EditProfileForm';
+import EditProfileForm from '../Forms/EditProfileForm';
 import Container from '../../../components/Container';
 import { buildUserFormData, buildUserFormInitialState } from '../../../helpers';
 import { PATHS } from '../../../constants/paths';
