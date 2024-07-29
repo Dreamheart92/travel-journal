@@ -30,7 +30,11 @@ export default function Catalogue() {
       <div className={style.wrapper}>
 
         <div className={style['journals-container']}>
-          <JournalsList destination={destination} searchParams={searchParams} />
+          <JournalsList
+            onQuery={onQuery}
+            destination={destination}
+            searchParams={searchParams}
+          />
         </div>
 
         <Sidebar width="20em">
