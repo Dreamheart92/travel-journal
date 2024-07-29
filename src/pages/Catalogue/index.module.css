@@ -5,10 +5,3 @@
     justify-content: center;
     gap: 2em;
 }
-
-.journals-container {
-    width: 63em;
-    border-right: 1px solid #dadada;
-    position: relative;
-    padding-bottom: 2em;
-}
