@@ -16,6 +16,12 @@ const useOptimisticActions = () => {
       },
     }));
   };
+
+  const handleDeleteComment = (targetItemId) => {
+    dispatch(deleteCommentRequest({
+      key: optimisticKeys.DELETE_COMMENT,
+      commentId: targetItemId,
+    }));
     postCommentOptimistic: handlePostComment,
 };
 
