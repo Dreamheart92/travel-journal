@@ -23,6 +23,9 @@ export default function App() {
   const appIsLoaded = initApp && destinationsLoaded;
 
   if (!appIsLoaded) {
+    return <Loading />;
+  }
+
   return (
     <DefaultLayout>
       <Navigation />
