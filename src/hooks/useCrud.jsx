@@ -71,6 +71,18 @@ const useCrud = (type) => {
       };
       break;
     }
+    case crudKeys.DELETE: {
+      actions = {
+        deleteJournal: (journalId) => (
+          dispatch(deleteJournalRequest({
+            key: crudKeys.DELETE,
+            currentAction: crudActionsConstants.DELETE_JOURNAL,
+            journalId,
+          }))
+        ),
+      };
+      break;
+    }
     default:
   }
 
