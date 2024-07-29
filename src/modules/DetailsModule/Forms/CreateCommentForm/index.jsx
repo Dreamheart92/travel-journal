@@ -1,7 +1,7 @@
-import Button from '../../components/Button';
-import Form from '../../components/Form';
+import Button from '../../../../components/Button';
+import Form from '../../../../components/Form';
 import style from './index.module.css';
-import useForm from '../../hooks/useForm';
+import useForm from '../../../../hooks/useForm';
 
 export default function CreateCommentForm({ onCreateCommentSubmit }) {
   const [form] = useForm();
