@@ -37,6 +37,18 @@ const useCrud = (type) => {
       };
       break;
     }
+    case crudKeys.READ: {
+      actions = {
+        login: (loginData) => {
+          dispatch(sendLoginRequest({
+            key: crudKeys.READ,
+            currentAction: crudActionsConstants.LOGIN,
+            loginData: constructLoginData(loginData),
+          }));
+        },
+      };
+      break;
+    }
     default:
   }
 
