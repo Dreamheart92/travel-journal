@@ -18,15 +18,5 @@ export default function Signup() {
 
   useEffect(() => () => dispatch(crudActions.resetState({ key: crudKeys.CREATE })));
 
-  return (
-    <AuthLayout
-      title="Join the Adventure!"
-      caption="Sign up to create your Travel Journal, share your stories, and explore a world of new destinations with fellow travelers."
-      form={(
-        <FormProvider>
-          <SignupForm />
-        </FormProvider>
-      )}
-    />
-  );
+  return <AuthModule settings={settings} />;
 }
