@@ -10,7 +10,7 @@ import { selectUser } from '../../../store/auth/selectors';
 import { crudActions } from '../../../store/crud';
 import FormProvider from '../../../context/FormContext';
 import useAuth from '../../../hooks/useAuth';
-import useUpdate from '../../../hooks/useUpdate';
+import useCrud from '../../../hooks/useCrud';
 
 export default function EditProfileModule() {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export default function EditProfileModule() {
     loading,
     success,
     updateProfile,
-  } = useUpdate();
+  } = useCrud(crudKeys.UPDATE);
 
   useEffect(() => {
     dispatch(crudActions.resetState({ key: crudKeys.UPDATE }));
