@@ -16,6 +16,8 @@ export default function OptimisticModule() {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const optimisticState = useSelector(selectOptimistic);
+
+  const postCommentSuccessData = optimisticState[optimisticKeys.POST_COMMENT].data;
     <Modal isOpen={isModalOpen}>
     </Modal>
   );
