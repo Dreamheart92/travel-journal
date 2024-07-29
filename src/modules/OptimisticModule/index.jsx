@@ -15,6 +15,7 @@ export default function OptimisticModule() {
 
   const [errorMessage, setErrorMessage] = useState(null);
 
+  const optimisticState = useSelector(selectOptimistic);
     <Modal isOpen={isModalOpen}>
     </Modal>
   );
