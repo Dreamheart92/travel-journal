@@ -7,10 +7,10 @@ import { selectJournalsEntries } from '../../../store/entries/selectors';
 import { entriesActions } from '../../../store/entries';
 import entriesKeys from '../../../store/entries/types';
 import { buildQueryString } from '../../../helpers';
-import { searchActions } from '../../../store/search';
 import ErrorMessage from '../../../components/ErrorMessage';
 import Pagination from '../../../components/Pagination';
 import style from './index.module.css';
+import useSearch from '../../../hooks/useSearch';
 
 export default function CatalogueListModule({ destination, searchParams, onQuery }) {
   const dispatch = useDispatch();
@@ -21,6 +21,8 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
     success,
     error,
   } = useSelector(selectJournalsEntries);
+
+  const { resetSearch } = useSearch();
 
   const currentPage = Number(searchParams.get('page')) || 1;
 
@@ -36,7 +38,7 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
   }, [dispatch, destination, searchParams]);
 
   useEffect(() => {
-    dispatch(searchActions.resetState());
+    resetSearch();
   }, [destination]);
 
   return (
