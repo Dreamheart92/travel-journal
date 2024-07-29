@@ -1,5 +1,5 @@
 import entriesKeys from './types';
-import INITIAL_KEY_STATE from './initialState';
+import { INITIAL_KEY_STATE } from './initialState';
 
 const resetState = (state, action) => {
   const { key } = action.payload;
