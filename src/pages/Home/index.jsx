@@ -1,14 +1,14 @@
 import Container from '../../components/Container';
 import Hero from '../../components/Hero';
-import Destinations from '../../components/Destinations';
-import LatestJournals from '../../components/LatestJournals';
+import DestinationsModule from '../../modules/HomeModule/DestinationsModule';
+import LatestJournalsModule from '../../modules/HomeModule/LatestJournalsModule';
 
 export default function Home() {
   return (
     <Container width="100%">
       <Hero />
-      <Destinations />
-      <LatestJournals />
+      <DestinationsModule />
+      <LatestJournalsModule />
     </Container>
   );
 }
