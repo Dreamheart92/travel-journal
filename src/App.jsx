@@ -7,7 +7,7 @@ import Loading from './components/Loading';
 import { selectDestinations } from './store/destinations/selectors';
 import { fetchDestinations } from './store/destinations/services';
 import Footer from './components/Footer';
-import OptimisticErrorModel from './components/Modal/OptimisticErrorModel';
+import OptimisticErrorModal from './components/Modal/OptimisticErrorModal';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export default function App() {
       <Navigation />
       <Outlet />
       <Footer />
-      <OptimisticErrorModel />
+      <OptimisticErrorModal />
       <ScrollRestoration />
     </DefaultLayout>
   );
