@@ -4,14 +4,18 @@ import Container from '../Container';
 import Grid from '../Grid';
 import HomeCard from '../HomeCard';
 import Loading from '../Loading';
-import { fetchEntries } from '../../store/entries/thunks';
+import { fetchEntries } from '../../store/entries/services';
 import { selectJournalsEntries } from '../../store/entries/selectors';
+import { entriesActions } from '../../store/entries';
+import entriesKeys from '../../store/entries/types';
+import ErrorMessage from '../ErrorMessage';
 
 export default function LatestJournals() {
   const dispatch = useDispatch();
-  const { results, loading } = useSelector(selectJournalsEntries);
+  const { results, loading, error, success } = useSelector(selectJournalsEntries);
 
   useEffect(() => {
+    dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES }));
     const promise = dispatch(fetchEntries());
 
     return () => {
@@ -19,24 +23,28 @@ export default function LatestJournals() {
     };
   }, []);
 
-  if (loading || !results) {
-    return <Loading />;
-  }
-
   return (
     <Container
       width="70%"
       heading="Latest journals"
     >
-      <Grid>
-        {results.journals.map((journal) => (
-          <HomeCard
-            key={journal._id}
-            journal={journal}
-          />
-        ))}
-      </Grid>
+      {(loading || (!success && !error))
+        && <Loading />}
 
+      {!loading && success
+        && (
+          <Grid>
+            {results.journals.map((journal) => (
+              <HomeCard
+                key={journal._id}
+                journal={journal}
+              />
+            ))}
+          </Grid>
+        )}
+
+      {error
+        && <ErrorMessage large message={error.message} />}
     </Container>
   );
 }
