@@ -1,37 +1,42 @@
 import { useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchEntry } from '../store/entries/services';
-import { selectJournalEntry } from '../store/entries/selectors';
-import { selectUser } from '../store/auth/selectors';
 import { PATHS } from '../constants/paths';
 import Loading from '../components/Loading';
+import useJournal from '../hooks/useJournal';
+import { useDispatch } from 'react-redux';
+import { entriesActions } from '../store/entries';
+import entriesKeys from '../store/entries/types';
 
 export default function JournalOwnerGuard({ children }) {
+  const dispatch = useDispatch();
   const { journalId } = useParams();
 
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-
   const {
-    result: journal,
+    journal,
     loading,
-  } = useSelector(selectJournalEntry);
+    fetchJournal,
+    error,
+  } = useJournal();
 
   useEffect(() => {
-    dispatch(fetchEntry({ journalId }));
+    const promise = fetchJournal(journalId);
+
+    return () => {
+      promise.abort();
+      dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRY }));
+    };
   }, []);
+
+  if (error) {
+    return <Navigate to={PATHS.HOME} />;
+  }
 
   if (loading || !journal) {
     return <Loading />;
   }
 
-  if (journal) {
-    const isOwner = journal.author._id === user._id;
-
-    if (!isOwner) {
-      return <Navigate to={PATHS.HOME} />;
-    }
+  if (!journal.isJournalOwner) {
+    return <Navigate to={PATHS.HOME} />;
   }
 
   return children;
