@@ -4,7 +4,7 @@ import style from './index.module.css';
 
 export default function AccountLayout({ children }) {
   return (
-    <Container width="100%">
+    <Container customStyle={{ width: '100%' }}>
       <div className={style['image-header']}>
         <Image imageUrl="/dashboard.jpg" />
 
