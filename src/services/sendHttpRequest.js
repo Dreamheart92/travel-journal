@@ -2,10 +2,6 @@ const sentHttpRequest = async (url, settings) => {
   try {
     const response = await fetch(url, settings);
 
-    if (response.status === 404) {
-      throw response;
-    }
-
     if (response.status === 204) {
       return response;
     }
@@ -18,7 +14,10 @@ const sentHttpRequest = async (url, settings) => {
 
     throw result;
   } catch (error) {
-    throw error;
+    if (typeof error.success !== 'undefined') {
+      throw error;
+    }
+    throw new Error('Something went wrong. Please try again.');
   }
 };
 
