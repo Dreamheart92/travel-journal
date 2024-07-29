@@ -42,19 +42,20 @@ export default function Form(
     const childrenArray = Children.toArray(children);
 
     const initialState = childrenArray.reduce((state, child) => {
-      if (child.type.name === 'Button') {
-        return state;
+
+      if (child.type.name === 'FormInput') {
+        const { name: fieldName, initialValue: fieldValue = '', validators = [] } = child.props;
+
+        return {
+          ...state,
+          [fieldName]: {
+            state: { value: fieldValue, isDirty: false },
+            validators,
+          },
+        };
       }
 
-      const { name: fieldName, fieldValue = '', validators = [] } = child.props;
-
-      return {
-        ...state,
-        [fieldName]: {
-          state: { value: fieldValue, isDirty: false },
-          validators,
-        },
-      };
+      return state;
     }, {});
 
     formContextActions.initFormState(initialState);
