@@ -15,8 +15,16 @@ const useAuth = () => {
     dispatch(authActions.clearUser());
   };
 
+  const handleUpdateUser = (userData) => {
+    handleClearUser();
+    handleStoreUser(userData);
+  };
+
+  return {
     saveUser: handleStoreUser,
     clearUser: handleClearUser,
+    updateUser: handleUpdateUser,
+  };
 };
 
 export default useAuth;
