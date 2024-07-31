@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import DestinationHeader from '../../modules/CatalogueModule/components/DestinationHeader';
@@ -8,8 +9,13 @@ import { selectIsAuthenticated } from '../../store/auth/selectors';
 import useDestinations from '../../hooks/useDestinations';
 import CatalogueListModule from '../../modules/CatalogueModule/CatalogueListModule';
 import CatalogueSidebarModule from '../../modules/CatalogueModule/CatalogueSidebarModule';
+import { entriesActions } from '../../store/entries';
+import entriesKeys from '../../store/entries/types';
+import Container from '../../components/Container';
 
 export default function Catalogue() {
+  const dispatch = useDispatch();
+
   const { destination } = useParams();
   const { destinations } = useDestinations();
 
@@ -21,8 +27,11 @@ export default function Catalogue() {
     ? destinations.find((destinationFilter) => destinationFilter.name === destination)
     : null;
 
+  useEffect(() => () => dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES })));
+
   return (
-    <DefaultLayout>
+    <Container customStyle={{ paddingBottom: '5em' }}>
+
       <DestinationHeader destination={currentDestination} />
 
       <div className={style.wrapper}>
@@ -39,6 +48,6 @@ export default function Catalogue() {
         />
 
       </div>
-    </DefaultLayout>
+    </Container>
   );
 }
