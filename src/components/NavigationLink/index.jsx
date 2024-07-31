@@ -5,12 +5,13 @@ export default function NavigationLink(
   {
     to,
     filter = false,
+    account = false,
     children,
     onClick,
     end = false,
   },
 ) {
-  const linkClass = `${style.link} ${filter ? style.filter : ''}`;
+  const linkClass = `${style.link} ${filter && style.filter} ${account && style.account}`;
 
   return (
     <NavLink
