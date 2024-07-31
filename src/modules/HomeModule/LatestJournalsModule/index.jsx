@@ -27,14 +27,14 @@ export default function LatestJournalsModule() {
       customStyle={{ width: '70%', paddingBottom: '5em' }}
       heading="Latest journals"
     >
-      {(loading || (!success && !error))
-        && <Loading />}
 
-      {!loading && success
+      {loading
+        && <Loading />}
+      {success
         && (
           <Grid>
             {journals.map((journal) => (
-              <HomeCard
+              <JournalCard
                 key={journal._id}
                 journal={journal}
               />
@@ -42,8 +42,10 @@ export default function LatestJournalsModule() {
           </Grid>
         )}
 
-      {error
-        && <ErrorMessage large message={error.message} />}
+      {
+        error
+        && <ErrorMessage large message={error.message} />
+      }
     </Container>
   );
 }
