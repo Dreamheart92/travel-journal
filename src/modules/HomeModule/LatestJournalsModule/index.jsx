@@ -1,17 +1,12 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import Container from '../../../components/Container';
 import Grid from '../../../components/Grid';
-import HomeCard from '../../../components/HomeCard';
-import Loading from '../../../components/Loading';
-import { entriesActions } from '../../../store/entries';
-import entriesKeys from '../../../store/entries/types';
 import ErrorMessage from '../../../components/ErrorMessage';
 import useJournals from '../../../hooks/useJournals';
+import JournalCard from '../../../components/JournalCard';
+import Loading from '../../../components/Loading';
 
 export default function LatestJournalsModule() {
-  const dispatch = useDispatch();
-
   const {
     journals,
     loading,
@@ -21,9 +16,7 @@ export default function LatestJournalsModule() {
   } = useJournals();
 
   useEffect(() => {
-    dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES }));
     const promise = fetchJournals();
-
     return () => {
       promise.abort();
     };
