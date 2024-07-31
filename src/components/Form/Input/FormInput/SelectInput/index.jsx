@@ -1,5 +1,7 @@
 import { normalizeName } from '../../../../../helpers';
 
+import style from '../../index.module.css';
+
 export default function SelectInput({ fieldProps }) {
   const {
     value,
@@ -11,7 +13,7 @@ export default function SelectInput({ fieldProps }) {
 
   return (
     <select
-      className={inputClassName}
+      className={`${inputClassName} ${style.select}`}
       value={value}
       onChange={onChange}
       onBlur={onBlur}
