@@ -13,6 +13,7 @@ import {
   updateJournalRequest,
   updateProfileRequest,
 } from '../store/crud/services';
+import { crudActions } from '../store/crud';
 
 const useCrud = (type) => {
   const dispatch = useDispatch();
@@ -85,6 +86,8 @@ const useCrud = (type) => {
     }
     default:
   }
+
+  actions.resetState = () => dispatch(crudActions.resetState());
 
   return { ...typeState, ...actions };
 };
