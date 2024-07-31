@@ -1,3 +1,14 @@
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: .25em;
+}
+
+.label {
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
 .field {
     padding: .75em 1em;
     background-color: #f6f6f6;
@@ -19,11 +30,6 @@
     border-color: red !important;
 }
 
-.image-wrapper {
-    display: flex;
-    gap: 1em;
-}
-
 .column {
     flex-direction: column;
 }
@@ -32,23 +38,12 @@
     flex-direction: row;
 }
 
-.image-wrapper button {
-    width: 14em;
-}
-
-.journal {
-    width: 30em;
-    height: 13.4em;
-}
-
-.account {
-    width: 4em;
-    height: 4em;
-    border-radius: 100%;
-}
-
 .date {
     background-color: #EEE;
     padding: .75em 1em;
+    cursor: pointer;
+}
+
+.select {
     cursor: pointer;
 }
