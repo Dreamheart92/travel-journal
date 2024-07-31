@@ -18,7 +18,7 @@ function formReducer(state, action) {
       const { event } = action.payload;
       const fieldName = event.target.name;
 
-      const fieldValue = event.target.type === 'file' ? event.target.files[0] : event.target.value;
+      const fieldValue = event.target.type === 'file' ? event.target.files[0] || '' : event.target.value;
 
       const { formState } = state;
 
@@ -82,7 +82,7 @@ function formReducer(state, action) {
       };
     }
     default:
-      return state;
+      throw new Error('Invalid action');
   }
 }
 
