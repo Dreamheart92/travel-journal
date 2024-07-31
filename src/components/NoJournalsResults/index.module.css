@@ -1,0 +1,14 @@
+.no-journals {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 5em;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1em;
+}
+
+.no-journals button {
+    width: 30%;
+}
