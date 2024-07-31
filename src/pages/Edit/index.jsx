@@ -5,9 +5,9 @@ import Loading from '../../components/Loading';
 import { PATHS } from '../../constants/paths';
 import crudKeys from '../../store/crud/types';
 import { selectJournalEntry } from '../../store/entries/selectors';
-import { crudActions } from '../../store/crud';
 import JournalEditorModule from '../../modules/JournalEditorModule';
 import useCrud from '../../hooks/useCrud';
+import { crudActions } from '../../store/crud';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -25,11 +25,13 @@ export default function Edit() {
   } = useCrud(crudKeys.UPDATE);
 
   useEffect(() => {
-    dispatch(crudActions.resetState({ key: crudKeys.UPDATE }));
-
     if (isUpdatedJournal) {
       navigate(`${PATHS.DETAILS}/${journalId}`);
     }
+
+    return () => {
+      dispatch(crudActions.resetState());
+    };
   }, [isUpdatedJournal]);
 
   const handleUpdateJournalSubmit = async (journalData) => {
