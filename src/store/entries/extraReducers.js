@@ -19,7 +19,7 @@ const extraReducers = (builder) => {
   builder.addCase(fetchEntry.rejected, (state, action) => {
     if (action.error.message !== 'Aborted') {
       state[entriesKeys.JOURNAL_ENTRY].loading = false;
-      state[entriesKeys.JOURNAL_ENTRY].error = buildErrorObject(action.error.message);
+      state[entriesKeys.JOURNAL_ENTRY].error = action.error;
     }
   });
   builder.addMatcher(
