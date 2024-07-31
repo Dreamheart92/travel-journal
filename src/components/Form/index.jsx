@@ -40,22 +40,24 @@ export default function Form(
 
   useEffect(() => {
     const childrenArray = Children.toArray(children);
+    const initialState = {};
 
-    const initialState = childrenArray.reduce((state, child) => {
-      if (child.type.name === 'FormInput') {
-        const { name: fieldName, initialValue: fieldValue = '', validators = [] } = child.props;
+    const getInitialStateFromFormChildren = (arrayChildren) => {
+      arrayChildren.forEach((child) => {
+        if (child.type?.name === 'FormInput') {
+          const { name: fieldName, initialValue: fieldValue = '', validators = [] } = child.props;
 
-        return {
-          ...state,
-          [fieldName]: {
+          initialState[fieldName] = {
             state: { value: fieldValue, isDirty: false },
             validators,
-          },
-        };
-      }
+          };
+        } else if (typeof child?.props?.children !== 'undefined') {
+          getInitialStateFromFormChildren(Children.toArray(child.props.children));
+        }
+      });
+    };
 
-      return state;
-    }, {});
+    getInitialStateFromFormChildren(childrenArray);
 
     formContextActions.initFormState(initialState);
     setInitForm(true);
