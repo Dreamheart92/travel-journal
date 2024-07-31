@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import EditProfileForm from '../Forms/EditProfileForm';
+import Index from '../Forms/EditProfileForm';
 import Container from '../../../components/Container';
 import { buildUserFormInitialState } from '../../../helpers';
 import { PATHS } from '../../../constants/paths';
@@ -11,6 +11,7 @@ import { crudActions } from '../../../store/crud';
 import FormProvider from '../../../context/FormContext';
 import useAuth from '../../../hooks/useAuth';
 import useCrud from '../../../hooks/useCrud';
+import EditProfileForm from '../Forms/EditProfileForm';
 
 export default function EditProfileModule() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function EditProfileModule() {
     data: updatedUserData,
     loading,
     success,
+    error,
     updateProfile,
   } = useCrud(crudKeys.UPDATE);
 
@@ -43,8 +45,9 @@ export default function EditProfileModule() {
 
   return (
     <FormProvider>
-      <Container customStyle={{ width: '40%' }}>
+      <Container>
         <EditProfileForm
+          error={error}
           initialState={formInitialState}
           submitCallback={handleUpdateProfileSubmit}
           isSubmitting={loading}
