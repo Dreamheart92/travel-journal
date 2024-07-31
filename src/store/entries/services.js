@@ -22,7 +22,9 @@ export const fetchEntry = createAsyncThunk(
   'entries/fetchEntry',
   async (arg, { signal }) => {
     const { journalId } = arg;
+
     const result = await sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, { signal });
+
     const { id: userId } = getAccessTokenAndIdFromLocalStorage();
     const isJournalOwner = result.data.author._id === userId;
 
