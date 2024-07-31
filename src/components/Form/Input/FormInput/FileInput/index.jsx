@@ -1,5 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileUpload } from '@fortawesome/free-solid-svg-icons/faFileUpload';
+
 import Button from '../../../../Button';
-import style from '../../index.module.css';
+import style from './index.module.css';
 
 export default function FileInput({ fieldProps }) {
   const {
@@ -7,11 +10,10 @@ export default function FileInput({ fieldProps }) {
     onChange,
     name,
     placeholder,
-    isJournal,
+    userProfileImage = false,
   } = fieldProps;
 
-  const fileStyle = `${style['image-wrapper']} ${isJournal ? style.column : style.row}`;
-  const imageClassName = `${isJournal ? style.journal : style.account}`;
+  const imageClassName = `${userProfileImage ? style.account : style.journal}`;
 
   const handleUploadImage = (event) => {
     event.preventDefault();
@@ -27,18 +29,23 @@ export default function FileInput({ fieldProps }) {
       imagePlaceholder = value;
     }
   } else {
-    imagePlaceholder = !isJournal ? '/userPlaceholder.png' : '/imagePlaceholder.jpg';
+    imagePlaceholder = userProfileImage ? '/userPlaceholder.png' : '/placeholder-image.jpg';
   }
 
   return (
-    <div className={fileStyle}>
+    <div className={style['image-wrapper']}>
       <img
+        onClick={handleUploadImage}
         className={imageClassName}
         src={imagePlaceholder}
         alt=""
       />
 
-      <Button onClick={handleUploadImage} caption="Upload your image" />
+      <FontAwesomeIcon
+        onClick={handleUploadImage}
+        className={style['icon-upload']}
+        icon={faFileUpload}
+      />
 
       <input
         type="file"
