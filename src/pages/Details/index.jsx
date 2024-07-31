@@ -42,7 +42,7 @@ export default function Details() {
 
   return (
     <DefaultLayout>
-      <Container customStyle={{ width: '80em' }}>
+      <Container customStyle={{ width: '80em', minHeight: '100vh', paddingBottom: '5em' }}>
 
         {(loading || (!success && !error))
           && <Loading />}
