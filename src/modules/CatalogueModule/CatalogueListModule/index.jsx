@@ -2,14 +2,13 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import CatalogueCard from '../../../components/CatalogueCard';
 import Loading from '../../../components/Loading';
-import { entriesActions } from '../../../store/entries';
-import entriesKeys from '../../../store/entries/types';
 import { buildQueryString } from '../../../helpers';
 import ErrorMessage from '../../../components/ErrorMessage';
 import Pagination from '../../../components/Pagination';
 import style from './index.module.css';
 import useSearch from '../../../hooks/useSearch';
 import useJournals from '../../../hooks/useJournals';
+import NoJournalResults from '../../../components/NoJournalsResults';
 
 export default function CatalogueListModule({ destination, searchParams, onQuery }) {
   const dispatch = useDispatch();
@@ -18,7 +17,6 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
     journals,
     totalPages,
     loading,
-    success,
     error,
     fetchJournals,
   } = useJournals();
@@ -28,8 +26,6 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
   const currentPage = Number(searchParams.get('page')) || 1;
 
   useEffect(() => {
-    dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES }));
-
     const query = buildQueryString(searchParams);
     const promise = fetchJournals(query, destination);
 
@@ -44,27 +40,38 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
 
   return (
     <div className={style['journals-container']}>
-      {(loading || (!success && !error))
+      {loading
         && <Loading />}
 
       {!loading && journals
         && (
-          <Pagination
-            onQuery={onQuery}
-            totalPages={totalPages}
-            currentPage={currentPage}
-          >
-            {journals.map((journal) => (
-              <CatalogueCard
-                key={journal._id}
-                journal={journal}
-              />
-            ))}
-          </Pagination>
+          <>
+            {journals.length <= 0
+              && <NoJournalResults />}
+
+            {journals.length > 0
+              && (
+                <Pagination
+                  onQuery={onQuery}
+                  totalPages={totalPages}
+                  currentPage={currentPage}
+                >
+                  {journals.map((journal) => (
+                    <CatalogueCard
+                      key={journal._id}
+                      journal={journal}
+                    />
+                  ))}
+                </Pagination>
+              )}
+          </>
         )}
 
-      {error
-        && <ErrorMessage large message={error.message} />}
+      {
+        error
+        && <ErrorMessage large message={error.message} />
+      }
     </div>
-  );
+  )
+    ;
 }
