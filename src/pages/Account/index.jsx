@@ -11,7 +11,7 @@ export default function Account() {
       <AccountSidebarModule />
 
       <div className={style.content}>
-        <h3>{contentHeading}</h3>
+        <h3 className={style['content-heading']}>{contentHeading}</h3>
         <Outlet />
       </div>
     </AccountLayout>
