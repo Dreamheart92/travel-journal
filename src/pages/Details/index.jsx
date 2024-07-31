@@ -62,7 +62,7 @@ export default function Details() {
           )}
 
         {error
-          && <ErrorMessage large message={error.message} />}
+          && <ErrorMessage large message="Failed to fetch journal. Please try again." />}
       </Container>
     </DefaultLayout>
   );
