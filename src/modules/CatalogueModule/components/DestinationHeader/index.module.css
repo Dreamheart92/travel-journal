@@ -5,7 +5,7 @@
 }
 
 .destination-header img {
-    filter: brightness(50%);
+    filter: brightness(60%);
 }
 
 .caption {
@@ -14,5 +14,9 @@
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     color: white;
-    font-size: 3em;
+    font-size: 3.4em;
+    letter-spacing: .25em;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
 }
