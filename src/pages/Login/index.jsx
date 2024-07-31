@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import LoginForm from '../../modules/AuthModule/Forms/LoginForm';
 import { crudActions } from '../../store/crud';
-import crudKeys from '../../store/crud/types';
 import AuthModule from '../../modules/AuthModule';
 
 const settings = {
@@ -14,7 +13,7 @@ const settings = {
 export default function Login() {
   const dispatch = useDispatch();
 
-  useEffect(() => () => dispatch(crudActions.resetState({ key: crudKeys.READ })));
+  useEffect(() => () => dispatch(crudActions.resetState()));
 
   return <AuthModule settings={settings} />;
 }
