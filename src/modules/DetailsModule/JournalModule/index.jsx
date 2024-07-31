@@ -32,24 +32,24 @@ export default function JournalModule({ journalId, journal }) {
     <div className={style.container}>
       <div className={style['journal-image-wrapper']}>
         <Image imageUrl={journal.imageUrl} />
+
+        {journal.isJournalOwner && (
+          <div className={style.controls}>
+            <Button
+              onClick={() => navigate(`${PATHS.EDIT}/${journalId}`)}
+              variant="secondary"
+              caption="Edit"
+            />
+            <Button
+              onClick={() => onOpenModal()}
+              variant="warning"
+              caption="Delete"
+            />
+          </div>
+        )}
       </div>
 
       <JournalContent journal={journal} />
-
-      {journal.isJournalOwner && (
-        <div className={style.controls}>
-          <Button
-            onClick={() => navigate(`${PATHS.EDIT}/${journalId}`)}
-            variant="secondary"
-            caption="Edit"
-          />
-          <Button
-            onClick={() => onOpenModal()}
-            variant="warning"
-            caption="Delete"
-          />
-        </div>
-      )}
 
       <Modal isOpen={isOpen}>
         <DeleteModal
