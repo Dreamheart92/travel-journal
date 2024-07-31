@@ -17,8 +17,7 @@ export const buildQueryString = (searchParams) => {
     queries.push(`${searchKey}=${searchValue}`);
   });
 
-  const query = queries.length > 0 ? `?${queries.join('&')}` : '';
-  return query;
+  return queries.length > 0 ? `?${queries.join('&')}` : '';
 };
 
 export const buildJournalFormData = (journalData) => {
