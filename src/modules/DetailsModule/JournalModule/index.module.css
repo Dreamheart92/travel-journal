@@ -11,7 +11,8 @@
 
 .journal-image-wrapper {
     width: 100%;
-    height: 30em;
+    height: 40em;
+    position: relative;
 }
 
 .controls {
@@ -19,6 +20,6 @@
     gap: 1em;
     width: 20%;
     position: absolute;
-    right: 3em;
-    top: 34em;
+    right: 1%;
+    bottom: -7%;
 }
