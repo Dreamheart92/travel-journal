@@ -1,11 +1,11 @@
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { crudActions } from '../../store/crud';
 import crudKeys from '../../store/crud/types';
 import { PATHS } from '../../constants/paths';
 import JournalEditorModule from '../../modules/JournalEditorModule';
 import useCrud from '../../hooks/useCrud';
+import { crudActions } from '../../store/crud';
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -20,11 +20,13 @@ export default function Create() {
   } = useCrud(crudKeys.CREATE);
 
   useEffect(() => {
-    dispatch(crudActions.resetState({ key: crudKeys.CREATE }));
-
     if (success) {
       navigate(`${PATHS.DETAILS}/${journalData._id}`);
     }
+
+    return () => {
+      dispatch(crudActions.resetState());
+    };
   }, [success]);
 
   const handleCreateJournalSubmit = (formData) => {
