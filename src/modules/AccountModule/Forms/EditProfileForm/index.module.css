@@ -1,0 +1,9 @@
+.wrapper {
+    display: flex;
+    gap: 2em;
+}
+
+.file-wrapper {
+    width: 5em;
+    height: 5em;
+}
