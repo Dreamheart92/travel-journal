@@ -1,6 +1,6 @@
 .journals-container {
     width: 63em;
-    border-right: 1px solid #dadada;
+    height: 100%;
     position: relative;
     padding-bottom: 2em;
 }
