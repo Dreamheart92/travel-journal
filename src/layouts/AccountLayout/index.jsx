@@ -1,10 +1,9 @@
-import Container from '../../components/Container';
 import Image from '../../components/Image';
 import style from './index.module.css';
 
 export default function AccountLayout({ children }) {
   return (
-    <Container customStyle={{ width: '100%' }}>
+    <div className={style.container}>
       <div className={style['image-header']}>
         <Image imageUrl="/dashboard.jpg" />
 
@@ -13,10 +12,9 @@ export default function AccountLayout({ children }) {
         </div>
       </div>
 
-
       <div className={style['content-container']}>
         {children}
       </div>
-    </Container>
+    </div>
   );
 }
