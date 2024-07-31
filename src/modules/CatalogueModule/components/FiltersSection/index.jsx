@@ -1,8 +1,8 @@
-import SidebarSection from '../SidebarSection';
+import SidebarSection from '../../../../components/Sidebar/SidebarSection';
 import Filter from '../Filter';
 
 import style from './index.module.css';
-import useDestinations from '../../../hooks/useDestinations';
+import useDestinations from '../../../../hooks/useDestinations';
 
 export default function FiltersSection() {
   const { destinations } = useDestinations();

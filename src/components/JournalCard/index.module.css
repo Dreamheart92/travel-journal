@@ -1,0 +1,22 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: .25em;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.info h2:hover {
+    color: blue;
+}
+
+.description {
+    color: #575757;
+}
+
+.author {
+    padding-top: .25em;
+    display: flex;
+    gap: .25em;
+    align-items: center
+}

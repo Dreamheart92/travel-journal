@@ -1,14 +1,15 @@
 import style from '../index.module.css';
 
-export default function HomeCardInfo(
+export default function JournalCardInfo(
   {
     author,
     title,
     description,
+    fontSize,
   },
 ) {
   return (
-    <div className={style.info}>
+    <div style={{ fontSize }} className={style.info}>
       <div className={style.author}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

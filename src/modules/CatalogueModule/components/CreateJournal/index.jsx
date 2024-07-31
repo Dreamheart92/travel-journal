@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import SidebarSection from '../SidebarSection';
-import { PATHS } from '../../../constants/paths';
-import Button from '../../Button';
+import SidebarSection from '../../../../components/Sidebar/SidebarSection';
+import { PATHS } from '../../../../constants/paths';
+import Button from '../../../../components/Button';
 
 export default function CreateJournal() {
   return (
