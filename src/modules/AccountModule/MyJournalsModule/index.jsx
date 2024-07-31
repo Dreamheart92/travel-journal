@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../../components/Loading';
 import Grid from '../../../components/Grid';
-import HomeCard from '../../../components/HomeCard';
 import { selectUser } from '../../../store/auth/selectors';
 import { entriesActions } from '../../../store/entries';
 import entriesKeys from '../../../store/entries/types';
 import useJournals from '../../../hooks/useJournals';
 import ErrorMessage from '../../../components/ErrorMessage';
+import JournalCard from '../../../components/JournalCard';
+import NoJournalResults from '../../../components/NoJournalsResults';
 
 export default function MyJournalsModule() {
   const dispatch = useDispatch();
@@ -39,14 +40,23 @@ export default function MyJournalsModule() {
 
       {!loading && success
         && (
-          <Grid>
-            {journals.map((journal) => (
-              <HomeCard
-                key={journal._id}
-                journal={journal}
-              />
-            ))}
-          </Grid>
+          <>
+            {journals.length <= 0
+              && <NoJournalResults contextType="account" />}
+
+            {journals.length > 0
+              && (
+                <Grid>
+                  {journals.map((journal) => (
+                    <JournalCard
+                      key={journal._id}
+                      size='sm'
+                      journal={journal}
+                    />
+                  ))}
+                </Grid>
+              )}
+          </>
         )}
 
       {error
