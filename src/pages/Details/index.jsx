@@ -11,6 +11,7 @@ import { PATHS } from '../../constants/paths';
 import JournalModule from '../../modules/DetailsModule/JournalModule';
 import CommentsModule from '../../modules/DetailsModule/CommentsModule';
 import useJournal from '../../hooks/useJournal';
+import { crudActions } from '../../store/crud';
 
 export default function Details() {
   const { journalId } = useParams();
@@ -30,6 +31,7 @@ export default function Details() {
 
     return () => {
       dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRY }));
+      dispatch(crudActions.resetState());
       promise.abort();
     };
   }, []);
