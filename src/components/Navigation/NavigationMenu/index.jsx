@@ -6,7 +6,7 @@ import UserNavigation from './UserNavigation';
 import GuestNavigation from './GuestNavigation';
 import { selectIsAuthenticated } from '../../../store/auth/selectors';
 
-export default function NavigationMenu({ onLogout }) {
+export default function NavigationMenu() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   return (
@@ -14,7 +14,7 @@ export default function NavigationMenu({ onLogout }) {
       <ul className={style.navigation}>
         <NavigationLink to={PATHS.HOME}>Home</NavigationLink>
         <NavigationLink to={`${PATHS.CATALOGUE}`}>Journals</NavigationLink>
-        {isAuthenticated ? <UserNavigation onLogout={onLogout} /> : <GuestNavigation />}
+        {isAuthenticated ? <UserNavigation /> : <GuestNavigation />}
       </ul>
     </div>
   );
