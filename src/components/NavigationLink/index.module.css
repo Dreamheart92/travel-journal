@@ -34,10 +34,21 @@
 
 .filter:before {
     background-image: none;
-    background-color: #EEE;
+    background-color: #0284c7;
 }
 
 .filter:hover,
-.filter:active {
-    color: black !important;
+.filter.active {
+    color: white !important;
+}
+
+.account {
+    background-color: transparent;
+}
+
+.account:hover,
+.account.active {
+    background-color: #c86f6f;
+    border-radius: .25em;
+    color: white;
 }
