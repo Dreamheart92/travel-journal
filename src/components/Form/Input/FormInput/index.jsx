@@ -14,7 +14,7 @@ export default function FormInput(
     label,
     inputType,
     type,
-    isJournal,
+    userProfileImage,
     options,
   },
 ) {
@@ -39,7 +39,7 @@ export default function FormInput(
     name,
     placeholder,
     type,
-    isJournal,
+    userProfileImage,
     label,
     options,
   };
@@ -51,7 +51,10 @@ export default function FormInput(
     || (inputType === 'text-area' && TextAreaInput);
 
   return (
-    <div>
+    <div className={style['input-wrapper']}>
+      {label
+        && <label className={style.label} htmlFor={name}>{label}</label>}
+
       <Input fieldProps={fieldProps} />
 
       {displayError
