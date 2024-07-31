@@ -17,6 +17,7 @@ import MyJournalsModule from './modules/AccountModule/MyJournalsModule';
 import AuthGuard from './guards/AuthGuard';
 import JournalOwnerGuard from './guards/JournalOwnerGuard';
 import RestrictAuthenticatedGuard from './guards/RestrictAuthenticatedGuard';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,14 @@ const router = createBrowserRouter([
             element: <MyJournalsModule />,
           },
         ],
+      },
+      {
+        path: PATHS.NOT_FOUND,
+        element: <NotFound />,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },
