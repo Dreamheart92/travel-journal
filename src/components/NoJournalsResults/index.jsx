@@ -5,5 +5,26 @@ import Button from '../Button';
 import style from './index.module.css';
 
 export default function NoJournalResults({ contextType = 'catalogue' }) {
+  const navigate = useNavigate();
+  const message = NO_JOURNAL_RESULTS[contextType];
+
+  const handleRedirect = () => {
+    navigate(PATHS.CREATE);
+  };
+
+  return (
+    <div className={style['no-journals']}>
+      <h3>
+        {message}
+      </h3>
+
+      {contextType === 'account'
+        && (
+          <Button
+            onClick={handleRedirect}
+            caption="Create"
+          />
+        )}
+    </div>
   );
 }
