@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-regular-svg-icons/faComments';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
 import { faPencil } from '@fortawesome/free-solid-svg-icons/faPencil';
-import { formatDate, splitByNewLine } from '../../helpers';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe';
+import { formatDate, normalizeName, splitByNewLine } from '../../helpers';
 import CatalogueCardButton from '../CatalogueCard/CatalogueCardButton';
 
 import style from './index.module.css';
@@ -13,6 +14,12 @@ export default function JournalContent({ journal, readMore = false }) {
   return (
     <div className={style.info}>
       <div className={style.header}>
+
+        <div className={style['info-container']}>
+          <FontAwesomeIcon icon={faGlobe} />
+          <p>{normalizeName(journal.destination.name)}</p>
+        </div>
+
         <div className={style['info-container']}>
           <FontAwesomeIcon icon={faCalendar} />
           <p>{formatDate(journal.date)}</p>
@@ -22,12 +29,13 @@ export default function JournalContent({ journal, readMore = false }) {
           <FontAwesomeIcon icon={faPencil} />
           <p>{journal.author.username}</p>
         </div>
+
       </div>
 
       <div className={style.description}>
         <h1>{journal.title}</h1>
-        {journal.location
-          && <h4>{journal.location}</h4>}
+        <h4>{journal.location}</h4>
+
         {readMore
           && <p>{content}</p>}
 
