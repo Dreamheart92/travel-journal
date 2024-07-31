@@ -7,6 +7,7 @@ export const PATHS = {
   CREATE: '/create',
   ACCOUNT: '/account',
   EDIT: '/edit',
+  NOT_FOUND: '/404',
 };
 
 export const ACCOUNT_SUB_PATHS = {
