@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-
-import crudKeys from '../../store/crud/types';
 import { crudActions } from '../../store/crud/index';
 
 import SignupForm from '../../modules/AuthModule/Forms/SignupForm';
@@ -16,7 +14,7 @@ const settings = {
 export default function Signup() {
   const dispatch = useDispatch();
 
-  useEffect(() => () => dispatch(crudActions.resetState({ key: crudKeys.CREATE })));
+  useEffect(() => () => dispatch(crudActions.resetState()));
 
   return <AuthModule settings={settings} />;
 }
