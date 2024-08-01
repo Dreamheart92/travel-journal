@@ -5,11 +5,7 @@ const extraReducers = (builder) => {
     (action) => action.type.startsWith('crud/thunk/'),
     (state, action) => {
       const { requestStatus } = action.meta;
-      const { key, currentAction } = action.meta.arg;
-
-      if (!currentAction) {
-        throw new Error('Provide a current action');
-      }
+      const { key } = action.meta.arg;
 
       switch (requestStatus) {
         case 'pending': {
@@ -17,7 +13,6 @@ const extraReducers = (builder) => {
           state[key].data = null;
           state[key].error = null;
           state[key].success = false;
-          state[key].currentAction = currentAction;
           break;
         }
         case 'fulfilled': {
