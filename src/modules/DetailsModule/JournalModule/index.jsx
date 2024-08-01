@@ -20,7 +20,7 @@ export default function JournalModule({ journalId, journal }) {
   const { loading, deleteJournal } = useCrud(CRUD_STATE_KEYS.DELETE);
 
   const handleDeleteJournal = async () => {
-    const isSuccess = await deleteJournal(journalId);
+    const isSuccess = await deleteJournal({ journalId, destinationId: journal.destination._id });
 
     if (isSuccess?.payload?.success) {
       dispatch(crudActions.resetState({ key: CRUD_STATE_KEYS.DELETE }));
