@@ -8,7 +8,7 @@ import { buildLocalComment } from '../../../forms/helpers/createCommentForm';
 import Modal from '../../../components/Modal';
 import DeleteModal from '../../../components/Modal/DeleteModal';
 import useModal from '../../../hooks/useModal';
-import { selectComments } from '../../../store/entries/selectors';
+import { selectComments } from '../../../store/journals/selectors';
 import { selectAuth } from '../../../store/auth/selectors';
 import FormProvider from '../../../context/FormContext';
 import useOptimisticActions from '../../../hooks/useOptimisticActions';
@@ -34,7 +34,7 @@ export default function CommentsModule({ journalId }) {
 
   const handleDeleteComment = () => {
     if (targetItemId) {
-      deleteCommentOptimistic(targetItemId);
+      deleteCommentOptimistic({ commentId: targetItemId, journalId });
       onCloseModal();
     }
   };
