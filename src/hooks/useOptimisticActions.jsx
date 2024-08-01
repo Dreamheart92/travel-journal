@@ -20,11 +20,12 @@ const useOptimisticActions = () => {
     }));
   };
 
-  const handleDeleteComment = (commentId) => {
+  const handleDeleteComment = ({ commentId, journalId }) => {
     dispatch(journalsActions.deleteLocalComment({ commentId }));
     dispatch(deleteCommentRequest({
       key: optimisticKeys.DELETE_COMMENT,
       commentId,
+      journalId,
     }));
   };
 
