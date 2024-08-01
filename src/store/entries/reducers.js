@@ -60,19 +60,19 @@ const updateLocalCommentReaction = (state, action) => {
     localComment._id === commentId));
 
   if (isReacted) {
-    const indexOfReactedUser = reactedLocalComment[currentReaction].findIndex((reactedId) => (
+    const reactedUserIndex = reactedLocalComment[currentReaction].findIndex((reactedId) => (
       reactedId === userId));
 
-    reactedLocalComment[currentReaction].splice(indexOfReactedUser, 1);
+    reactedLocalComment[currentReaction].splice(reactedUserIndex, 1);
   } else {
     reactedLocalComment[currentReaction].push(userId);
 
-    const indexOfOppositeReaction = reactedLocalComment[oppositeReaction]
+    const oppositeReactionIndex = reactedLocalComment[oppositeReaction]
       .findIndex((reactedId) => (
         reactedId === userId));
 
-    if (indexOfOppositeReaction !== -1) {
-      reactedLocalComment[oppositeReaction].splice(indexOfOppositeReaction, 1);
+    if (oppositeReactionIndex !== -1) {
+      reactedLocalComment[oppositeReaction].splice(oppositeReactionIndex, 1);
     }
   }
 };
