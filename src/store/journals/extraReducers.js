@@ -1,25 +1,25 @@
 import { fetchJournalService } from './services';
-import entriesKeys from './types';
+import { JOURNALS_STATE_KEYS } from '../../constants/redux';
 import { buildErrorObject } from '../../helpers';
 
 const extraReducers = (builder) => {
   builder.addCase(fetchJournalService.pending, (state) => {
-    state[entriesKeys.JOURNAL_ENTRY].loading = true;
-    state[entriesKeys.JOURNAL_ENTRY].success = false;
-    state[entriesKeys.JOURNAL_ENTRY].error = null;
+    state[JOURNALS_STATE_KEYS.JOURNAL].loading = true;
+    state[JOURNALS_STATE_KEYS.JOURNAL].success = false;
+    state[JOURNALS_STATE_KEYS.JOURNAL].error = null;
   });
   builder.addCase(fetchJournalService.fulfilled, (state, action) => {
-    state[entriesKeys.JOURNAL_ENTRY].result = action.payload.result;
-    state[entriesKeys.JOURNAL_ENTRY].result.isJournalOwner = action.payload.isJournalOwner;
-    state[entriesKeys.COMMENTS].results = action.payload.comments;
+    state[JOURNALS_STATE_KEYS.JOURNAL].result = action.payload.result;
+    state[JOURNALS_STATE_KEYS.JOURNAL].result.isJournalOwner = action.payload.isJournalOwner;
+    state[JOURNALS_STATE_KEYS.COMMENTS].results = action.payload.comments;
 
-    state[entriesKeys.JOURNAL_ENTRY].loading = false;
-    state[entriesKeys.JOURNAL_ENTRY].success = true;
+    state[JOURNALS_STATE_KEYS.JOURNAL].loading = false;
+    state[JOURNALS_STATE_KEYS.JOURNAL].success = true;
   });
   builder.addCase(fetchJournalService.rejected, (state, action) => {
     if (action.error.message !== 'Aborted') {
-      state[entriesKeys.JOURNAL_ENTRY].loading = false;
-      state[entriesKeys.JOURNAL_ENTRY].error = action.error;
+      state[JOURNALS_STATE_KEYS.JOURNAL].loading = false;
+      state[JOURNALS_STATE_KEYS.JOURNAL].error = action.error;
     }
   });
   builder.addMatcher(
@@ -29,25 +29,25 @@ const extraReducers = (builder) => {
 
       switch (requestStatus) {
         case 'pending': {
-          state[entriesKeys.JOURNAL_ENTRIES].loading = true;
-          state[entriesKeys.JOURNAL_ENTRIES].success = false;
-          state[entriesKeys.JOURNAL_ENTRIES].error = null;
+          state[JOURNALS_STATE_KEYS.JOURNALS].loading = true;
+          state[JOURNALS_STATE_KEYS.JOURNALS].success = false;
+          state[JOURNALS_STATE_KEYS.JOURNALS].error = null;
           break;
         }
         case 'fulfilled': {
-          state[entriesKeys.JOURNAL_ENTRIES].results = {
+          state[JOURNALS_STATE_KEYS.JOURNALS].results = {
             journals: action.payload.journals,
             totalPages: action.payload.totalPages,
           };
 
-          state[entriesKeys.JOURNAL_ENTRIES].loading = false;
-          state[entriesKeys.JOURNAL_ENTRIES].success = true;
+          state[JOURNALS_STATE_KEYS.JOURNALS].loading = false;
+          state[JOURNALS_STATE_KEYS.JOURNALS].success = true;
           break;
         }
         case 'rejected': {
           if (action.error.message !== 'Aborted') {
-            state[entriesKeys.JOURNAL_ENTRIES].error = buildErrorObject('Failed to fetch journals. Please try again.');
-            state[entriesKeys.JOURNAL_ENTRIES].loading = false;
+            state[JOURNALS_STATE_KEYS.JOURNALS].error = buildErrorObject('Failed to fetch journals. Please try again.');
+            state[JOURNALS_STATE_KEYS.JOURNALS].loading = false;
           }
           break;
         }

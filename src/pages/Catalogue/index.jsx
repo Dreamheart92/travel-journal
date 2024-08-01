@@ -9,7 +9,7 @@ import useDestinations from '../../hooks/useDestinations';
 import CatalogueListModule from '../../modules/CatalogueModule/CatalogueListModule';
 import CatalogueSidebarModule from '../../modules/CatalogueModule/CatalogueSidebarModule';
 import { journalsActions } from '../../store/journals';
-import entriesKeys from '../../store/journals/types';
+import { JOURNALS_STATE_KEYS } from '../../constants/redux';
 import Container from '../../components/Container';
 
 export default function Catalogue() {
@@ -26,7 +26,7 @@ export default function Catalogue() {
     ? destinations.find((destinationFilter) => destinationFilter.name === destination)
     : null;
 
-  useEffect(() => () => dispatch(journalsActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES })));
+  useEffect(() => () => dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.JOURNALS })));
 
   return (
     <Container customStyle={{ paddingBottom: '5em' }}>

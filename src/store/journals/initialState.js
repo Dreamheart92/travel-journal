@@ -1,4 +1,4 @@
-import entriesKeys from './types';
+import { JOURNALS_STATE_KEYS } from '../../constants/redux';
 
 const INITIAL_KEY_STATE = {
   results: null,
@@ -8,14 +8,14 @@ const INITIAL_KEY_STATE = {
 };
 
 const initialState = {
-  [entriesKeys.JOURNAL_ENTRY]: {
+  [JOURNALS_STATE_KEYS.JOURNAL]: {
     result: null,
     loading: false,
     success: false,
     error: null,
   },
-  [entriesKeys.JOURNAL_ENTRIES]: INITIAL_KEY_STATE,
-  [entriesKeys.COMMENTS]: {
+  [JOURNALS_STATE_KEYS.JOURNALS]: INITIAL_KEY_STATE,
+  [JOURNALS_STATE_KEYS.COMMENTS]: {
     results: null,
   },
 };

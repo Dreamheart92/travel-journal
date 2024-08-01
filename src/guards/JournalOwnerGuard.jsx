@@ -5,7 +5,7 @@ import { PATHS } from '../constants/paths';
 import Loading from '../components/Loading';
 import useJournal from '../hooks/useJournal';
 import { journalsActions } from '../store/journals';
-import entriesKeys from '../store/journals/types';
+import { JOURNALS_STATE_KEYS } from '../constants/redux';
 
 export default function JournalOwnerGuard({ children }) {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function JournalOwnerGuard({ children }) {
 
     return () => {
       promise.abort();
-      dispatch(journalsActions.resetState({ key: entriesKeys.JOURNAL_ENTRY }));
+      dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.JOURNAL }));
     };
   }, []);
 

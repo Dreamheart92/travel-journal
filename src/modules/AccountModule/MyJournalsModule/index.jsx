@@ -4,7 +4,7 @@ import Loading from '../../../components/Loading';
 import Grid from '../../../components/Grid';
 import { selectUser } from '../../../store/auth/selectors';
 import { journalsActions } from '../../../store/journals';
-import entriesKeys from '../../../store/journals/types';
+import { JOURNALS_STATE_KEYS } from '../../../constants/redux';
 import useJournals from '../../../hooks/useJournals';
 import ErrorMessage from '../../../components/ErrorMessage';
 import JournalCard from '../../../components/JournalCard';
@@ -24,7 +24,7 @@ export default function MyJournalsModule() {
   } = useJournals();
 
   useEffect(() => {
-    dispatch(journalsActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES }));
+    dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.JOURNALS }));
 
     const promise = fetchUserJournals(user._id);
 

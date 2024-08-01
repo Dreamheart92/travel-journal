@@ -1,4 +1,4 @@
-import entriesKeys from './types';
+import { JOURNALS_STATE_KEYS } from '../../constants/redux';
 import { INITIAL_KEY_STATE } from './initialState';
 
 const resetState = (state, action) => {
@@ -7,25 +7,25 @@ const resetState = (state, action) => {
 };
 
 const addLocalComment = (state, action) => {
-  state[entriesKeys.COMMENTS].results.unshift(action.payload);
+  state[JOURNALS_STATE_KEYS.COMMENTS].results.unshift(action.payload);
 };
 
 const deleteLocalComment = (state, action) => {
   const { commentId } = action.payload;
 
-  const indexOfTargetedComment = state[entriesKeys.COMMENTS].results
+  const indexOfTargetedComment = state[JOURNALS_STATE_KEYS.COMMENTS].results
     .findIndex((localComment) => (
       localComment._id === commentId));
 
   if (indexOfTargetedComment !== -1) {
-    state[entriesKeys.COMMENTS].results.splice(indexOfTargetedComment, 1);
+    state[JOURNALS_STATE_KEYS.COMMENTS].results.splice(indexOfTargetedComment, 1);
   }
 };
 
 const updateLocalCommentWithRealData = (state, action) => {
   const commentRealData = action.payload;
 
-  const localCommentIndex = state[entriesKeys.COMMENTS].results
+  const localCommentIndex = state[JOURNALS_STATE_KEYS.COMMENTS].results
     .findIndex((localComment) => (
       String(new Date(localComment.createdAt)) === String(new Date(commentRealData.createdAt))
       && localComment.comment === commentRealData.comment
@@ -33,7 +33,7 @@ const updateLocalCommentWithRealData = (state, action) => {
     ));
 
   if (localCommentIndex !== -1) {
-    state[entriesKeys.COMMENTS].results[localCommentIndex] = commentRealData;
+    state[JOURNALS_STATE_KEYS.COMMENTS].results[localCommentIndex] = commentRealData;
   }
 };
 
@@ -56,7 +56,7 @@ const updateLocalCommentReaction = (state, action) => {
     ? reactions.dislikes
     : reactions.likes;
 
-  const reactedLocalComment = state[entriesKeys.COMMENTS].results.find((localComment) => (
+  const reactedLocalComment = state[JOURNALS_STATE_KEYS.COMMENTS].results.find((localComment) => (
     localComment._id === commentId));
 
   if (isReacted) {

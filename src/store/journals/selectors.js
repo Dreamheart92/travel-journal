@@ -1,16 +1,16 @@
 import { createSelector } from '@reduxjs/toolkit';
-import entriesKeys from './types';
+import { JOURNALS_STATE_KEYS } from '../../constants/redux';
 
 const selectJournalsSlice = (state) => state.journals;
 
-export const selectJournals = (state) => state.journals[entriesKeys.JOURNAL_ENTRIES];
+export const selectJournals = (state) => state.journals[JOURNALS_STATE_KEYS.JOURNALS];
 
-export const selectJournal = (state) => state.journals[entriesKeys.JOURNAL_ENTRY];
+export const selectJournal = (state) => state.journals[JOURNALS_STATE_KEYS.JOURNAL];
 
 export const selectComments = createSelector(
   [selectJournalsSlice, selectJournals],
-  (journalsSlice, journalEntries) => ({
-    comments: journalsSlice[entriesKeys.COMMENTS],
-    loading: journalEntries.loading,
+  (journalsSlice, journals) => ({
+    comments: journalsSlice[JOURNALS_STATE_KEYS.COMMENTS],
+    loading: journals.loading,
   }),
 );

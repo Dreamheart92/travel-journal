@@ -5,7 +5,7 @@ import DefaultLayout from '../../layouts/DefaultLayout';
 import Container from '../../components/Container';
 import Loading from '../../components/Loading';
 import { journalsActions } from '../../store/journals';
-import entriesKeys from '../../store/journals/types';
+import { JOURNALS_STATE_KEYS } from '../../constants/redux';
 import ErrorMessage from '../../components/ErrorMessage';
 import { PATHS } from '../../constants/paths';
 import JournalModule from '../../modules/DetailsModule/JournalModule';
@@ -30,7 +30,7 @@ export default function Details() {
     const promise = fetchJournal(journalId);
 
     return () => {
-      dispatch(journalsActions.resetState({ key: entriesKeys.JOURNAL_ENTRY }));
+      dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.JOURNAL }));
       dispatch(crudActions.resetState());
       promise.abort();
     };
