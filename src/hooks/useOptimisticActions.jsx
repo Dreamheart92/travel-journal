@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { deleteCommentRequest, postCommentReactionRequest, postCommentRequest } from '../store/optimistic/services';
-import optimisticKeys from '../store/optimistic/types';
+import { OPTIMISTIC_STATE_KEYS } from '../constants/redux';
 import { journalsActions } from '../store/journals';
 
 const useOptimisticActions = () => {
@@ -9,7 +9,7 @@ const useOptimisticActions = () => {
   const handlePostComment = (localComment, journalId) => {
     dispatch(journalsActions.addLocalComment(localComment));
     dispatch(postCommentRequest({
-      key: optimisticKeys.POST_COMMENT,
+      key: OPTIMISTIC_STATE_KEYS.POST_COMMENT,
       commentMetaData: {
         commentData: {
           comment: localComment.comment,
@@ -23,7 +23,7 @@ const useOptimisticActions = () => {
   const handleDeleteComment = ({ commentId, journalId }) => {
     dispatch(journalsActions.deleteLocalComment({ commentId }));
     dispatch(deleteCommentRequest({
-      key: optimisticKeys.DELETE_COMMENT,
+      key: OPTIMISTIC_STATE_KEYS.DELETE_COMMENT,
       commentId,
       journalId,
     }));
@@ -45,7 +45,7 @@ const useOptimisticActions = () => {
     }));
 
     dispatch(postCommentReactionRequest({
-      key: optimisticKeys.POST_COMMENT_REACTION,
+      key: OPTIMISTIC_STATE_KEYS.POST_COMMENT_REACTION,
       reactionMetaData: {
         reactionType,
         isReacted,

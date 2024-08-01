@@ -5,7 +5,7 @@ import useModal from '../../hooks/useModal';
 import { optimisticErrorMessages } from '../../constants/errorMessages';
 import Modal from '../../components/Modal';
 import ErrorMessage from '../../components/ErrorMessage';
-import optimisticKeys from '../../store/optimistic/types';
+import { OPTIMISTIC_STATE_KEYS } from '../../constants/redux';
 import { journalsActions } from '../../store/journals';
 
 export default function OptimisticModule() {
@@ -17,12 +17,12 @@ export default function OptimisticModule() {
 
   const optimisticState = useSelector(selectOptimistic);
 
-  const postCommentSuccessData = optimisticState[optimisticKeys.POST_COMMENT].data;
+  const postCommentSuccessData = optimisticState[OPTIMISTIC_STATE_KEYS.POST_COMMENT].data;
 
   const optimisticErrors = {
-    [optimisticKeys.POST_COMMENT]: optimisticState[optimisticKeys.POST_COMMENT].error,
-    [optimisticKeys.DELETE_COMMENT]: optimisticState[optimisticKeys.DELETE_COMMENT].error,
-    [optimisticKeys.POST_COMMENT_REACTION]: optimisticState[optimisticKeys.POST_COMMENT_REACTION].error,
+    [OPTIMISTIC_STATE_KEYS.POST_COMMENT]: optimisticState[OPTIMISTIC_STATE_KEYS.POST_COMMENT].error,
+    [OPTIMISTIC_STATE_KEYS.DELETE_COMMENT]: optimisticState[OPTIMISTIC_STATE_KEYS.DELETE_COMMENT].error,
+    [OPTIMISTIC_STATE_KEYS.POST_COMMENT_REACTION]: optimisticState[OPTIMISTIC_STATE_KEYS.POST_COMMENT_REACTION].error,
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import optimisticKeys from './types';
+import { OPTIMISTIC_STATE_KEYS } from '../../constants/redux';
 
 const INITIAL_KEY_STATE = {
   data: null,
@@ -7,9 +7,9 @@ const INITIAL_KEY_STATE = {
 };
 
 const initialState = {
-  [optimisticKeys.POST_COMMENT]: INITIAL_KEY_STATE,
-  [optimisticKeys.DELETE_COMMENT]: INITIAL_KEY_STATE,
-  [optimisticKeys.POST_COMMENT_REACTION]: INITIAL_KEY_STATE,
+  [OPTIMISTIC_STATE_KEYS.POST_COMMENT]: INITIAL_KEY_STATE,
+  [OPTIMISTIC_STATE_KEYS.DELETE_COMMENT]: INITIAL_KEY_STATE,
+  [OPTIMISTIC_STATE_KEYS.POST_COMMENT_REACTION]: INITIAL_KEY_STATE,
 };
 
 export { INITIAL_KEY_STATE, initialState };
