@@ -10,6 +10,13 @@ export const splitByNewLine = (content) => content.split('\n');
 
 export const formatCommentsCount = (comments) => `${comments.length} comment${comments.length !== 1 ? 's' : ''}`;
 
+export const findCurrentDestination = (destination, destinations) => {
+  if (!destination) {
+    return null;
+  }
+  return destinations.find((destinationFilter) => destinationFilter.name === destination);
+};
+
 export const buildQueryString = (searchParams) => {
   const queries = [];
 
