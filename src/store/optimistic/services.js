@@ -54,7 +54,7 @@ export const postCommentRequest = createAsyncThunk(
 export const deleteCommentRequest = createAsyncThunk(
   'optimistic',
   async (arg, { dispatch, signal }) => {
-    const { commentId } = arg;
+    const { commentId, journalId } = arg;
     const { accessToken } = getAccessTokenAndIdFromLocalStorage();
 
     const settings = {
@@ -65,7 +65,7 @@ export const deleteCommentRequest = createAsyncThunk(
     };
 
     try {
-      await sendHttpRequest(`${API.COMMENTS.COMMENTS}/${commentId}`, settings);
+      await sendHttpRequest(`${API.COMMENTS.COMMENTS}/${journalId}/${commentId}`, settings);
       return { success: true };
     } catch (error) {
       throw error;
