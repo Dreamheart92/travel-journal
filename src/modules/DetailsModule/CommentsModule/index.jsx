@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import CommentsSectionHeader from './CommentsSectionHeader';
-import CommentCard from '../../../components/CommentCard';
 import style from './index.module.css';
 import { formatCommentsCount } from '../../../helpers/helpers';
 import CreateCommentForm from '../Forms/CreateCommentForm';
@@ -12,6 +11,7 @@ import { selectComments } from '../../../store/journals/selectors';
 import { selectAuth } from '../../../store/auth/selectors';
 import FormProvider from '../../../context/FormContext';
 import useOptimisticActions from '../../../hooks/useOptimisticActions';
+import CommentsList from '../components/CommentsList';
 
 export default function CommentsModule({ journalId }) {
   const { user, isAuthenticated } = useSelector(selectAuth);
@@ -54,16 +54,11 @@ export default function CommentsModule({ journalId }) {
         {formatCommentsCount(comments.results)}
       </div>
 
-      <div className={style['comments-list']}>
-        {comments.results.map((comment) => (
-          <CommentCard
-            key={comment._id}
-            comment={comment}
-            userId={user?._id}
-            onSetModalTargetItemId={onSetTargetItemId}
-          />
-        ))}
-      </div>
+      <CommentsList
+        comments={comments.results}
+        userId={user._id}
+        onSetTargetItemId={onSetTargetItemId}
+      />
 
       <Modal isOpen={isOpen}>
         <DeleteModal
