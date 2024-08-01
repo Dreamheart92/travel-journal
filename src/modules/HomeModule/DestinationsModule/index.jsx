@@ -1,8 +1,7 @@
 import Container from '../../../components/Container';
-import Grid from '../../../components/Grid';
-import DestinationCard from '../../../components/DestinationCard';
 import style from './index.module.css';
 import useDestinations from '../../../hooks/useDestinations';
+import DestinationsGrid from '../components/DestinationsGrid';
 
 export default function DestinationsModule() {
   const { destinations } = useDestinations();
@@ -12,24 +11,11 @@ export default function DestinationsModule() {
 
   return (
     <Container heading="Around the world">
-      <Grid>
-        {firstRow.map((destination) => (
-          <DestinationCard
-            key={destination._id}
-            destination={destination}
-          />
-        ))}
-      </Grid>
+      <DestinationsGrid destinations={firstRow} />
 
-      <Grid outerClassName={style['second-row']}>
-        {secondRow.map((destination) => (
-          <DestinationCard
-            key={destination._id}
-            destination={destination}
-          />
-        ))}
-      </Grid>
-
+      <div className={style.wrapper}>
+        <DestinationsGrid destinations={secondRow} />
+      </div>
     </Container>
   );
 }
