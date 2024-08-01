@@ -7,11 +7,6 @@ import JournalContent from '../JournalContent';
 
 export default function JournalCatalogueCard({ journal }) {
   const {
-    date,
-    comments,
-    author,
-    description,
-    title,
     destination,
     imageUrl,
   } = journal;
