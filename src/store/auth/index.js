@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { storeUser, clearUser } from './reducers';
-import { getInitialAuthState } from '../../helpers/getInitialAuthState';
+import { getInitialAuthState } from '../../helpers/helpers';
 
 const authSlice = createSlice({
   name: 'auth',
