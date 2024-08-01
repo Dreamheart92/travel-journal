@@ -8,7 +8,7 @@ import Modal from '../../../components/Modal';
 import DeleteModal from '../../../components/Modal/DeleteModal';
 import useModal from '../../../hooks/useModal';
 import { PATHS } from '../../../constants/paths';
-import crudKeys from '../../../store/crud/types';
+import { CRUD_STATE_KEYS } from '../../../constants/redux';
 import { crudActions } from '../../../store/crud';
 import useCrud from '../../../hooks/useCrud';
 
@@ -17,13 +17,13 @@ export default function JournalModule({ journalId, journal }) {
   const navigate = useNavigate();
 
   const { isOpen, onOpenModal, onCloseModal } = useModal();
-  const { loading, deleteJournal } = useCrud(crudKeys.DELETE);
+  const { loading, deleteJournal } = useCrud(CRUD_STATE_KEYS.DELETE);
 
   const handleDeleteJournal = async () => {
     const isSuccess = await deleteJournal(journalId);
 
     if (isSuccess?.payload?.success) {
-      dispatch(crudActions.resetState({ key: crudKeys.DELETE }));
+      dispatch(crudActions.resetState({ key: CRUD_STATE_KEYS.DELETE }));
       navigate(PATHS.CATALOGUE);
     }
   };

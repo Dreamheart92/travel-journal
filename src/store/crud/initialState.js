@@ -1,4 +1,4 @@
-import crudKeys from './types';
+import { CRUD_STATE_KEYS } from '../../constants/redux';
 
 export const INITIAL_KEY_STATE = {
   data: null,
@@ -8,10 +8,10 @@ export const INITIAL_KEY_STATE = {
 };
 
 const initialState = {
-  [crudKeys.CREATE]: INITIAL_KEY_STATE,
-  [crudKeys.READ]: INITIAL_KEY_STATE,
-  [crudKeys.UPDATE]: INITIAL_KEY_STATE,
-  [crudKeys.DELETE]: INITIAL_KEY_STATE,
+  [CRUD_STATE_KEYS.CREATE]: INITIAL_KEY_STATE,
+  [CRUD_STATE_KEYS.READ]: INITIAL_KEY_STATE,
+  [CRUD_STATE_KEYS.UPDATE]: INITIAL_KEY_STATE,
+  [CRUD_STATE_KEYS.DELETE]: INITIAL_KEY_STATE,
 };
 
 export default initialState;

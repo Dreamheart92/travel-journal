@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import crudKeys from '../store/crud/types';
+import { CRUD_STATE_KEYS } from '../constants/redux';
 import { buildJournalFormData, buildUserFormData } from '../helpers';
 import { constructSignupData } from '../forms/helpers/signupForm';
 import { constructLoginData } from '../forms/helpers/loginForm';
@@ -22,35 +22,35 @@ const useCrud = (type) => {
   let actions;
 
   switch (type) {
-    case crudKeys.CREATE: {
+    case CRUD_STATE_KEYS.CREATE: {
       actions = {
         postJournal: (formData) => dispatch(postJournalRequest({
-          key: crudKeys.CREATE,
+          key: CRUD_STATE_KEYS.CREATE,
           journalData: buildJournalFormData(formData),
         })),
         signup: (signupData) => dispatch(sendSignupRequest({
-          key: crudKeys.CREATE,
+          key: CRUD_STATE_KEYS.CREATE,
           signupData: constructSignupData(signupData),
         })),
       };
       break;
     }
-    case crudKeys.READ: {
+    case CRUD_STATE_KEYS.READ: {
       actions = {
         login: (loginData) => {
           dispatch(sendLoginRequest({
-            key: crudKeys.READ,
+            key: CRUD_STATE_KEYS.READ,
             loginData: constructLoginData(loginData),
           }));
         },
       };
       break;
     }
-    case crudKeys.UPDATE: {
+    case CRUD_STATE_KEYS.UPDATE: {
       actions = {
         updateJournal: (journalData, journalId) => {
           dispatch(updateJournalRequest({
-            key: crudKeys.UPDATE,
+            key: CRUD_STATE_KEYS.UPDATE,
             journalMetaData: {
               journalData: buildJournalFormData(journalData),
               journalId,
@@ -59,18 +59,18 @@ const useCrud = (type) => {
         },
         updateProfile: (userData) => {
           dispatch(updateProfileRequest({
-            key: crudKeys.UPDATE,
+            key: CRUD_STATE_KEYS.UPDATE,
             userData: buildUserFormData(userData),
           }));
         },
       };
       break;
     }
-    case crudKeys.DELETE: {
+    case CRUD_STATE_KEYS.DELETE: {
       actions = {
         deleteJournal: (journalId) => (
           dispatch(deleteJournalRequest({
-            key: crudKeys.DELETE,
+            key: CRUD_STATE_KEYS.DELETE,
             journalId,
           }))
         ),

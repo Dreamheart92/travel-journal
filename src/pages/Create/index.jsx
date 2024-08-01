@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import crudKeys from '../../store/crud/types';
+import { CRUD_STATE_KEYS } from '../../constants/redux';
 import { PATHS } from '../../constants/paths';
 import JournalEditorModule from '../../modules/JournalEditorModule';
 import useCrud from '../../hooks/useCrud';
@@ -17,7 +17,7 @@ export default function Create() {
     success,
     error,
     postJournal,
-  } = useCrud(crudKeys.CREATE);
+  } = useCrud(CRUD_STATE_KEYS.CREATE);
 
   useEffect(() => {
     if (success) {

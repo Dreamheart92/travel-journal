@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Index from '../Forms/EditProfileForm';
 import Container from '../../../components/Container';
 import { buildUserFormInitialState } from '../../../helpers';
 import { PATHS } from '../../../constants/paths';
-import crudKeys from '../../../store/crud/types';
+import { CRUD_STATE_KEYS } from '../../../constants/redux';
 import { selectUser } from '../../../store/auth/selectors';
 import { crudActions } from '../../../store/crud';
 import FormProvider from '../../../context/FormContext';
@@ -26,10 +25,10 @@ export default function EditProfileModule() {
     success,
     error,
     updateProfile,
-  } = useCrud(crudKeys.UPDATE);
+  } = useCrud(CRUD_STATE_KEYS.UPDATE);
 
   useEffect(() => {
-    dispatch(crudActions.resetState({ key: crudKeys.UPDATE }));
+    dispatch(crudActions.resetState({ key: CRUD_STATE_KEYS.UPDATE }));
 
     if (success) {
       auth.updateUser(updatedUserData);

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Loading from '../../components/Loading';
 import { PATHS } from '../../constants/paths';
-import crudKeys from '../../store/crud/types';
+import { CRUD_STATE_KEYS } from '../../constants/redux';
 import JournalEditorModule from '../../modules/JournalEditorModule';
 import useCrud from '../../hooks/useCrud';
 import { crudActions } from '../../store/crud';
@@ -22,7 +22,7 @@ export default function Edit() {
     success: isUpdatedJournal,
     error,
     updateJournal,
-  } = useCrud(crudKeys.UPDATE);
+  } = useCrud(CRUD_STATE_KEYS.UPDATE);
 
   useEffect(() => {
     if (isUpdatedJournal) {

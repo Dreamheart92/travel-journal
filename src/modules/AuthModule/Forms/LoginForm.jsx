@@ -7,7 +7,7 @@ import { PATHS } from '../../../constants/paths';
 import useForm from '../../../hooks/useForm';
 import useAuth from '../../../hooks/useAuth';
 import useCrud from '../../../hooks/useCrud';
-import crudKeys from '../../../store/crud/types';
+import { CRUD_STATE_KEYS } from '../../../constants/redux';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function LoginForm() {
     error,
     success,
     login,
-  } = useCrud(crudKeys.READ);
+  } = useCrud(CRUD_STATE_KEYS.READ);
 
   const handleLoginSubmit = (loginData) => {
     login(loginData);

@@ -9,7 +9,7 @@ import VALIDATIONS from '../../../constants/validations';
 
 import Form from '../../../components/Form';
 import Button from '../../../components/Button';
-import crudKeys from '../../../store/crud/types';
+import { CRUD_STATE_KEYS } from '../../../constants/redux';
 
 export default function SignupForm() {
   const [form] = useForm();
@@ -24,7 +24,7 @@ export default function SignupForm() {
     success,
     error,
     signup,
-  } = useCrud(crudKeys.CREATE);
+  } = useCrud(CRUD_STATE_KEYS.CREATE);
 
   useEffect(() => {
     if (success) {
