@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
-import DefaultLayout from '../../layouts/DefaultLayout';
 import Container from '../../components/Container';
 import Loading from '../../components/Loading';
 import { journalsActions } from '../../store/journals';
