@@ -3,8 +3,8 @@ import sendHttpRequest from '../../services/sendHttpRequest';
 import API from '../../constants/api';
 import { getAccessTokenAndIdFromLocalStorage } from '../../helpers/storage';
 
-export const fetchEntries = createAsyncThunk(
-  'journals/fetchEntries',
+export const fetchJournalsService = createAsyncThunk(
+  'journals/fetchJournals',
   async (arg, { signal }) => {
     const { query = '', destination = null } = arg || {};
 
@@ -18,8 +18,8 @@ export const fetchEntries = createAsyncThunk(
   },
 );
 
-export const fetchEntry = createAsyncThunk(
-  'journals/fetchEntry',
+export const fetchJournalService = createAsyncThunk(
+  'journals/fetchJournal',
   async (arg, { signal }) => {
     const { journalId } = arg;
 
@@ -36,8 +36,8 @@ export const fetchEntry = createAsyncThunk(
   },
 );
 
-export const fetchUserEntries = createAsyncThunk(
-  'journals/fetchEntries',
+export const fetchUserJournalsService = createAsyncThunk(
+  'journals/fetchJournals',
   async (arg, { signal }) => {
     const { userId } = arg;
     const { accessToken } = getAccessTokenAndIdFromLocalStorage();
