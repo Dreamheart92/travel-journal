@@ -1,8 +1,14 @@
-.profile-image {
+.small {
+    width: 2em;
+    height: 2em;
+}
+
+.medium {
     width: 4em;
     height: 4em;
 }
 
-.profile-image img {
+.small img,
+.medium img {
     border-radius: 100%;
 }
