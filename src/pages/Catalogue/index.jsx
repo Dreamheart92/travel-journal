@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import DefaultLayout from '../../layouts/DefaultLayout';
 import DestinationHeader from '../../modules/CatalogueModule/components/DestinationHeader';
 import style from './index.module.css';
 import useQuery from '../../hooks/useQuery';
