@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Image from '../../../components/Image';
-import JournalContent from '../../../components/JournalContent';
 import style from './index.module.css';
-import Button from '../../../components/Button';
 import Modal from '../../../components/Modal';
 import DeleteModal from '../../../components/Modal/DeleteModal';
 import useModal from '../../../hooks/useModal';
@@ -11,8 +8,9 @@ import { PATHS } from '../../../constants/paths';
 import { CRUD_STATE_KEYS } from '../../../constants/redux';
 import { crudActions } from '../../../store/crud';
 import useCrud from '../../../hooks/useCrud';
+import Journal from '../components/Journal';
 
-export default function JournalModule({ journalId, journal }) {
+export default function JournalModule({ journal }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,7 +18,10 @@ export default function JournalModule({ journalId, journal }) {
   const { loading, deleteJournal } = useCrud(CRUD_STATE_KEYS.DELETE);
 
   const handleDeleteJournal = async () => {
-    const isSuccess = await deleteJournal({ journalId, destinationId: journal.destination._id });
+    const isSuccess = await deleteJournal({
+      journalId: journal._id,
+      destinationId: journal.destination._id,
+    });
 
     if (isSuccess?.payload?.success) {
       dispatch(crudActions.resetState({ key: CRUD_STATE_KEYS.DELETE }));
@@ -30,26 +31,7 @@ export default function JournalModule({ journalId, journal }) {
 
   return (
     <div className={style.container}>
-      <div className={style['journal-image-wrapper']}>
-        <Image imageUrl={journal.imageUrl} />
-
-        {journal.isJournalOwner && (
-          <div className={style.controls}>
-            <Button
-              onClick={() => navigate(`${PATHS.EDIT}/${journalId}`)}
-              variant="secondary"
-              caption="Edit"
-            />
-            <Button
-              onClick={() => onOpenModal()}
-              variant="warning"
-              caption="Delete"
-            />
-          </div>
-        )}
-      </div>
-
-      <JournalContent journal={journal} />
+      <Journal journal={journal} onOpenModal={onOpenModal} />
 
       <Modal isOpen={isOpen}>
         <DeleteModal
