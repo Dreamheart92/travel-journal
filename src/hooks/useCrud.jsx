@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import crudKeys from '../store/crud/types';
-import crudActionsConstants from '../constants/crudActionsConstants';
 import { buildJournalFormData, buildUserFormData } from '../helpers';
 import { constructSignupData } from '../forms/helpers/signupForm';
 import { constructLoginData } from '../forms/helpers/loginForm';
@@ -27,12 +26,10 @@ const useCrud = (type) => {
       actions = {
         postJournal: (formData) => dispatch(postJournalRequest({
           key: crudKeys.CREATE,
-          currentAction: crudActionsConstants.POST_JOURNAL,
           journalData: buildJournalFormData(formData),
         })),
         signup: (signupData) => dispatch(sendSignupRequest({
           key: crudKeys.CREATE,
-          currentAction: crudActionsConstants.SIGNUP,
           signupData: constructSignupData(signupData),
         })),
       };
@@ -43,7 +40,6 @@ const useCrud = (type) => {
         login: (loginData) => {
           dispatch(sendLoginRequest({
             key: crudKeys.READ,
-            currentAction: crudActionsConstants.LOGIN,
             loginData: constructLoginData(loginData),
           }));
         },
@@ -55,7 +51,6 @@ const useCrud = (type) => {
         updateJournal: (journalData, journalId) => {
           dispatch(updateJournalRequest({
             key: crudKeys.UPDATE,
-            currentAction: crudActionsConstants.UPDATE_JOURNAL,
             journalMetaData: {
               journalData: buildJournalFormData(journalData),
               journalId,
@@ -65,7 +60,6 @@ const useCrud = (type) => {
         updateProfile: (userData) => {
           dispatch(updateProfileRequest({
             key: crudKeys.UPDATE,
-            currentAction: crudActionsConstants.UPDATE_PROFILE,
             userData: buildUserFormData(userData),
           }));
         },
@@ -77,7 +71,6 @@ const useCrud = (type) => {
         deleteJournal: (journalId) => (
           dispatch(deleteJournalRequest({
             key: crudKeys.DELETE,
-            currentAction: crudActionsConstants.DELETE_JOURNAL,
             journalId,
           }))
         ),
