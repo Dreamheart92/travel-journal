@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux';
 import CommentsSectionHeader from './CommentsSectionHeader';
 import style from './index.module.css';
-import { formatCommentsCount } from '../../../helpers/helpers';
+import { buildLocalComment, formatCommentsCount } from '../../../helpers/helpers';
 import CreateCommentForm from '../Forms/CreateCommentForm';
-import { buildLocalComment } from '../../../forms/helpers/createCommentForm';
 import Modal from '../../../components/Modal';
 import DeleteModal from '../../../components/Modal/DeleteModal';
 import useModal from '../../../hooks/useModal';
