@@ -23,7 +23,7 @@ const extraReducers = (builder) => {
     }
   });
   builder.addMatcher(
-    (action) => action.type.startsWith('entries/fetchEntries'),
+    (action) => action.type.startsWith('journals/fetchEntries'),
     (state, action) => {
       const { requestStatus } = action.meta;
 

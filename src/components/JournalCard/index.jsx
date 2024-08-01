@@ -44,6 +44,7 @@ export default function JournalCard({ journal, size = 'md' }) {
         <JournalCardInfo
           author={author.username}
           title={title}
+          imageUrl={author.imageUrl}
           description={description}
           fontSize={cardStyle.fontSize}
         />

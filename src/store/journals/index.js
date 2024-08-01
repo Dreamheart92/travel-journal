@@ -10,8 +10,8 @@ import {
   updateLocalCommentReaction,
 } from './reducers';
 
-const entriesSlice = createSlice({
-  name: 'entries',
+const journalsSlice = createSlice({
+  name: 'journals',
   initialState,
   reducers: {
     resetState,
@@ -23,5 +23,5 @@ const entriesSlice = createSlice({
   extraReducers,
 });
 
-export const entriesActions = entriesSlice.actions;
-export default entriesSlice.reducer;
+export const journalsActions = journalsSlice.actions;
+export default journalsSlice.reducer;
