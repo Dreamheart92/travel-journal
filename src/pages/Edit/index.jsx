@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Loading from '../../components/Loading';
 import { PATHS } from '../../constants/paths';
 import crudKeys from '../../store/crud/types';
-import { selectJournalEntry } from '../../store/entries/selectors';
 import JournalEditorModule from '../../modules/JournalEditorModule';
 import useCrud from '../../hooks/useCrud';
 import { crudActions } from '../../store/crud';
+import useJournal from '../../hooks/useJournal';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export default function Edit() {
 
   const { journalId } = useParams();
 
-  const { result: journal, loading: journalLoading } = useSelector(selectJournalEntry);
+  const { journal, loading: journalLoading } = useJournal();
 
   const {
     loading: isUpdating,
