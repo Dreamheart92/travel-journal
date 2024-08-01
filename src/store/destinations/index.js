@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchDestinations } from './services';
+import { updateDestinationCount } from './reducers';
 
 const initialState = {
   destinations: [],
@@ -11,7 +12,9 @@ const initialState = {
 const destinationsSlice = createSlice({
   name: 'destinations',
   initialState,
-  reducers: {},
+  reducers: {
+    updateDestinationCount,
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchDestinations.pending, (state) => {
       state.loading = true;
@@ -29,4 +32,5 @@ const destinationsSlice = createSlice({
   },
 });
 
+export const destinationsActions = destinationsSlice.actions;
 export default destinationsSlice.reducer;
