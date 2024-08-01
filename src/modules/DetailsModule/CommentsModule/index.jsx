@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import CommentsSectionHeader from './CommentsSectionHeader';
 import CommentCard from '../../../components/CommentCard';
 import style from './index.module.css';
-import { formatCommentsCount } from '../../../helpers';
+import { formatCommentsCount } from '../../../helpers/helpers';
 import CreateCommentForm from '../Forms/CreateCommentForm';
 import { buildLocalComment } from '../../../forms/helpers/createCommentForm';
 import Modal from '../../../components/Modal';

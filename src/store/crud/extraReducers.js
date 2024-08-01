@@ -1,4 +1,4 @@
-import { buildErrorObject } from '../../helpers';
+import { buildErrorObject } from '../../helpers/helpers';
 
 const extraReducers = (builder) => {
   builder.addMatcher(

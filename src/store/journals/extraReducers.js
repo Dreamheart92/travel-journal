@@ -1,6 +1,6 @@
 import { fetchJournalService } from './services';
 import { JOURNALS_STATE_KEYS } from '../../constants/redux';
-import { buildErrorObject } from '../../helpers';
+import { buildErrorObject } from '../../helpers/helpers';
 
 const extraReducers = (builder) => {
   builder.addCase(fetchJournalService.pending, (state) => {

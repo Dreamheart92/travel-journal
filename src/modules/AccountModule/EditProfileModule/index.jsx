@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from '../../../components/Container';
-import { buildUserFormInitialState } from '../../../helpers';
+import { buildUserFormInitialState } from '../../../helpers/helpers';
 import { PATHS } from '../../../constants/paths';
 import { CRUD_STATE_KEYS } from '../../../constants/redux';
 import { selectUser } from '../../../store/auth/selectors';

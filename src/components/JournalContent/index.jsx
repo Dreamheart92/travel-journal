@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-regular-svg-icons/faComments';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe';
-import { formatDate, normalizeName, splitByNewLine } from '../../helpers';
+import { formatDate, normalizeName, splitByNewLine } from '../../helpers/helpers';
 import CatalogueCardButton from '../CatalogueCard/CatalogueCardButton';
 
 import style from './index.module.css';
