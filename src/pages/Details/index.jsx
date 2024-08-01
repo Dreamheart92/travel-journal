@@ -19,7 +19,6 @@ export default function Details() {
   const {
     journal,
     loading,
-    success,
     error,
     fetchJournal,
   } = useJournal();
@@ -47,7 +46,7 @@ export default function Details() {
         {loading
           && <Loading />}
 
-        {!loading && success
+        {!loading && journal
           && (
             <>
               <JournalModule
