@@ -3,7 +3,6 @@ import CreateJournal from '../components/CreateJournal';
 import Search from '../../../components/Search';
 import FiltersSection from '../components/FiltersSection';
 
-export default function CatalogueSidebarModule({ isAuthenticated, onQuery }) {
   return (
     <Sidebar width="20em">
       {isAuthenticated
