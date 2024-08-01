@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { getUserDataFromLocalStorage } from './storage';
 
 export const normalizeName = (value) => value[0].toUpperCase() + value.slice(1);
 
@@ -71,3 +72,39 @@ export const buildErrorObject = (message) => ({
   error: true,
   message,
 });
+
+export const getInitialAuthState = () => {
+  const user = getUserDataFromLocalStorage();
+
+  return {
+    user,
+    isAuthenticated: !!user,
+  };
+};
+
+const buildTemporaryCommentId = () => `${Math.random() * 1000}___temporary`;
+
+export const buildLocalComment = (user, comment) => ({
+  _id: buildTemporaryCommentId(),
+  createdAt: String(new Date()),
+  author: user,
+  comment,
+  dislikes: [],
+  likes: [],
+  totalLikes: 0,
+});
+
+export const constructLoginData = (formData) => ({
+  email: formData.email,
+  password: formData.password,
+});
+
+export const constructSignupData = (signupData) => (
+  {
+    email: signupData.email,
+    username: signupData.username,
+    firstName: signupData.firstName,
+    lastName: signupData.lastName,
+    password: signupData.password,
+  }
+);
