@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../../components/Loading';
 import Grid from '../../../components/Grid';
 import { selectUser } from '../../../store/auth/selectors';
-import { entriesActions } from '../../../store/entries';
-import entriesKeys from '../../../store/entries/types';
+import { journalsActions } from '../../../store/journals';
+import entriesKeys from '../../../store/journals/types';
 import useJournals from '../../../hooks/useJournals';
 import ErrorMessage from '../../../components/ErrorMessage';
 import JournalCard from '../../../components/JournalCard';
@@ -24,7 +24,7 @@ export default function MyJournalsModule() {
   } = useJournals();
 
   useEffect(() => {
-    dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES }));
+    dispatch(journalsActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES }));
 
     const promise = fetchUserJournals(user._id);
 
@@ -50,7 +50,7 @@ export default function MyJournalsModule() {
                   {journals.map((journal) => (
                     <JournalCard
                       key={journal._id}
-                      size='sm'
+                      size="sm"
                       journal={journal}
                     />
                   ))}
