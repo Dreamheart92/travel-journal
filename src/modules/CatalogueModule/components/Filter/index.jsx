@@ -1,6 +1,6 @@
 import NavigationLink from '../../../../components/NavigationLink';
 import { PATHS } from '../../../../constants/paths';
-import { normalizeName } from '../../../../helpers';
+import { normalizeName } from '../../../../helpers/helpers';
 
 export default function Filter({ filter }) {
   return (
