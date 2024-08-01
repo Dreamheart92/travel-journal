@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectJournalEntry } from '../store/entries/selectors';
-import { fetchEntry } from '../store/entries/services';
+import { selectJournal } from '../store/journals/selectors';
+import { fetchJournalService } from '../store/journals/services';
 
 const useJournal = () => {
   const dispatch = useDispatch();
@@ -10,10 +10,10 @@ const useJournal = () => {
     loading,
     success,
     error,
-  } = useSelector(selectJournalEntry);
+  } = useSelector(selectJournal);
 
   const fetchJournal = (journalId) => (
-    dispatch(fetchEntry({ journalId }))
+    dispatch(fetchJournalService({ journalId }))
   );
 
   return {
