@@ -1,14 +1,14 @@
-import { fetchEntry } from './services';
+import { fetchJournalService } from './services';
 import entriesKeys from './types';
 import { buildErrorObject } from '../../helpers';
 
 const extraReducers = (builder) => {
-  builder.addCase(fetchEntry.pending, (state) => {
+  builder.addCase(fetchJournalService.pending, (state) => {
     state[entriesKeys.JOURNAL_ENTRY].loading = true;
     state[entriesKeys.JOURNAL_ENTRY].success = false;
     state[entriesKeys.JOURNAL_ENTRY].error = null;
   });
-  builder.addCase(fetchEntry.fulfilled, (state, action) => {
+  builder.addCase(fetchJournalService.fulfilled, (state, action) => {
     state[entriesKeys.JOURNAL_ENTRY].result = action.payload.result;
     state[entriesKeys.JOURNAL_ENTRY].result.isJournalOwner = action.payload.isJournalOwner;
     state[entriesKeys.COMMENTS].results = action.payload.comments;
@@ -16,14 +16,14 @@ const extraReducers = (builder) => {
     state[entriesKeys.JOURNAL_ENTRY].loading = false;
     state[entriesKeys.JOURNAL_ENTRY].success = true;
   });
-  builder.addCase(fetchEntry.rejected, (state, action) => {
+  builder.addCase(fetchJournalService.rejected, (state, action) => {
     if (action.error.message !== 'Aborted') {
       state[entriesKeys.JOURNAL_ENTRY].loading = false;
       state[entriesKeys.JOURNAL_ENTRY].error = action.error;
     }
   });
   builder.addMatcher(
-    (action) => action.type.startsWith('journals/fetchEntries'),
+    (action) => action.type.startsWith('journals/fetchJournals'),
     (state, action) => {
       const { requestStatus } = action.meta;
 
