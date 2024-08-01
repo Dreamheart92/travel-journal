@@ -13,12 +13,12 @@ const addLocalComment = (state, action) => {
 const deleteLocalComment = (state, action) => {
   const { commentId } = action.payload;
 
-  const indexOfTargetedComment = state[JOURNALS_STATE_KEYS.COMMENTS].results
+  const targetedCommentIndex = state[JOURNALS_STATE_KEYS.COMMENTS].results
     .findIndex((localComment) => (
       localComment._id === commentId));
 
-  if (indexOfTargetedComment !== -1) {
-    state[JOURNALS_STATE_KEYS.COMMENTS].results.splice(indexOfTargetedComment, 1);
+  if (targetedCommentIndex !== -1) {
+    state[JOURNALS_STATE_KEYS.COMMENTS].results.splice(targetedCommentIndex, 1);
   }
 };
 
