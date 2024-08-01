@@ -68,10 +68,11 @@ const useCrud = (type) => {
     }
     case CRUD_STATE_KEYS.DELETE: {
       actions = {
-        deleteJournal: (journalId) => (
+        deleteJournal: ({ journalId, destinationId }) => (
           dispatch(deleteJournalRequest({
             key: CRUD_STATE_KEYS.DELETE,
             journalId,
+            destinationId,
           }))
         ),
       };
