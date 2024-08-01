@@ -40,29 +40,27 @@ export default function Details() {
   }
 
   return (
-    <DefaultLayout>
-      <Container customStyle={{ width: '80em', minHeight: '100vh', paddingBottom: '5em' }}>
+    <Container customStyle={{ width: '80em', minHeight: '100vh', paddingBottom: '5em' }}>
 
-        {loading
-          && <Loading />}
+      {loading
+        && <Loading />}
 
-        {!loading && journal
-          && (
-            <>
-              <JournalModule
-                journal={journal}
-                journalId={journalId}
-              />
+      {!loading && journal
+        && (
+          <>
+            <JournalModule
+              journal={journal}
+              journalId={journalId}
+            />
 
-              <CommentsModule
-                journalId={journalId}
-              />
-            </>
-          )}
+            <CommentsModule
+              journalId={journalId}
+            />
+          </>
+        )}
 
-        {error
-          && <ErrorMessage large message="Failed to fetch journal. Please try again." />}
-      </Container>
-    </DefaultLayout>
+      {error
+        && <ErrorMessage large message="Failed to fetch journal. Please try again." />}
+    </Container>
   );
 }
