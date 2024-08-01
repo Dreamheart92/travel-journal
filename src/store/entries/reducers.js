@@ -32,7 +32,9 @@ const updateLocalCommentWithRealData = (state, action) => {
       && localComment.author._id === commentRealData.author._id
     ));
 
-  state[entriesKeys.COMMENTS].results[localCommentIndex] = commentRealData;
+  if (localCommentIndex !== -1) {
+    state[entriesKeys.COMMENTS].results[localCommentIndex] = commentRealData;
+  }
 };
 
 const updateLocalCommentReaction = (state, action) => {
