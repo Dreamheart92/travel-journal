@@ -5,3 +5,9 @@ const CRUD_STATE_KEYS = {
   DELETE: 'delete',
 };
 
+const JOURNALS_STATE_KEYS = {
+  JOURNAL: 'journal',
+  JOURNALS: 'journals',
+  COMMENTS: 'comments',
+};
+
