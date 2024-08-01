@@ -2,10 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getAccessTokenAndIdFromLocalStorage } from '../../helpers/storage';
 import sendHttpRequest from '../../services/sendHttpRequest';
 import API from '../../constants/api';
+import { destinationsActions } from '../destinations';
 
 export const postJournalRequest = createAsyncThunk(
   'crud/thunk/postJournalRequest',
-  async (arg, { signal }) => {
+  async (arg, { dispatch, signal }) => {
     const { journalData } = arg;
     const { accessToken } = getAccessTokenAndIdFromLocalStorage();
 
@@ -18,6 +19,8 @@ export const postJournalRequest = createAsyncThunk(
     };
 
     const result = await sendHttpRequest(API.JOURNAL.JOURNAL, settings);
+
+    dispatch(destinationsActions.updateDestinationCount({ destinationId: result.data.destination, isAdding: true }));
 
     return result.data;
   },
@@ -44,8 +47,8 @@ export const updateJournalRequest = createAsyncThunk(
 
 export const deleteJournalRequest = createAsyncThunk(
   'crud/thunk/deleteJournalRequest',
-  async (arg, { signal }) => {
-    const { journalId } = arg;
+  async (arg, { dispatch, signal }) => {
+    const { journalId, destinationId } = arg;
     const { accessToken } = getAccessTokenAndIdFromLocalStorage();
 
     const settings = {
@@ -57,6 +60,7 @@ export const deleteJournalRequest = createAsyncThunk(
 
     try {
       await sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, settings);
+      dispatch(destinationsActions.updateDestinationCount({ destinationId, isAdding: false }));
       return { success: true };
     } catch (error) {
       throw error;
