@@ -1,0 +1,14 @@
+.journal-image-wrapper {
+    width: 100%;
+    height: 40em;
+    position: relative;
+}
+
+.controls {
+    display: flex;
+    gap: 1em;
+    width: 20%;
+    position: absolute;
+    right: 1%;
+    bottom: -7%;
+}
