@@ -72,6 +72,5 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
         && <ErrorMessage large message={error.message} />
       }
     </div>
-  )
-    ;
+  );
 }
