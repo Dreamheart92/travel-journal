@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import Container from '../../../components/Container';
-import Grid from '../../../components/Grid';
 import ErrorMessage from '../../../components/ErrorMessage';
 import useJournals from '../../../hooks/useJournals';
-import JournalCard from '../../../components/JournalCard';
 import Loading from '../../../components/Loading';
+import JournalsGrid from '../components/JournalsGrid';
 
 export default function LatestJournalsModule() {
   const {
@@ -30,17 +29,9 @@ export default function LatestJournalsModule() {
 
       {loading
         && <Loading />}
+
       {success
-        && (
-          <Grid>
-            {journals.map((journal) => (
-              <JournalCard
-                key={journal._id}
-                journal={journal}
-              />
-            ))}
-          </Grid>
-        )}
+        && <JournalsGrid journals={journals} />}
 
       {
         error
