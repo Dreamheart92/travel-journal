@@ -8,8 +8,8 @@ import { selectIsAuthenticated } from '../../store/auth/selectors';
 import useDestinations from '../../hooks/useDestinations';
 import CatalogueListModule from '../../modules/CatalogueModule/CatalogueListModule';
 import CatalogueSidebarModule from '../../modules/CatalogueModule/CatalogueSidebarModule';
-import { entriesActions } from '../../store/entries';
-import entriesKeys from '../../store/entries/types';
+import { journalsActions } from '../../store/journals';
+import entriesKeys from '../../store/journals/types';
 import Container from '../../components/Container';
 
 export default function Catalogue() {
@@ -26,7 +26,7 @@ export default function Catalogue() {
     ? destinations.find((destinationFilter) => destinationFilter.name === destination)
     : null;
 
-  useEffect(() => () => dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES })));
+  useEffect(() => () => dispatch(journalsActions.resetState({ key: entriesKeys.JOURNAL_ENTRIES })));
 
   return (
     <Container customStyle={{ paddingBottom: '5em' }}>

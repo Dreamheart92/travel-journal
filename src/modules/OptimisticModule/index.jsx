@@ -6,7 +6,7 @@ import { optimisticErrorMessages } from '../../constants/errorMessages';
 import Modal from '../../components/Modal';
 import ErrorMessage from '../../components/ErrorMessage';
 import optimisticKeys from '../../store/optimistic/types';
-import { entriesActions } from '../../store/entries';
+import { journalsActions } from '../../store/journals';
 
 export default function OptimisticModule() {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function OptimisticModule() {
 
   useEffect(() => {
     if (postCommentSuccessData) {
-      dispatch(entriesActions.updateLocalCommentWithRealData(postCommentSuccessData));
+      dispatch(journalsActions.updateLocalCommentWithRealData(postCommentSuccessData));
     }
   }, [postCommentSuccessData]);
 

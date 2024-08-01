@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 import { PATHS } from '../constants/paths';
 import Loading from '../components/Loading';
 import useJournal from '../hooks/useJournal';
-import { useDispatch } from 'react-redux';
-import { entriesActions } from '../store/entries';
-import entriesKeys from '../store/entries/types';
+import { journalsActions } from '../store/journals';
+import entriesKeys from '../store/journals/types';
 
 export default function JournalOwnerGuard({ children }) {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function JournalOwnerGuard({ children }) {
 
     return () => {
       promise.abort();
-      dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRY }));
+      dispatch(journalsActions.resetState({ key: entriesKeys.JOURNAL_ENTRY }));
     };
   }, []);
 

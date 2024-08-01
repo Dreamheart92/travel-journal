@@ -4,8 +4,8 @@ import { Navigate, useParams } from 'react-router-dom';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import Container from '../../components/Container';
 import Loading from '../../components/Loading';
-import { entriesActions } from '../../store/entries';
-import entriesKeys from '../../store/entries/types';
+import { journalsActions } from '../../store/journals';
+import entriesKeys from '../../store/journals/types';
 import ErrorMessage from '../../components/ErrorMessage';
 import { PATHS } from '../../constants/paths';
 import JournalModule from '../../modules/DetailsModule/JournalModule';
@@ -30,7 +30,7 @@ export default function Details() {
     const promise = fetchJournal(journalId);
 
     return () => {
-      dispatch(entriesActions.resetState({ key: entriesKeys.JOURNAL_ENTRY }));
+      dispatch(journalsActions.resetState({ key: entriesKeys.JOURNAL_ENTRY }));
       dispatch(crudActions.resetState());
       promise.abort();
     };
