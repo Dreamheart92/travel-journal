@@ -2,13 +2,14 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import CatalogueCard from '../../../components/CatalogueCard';
 import Loading from '../../../components/Loading';
-import { buildQueryString } from '../../../helpers';
+import { buildQueryString } from '../../../helpers/helpers';
 import ErrorMessage from '../../../components/ErrorMessage';
 import Pagination from '../../../components/Pagination';
 import style from './index.module.css';
 import useSearch from '../../../hooks/useSearch';
 import useJournals from '../../../hooks/useJournals';
 import NoJournalResults from '../../../components/NoJournalsResults';
+import JournalsList from '../components/JournalsList';
 
 export default function CatalogueListModule({ destination, searchParams, onQuery }) {
   const dispatch = useDispatch();
@@ -51,18 +52,12 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
 
             {journals.length > 0
               && (
-                <Pagination
-                  onQuery={onQuery}
-                  totalPages={totalPages}
+                <JournalsList
                   currentPage={currentPage}
-                >
-                  {journals.map((journal) => (
-                    <CatalogueCard
-                      key={journal._id}
-                      journal={journal}
-                    />
-                  ))}
-                </Pagination>
+                  totalPages={totalPages}
+                  journals={journals}
+                  onQuery={onQuery}
+                />
               )}
           </>
         )}
