@@ -35,10 +35,10 @@ export default function MyJournalsModule() {
 
   return (
     <>
-      {(loading || (!success && !error))
+      {loading
         && <Loading />}
 
-      {!loading && success
+      {!loading && journals
         && (
           <>
             {journals.length <= 0
