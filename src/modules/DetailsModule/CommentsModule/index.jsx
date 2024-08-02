@@ -55,7 +55,7 @@ export default function CommentsModule({ journalId }) {
 
       <CommentsList
         comments={comments.results}
-        userId={user._id}
+        userId={user?._id}
         onSetTargetItemId={onSetTargetItemId}
       />
 
