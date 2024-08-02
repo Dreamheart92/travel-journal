@@ -60,7 +60,11 @@ const router = createBrowserRouter([
       },
       {
         path: `${PATHS.CATALOGUE}/:destination`,
-        element: <Catalogue />,
+        element: (
+          <Suspense fallback={<div><Loading /></div>}>
+            <Catalogue />
+          </Suspense>
+        ),
       },
       {
         path: `${PATHS.DETAILS}/:journalId`,
