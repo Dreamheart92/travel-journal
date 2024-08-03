@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLoadScript } from '@react-google-maps/api';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Loading from './components/Loading';
@@ -7,14 +8,21 @@ import useDestinations from './hooks/useDestinations';
 import OptimisticModule from './modules/OptimisticModule';
 import AppLayout from './layouts/AppLayout';
 
+const libraries = ['places'];
+
 export default function App() {
+  const { isLoaded: isMapsLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyCqkEzqlvC-P2VQhkIVupAZpaf0lRsUc-k',
+    libraries,
+  });
+
   const { success: destinationsLoaded, fetchDestinations } = useDestinations();
 
   useEffect(() => {
     fetchDestinations();
   }, []);
 
-  if (!destinationsLoaded) {
+  if (!destinationsLoaded || !isMapsLoaded) {
     return <AppLayout content={<Loading />} />;
   }
 
