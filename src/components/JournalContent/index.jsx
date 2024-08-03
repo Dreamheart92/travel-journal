@@ -34,7 +34,7 @@ export default function JournalContent({ journal, readMore = false }) {
 
       <div className={style.description}>
         <h1>{journal.title}</h1>
-        <h4>{journal.location}</h4>
+        <h4>{journal.location.formatted_address}</h4>
 
         {readMore
           && <p>{content}</p>}
