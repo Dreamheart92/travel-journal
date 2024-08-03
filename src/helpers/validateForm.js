@@ -12,7 +12,9 @@ const validateField = (validations, fieldValue) => {
           if (fieldValue.name.trim() === '') {
             errors.push(errorMessage);
           }
-        } else if (validationRequirement && fieldValue.trim() === '') {
+          // If field value have formatted address location is not empty
+          // Todo: Refactor for better error handling
+        } else if (typeof fieldValue.formatted_address === 'undefined' && validationRequirement && fieldValue.trim() === '') {
           errors.push(errorMessage);
         }
         break;
