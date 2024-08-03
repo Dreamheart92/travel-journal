@@ -33,7 +33,7 @@ export const buildJournalFormData = (journalData) => {
   formData.append('image', journalData.image);
   formData.append('description', journalData.description);
   formData.append('title', journalData.title);
-  formData.append('location', journalData.location);
+  formData.append('location', JSON.stringify(journalData.location));
   formData.append('date', journalData.date);
   formData.append('destination', journalData.destination);
 
