@@ -1,4 +1,4 @@
-import { GoogleMap } from '@react-google-maps/api';
+import { GoogleMap, MarkerF } from '@react-google-maps/api';
 
 const mapContainerStyle = {
   width: '100%',
@@ -11,6 +11,8 @@ export default function Map({ center }) {
       mapContainerStyle={mapContainerStyle}
       center={center}
       zoom={5}
-    />
+    >
+      <MarkerF position={center} />
+    </GoogleMap>
   );
 }
