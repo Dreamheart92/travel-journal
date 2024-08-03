@@ -2,7 +2,7 @@ import { GoogleMap } from '@react-google-maps/api';
 
 const mapContainerStyle = {
   width: '100%',
-  height: '400px',
+  height: '300px',
 };
 
 export default function Map({ center }) {
@@ -10,7 +10,7 @@ export default function Map({ center }) {
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       center={center}
-      zoom={10}
+      zoom={5}
     />
   );
 }
