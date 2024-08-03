@@ -6,6 +6,7 @@ import DateInput from './DateInput';
 import TextAreaInput from './TextAreaInput';
 import { useFormContext } from '../../../../context/FormContext';
 import style from '../index.module.css';
+import LocationAutocompleteInput from './LocationAutocompleteInput';
 
 export default function FormInput(
   {
@@ -48,7 +49,8 @@ export default function FormInput(
     || (inputType === 'file' && FileInput)
     || (inputType === 'select' && SelectInput)
     || (inputType === 'date' && DateInput)
-    || (inputType === 'text-area' && TextAreaInput);
+    || (inputType === 'text-area' && TextAreaInput)
+    || (inputType === 'location-autocomplete' && LocationAutocompleteInput);
 
   return (
     <div className={style['input-wrapper']}>
