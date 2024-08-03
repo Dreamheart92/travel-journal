@@ -66,18 +66,14 @@ export default function JournalForm(
 
       <Form.Input
         name="location"
-        placeholder="Location"
+        placeholder="Search for places"
         label="Location"
         initialValue={initialState.location}
-        inputType="text"
+        inputType="location-autocomplete"
         validators={[
           {
             required: true,
             message: 'Location is required',
-          },
-          {
-            minLength: VALIDATIONS.JOURNAL.LOCATION_MIN_LENGTH,
-            message: `Location must be at least ${VALIDATIONS.JOURNAL.LOCATION_MIN_LENGTH}`,
           },
         ]}
       />
