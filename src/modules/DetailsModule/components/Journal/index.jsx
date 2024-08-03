@@ -4,6 +4,7 @@ import Button from '../../../../components/Button';
 import { PATHS } from '../../../../constants/paths';
 import JournalContent from '../../../../components/JournalContent';
 import style from './index.module.css';
+import Map from '../../../../components/Map';
 
 export default function Journal({ journal, onOpenModal }) {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function Journal({ journal, onOpenModal }) {
       </div>
 
       <JournalContent journal={journal} />
+      <Map center={{ lat: Number(journal.location.lat), lng: Number(journal.location.lng) }} />
     </>
   );
 }
