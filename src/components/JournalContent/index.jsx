@@ -4,9 +4,8 @@ import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe';
 import { formatDate, normalizeName, splitByNewLine } from '../../helpers/helpers';
 import CatalogueCardButton from '../CatalogueCard/CatalogueCardButton';
-
-import style from './index.module.css';
 import UserProfileImage from '../UserProfileImage';
+import style from './index.module.css';
 
 export default function JournalContent({ journal, readMore = false }) {
   const content = readMore ? `${journal.description.slice(0, 500)}...` : journal.description;
