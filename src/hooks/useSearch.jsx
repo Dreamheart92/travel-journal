@@ -10,6 +10,8 @@ const useSearch = () => {
     currentPage,
     totalPages,
     isSearching,
+    sortByOptions,
+    sortBy,
   } = useSelector(selectSearch);
 
   const handleSearch = (searchValue) => {
