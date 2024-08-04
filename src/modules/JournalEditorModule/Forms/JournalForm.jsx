@@ -4,6 +4,7 @@ import VALIDATIONS from '../../../constants/validations';
 import useDestinations from '../../../hooks/useDestinations';
 
 import style from './JournalForm.module.css';
+import useForm from '../../../hooks/useForm';
 
 export default function JournalForm(
   {
@@ -14,7 +15,11 @@ export default function JournalForm(
     requestError,
   },
 ) {
+  const [form] = useForm();
   const { destinations } = useDestinations();
+
+
+  const disableSubmitButton = !form.isValidForm && form.hasBeenSubmitted;
 
   return (
     <Form
@@ -111,6 +116,7 @@ export default function JournalForm(
         submitButton
         isLoading={isSubmitting}
         caption={buttonCaption}
+        disabled={disableSubmitButton}
       />
     </Form>
   );

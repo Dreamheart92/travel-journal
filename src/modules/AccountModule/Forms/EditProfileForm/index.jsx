@@ -2,6 +2,7 @@ import Form from '../../../../components/Form';
 import Button from '../../../../components/Button';
 import VALIDATIONS from '../../../../constants/validations';
 import style from './index.module.css';
+import useForm from '../../../../hooks/useForm';
 
 export default function EditProfileForm(
   {
@@ -11,6 +12,10 @@ export default function EditProfileForm(
     error,
   },
 ) {
+  const [form] = useForm();
+
+  const disableSubmitButton = !form.isValidForm && form.hasBeenSubmitted;
+
   return (
     <Form
       submitCallback={submitCallback}
@@ -106,6 +111,7 @@ export default function EditProfileForm(
         submitButton
         caption="Update"
         isLoading={isSubmitting}
+        disabled={disableSubmitButton}
       />
     </Form>
   );
