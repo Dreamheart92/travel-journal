@@ -6,4 +6,13 @@ const optimisticErrorMessages = {
   [OPTIMISTIC_STATE_KEYS.DELETE_COMMENT]: 'Something went wrong when deleting your comment.',
 };
 
-export { optimisticErrorMessages };
+const ERROR_PAGE_TYPES = {
+  NOT_FOUND: 'NOT_FOUND',
+  SERVER_ERROR: 'SERVER_ERROR',
+};
+
+
+export {
+  optimisticErrorMessages,
+  ERROR_PAGE_TYPES,
+};
