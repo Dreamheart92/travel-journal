@@ -20,7 +20,7 @@ export default function HomeCard({ journal, size = 'md' }) {
       cardStyle = {
         width: '19.8em',
         height: '12em',
-        fontSize: '.75em',
+        fontSize: '.9em',
       };
       break;
     }
@@ -42,16 +42,17 @@ export default function HomeCard({ journal, size = 'md' }) {
           size={{ width: cardStyle.width, height: cardStyle.height }}
           imageUrl={imageUrl}
         />
-
-        <CardDetails
-          author={author.username}
-          title={title}
-          imageUrl={author.imageUrl}
-          description={description}
-          fontSize={cardStyle.fontSize}
-          viewsCount={views.count}
-        />
       </Link>
+
+      <CardDetails
+        author={author.username}
+        title={title}
+        imageUrl={author.imageUrl}
+        description={description}
+        fontSize={cardStyle.fontSize}
+        viewsCount={views.count}
+        journalId={journal._id}
+      />
     </div>
   );
 }
