@@ -70,3 +70,9 @@ npm install
 ```bash
 VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
 ```
+
+5. **Run the app:**
+
+```bash
+npm run dev
+```
