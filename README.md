@@ -12,7 +12,24 @@ The app also features a catalogue for browsing journals with various search and 
 
 Check out the live demo here: [Live Demo](https://toni-rachev-travel-journal.netlify.app/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)
-  uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast
-  Refresh
+# Features
+
+Authentication: Secure login and registration for users.
+
+Journal Management: Create, edit, and delete travel journals.
+
+View the number of times each journal has been read.
+
+Comments and Likes: Registered users can comment on journals.
+Like comments to show appreciation.
+
+User Profiles:
+Edit profile information.
+View and manage published journals.
+
+Catalogue Page:
+Search journals by name.
+Filter journals by destination.
+Sort journals by various criteria (oldest, newest, most viewed, least viewed, most commented, least commented).
+
+Google Maps Integration: Visualize journal destinations on a map.
