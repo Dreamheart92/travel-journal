@@ -49,3 +49,24 @@ To get started with the Travel Journal App locally, follow these steps:
 
 ```bash
 git clone https://github.com/dreamheart92/travel-journal
+```
+
+2. **Navigate into the project directory:**
+
+```bash
+cd travel-journal
+```
+
+3. **Install dependencies**
+
+```bash
+npm install
+```
+
+4. **Set up environment variables:**
+
+Create a .env file in the root directory and add your configuration variables. You need to include your Google Maps API key. Example:
+
+```bash
+VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
+```
