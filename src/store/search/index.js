@@ -5,7 +5,7 @@ import {
   setCurrentPage,
   setSearch,
   setTotalPages,
-  resetState,
+  resetState, setSortBy,
 } from './reducers';
 
 const searchSlice = createSlice({
@@ -15,6 +15,7 @@ const searchSlice = createSlice({
     setSearch,
     setTotalPages,
     setCurrentPage,
+    setSortBy,
     resetState,
   },
 });
