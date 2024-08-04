@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserProfileImage from '../UserProfileImage';
-import CommentCardContent from './CommentCardContent';
-import CommentCardReaction from './CommentCardReaction';
+import Content from './Content';
 import style from './index.module.css';
 import Button from '../Button';
 import { selectIsAuthenticated } from '../../store/auth/selectors';
 import { PATHS } from '../../constants/paths';
 import useOptimisticActions from '../../hooks/useOptimisticActions';
+import Reaction from './Reaction';
 
 export default function CommentCard({ comment, userId, onSetModalTargetItemId }) {
   const navigate = useNavigate();
@@ -49,14 +49,14 @@ export default function CommentCard({ comment, userId, onSetModalTargetItemId })
       <UserProfileImage imageUrl={author.imageUrl} />
 
       <div className={style.wrapper}>
-        <CommentCardContent
+        <Content
           author={author.username}
           content={content}
           createdAt={createdAt}
           id={commentId}
         />
 
-        <CommentCardReaction
+        <Reaction
           commentId={commentId}
           isLikedComment={isLikedComment}
           isDislikedComment={isDislikedComment}
