@@ -6,7 +6,11 @@
     width: 90%;
 }
 
-.info h2:hover {
+.info h3 {
+    font-weight: 500;
+}
+
+.info h3:hover {
     color: blue;
 }
 
