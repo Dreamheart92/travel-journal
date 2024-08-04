@@ -1,4 +1,5 @@
-.detail-container {
+.detail-container,
+.detail-container a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,4 +13,9 @@
 
 .detail-container svg {
     color: #555555;
+}
+
+.detail-container:hover a p,
+.detail-container:hover a svg {
+    color: #0ea5e9;
 }
