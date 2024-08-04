@@ -65,7 +65,7 @@ npm install
 
 4. **Set up environment variables:**
 
-      Create a .env file in the root directory and add your configuration variables. You need to include your Google Maps API key. Example:
+    Create a .env file in the root directory and add your configuration variables. You need to include your Google Maps API key. Example:
 
 ```bash
 VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
