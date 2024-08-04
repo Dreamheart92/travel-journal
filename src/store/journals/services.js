@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import sendHttpRequest from '../../services/sendHttpRequest';
 import API from '../../constants/api';
-import { getAccessTokenAndIdFromLocalStorage } from '../../helpers/storage';
+import { getAccessTokenAndIdFromLocalStorage } from '../../utils/storage';
+import { resolveUserId } from '../../utils/authUtils';
 
 export const fetchJournalsService = createAsyncThunk(
   'journals/fetchJournals',
@@ -20,13 +21,17 @@ export const fetchJournalsService = createAsyncThunk(
 
 export const fetchJournalService = createAsyncThunk(
   'journals/fetchJournal',
-  async (arg, { signal }) => {
+  async (arg, { dispatch, signal }) => {
     const { journalId } = arg;
 
     const result = await sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, { signal });
 
-    const { id: userId } = getAccessTokenAndIdFromLocalStorage();
+    const userId = resolveUserId();
     const isJournalOwner = result.data.author._id === userId;
+
+    if (!result.data.views.userIds.includes(userId)) {
+      dispatch(registerJournalViewService({ userId, journalId }));
+    }
 
     return {
       result: result.data,
