@@ -14,13 +14,24 @@ Check out the live demo here: [Live Demo](https://toni-rachev-travel-journal.net
 
 ## Features
 
-- #### Authentication
+- #### Authentication: Secure login and registration for users.
 
 - #### Journal Management
 
+- Create, edit, and delete travel journals.
+
+- View the number of times each journal has been read.
+
 - #### Comments and Likes
 
+- Registered users can comment on journals.
+
+- Like comments to show appreciation.
+
 - #### User Profile
+
+- Edit profile information.
+- View and manage published journals.
 
 - #### Catalogue Page
 
