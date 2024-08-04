@@ -1,11 +1,11 @@
 import Grid from '../../../../components/Grid';
-import JournalCard from '../../../../components/JournalCard';
+import HomeCard from '../../../../components/JournalCards/HomeCard';
 
 export default function JournalsGrid({ journals }) {
   return (
     <Grid>
       {journals.map((journal) => (
-        <JournalCard
+        <HomeCard
           key={journal._id}
           journal={journal}
         />
