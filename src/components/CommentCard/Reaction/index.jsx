@@ -5,7 +5,7 @@ import { faThumbsDown as faSolidThumbsDown } from '@fortawesome/free-solid-svg-i
 import { faThumbsDown as faRegularThumbsDown } from '@fortawesome/free-regular-svg-icons/faThumbsDown';
 import style from './index.module.css';
 
-export default function CommentCardReaction(
+export default function Reaction(
   {
     isLikedComment,
     isDislikedComment,
