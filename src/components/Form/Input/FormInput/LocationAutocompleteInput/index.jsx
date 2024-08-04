@@ -16,6 +16,8 @@ export default function LocationAutocompleteInput({ fieldProps }) {
 
   const inputRef = useRef(null);
   const [inputValue, setInputValue] = useState(value?.formatted_address || '');
+  const isSelected = useRef(false);
+  const blurTimeout = useRef(null);
 
   useEffect(() => {
     if (!inputRef.current) {
@@ -34,6 +36,7 @@ export default function LocationAutocompleteInput({ fieldProps }) {
         lng: place.geometry.location.lng(),
       };
 
+      isSelected.current = true;
       onChange({ target: { name: 'location', value: locationValue } });
     });
   }, [inputRef]);
@@ -45,14 +48,29 @@ export default function LocationAutocompleteInput({ fieldProps }) {
     }
   };
 
+  // Add timeout to make sure autocomplete
+  // has finished or will quickly flash error when place is selected
+
+  const handleBlur = (event) => {
+    if (blurTimeout.current) {
+      clearTimeout(blurTimeout.current);
+    }
+
+    blurTimeout.current = setTimeout(() => {
+      if (!isSelected.current) {
+        onBlur(event);
+      }
+    }, 200);
+  };
+
   return (
     <input
       className={inputClassName}
       name={name}
       type="text"
-      onBlur={onBlur}
       ref={inputRef}
       value={inputValue}
+      onBlur={handleBlur}
       onInput={handleChange}
       placeholder={placeholder}
     />
