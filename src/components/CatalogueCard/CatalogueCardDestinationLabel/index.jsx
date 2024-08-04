@@ -1,5 +1,4 @@
-import { normalizeName } from '../../../helpers/helpers';
-
+import { normalizeName } from '../../../utils/stringUtils';
 import style from './index.module.css';
 
 export default function CatalogueCardDestinationLabel({ destination }) {
