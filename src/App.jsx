@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import useDestinations from './hooks/useDestinations';
 import OptimisticModule from './modules/OptimisticModule';
 import AppLayout from './layouts/AppLayout';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const libraries = ['places'];
 
@@ -27,16 +28,18 @@ export default function App() {
   }
 
   return (
-    <AppLayout
-      navigation={<Navigation />}
-      content={(
-        <>
-          <Outlet />
-          <OptimisticModule />
-          <ScrollRestoration />
-        </>
-      )}
-      footer={<Footer />}
-    />
+    <ErrorBoundary>
+      <AppLayout
+        navigation={<Navigation />}
+        content={(
+          <>
+            <Outlet />
+            <OptimisticModule />
+            <ScrollRestoration />
+          </>
+        )}
+        footer={<Footer />}
+      />
+    </ErrorBoundary>
   );
 }
