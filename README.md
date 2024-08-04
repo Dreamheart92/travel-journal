@@ -8,20 +8,20 @@ Users can create, edit, and delete journals, comment on and like comments, and m
 
 The app also features a catalogue for browsing journals with various search and filtering options.
 
-# Live Demo
+## Live Demo
 
 Check out the live demo here: [Live Demo](https://toni-rachev-travel-journal.netlify.app/).
 
-# Features
+## Features
 
-- Authentication
+### - Authentication
 
-Journal Management
+### - Journal Management
 
-Comments and Likes
+### -Comments and Likes
 
-User Profile
+### - User Profile
 
-Catalogue Page
+### - Catalogue Page
 
-Google Maps Integration: Visualize journal destinations on a map.
+#### - Google Maps Integration: Visualize journal destinations on a map.
