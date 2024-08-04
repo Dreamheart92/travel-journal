@@ -1,1 +1,0 @@
-import{b as o}from"./useCrud-6uD_6Pwn.js";const s=()=>{const{formContextActions:t,formContextSelectors:e}=o();return[{isValidForm:e.isValidForm(),hasBeenSubmitted:e.hasBeenSubmitted(),resetField:t.resetField}]},m=s;export{m as u};
