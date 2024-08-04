@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
-import { PATHS } from '../../constants/paths';
-import JournalCardInfo from './JournalCardInfo';
-import JournalCardImage from './JournalCardImage';
+import { PATHS } from '../../../constants/paths';
+import CardDetails from './CardDetails';
+import CardImage from './CardImage';
 
-export default function JournalCard({ journal, size = 'md' }) {
+export default function HomeCard({ journal, size = 'md' }) {
   const {
     _id: journalId,
     author,
     title,
     description,
     imageUrl,
+    views,
   } = journal;
 
   let cardStyle;
@@ -37,16 +38,18 @@ export default function JournalCard({ journal, size = 'md' }) {
   return (
     <div>
       <Link to={`${PATHS.DETAILS}/${journalId}`}>
-        <JournalCardImage
+        <CardImage
           size={{ width: cardStyle.width, height: cardStyle.height }}
           imageUrl={imageUrl}
         />
-        <JournalCardInfo
+
+        <CardDetails
           author={author.username}
           title={title}
           imageUrl={author.imageUrl}
           description={description}
           fontSize={cardStyle.fontSize}
+          viewsCount={views.count}
         />
       </Link>
     </div>
