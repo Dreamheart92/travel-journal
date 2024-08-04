@@ -1,6 +1,6 @@
 import Image from '../../../../components/Image';
 import style from './index.module.css';
-import { findCurrentDestination } from '../../../../helpers/helpers';
+import { findCurrentDestination } from '../../../../utils/utils';
 import useDestinations from '../../../../hooks/useDestinations';
 
 export default function DestinationBanner({ destination }) {

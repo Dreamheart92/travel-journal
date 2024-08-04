@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { CRUD_STATE_KEYS } from '../constants/redux';
-import { buildJournalFormData, buildUserFormData, constructLoginData, constructSignupData } from '../helpers/helpers';
+import {
+  buildJournalFormData,
+  buildUserFormData,
+  constructLoginData,
+  constructSignupData,
+} from '../utils/formDataUtils';
 
 import {
   deleteJournalRequest,

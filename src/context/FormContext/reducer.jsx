@@ -1,5 +1,5 @@
 import * as actionTypes from './types';
-import { getErrorsAndValidateForm } from '../../helpers/validateForm';
+import { getErrorsAndValidateForm } from '../../utils/validateForm';
 
 function formReducer(state, action) {
   switch (action.type) {

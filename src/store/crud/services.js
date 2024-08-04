@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getAccessTokenAndIdFromLocalStorage } from '../../helpers/storage';
+import { getAccessTokenAndIdFromLocalStorage } from '../../utils/storage';
 import sendHttpRequest from '../../services/sendHttpRequest';
 import API from '../../constants/api';
 import { destinationsActions } from '../destinations';

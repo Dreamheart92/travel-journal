@@ -1,10 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import CatalogueCard from '../../../components/CatalogueCard';
 import Loading from '../../../components/Loading';
-import { buildQueryString } from '../../../helpers/helpers';
 import ErrorMessage from '../../../components/ErrorMessage';
-import Pagination from '../../../components/Pagination';
 import style from './index.module.css';
 import useSearch from '../../../hooks/useSearch';
 import useJournals from '../../../hooks/useJournals';
@@ -12,6 +9,7 @@ import NoJournalResults from '../../../components/NoJournalsResults';
 import JournalsList from '../components/JournalsList';
 import { journalsActions } from '../../../store/journals';
 import { JOURNALS_STATE_KEYS } from '../../../constants/redux';
+import { buildQueryString } from '../../../utils/queryUtils';
 
 export default function CatalogueListModule({ destination, searchParams, onQuery }) {
   const dispatch = useDispatch();

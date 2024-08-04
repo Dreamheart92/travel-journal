@@ -1,7 +1,7 @@
 import JournalEditorLayout from '../../layouts/JournalEditorLayout';
 import FormProvider from '../../context/FormContext';
 import JournalForm from './Forms/JournalForm';
-import { buildFormInitialState } from '../../helpers/helpers';
+import { buildFormInitialState } from '../../utils/formDataUtils';
 
 export default function JournalEditorModule({ settings }) {
   const {

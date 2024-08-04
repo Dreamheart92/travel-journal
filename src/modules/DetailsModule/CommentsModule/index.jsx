@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import CommentsSectionHeader from './CommentsSectionHeader';
 import style from './index.module.css';
-import { buildLocalComment, formatCommentsCount } from '../../../helpers/helpers';
 import CreateCommentForm from '../Forms/CreateCommentForm';
 import Modal from '../../../components/Modal';
 import DeleteModal from '../../../components/Modal/DeleteModal';
@@ -11,6 +10,8 @@ import { selectAuth } from '../../../store/auth/selectors';
 import FormProvider from '../../../context/FormContext';
 import useOptimisticActions from '../../../hooks/useOptimisticActions';
 import CommentsList from '../components/CommentsList';
+import { formatCommentsCount } from '../../../utils/stringUtils';
+import { buildLocalComment } from '../../../utils/commentUtils';
 
 export default function CommentsModule({ journalId }) {
   const { user, isAuthenticated } = useSelector(selectAuth);
