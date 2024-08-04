@@ -1,4 +1,4 @@
-const BASE_URL = 'https://travel-journal-api.vercel.app/api/v1';
+const BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
 const AUTH = `${BASE_URL}/auth`;
 const JOURNAL = `${BASE_URL}/journal`;
