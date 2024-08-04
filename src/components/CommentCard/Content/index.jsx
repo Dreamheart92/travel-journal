@@ -3,7 +3,7 @@ import { splitByNewLine } from '../../../utils/stringUtils';
 
 import style from './index.module.css';
 
-export default function CommentCardContent(
+export default function Content(
   {
     author,
     createdAt,
@@ -13,8 +13,8 @@ export default function CommentCardContent(
 ) {
   return (
     <div className={style.content}>
-      <h5>{author}</h5>
-      <p>{convertToRelativeTime(createdAt)}</p>
+      <h4 className={style.author}>{author}</h4>
+      <p className={style['comment-date']}>{convertToRelativeTime(createdAt)}</p>
 
       {splitByNewLine(content).map((chunk, index) => (
         <p key={index}>{chunk}</p>
