@@ -1,6 +1,7 @@
 # Travel Journal
 
-Welcome to the Travel Journal App! This application allows users to share their travel experiences through blog
+Welcome to the Travel Journal App!
+This application allows users to share their travel experiences through blog
 journals. Users can create, edit, and delete journals, comment on and like comments, and manage their profiles. The app
 also features a catalogue for browsing journals with various search and filtering options.
 
