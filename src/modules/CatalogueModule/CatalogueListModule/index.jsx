@@ -10,6 +10,8 @@ import useSearch from '../../../hooks/useSearch';
 import useJournals from '../../../hooks/useJournals';
 import NoJournalResults from '../../../components/NoJournalsResults';
 import JournalsList from '../components/JournalsList';
+import { journalsActions } from '../../../store/journals';
+import { JOURNALS_STATE_KEYS } from '../../../constants/redux';
 
 export default function CatalogueListModule({ destination, searchParams, onQuery }) {
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
 
     return () => {
       promise.abort();
+      dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.JOURNALS }));
     };
   }, [dispatch, destination, searchParams]);
 
