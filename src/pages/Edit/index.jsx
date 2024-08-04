@@ -8,6 +8,7 @@ import JournalEditorModule from '../../modules/JournalEditorModule';
 import useCrud from '../../hooks/useCrud';
 import { crudActions } from '../../store/crud';
 import useJournal from '../../hooks/useJournal';
+import { destinationsActions } from '../../store/destinations';
 
 export default function Edit() {
   const dispatch = useDispatch();
@@ -18,21 +19,27 @@ export default function Edit() {
   const { journal, loading: journalLoading } = useJournal();
 
   const {
+    data: updatedJournal,
     loading: isUpdating,
-    success: isUpdatedJournal,
+    success: isJournalUpdated,
     error,
     updateJournal,
   } = useCrud(CRUD_STATE_KEYS.UPDATE);
 
   useEffect(() => {
-    if (isUpdatedJournal) {
+    if (isJournalUpdated) {
+      dispatch(destinationsActions.updateDestinationCountOnJournalEdit({
+        oldDestinationId: journal.destination._id,
+        newDestinationId: updatedJournal.destination,
+      }));
+
       navigate(`${PATHS.DETAILS}/${journalId}`);
     }
 
     return () => {
       dispatch(crudActions.resetState());
     };
-  }, [isUpdatedJournal]);
+  }, [isJournalUpdated]);
 
   const handleUpdateJournalSubmit = async (journalData) => {
     updateJournal(journalData, journalId);
