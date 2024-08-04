@@ -13,7 +13,7 @@ const libraries = ['places'];
 
 export default function App() {
   const { isLoaded: isMapsLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyCqkEzqlvC-P2VQhkIVupAZpaf0lRsUc-k',
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries,
   });
 
