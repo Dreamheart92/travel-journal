@@ -18,21 +18,25 @@ Check out the live demo here: [Live Demo](https://toni-rachev-travel-journal.net
 
 - #### Journal Management
 
-- Create, edit, and delete travel journals.
+  - Create, edit, and delete travel journals.
 
-- View the number of times each journal has been read.
+  - View the number of times each journal has been read.
 
 - #### Comments and Likes
 
-- Registered users can comment on journals.
+  - Registered users can comment on journals.
 
-- Like comments to show appreciation.
+  - Like comments to show appreciation.
 
 - #### User Profile
 
-- Edit profile information.
-- View and manage published journals.
+  - Edit profile information.
+  - View and manage published journals.
 
 - #### Catalogue Page
+
+   - Search journals by name.
+   - Filter journals by destination.
+   - Sort journals by various criteria (oldest, newest, most viewed, least viewed, most commented, least commented).
 
 - #### Google Maps Integration: Visualize journal destinations on a map.
