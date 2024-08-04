@@ -44,7 +44,7 @@ export default function Form(
 
     const getInitialStateFromFormChildren = (arrayChildren) => {
       arrayChildren.forEach((child) => {
-        if (child.type?.name === 'FormInput') {
+        if (typeof child?.props?.inputType !== 'undefined') {
           const { name: fieldName, initialValue: fieldValue = '', validators = [] } = child.props;
 
           initialState[fieldName] = {
