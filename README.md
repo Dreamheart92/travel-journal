@@ -76,3 +76,13 @@ VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
 ```bash
 npm run dev
 ```
+
+## Technologies Used
+
+- React
+- React Router
+- Node.js & Express: For the backend server
+- MongoDB
+- JWT
+- Vite
+- Google Maps API
