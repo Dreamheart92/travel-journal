@@ -31,6 +31,9 @@ const useSearch = () => {
     currentPage,
     totalPages,
     isSearching,
+    sortBy,
+    sortByOptions,
+    onSortBy: handleSortBy,
     onSearch: handleSearch,
     resetSearch: handleResetState,
   };
