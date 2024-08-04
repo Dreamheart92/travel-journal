@@ -12,5 +12,21 @@ export default function SortBy({ onQuery }) {
     onQuery('sortBy', value);
   };
 
+  return (
+    <SidebarSection
+      heading="Sort"
+    >
+      <select className={style['sort-by-wrapper']} value={sortBy.name} onChange={handleSelect}>
+        {sortByOptions.map((sortByOption) => (
+          <option
+            key={sortByOption.name}
+            value={sortByOption.name}
+            id={sortByOption.normalized_name}
+          >
+            {sortByOption.normalized_name}
+          </option>
+        ))}
+      </select>
+    </SidebarSection>
   );
 }
