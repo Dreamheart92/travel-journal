@@ -3,3 +3,11 @@
     flex-direction: column;
     gap: .25em;
 }
+
+.author {
+    font-weight: 500;
+}
+
+.comment-date {
+    color: #737373;
+}
