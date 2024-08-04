@@ -40,3 +40,12 @@ Check out the live demo here: [Live Demo](https://toni-rachev-travel-journal.net
    - Sort journals by various criteria (oldest, newest, most viewed, least viewed, most commented, least commented).
 
 - #### Google Maps Integration: Visualize journal destinations on a map.
+
+## Installation
+
+To get started with the Travel Journal App locally, follow these steps:
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/your-username/travel-journal.git
