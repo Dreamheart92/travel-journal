@@ -58,3 +58,20 @@ export const fetchUserJournalsService = createAsyncThunk(
     };
   },
 );
+
+export const registerJournalViewService = createAsyncThunk(
+  'journals/registerJournalView',
+  async (arg, { signal }) => {
+    const { userId, journalId } = arg;
+
+    const settings = {
+      method: 'Post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId }),
+    };
+
+    return sendHttpRequest(`${API.JOURNAL.REGISTER_JOURNAL_VIEW}/${journalId}`, settings);
+  },
+);
