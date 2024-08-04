@@ -48,7 +48,7 @@ export default function JournalContent({ journal, readMore = false }) {
       {readMore
         && (
           <div className={style['additional-info']}>
-            <ReadMoreButton />
+            <ReadMoreButton journalId={journal._id} />
 
             <div className={style.comments}>
               <p>{journal.comments.length}</p>
