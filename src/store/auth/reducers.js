@@ -4,9 +4,10 @@ const storeUser = (state, action) => {
   state.guestId = null;
 };
 
-const clearUser = (state) => {
+const clearUser = (state, action) => {
   state.user = null;
   state.isAuthenticated = false;
+  state.guestId = action.payload.guestId;
 };
 
 export { storeUser, clearUser };
