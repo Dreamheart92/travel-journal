@@ -7,8 +7,8 @@ import { journalsActions } from '../../../store/journals';
 import { JOURNALS_STATE_KEYS } from '../../../constants/redux';
 import useJournals from '../../../hooks/useJournals';
 import ErrorMessage from '../../../components/ErrorMessage';
-import JournalCard from '../../../components/JournalCard';
 import NoJournalResults from '../../../components/NoJournalsResults';
+import HomeCard from '../../../components/JournalCards/HomeCard';
 
 export default function MyJournalsModule() {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ export default function MyJournalsModule() {
               && (
                 <Grid>
                   {journals.map((journal) => (
-                    <JournalCard
+                    <HomeCard
                       key={journal._id}
                       size="sm"
                       journal={journal}
