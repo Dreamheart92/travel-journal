@@ -1,4 +1,5 @@
-import { convertToRelativeTime, splitByNewLine } from '../../../helpers/helpers';
+import { convertToRelativeTime } from '../../../utils/dateUtils';
+import { splitByNewLine } from '../../../utils/stringUtils';
 
 import style from './index.module.css';
 
