@@ -16,3 +16,13 @@ export const getAccessTokenAndIdFromLocalStorage = () => {
     accessToken: userData?.accessToken || null,
   };
 };
+
+export const storeGuestSession = (guestId) => {
+  localStorage.setItem('guest_session', guestId);
+};
+
+export const clearGuestSession = () => {
+  localStorage.removeItem('guest_session');
+};
+
+export const getGuestId = () => localStorage.getItem('guest_session');
