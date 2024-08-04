@@ -14,7 +14,7 @@ Check out the live demo here: [Live Demo](https://toni-rachev-travel-journal.net
 
 # Features
 
-Authentication
+- Authentication
 
 Journal Management
 
