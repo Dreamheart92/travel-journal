@@ -2,7 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-regular-svg-icons/faComments';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe';
-import { formatDate, normalizeName, splitByNewLine } from '../../helpers/helpers';
+import { faEye } from '@fortawesome/free-regular-svg-icons/faEye';
+import { normalizeName, splitByNewLine } from '../../utils/stringUtils';
+import { formatDate } from '../../utils/dateUtils';
 import CatalogueCardButton from '../CatalogueCard/CatalogueCardButton';
 import UserProfileImage from '../UserProfileImage';
 import style from './index.module.css';
@@ -27,6 +29,11 @@ export default function JournalContent({ journal, readMore = false }) {
         <div className={style['info-container']}>
           <FontAwesomeIcon icon={faCalendar} />
           <p>{formatDate(journal.date)}</p>
+        </div>
+
+        <div className={style['info-container']}>
+          <FontAwesomeIcon icon={faEye} />
+          <p>{journal.views.count}</p>
         </div>
 
       </div>
