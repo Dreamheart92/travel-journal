@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchDestinations } from './services';
-import { updateDestinationCount } from './reducers';
+import { updateDestinationCount, updateDestinationCountOnJournalEdit } from './reducers';
 
 const initialState = {
   destinations: [],
@@ -14,6 +14,7 @@ const destinationsSlice = createSlice({
   initialState,
   reducers: {
     updateDestinationCount,
+    updateDestinationCountOnJournalEdit,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchDestinations.pending, (state) => {
