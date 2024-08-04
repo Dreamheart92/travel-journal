@@ -1,0 +1,1 @@
+import{j as e}from"./index-CEjWu8zT.js";const r="_greeting_1r96w_1",n={greeting:r};function o(){return e.jsx("h4",{className:n.greeting,children:"Welcome to your travel hub! Manage your journeys, track your adventures, and share your experiences all in one place."})}export{o as default};
