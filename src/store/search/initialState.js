@@ -7,8 +7,10 @@ const initialState = {
   sortByOptions: [
     { normalized_name: 'Newest', name: 'newest' },
     { normalized_name: 'Oldest', name: 'oldest' },
-    { normalized_name: 'Most Commented', name: 'mostCommented' },
-    { normalized_name: 'Least Commented', name: 'leastCommented' },
+    { normalized_name: 'Most viewed', name: 'mostViewed' },
+    { normalized_name: 'Least viewed', name: 'leastViewed' },
+    { normalized_name: 'Most commented', name: 'mostCommented' },
+    { normalized_name: 'Least commented', name: 'leastCommented' },
   ],
 };
 
