@@ -13,11 +13,16 @@ const setCurrentPage = (state, action) => {
   state.currentPage = action.payload.page;
 };
 
+const setSortBy = (state, action) => {
+  state.sortBy = action.payload.option;
+};
+
 const resetState = () => initialState;
 
 export {
   setSearch,
   setTotalPages,
   setCurrentPage,
+  setSortBy,
   resetState,
 };
