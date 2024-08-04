@@ -18,6 +18,10 @@ const useSearch = () => {
     dispatch(searchActions.setSearch({ search: searchValue }));
   };
 
+  const handleSortBy = (option) => {
+    dispatch(searchActions.setSortBy({ option }));
+  };
+
   const handleResetState = () => {
     dispatch(searchActions.resetState());
   };
