@@ -1,13 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-regular-svg-icons/faComments';
-import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe';
-import { faEye } from '@fortawesome/free-regular-svg-icons/faEye';
-import { normalizeName, splitByNewLine } from '../../utils/stringUtils';
-import { formatDate } from '../../utils/dateUtils';
-import CatalogueCardButton from '../CatalogueCard/CatalogueCardButton';
-import UserProfileImage from '../UserProfileImage';
+import { splitByNewLine } from '../../utils/stringUtils';
 import style from './index.module.css';
+import AuthorDetails from '../JournalDetails/AuthorDetails';
+import DestinationDetails from '../JournalDetails/DestinationDetails';
+import DateDetails from '../JournalDetails/DateDetails';
+import ViewsDetails from '../JournalDetails/ViewsDetails';
+import ReadMoreButton from '../JournalCards/CatalogueCard/ReadMoreButton';
 
 export default function JournalContent({ journal, readMore = false }) {
   const content = readMore ? `${journal.description.slice(0, 500)}...` : journal.description;
@@ -16,25 +15,16 @@ export default function JournalContent({ journal, readMore = false }) {
     <div className={style.info}>
       <div className={style.header}>
 
-        <div className={style['info-container']}>
-          <UserProfileImage size="sm" imageUrl={journal.author.imageUrl} />
-          <p>{journal.author.username}</p>
-        </div>
+        <AuthorDetails
+          image={journal.author.imageUrl}
+          username={journal.author.username}
+        />
 
-        <div className={style['info-container']}>
-          <FontAwesomeIcon icon={faGlobe} />
-          <p>{normalizeName(journal.destination.name)}</p>
-        </div>
+        <DestinationDetails destination={journal.destination.name} />
 
-        <div className={style['info-container']}>
-          <FontAwesomeIcon icon={faCalendar} />
-          <p>{formatDate(journal.date)}</p>
-        </div>
+        <DateDetails date={journal.date} />
 
-        <div className={style['info-container']}>
-          <FontAwesomeIcon icon={faEye} />
-          <p>{journal.views.count}</p>
-        </div>
+        <ViewsDetails viewsCount={journal.views.count} />
 
       </div>
 
@@ -58,9 +48,7 @@ export default function JournalContent({ journal, readMore = false }) {
       {readMore
         && (
           <div className={style['additional-info']}>
-            <CatalogueCardButton
-              caption="Read more"
-            />
+            <ReadMoreButton />
 
             <div className={style.comments}>
               <p>{journal.comments.length}</p>
@@ -68,7 +56,6 @@ export default function JournalContent({ journal, readMore = false }) {
             </div>
           </div>
         )}
-
     </div>
   );
 }
