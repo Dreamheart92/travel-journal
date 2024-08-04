@@ -13,21 +13,21 @@ export default function JournalCatalogueCard({ journal }) {
 
   return (
     <div className={style.wrapper}>
-      <Link
-        to={`${PATHS.DETAILS}/${journal._id}`}
-      >
-        <div className={style['image-wrapper']}>
+      <div className={style['image-wrapper']}>
+        <Link
+          to={`${PATHS.DETAILS}/${journal._id}`}
+        >
           <Image
             imageUrl={imageUrl}
           />
-        </div>
+        </Link>
+      </div>
 
-        <JournalContent journal={journal} readMore />
+      <JournalContent journal={journal} readMore />
 
-        <DestinationLabel
-          destination={destination.name}
-        />
-      </Link>
+      <DestinationLabel
+        destination={destination.name}
+      />
     </div>
   );
 }
