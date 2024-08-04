@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import Image from '../Image';
-import { PATHS } from '../../constants/paths';
-import CatalogueCardDestinationLabel from './CatalogueCardDestinationLabel';
+import Image from '../../Image';
+import { PATHS } from '../../../constants/paths';
 import style from './index.module.css';
-import JournalContent from '../JournalContent';
+import JournalContent from '../../JournalContent';
+import DestinationLabel from './DestinationLabel';
 
 export default function JournalCatalogueCard({ journal }) {
   const {
@@ -24,7 +24,7 @@ export default function JournalCatalogueCard({ journal }) {
 
         <JournalContent journal={journal} readMore />
 
-        <CatalogueCardDestinationLabel
+        <DestinationLabel
           destination={destination.name}
         />
       </Link>
