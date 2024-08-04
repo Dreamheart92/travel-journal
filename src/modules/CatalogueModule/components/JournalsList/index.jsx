@@ -1,4 +1,4 @@
-import CatalogueCard from '../../../../components/CatalogueCard';
+import CatalogueCard from '../../../../components/JournalCards/CatalogueCard';
 import Pagination from '../../../../components/Pagination';
 
 export default function JournalsList(
