@@ -9,8 +9,8 @@ import Account from './pages/Account';
 import AuthGuard from './guards/AuthGuard';
 import JournalOwnerGuard from './guards/JournalOwnerGuard';
 import RestrictAuthenticatedGuard from './guards/RestrictAuthenticatedGuard';
-import NotFound from './pages/NotFound';
 import Loading from './components/Loading';
+import ErrorModule from './modules/ErrorModule';
 
 const Login = lazy(() => import('./pages/Login'));
 const Signup = lazy(() => import('./pages/Signup'));
@@ -132,11 +132,11 @@ const router = createBrowserRouter([
       },
       {
         path: PATHS.NOT_FOUND,
-        element: <NotFound />,
+        element: <ErrorModule notFoundPageError />,
       },
       {
         path: '*',
-        element: <NotFound />,
+        element: <ErrorModule notFoundPageError />,
       },
     ],
   },
