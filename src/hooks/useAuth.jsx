@@ -22,8 +22,11 @@ const useAuth = () => {
   };
 
   const handleClearUser = () => {
+    const guestId = generateGuestId();
+
     deleteUserDataFromLocalStorage();
-    dispatch(authActions.clearUser());
+    storeGuestSession(guestId);
+    dispatch(authActions.clearUser({ guestId }));
   };
 
   const handleUpdateUser = (userData) => {
