@@ -1,14 +1,14 @@
 const CRUD_STATE_KEYS = {
-  CREATE: 'create',
-  READ: 'read',
-  UPDATE: 'update',
-  DELETE: 'delete',
+  CREATE: 'CREATE',
+  READ: 'READ',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
 };
 
 const JOURNALS_STATE_KEYS = {
-  JOURNAL: 'journal',
-  JOURNALS: 'journals',
-  COMMENTS: 'comments',
+  JOURNAL: 'JOURNAL',
+  JOURNALS: 'JOURNALS',
+  COMMENTS: 'COMMENTS',
 };
 
 const OPTIMISTIC_STATE_KEYS = {
