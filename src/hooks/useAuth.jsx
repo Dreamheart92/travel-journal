@@ -1,8 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authActions } from '../store/auth';
-import { deleteUserDataFromLocalStorage, saveUserDataToLocalStorage } from '../helpers/storage';
 import { PATHS } from '../constants/paths';
+import { generateGuestId } from '../utils/authUtils';
+
+import {
+  clearGuestSession,
+  deleteUserDataFromLocalStorage,
+  saveUserDataToLocalStorage,
+  storeGuestSession,
+} from '../utils/storage';
 
 const useAuth = () => {
   const dispatch = useDispatch();
@@ -10,6 +17,7 @@ const useAuth = () => {
 
   const handleStoreUser = (userData) => {
     saveUserDataToLocalStorage(userData);
+    clearGuestSession();
     dispatch(authActions.storeUser({ userData }));
   };
 
