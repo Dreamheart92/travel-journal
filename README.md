@@ -14,14 +14,14 @@ Check out the live demo here: [Live Demo](https://toni-rachev-travel-journal.net
 
 ## Features
 
-- ### Authentication
+- #### Authentication
 
-- ### Journal Management
+- #### Journal Management
 
-- ### Comments and Likes
+- #### Comments and Likes
 
-- ### User Profile
+- #### User Profile
 
-- ### Catalogue Page
+- #### Catalogue Page
 
-- ### Google Maps Integration: Visualize journal destinations on a map.
+- #### Google Maps Integration: Visualize journal destinations on a map.
