@@ -72,3 +72,22 @@ export const deleteCommentRequest = createAsyncThunk(
     }
   },
 );
+
+export const likeJournalRequest = createAsyncThunk(
+  'optimistic',
+  async (arg, { dispatch, signal }) => {
+    const { journalId } = arg;
+    const { accessToken } = getAccessTokenAndIdFromLocalStorage();
+
+    const settings = {
+      method: 'Get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: accessToken,
+      },
+    };
+
+    const result = await sendHttpRequest(`${API.JOURNAL.LIKE_JOURNAL}/${journalId}`, settings);
+    return result.data;
+  },
+);
