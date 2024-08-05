@@ -8,6 +8,7 @@ import DateDetails from '../JournalDetails/DateDetails';
 import ViewsDetails from '../JournalDetails/ViewsDetails';
 import ReadMoreButton from '../JournalCards/CatalogueCard/ReadMoreButton';
 import LikesDetails from '../JournalDetails/LikesDetails';
+import PublishedDetails from '../JournalDetails/PublishedDetails';
 
 export default function JournalContent({ journal, readMore = false }) {
   const content = readMore ? `${journal.description.slice(0, 500)}...` : journal.description;
@@ -16,6 +17,7 @@ export default function JournalContent({ journal, readMore = false }) {
     <div className={style.info}>
       <div className={style.header}>
         <AuthorDetails author={journal.author} />
+        <PublishedDetails createdAt={journal.createdAt} />
         <DestinationDetails destination={journal.destination.name} />
         <DateDetails date={journal.date} />
         <LikesDetails likesCount={journal.likes.count} />
