@@ -17,7 +17,7 @@ export default function Content(
       <p className={style['comment-date']}>{convertToRelativeTime(createdAt)}</p>
 
       {splitByNewLine(content).map((chunk, index) => (
-        <p key={index}>{chunk}</p>
+        <p className={style.comment} key={index}>{chunk}</p>
       ))}
     </div>
   );
