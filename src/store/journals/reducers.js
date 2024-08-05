@@ -77,10 +77,26 @@ const updateLocalCommentReaction = (state, action) => {
   }
 };
 
+const toggleLocalJournalLike = (state, action) => {
+  const { userId } = action.payload;
+  const { likes } = state[JOURNALS_STATE_KEYS.JOURNAL].result;
+
+  const isLikedJournal = likes.userIds.findIndex((likedIds) => likedIds === userId);
+
+  if (isLikedJournal !== -1) {
+    likes.userIds.splice(isLikedJournal, 1);
+    likes.count--;
+  } else {
+    likes.userIds.push(userId);
+    likes.count++;
+  }
+};
+
 export {
   resetState,
   addLocalComment,
   deleteLocalComment,
   updateLocalCommentWithRealData,
   updateLocalCommentReaction,
+  toggleLocalJournalLike,
 };
