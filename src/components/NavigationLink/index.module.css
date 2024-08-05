@@ -3,13 +3,13 @@
     display: inline-block;
     padding: .5em;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
     font-family: "Cinzel", serif;
 }
 
 .link:hover,
 .link.active {
-    color: #006478;
+    color: #047857;
 }
 
 .link:before {
