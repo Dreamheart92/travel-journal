@@ -6,9 +6,10 @@
 
 .controls {
     display: flex;
+    justify-content: flex-end;
     gap: 1em;
     width: 20%;
     position: absolute;
-    right: 1%;
+    right: 0;
     bottom: -7%;
 }
