@@ -8,7 +8,7 @@ export default function DestinationBanner({ destination }) {
 
   const currentDestination = findCurrentDestination(destination, destinations);
 
-  const imageUrl = currentDestination ? currentDestination.imageUrl : '/around-the-world.jpg';
+  const imageUrl = currentDestination ? currentDestination.imageUrl : '/around-the-world.png';
   const caption = currentDestination ? currentDestination.name : 'Around the World';
 
   return (
