@@ -9,6 +9,8 @@ const initialState = {
     { normalized_name: 'Oldest', name: 'oldest' },
     { normalized_name: 'Most viewed', name: 'mostViewed' },
     { normalized_name: 'Least viewed', name: 'leastViewed' },
+    { normalized_name: 'Most liked', name: 'mostLiked' },
+    { normalized_name: 'Least liked', name: 'leastLiked' },
     { normalized_name: 'Most commented', name: 'mostCommented' },
     { normalized_name: 'Least commented', name: 'leastCommented' },
   ],
