@@ -61,7 +61,7 @@ const useOptimisticActions = () => {
   };
 
   const handleLikeJournal = (journalId, userId) => {
-    dispatch(journalsActions.updateLocalJournalLike({ userId }));
+    dispatch(journalsActions.toggleLocalJournalLike({ userId }));
 
     dispatch(likeJournalRequest({
       key: OPTIMISTIC_STATE_KEYS.LIKE_JOURNAL,
@@ -73,7 +73,7 @@ const useOptimisticActions = () => {
     postCommentOptimistic: handlePostComment,
     deleteCommentOptimistic: handleDeleteComment,
     postCommentReactionOptimistic: handleCommentReaction,
-    likeJournalOptimistic: handleLikeJournal,
+    toggleJournalLikeOptimistic: handleLikeJournal,
   };
 };
 
