@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import AuthorDetails from '../../../JournalDetails/AuthorDetails';
 import ViewsDetails from '../../../JournalDetails/ViewsDetails';
-import style from '../index.module.css';
 import { PATHS } from '../../../../constants/paths';
 import LikesDetails from '../../../JournalDetails/LikesDetails';
+import style from './index.module.css';
 
 export default function CardDetails(
   {
@@ -18,11 +18,13 @@ export default function CardDetails(
 ) {
   return (
     <div style={{ fontSize }} className={style.info}>
-      <div style={{ display: 'flex', gap: '.5em', justifyContent: 'space-between', padding: '.5em 0' }}>
+      <div className={style['details-wrapper']}>
         <AuthorDetails author={author} />
 
+        <div className={style['likes-views-wrapper']}>
           <LikesDetails likesCount={likesCount} />
           <ViewsDetails viewsCount={viewsCount} />
+        </div>
       </div>
 
       <Link to={`${PATHS.DETAILS}/${journalId}`}>
