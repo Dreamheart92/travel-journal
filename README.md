@@ -81,6 +81,7 @@ npm run dev
 
 - React
 - React Router
+- Redux Toolkit
 - Node.js & Express: For the backend server
 - MongoDB
 - JWT
