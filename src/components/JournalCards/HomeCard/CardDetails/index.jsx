@@ -3,6 +3,7 @@ import AuthorDetails from '../../../JournalDetails/AuthorDetails';
 import ViewsDetails from '../../../JournalDetails/ViewsDetails';
 import style from '../index.module.css';
 import { PATHS } from '../../../../constants/paths';
+import LikesDetails from '../../../JournalDetails/LikesDetails';
 
 export default function CardDetails(
   {
@@ -12,6 +13,7 @@ export default function CardDetails(
     fontSize,
     viewsCount,
     journalId,
+    likesCount,
   },
 ) {
   return (
@@ -19,7 +21,8 @@ export default function CardDetails(
       <div style={{ display: 'flex', gap: '.5em', justifyContent: 'space-between', padding: '.5em 0' }}>
         <AuthorDetails author={author} />
 
-        <ViewsDetails viewsCount={viewsCount} />
+          <LikesDetails likesCount={likesCount} />
+          <ViewsDetails viewsCount={viewsCount} />
       </div>
 
       <Link to={`${PATHS.DETAILS}/${journalId}`}>
