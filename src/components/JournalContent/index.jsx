@@ -16,8 +16,7 @@ export default function JournalContent({ journal, readMore = false }) {
       <div className={style.header}>
 
         <AuthorDetails
-          image={journal.author.imageUrl}
-          username={journal.author.username}
+          author={journal.author}
         />
 
         <DestinationDetails destination={journal.destination.name} />
