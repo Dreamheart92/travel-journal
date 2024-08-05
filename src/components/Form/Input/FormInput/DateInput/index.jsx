@@ -10,7 +10,9 @@ export default function DateInput({ fieldProps }) {
   } = fieldProps;
 
   const dateValue = value;
+
   const date = dateValue ? dateValue.slice(0, 10) : null;
+  const maxDate = new Date().toISOString().split('T')[0];
 
   return (
     <input
@@ -18,6 +20,8 @@ export default function DateInput({ fieldProps }) {
       onChange={onChange}
       onBlur={onBlur}
       defaultValue={date}
+      min="2000-01-01"
+      max={maxDate}
       name={name}
       id="date"
       type="date"
