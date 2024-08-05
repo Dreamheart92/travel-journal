@@ -51,6 +51,7 @@ export default function HomeCard({ journal, size = 'md' }) {
         fontSize={cardStyle.fontSize}
         viewsCount={views.count}
         journalId={journal._id}
+        likesCount={journal.likes.count}
       />
     </div>
   );
