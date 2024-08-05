@@ -45,9 +45,8 @@ export default function HomeCard({ journal, size = 'md' }) {
       </Link>
 
       <CardDetails
-        author={author.username}
+        author={author}
         title={title}
-        imageUrl={author.imageUrl}
         description={description}
         fontSize={cardStyle.fontSize}
         viewsCount={views.count}
