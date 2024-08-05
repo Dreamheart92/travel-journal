@@ -1,7 +1,7 @@
+import { Link } from 'react-router-dom';
 import AuthorDetails from '../../../JournalDetails/AuthorDetails';
 import ViewsDetails from '../../../JournalDetails/ViewsDetails';
 import style from '../index.module.css';
-import { Link } from 'react-router-dom';
 import { PATHS } from '../../../../constants/paths';
 
 export default function CardDetails(
@@ -10,7 +10,6 @@ export default function CardDetails(
     title,
     description,
     fontSize,
-    imageUrl,
     viewsCount,
     journalId,
   },
@@ -18,10 +17,7 @@ export default function CardDetails(
   return (
     <div style={{ fontSize }} className={style.info}>
       <div style={{ display: 'flex', gap: '.5em', justifyContent: 'space-between', padding: '.5em 0' }}>
-        <AuthorDetails
-          username={author}
-          image={imageUrl}
-        />
+        <AuthorDetails author={author} />
 
         <ViewsDetails viewsCount={viewsCount} />
       </div>
