@@ -21,6 +21,9 @@ export default function Journal({ journal, onOpenModal }) {
 
   const { isJournalOwner } = journal;
   const isLikedJournal = journal.likes.userIds.includes(user._id);
+
+  const likeButtonCaption = isLikedJournal ? 'Liked' : 'Like';
+
   return (
     <>
       <div className={style['journal-image-wrapper']}>
