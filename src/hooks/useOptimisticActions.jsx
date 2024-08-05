@@ -1,5 +1,10 @@
 import { useDispatch } from 'react-redux';
-import { deleteCommentRequest, postCommentReactionRequest, postCommentRequest } from '../store/optimistic/services';
+import {
+  deleteCommentRequest,
+  likeJournalRequest,
+  postCommentReactionRequest,
+  postCommentRequest
+} from '../store/optimistic/services';
 import { OPTIMISTIC_STATE_KEYS } from '../constants/redux';
 import { journalsActions } from '../store/journals';
 
@@ -55,10 +60,20 @@ const useOptimisticActions = () => {
     }));
   };
 
+  const handleLikeJournal = (journalId, userId) => {
+    dispatch(journalsActions.updateLocalJournalLike({ userId }));
+
+    dispatch(likeJournalRequest({
+      key: OPTIMISTIC_STATE_KEYS.LIKE_JOURNAL,
+      journalId,
+    }));
+  };
+
   return {
     postCommentOptimistic: handlePostComment,
     deleteCommentOptimistic: handleDeleteComment,
     postCommentReactionOptimistic: handleCommentReaction,
+    likeJournalOptimistic: handleLikeJournal,
   };
 };
 
