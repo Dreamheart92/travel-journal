@@ -8,6 +8,7 @@ import {
   deleteLocalComment,
   updateLocalCommentWithRealData,
   updateLocalCommentReaction,
+  updateLocalJournalLike,
 } from './reducers';
 
 const journalsSlice = createSlice({
@@ -19,6 +20,7 @@ const journalsSlice = createSlice({
     deleteLocalComment,
     updateLocalCommentWithRealData,
     updateLocalCommentReaction,
+    updateLocalJournalLike,
   },
   extraReducers,
 });
