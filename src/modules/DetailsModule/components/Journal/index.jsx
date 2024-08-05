@@ -20,7 +20,7 @@ export default function Journal({ journal, onOpenModal }) {
   };
 
   const { isJournalOwner } = journal;
-  const isLikedJournal = journal.likes.userIds.includes(user._id);
+  const isLikedJournal = journal.likes.userIds.includes(user?._id);
 
   const likeButtonCaption = isLikedJournal ? 'Liked' : 'Like';
 
@@ -29,20 +29,31 @@ export default function Journal({ journal, onOpenModal }) {
       <div className={style['journal-image-wrapper']}>
         <Image imageUrl={journal.imageUrl} />
 
-        {journal.isJournalOwner && (
-          <div className={style.controls}>
-            <Button
-              onClick={() => navigate(`${PATHS.EDIT}/${journal._id}`)}
-              variant="secondary"
-              caption="Edit"
-            />
-            <Button
-              onClick={() => onOpenModal()}
-              variant="warning"
-              caption="Delete"
-            />
-          </div>
-        )}
+        <div className={style.controls}>
+          {isJournalOwner && (
+            <>
+              <Button
+                onClick={() => navigate(`${PATHS.EDIT}/${journal._id}`)}
+                variant="secondary"
+                caption="Edit"
+              />
+              <Button
+                onClick={() => onOpenModal()}
+                variant="warning"
+                caption="Delete"
+              />
+            </>
+          )}
+
+          {!isJournalOwner && user
+            && (
+              <Button
+                caption={likeButtonCaption}
+                variant={isLikedJournal ? 'secondary' : 'primary'}
+                onClick={handleLikeJournal}
+              />
+            )}
+        </div>
       </div>
 
       <JournalContent journal={journal} />
