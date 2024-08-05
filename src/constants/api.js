@@ -1,5 +1,4 @@
 const BASE_URL = 'https://travel-journal-api.vercel.app/api/v1';
-// const BASE_URL = 'http://localhost:3000/api/v1';
 
 const AUTH = `${BASE_URL}/auth`;
 const JOURNAL = `${BASE_URL}/journal`;
