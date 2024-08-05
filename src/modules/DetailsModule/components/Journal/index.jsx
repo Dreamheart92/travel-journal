@@ -13,10 +13,10 @@ export default function Journal({ journal, onOpenModal }) {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
 
-  const { likeJournalOptimistic } = useOptimisticActions();
+  const { toggleJournalLikeOptimistic } = useOptimisticActions();
 
   const handleLikeJournal = () => {
-    likeJournalOptimistic(journal._id, user._id);
+    toggleJournalLikeOptimistic(journal._id, user._id);
   };
 
   const { isJournalOwner } = journal;
