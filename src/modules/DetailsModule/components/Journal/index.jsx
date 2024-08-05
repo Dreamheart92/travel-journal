@@ -1,14 +1,19 @@
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Image from '../../../../components/Image';
 import Button from '../../../../components/Button';
 import { PATHS } from '../../../../constants/paths';
 import JournalContent from '../../../../components/JournalContent';
 import style from './index.module.css';
 import Map from '../../../../components/Map';
+import useOptimisticActions from '../../../../hooks/useOptimisticActions';
+import { selectUser } from '../../../../store/auth/selectors';
 
 export default function Journal({ journal, onOpenModal }) {
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
 
+  const isLikedJournal = journal.likes.userIds.includes(user._id);
   return (
     <>
       <div className={style['journal-image-wrapper']}>
