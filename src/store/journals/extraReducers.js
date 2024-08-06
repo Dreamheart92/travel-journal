@@ -29,7 +29,12 @@ const extraReducers = (builder) => {
         }
         case 'rejected': {
           if (action.error.message !== 'Aborted') {
-            state[key].error = buildErrorObject('Failed to fetch journals. Please try again.');
+
+            const errorMessage = action.error.message === 'Journal not found'
+              ? action.error.message
+              : 'Failed to fetch journals. Please try again.';
+
+            state[key].error = buildErrorObject(errorMessage);
             state[key].loading = false;
           }
           break;
