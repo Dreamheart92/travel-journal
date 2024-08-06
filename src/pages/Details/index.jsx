@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 import Container from '../../components/Container';
 import Loading from '../../components/Loading';
@@ -9,23 +9,22 @@ import ErrorMessage from '../../components/ErrorMessage';
 import { PATHS } from '../../constants/paths';
 import JournalModule from '../../modules/DetailsModule/JournalModule';
 import CommentsModule from '../../modules/DetailsModule/CommentsModule';
-import useJournal from '../../hooks/useJournal';
 import { crudActions } from '../../store/crud';
+import { selectJournal } from '../../store/journals/selectors';
+import { fetchJournalService } from '../../store/journals/services';
 
 export default function Details() {
+  const dispatch = useDispatch();
   const { journalId } = useParams();
 
   const {
-    journal,
+    results: journal,
     loading,
     error,
-    fetchJournal,
-  } = useJournal();
-
-  const dispatch = useDispatch();
+  } = useSelector(selectJournal);
 
   useEffect(() => {
-    const promise = fetchJournal(journalId);
+    const promise = dispatch(fetchJournalService({ key: JOURNALS_STATE_KEYS.JOURNAL, journalId }));
 
     return () => {
       dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.JOURNAL }));
