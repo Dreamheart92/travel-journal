@@ -7,6 +7,19 @@ import TopJournalsGrid from '../components/TopJournalsGrid';
 import { journalsActions } from '../../../store/journals';
 
 export default function TopJournalsModule() {
+  const dispatch = useDispatch();
+
+  const {
+    results,
+    loading,
+    error,
+  } = useSelector(selectHomeJournals);
+
+  useEffect(() => {
+    dispatch(fetchLatestAndMostLikedJournals({ key: JOURNALS_STATE_KEYS.HOME }));
+
+  }, []);
+
   return (
   );
 }
