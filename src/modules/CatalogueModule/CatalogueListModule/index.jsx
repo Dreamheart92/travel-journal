@@ -1,26 +1,25 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Loading from '../../../components/Loading';
 import ErrorMessage from '../../../components/ErrorMessage';
 import style from './index.module.css';
 import useSearch from '../../../hooks/useSearch';
-import useJournals from '../../../hooks/useJournals';
 import NoJournalResults from '../../../components/NoJournalsResults';
 import JournalsList from '../components/JournalsList';
 import { journalsActions } from '../../../store/journals';
 import { JOURNALS_STATE_KEYS } from '../../../constants/redux';
 import { buildQueryString } from '../../../utils/queryUtils';
+import { selectCatalogue } from '../../../store/journals/selectors';
+import { fetchJournalsService } from '../../../store/journals/services';
 
 export default function CatalogueListModule({ destination, searchParams, onQuery }) {
   const dispatch = useDispatch();
 
   const {
-    journals,
-    totalPages,
+    results,
     loading,
-    error,
-    fetchJournals,
-  } = useJournals();
+    error
+  } = useSelector(selectCatalogue);
 
   const { resetSearch } = useSearch();
 
@@ -28,11 +27,16 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
 
   useEffect(() => {
     const query = buildQueryString(searchParams);
-    const promise = fetchJournals(query, destination);
+
+    const promise = dispatch(fetchJournalsService({
+      key: JOURNALS_STATE_KEYS.CATALOGUE,
+      query,
+      destination,
+    }));
 
     return () => {
       promise.abort();
-      dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.JOURNALS }));
+      dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.CATALOGUE }));
     };
   }, [dispatch, destination, searchParams]);
 
@@ -45,18 +49,18 @@ export default function CatalogueListModule({ destination, searchParams, onQuery
       {loading
         && <Loading />}
 
-      {!loading && journals
+      {!loading && results
         && (
           <>
-            {journals.length <= 0
+            {results.journals.length <= 0
               && <NoJournalResults />}
 
-            {journals.length > 0
+            {results.journals.length > 0
               && (
                 <JournalsList
                   currentPage={currentPage}
-                  totalPages={totalPages}
-                  journals={journals}
+                  totalPages={results.totalPages}
+                  journals={results.journals}
                   onQuery={onQuery}
                 />
               )}
