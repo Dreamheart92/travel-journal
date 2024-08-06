@@ -16,7 +16,7 @@ import { buildLocalComment } from '../../../utils/commentUtils';
 export default function CommentsModule({ journalId }) {
   const { user, isAuthenticated } = useSelector(selectAuth);
 
-  const { comments } = useSelector(selectComments);
+  const comments = useSelector(selectComments);
 
   const { postCommentOptimistic, deleteCommentOptimistic } = useOptimisticActions();
 
@@ -51,11 +51,11 @@ export default function CommentsModule({ journalId }) {
         )}
 
       <div className={style['comments-count']}>
-        {formatCommentsCount(comments.results)}
+        {formatCommentsCount(comments)}
       </div>
 
       <CommentsList
-        comments={comments.results}
+        comments={comments}
         userId={user?._id}
         onSetTargetItemId={onSetTargetItemId}
       />
