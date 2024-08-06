@@ -24,5 +24,20 @@ export default function TopJournalsModule() {
   }, []);
 
   return (
+    <>
+      <TopJournalsGrid
+        heading="Latest Journals"
+        loading={loading}
+        error={error}
+        journals={results?.latestJournals}
+      />
+
+      <TopJournalsGrid
+        heading="Most Liked Journals"
+        loading={loading}
+        error={error}
+        journals={results?.mostLikedJournals}
+      />
+    </>
   );
 }
