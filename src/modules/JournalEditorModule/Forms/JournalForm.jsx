@@ -1,10 +1,10 @@
+import { useSelector } from 'react-redux';
+import useForm from '../../../hooks/useForm';
 import Form from '../../../components/Form';
 import Button from '../../../components/Button';
 import VALIDATIONS from '../../../constants/validations';
-import useDestinations from '../../../hooks/useDestinations';
-
 import style from './JournalForm.module.css';
-import useForm from '../../../hooks/useForm';
+import { selectDestinations } from '../../../store/destinations/selectors';
 
 export default function JournalForm(
   {
@@ -16,8 +16,7 @@ export default function JournalForm(
   },
 ) {
   const [form] = useForm();
-  const { destinations } = useDestinations();
-
+  const { destinations } = useSelector(selectDestinations);
 
   const disableSubmitButton = !form.isValidForm && form.hasBeenSubmitted;
 

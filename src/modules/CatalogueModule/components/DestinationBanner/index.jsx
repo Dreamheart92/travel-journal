@@ -1,10 +1,11 @@
+import { useSelector } from 'react-redux';
 import Image from '../../../../components/Image';
 import style from './index.module.css';
 import { findCurrentDestination } from '../../../../utils/utils';
-import useDestinations from '../../../../hooks/useDestinations';
+import { selectDestinations } from '../../../../store/destinations/selectors';
 
 export default function DestinationBanner({ destination }) {
-  const { destinations } = useDestinations();
+  const { destinations } = useSelector(selectDestinations);
 
   const currentDestination = findCurrentDestination(destination, destinations);
 

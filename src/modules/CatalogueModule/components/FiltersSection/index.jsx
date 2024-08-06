@@ -1,11 +1,11 @@
+import { useSelector } from 'react-redux';
 import SidebarSection from '../../../../components/Sidebar/SidebarSection';
 import Filter from '../Filter';
-
 import style from './index.module.css';
-import useDestinations from '../../../../hooks/useDestinations';
+import { selectDestinations } from '../../../../store/destinations/selectors';
 
 export default function FiltersSection() {
-  const { destinations } = useDestinations();
+  const { destinations } = useSelector(selectDestinations);
 
   return (
     <SidebarSection
