@@ -5,10 +5,11 @@ import Grid from '../../../components/Grid';
 import { selectUser } from '../../../store/auth/selectors';
 import { journalsActions } from '../../../store/journals';
 import { JOURNALS_STATE_KEYS } from '../../../constants/redux';
-import useJournals from '../../../hooks/useJournals';
 import ErrorMessage from '../../../components/ErrorMessage';
 import NoJournalResults from '../../../components/NoJournalsResults';
 import HomeCard from '../../../components/JournalCards/HomeCard';
+import { selectUserJournals } from '../../../store/journals/selectors';
+import { fetchJournalsService } from '../../../store/journals/services';
 
 export default function MyJournalsModule() {
   const dispatch = useDispatch();
@@ -16,20 +17,20 @@ export default function MyJournalsModule() {
   const user = useSelector(selectUser);
 
   const {
-    journals,
+    results,
     loading,
-    success,
     error,
-    fetchUserJournals,
-  } = useJournals();
+  } = useSelector(selectUserJournals);
 
   useEffect(() => {
-    dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.JOURNALS }));
-
-    const promise = fetchUserJournals(user._id);
+    const promise = dispatch(fetchJournalsService({
+      key: JOURNALS_STATE_KEYS.USER_JOURNALS,
+      query: `?author=${user._id}`,
+    }));
 
     return () => {
       promise.abort();
+      dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.USER_JOURNALS }));
     };
   }, []);
 
@@ -38,16 +39,16 @@ export default function MyJournalsModule() {
       {loading
         && <Loading />}
 
-      {!loading && journals
+      {!loading && results?.journals
         && (
           <>
-            {journals.length <= 0
+            {results.journals.length <= 0
               && <NoJournalResults contextType="account" />}
 
-            {journals.length > 0
+            {results.journals.length > 0
               && (
                 <Grid>
-                  {journals.map((journal) => (
+                  {results.journals.map((journal) => (
                     <HomeCard
                       key={journal._id}
                       size="sm"
