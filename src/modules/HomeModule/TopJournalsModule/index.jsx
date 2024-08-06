@@ -18,6 +18,9 @@ export default function TopJournalsModule() {
   useEffect(() => {
     dispatch(fetchLatestAndMostLikedJournals({ key: JOURNALS_STATE_KEYS.HOME }));
 
+    return () => {
+      dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.HOME }));
+    };
   }, []);
 
   return (
