@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import sendHttpRequest from '../../services/sendHttpRequest';
 import API from '../../constants/api';
-import { getAccessTokenAndIdFromLocalStorage } from '../../utils/storage';
 import { resolveUserId } from '../../utils/authUtils';
 
 export const fetchJournalsService = createAsyncThunk(
@@ -20,46 +19,22 @@ export const fetchJournalsService = createAsyncThunk(
 );
 
 export const fetchJournalService = createAsyncThunk(
-  'journals/fetchJournal',
+  'journals/fetchJournals',
   async (arg, { dispatch, signal }) => {
     const { journalId } = arg;
 
     const result = await sendHttpRequest(`${API.JOURNAL.JOURNAL}/${journalId}`, { signal });
 
     const userId = resolveUserId();
-    const isJournalOwner = result.data.author._id === userId;
+    result.data.isJournalOwner = result.data.author._id === userId;
 
     if (!result.data.views.userIds.includes(userId)) {
       dispatch(registerJournalViewService({ userId, journalId }));
     }
 
     return {
-      result: result.data,
+      journal: result.data,
       comments: result.data.comments,
-      isJournalOwner,
-    };
-  },
-);
-
-export const fetchUserJournalsService = createAsyncThunk(
-  'journals/fetchJournals',
-  async (arg, { signal }) => {
-    const { userId } = arg;
-    const { accessToken } = getAccessTokenAndIdFromLocalStorage();
-
-    const settings = {
-      method: 'Get',
-      headers: {
-        Authorization: accessToken,
-      },
-      signal,
-    };
-
-    const result = await sendHttpRequest(`${API.JOURNAL.USER_JOURNALS}/${userId}`, settings);
-
-    return {
-      journals: result.data,
-      totalPages: 1,
     };
   },
 );
@@ -78,5 +53,20 @@ export const registerJournalViewService = createAsyncThunk(
     };
 
     return sendHttpRequest(`${API.JOURNAL.REGISTER_JOURNAL_VIEW}/${journalId}`, settings);
+  },
+);
+
+export const fetchLatestAndMostLikedJournals = createAsyncThunk(
+  'journals/fetchJournals',
+  async (arg, { signal }) => {
+    const latestJournals = sendHttpRequest(`${API.JOURNAL.JOURNALS}?sortBy=newest&limit=3`, { signal });
+    const mostLikedJournals = sendHttpRequest(`${API.JOURNAL.JOURNALS}?sortBy=mostLiked&limit=3`, { signal });
+
+    const result = await Promise.all([latestJournals, mostLikedJournals]);
+
+    return {
+      latestJournals: result[0].data.journals,
+      mostLikedJournals: result[1].data.journals,
+    };
   },
 );
