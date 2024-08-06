@@ -7,25 +7,25 @@ const resetState = (state, action) => {
 };
 
 const addLocalComment = (state, action) => {
-  state[JOURNALS_STATE_KEYS.COMMENTS].results.unshift(action.payload);
+  state[JOURNALS_STATE_KEYS.COMMENTS].unshift(action.payload);
 };
 
 const deleteLocalComment = (state, action) => {
   const { commentId } = action.payload;
 
-  const targetedCommentIndex = state[JOURNALS_STATE_KEYS.COMMENTS].results
+  const targetedCommentIndex = state[JOURNALS_STATE_KEYS.COMMENTS]
     .findIndex((localComment) => (
       localComment._id === commentId));
 
   if (targetedCommentIndex !== -1) {
-    state[JOURNALS_STATE_KEYS.COMMENTS].results.splice(targetedCommentIndex, 1);
+    state[JOURNALS_STATE_KEYS.COMMENTS].splice(targetedCommentIndex, 1);
   }
 };
 
 const updateLocalCommentWithRealData = (state, action) => {
   const commentRealData = action.payload;
 
-  const localCommentIndex = state[JOURNALS_STATE_KEYS.COMMENTS].results
+  const localCommentIndex = state[JOURNALS_STATE_KEYS.COMMENTS]
     .findIndex((localComment) => (
       String(new Date(localComment.createdAt)) === String(new Date(commentRealData.createdAt))
       && localComment.comment === commentRealData.comment
@@ -33,7 +33,7 @@ const updateLocalCommentWithRealData = (state, action) => {
     ));
 
   if (localCommentIndex !== -1) {
-    state[JOURNALS_STATE_KEYS.COMMENTS].results[localCommentIndex] = commentRealData;
+    state[JOURNALS_STATE_KEYS.COMMENTS][localCommentIndex] = commentRealData;
   }
 };
 
@@ -56,7 +56,7 @@ const updateLocalCommentReaction = (state, action) => {
     ? reactions.dislikes
     : reactions.likes;
 
-  const reactedLocalComment = state[JOURNALS_STATE_KEYS.COMMENTS].results.find((localComment) => (
+  const reactedLocalComment = state[JOURNALS_STATE_KEYS.COMMENTS].find((localComment) => (
     localComment._id === commentId));
 
   if (isReacted) {
@@ -79,7 +79,7 @@ const updateLocalCommentReaction = (state, action) => {
 
 const toggleLocalJournalLike = (state, action) => {
   const { userId } = action.payload;
-  const { likes } = state[JOURNALS_STATE_KEYS.JOURNAL].result;
+  const { likes } = state[JOURNALS_STATE_KEYS.JOURNAL].results;
 
   const isLikedJournal = likes.userIds.findIndex((likedIds) => likedIds === userId);
 
