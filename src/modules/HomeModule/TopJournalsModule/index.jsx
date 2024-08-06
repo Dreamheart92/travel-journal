@@ -16,9 +16,10 @@ export default function TopJournalsModule() {
   } = useSelector(selectHomeJournals);
 
   useEffect(() => {
-    dispatch(fetchLatestAndMostLikedJournals({ key: JOURNALS_STATE_KEYS.HOME }));
+    const promise = dispatch(fetchLatestAndMostLikedJournals({ key: JOURNALS_STATE_KEYS.HOME }));
 
     return () => {
+      promise.abort();
       dispatch(journalsActions.resetState({ key: JOURNALS_STATE_KEYS.HOME }));
     };
   }, []);
