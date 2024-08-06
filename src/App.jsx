@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLoadScript } from '@react-google-maps/api';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Loading from './components/Loading';
 import Footer from './components/Footer';
-import useDestinations from './hooks/useDestinations';
 import OptimisticModule from './modules/OptimisticModule';
 import AppLayout from './layouts/AppLayout';
 import ErrorBoundary from './components/ErrorBoundary';
+import { selectDestinations } from './store/destinations/selectors';
+import { fetchDestinations } from './store/destinations/services';
 
 const libraries = ['places'];
 
@@ -17,10 +19,12 @@ export default function App() {
     libraries,
   });
 
-  const { success: destinationsLoaded, fetchDestinations } = useDestinations();
+  const dispatch = useDispatch();
+
+  const { success: destinationsLoaded } = useSelector(selectDestinations);
 
   useEffect(() => {
-    fetchDestinations();
+    dispatch(fetchDestinations());
   }, []);
 
   if (!destinationsLoaded || !isMapsLoaded) {
