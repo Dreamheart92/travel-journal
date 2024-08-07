@@ -12,7 +12,7 @@ export default function AccountSidebarModule() {
   const auth = useAuth();
 
   return (
-    <Sidebar width="fit-content">
+    <Sidebar width='15em'>
       <div className={style.container}>
         <div className={style.user}>
           <UserProfileImage imageUrl={user.imageUrl} />
